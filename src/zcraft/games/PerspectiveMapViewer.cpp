@@ -42,28 +42,53 @@ namespace zcraft
 	{
 		Vector3f camPos = m_camera.getPosition();
 		Vector3f camFw = m_camera.getForward();
+		Vector3f camVert = m_camera.getVertical();
+		Vector3f camLeft = camFw;
+		camLeft.rotateXYBy(-90);
+
 		f32 a = 8.f * delta.s();
 		f32 aa = 90.f * delta.s();
+
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
-			camPos.x -= a;
+		{
+			camPos -= camLeft * a;
+		}
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-			camPos.x += a;
+		{
+			camPos += camLeft * a;
+		}
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
-			camPos.y += a;
+		{
+			camPos += camFw * a;
+		}
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-			camPos.y -= a;
+		{
+			camPos -= camFw * a;
+		}
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Add))
-			camPos.z += a;
+		{
+			camPos += camVert * a;
+		}
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Subtract))
-			camPos.z -= a;
+		{
+			camPos -= camVert * a;
+		}
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+		{
 			camFw.rotateXYBy(aa);
+		}
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+		{
 			camFw.rotateXYBy(-aa);
+		}
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+		{
 			camFw.rotateYZBy(aa);
+		}
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+		{
 			camFw.rotateYZBy(-aa);
+		}
 
 		m_camera.setPosition(camPos);
 		m_camera.setForward(camFw);
