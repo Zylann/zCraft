@@ -1,0 +1,15 @@
+assets/
+assets_src/
+bin/
+obj/
+screenshots/
+src_old/
+worlds/
+
+callstack.txt
+*.png
+
+#Code::Blocks
+*.cbp
+*.depend
+*.layout
