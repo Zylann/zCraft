@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "zcraft/common.hpp"
 #include "zcraft/BlockMap.hpp"
-#include "zcraft/Cartography.hpp"
+#include "zcraft/cartographer/Cartography.hpp"
 
 namespace zcraft
 {

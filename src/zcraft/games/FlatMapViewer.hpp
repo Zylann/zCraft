@@ -5,7 +5,7 @@
 #include "engine/bmfont/Font.hpp"
 #include "engine/opengl/Camera2D.hpp"
 #include "zcraft/zcraft.hpp"
-#include "zcraft/Cartography.hpp"
+#include "zcraft/cartographer/Cartography.hpp"
 #include "zcraft/MapStreamer.hpp"
 #include "zcraft/IMapListener.hpp"
 

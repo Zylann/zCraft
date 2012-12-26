@@ -33,6 +33,7 @@ namespace zcraft
 	public :
 
 		MapStreamer(BlockMap & map, u32 radiusBlocks = 4);
+
 		~MapStreamer();
 
 		void update(const Vector3i center, bool forceUpdate = false);

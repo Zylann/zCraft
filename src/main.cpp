@@ -21,8 +21,7 @@ Estimated total dev time
 #include <cstdio>
 #include "zcraft/games/FlatMapViewer.hpp"
 #include "zcraft/games/PerspectiveMapViewer.hpp"
-#include "zcraft/MapLoader.hpp"
-#include "zcraft/Cartographer.hpp"
+#include "zcraft/cartographer/Cartographer.hpp"
 
 using namespace engine;
 

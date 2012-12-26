@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include "zcraft/games/FlatMapViewer.hpp"
-#include "zcraft/Cartographer.hpp"
+#include "zcraft/cartographer/Cartographer.hpp"
 #include "zcraft/NodeProperties.hpp"
 
 using namespace engine;

@@ -1,6 +1,6 @@
 #include "engine/opengl/Color.hpp"
 #include "zcraft/NodeProperties.hpp"
-#include "zcraft/Cartographer.hpp"
+#include "zcraft/cartographer/Cartographer.hpp"
 #include "zcraft/MapLoader.hpp"
 
 using namespace engine;

@@ -1,5 +1,5 @@
 #include <SFML/System.hpp>
-#include "zcraft/Cartography.hpp"
+#include "zcraft/cartographer/Cartography.hpp"
 #include "zcraft/Block.hpp"
 #include "engine/opengl/glutils.hpp"
 
