@@ -34,9 +34,7 @@ namespace zcraft
 			if(topNode.first >= minZ)
 				k = 0.1f + 0.9f * (float)(topNode.first - minZ) / (float)(maxZ - minZ);
 
-			color.r *= k;
-			color.g *= k;
-			color.b *= k;
+			color.multiplyRGB(k);
 
 			img.setPixel(x, y, color.toSfColor());
 		}

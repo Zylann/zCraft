@@ -74,6 +74,18 @@ namespace math
 		return (a + tolerance >= b) && (a - tolerance <= b);
 	}
 
+	template<class T>
+	inline const T & min(const T & a, const T & b)
+	{
+		return a < b ? a : b;
+	}
+
+	template<class T>
+	inline const T & max(const T & a, const T & b)
+	{
+		return a < b ? b : a;
+	}
+
 	// TODO math: random functions
 	// TODO math: put interpolations here (lerp)
 

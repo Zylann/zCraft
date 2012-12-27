@@ -36,7 +36,7 @@ namespace zcraft
 		np.opaque = true;
 		np.cube = true;
 		np.name = "grass";
-		np.color.set(128, 192, 0);
+		np.color.set(64, 192, 32);
 		s_list[node::GRASS] = np;
 	}
 
