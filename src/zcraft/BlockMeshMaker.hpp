@@ -8,6 +8,7 @@ This file is part of the zCraft project.
 #define ZCRAFT_BLOCKMESHMAKER_HPP_INCLUDED
 
 #include "engine/opengl/VertexColorArray.hpp"
+#include "engine/opengl/Color.hpp"
 #include "zcraft/VoxelBuffer.hpp"
 
 namespace zcraft
@@ -22,7 +23,7 @@ namespace zcraft
 		struct FastFace
 		{
 			Vector3f vertices[4];
-			u8 colors[16] = {255}; // r, g, b, a
+			engine::Color colors[4];
 			sf::Texture * texture = nullptr;
 		};
 

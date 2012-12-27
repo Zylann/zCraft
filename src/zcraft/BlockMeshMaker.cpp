@@ -115,11 +115,11 @@ namespace zcraft
 					vi += 3;
 				}
 
-				for(i = 0; i < 16; i += 4)
+				for(i = 0; i < 4; i++)
 				{
-					colors[ci] = ff.colors[i];
-					colors[ci + 1] = ff.colors[i + 1];
-					colors[ci + 2] = ff.colors[i + 2];
+					colors[ci] = ff.colors[i].r;
+					colors[ci + 1] = ff.colors[i].g;
+					colors[ci + 2] = ff.colors[i].b;
 					ci += 3;
 				}
 			}
@@ -306,16 +306,10 @@ namespace zcraft
         //video::SColor color = video::SColor(255, light, light, light);
 
 		// TODO BlockMeshMaker: fix colors
-		u8 ci = 0;
 		for(u8 i = 0; i < 4; i++)
 		{
 			ff.vertices[i] = vertexPos[i];
-
-			ff.colors[ci] = light;
-			ff.colors[ci + 1] = light;
-			ff.colors[ci + 2] = light;
-			ff.colors[ci + 3] = 255;
-			ci += 4;
+			ff.colors[i].set(light, light, light, 255);
 		}
 
         // update final vertices
@@ -443,6 +437,4 @@ namespace zcraft
     }
 
 } // namespace zcraft
-
-
 
