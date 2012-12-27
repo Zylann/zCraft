@@ -14,10 +14,6 @@ using namespace engine;
 
 namespace zcraft
 {
-	/*
-		Static
-	*/
-
 	gl::VertexColorArray * BlockMeshMaker::makeMesh(
 			const Vector3i bpos, VoxelBuffer & vb)
 	{

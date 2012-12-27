@@ -11,7 +11,7 @@ be used without too much bugs or quirks.
 Yes, that seems to be another Minecraft clone. Actually, I like to develop such
 a thing, and learning some advanced OpenGL. I have some different ideas for the future,
 but currently, YES, it appears to be another clone.
-Feel free to dislike the idea or not :-°
+Feel free to like the idea or not :-°
 
 Current main features
 =====================

@@ -12,6 +12,10 @@ This file is part of the zCraft project.
 
 namespace engine
 {
+	/*
+		This is a basic 3D camera implementation.
+	*/
+
 	class Camera3D
 	{
 	private :
