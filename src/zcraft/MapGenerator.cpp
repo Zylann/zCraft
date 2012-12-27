@@ -91,7 +91,7 @@ namespace zcraft
 				if(h < 0)
 					std::cout << "e";
 
-				if(h >= Block::SIZE)
+				if(h >= static_cast<s32>(Block::SIZE))
 					h = Block::SIZE;
 
 				if(h != 0)
