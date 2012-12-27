@@ -9,26 +9,34 @@ This file is part of the zCraft project.
 
 #include "engine/BasicGame.hpp"
 #include "engine/bmfont/Font.hpp"
-#include "engine/opengl/Camera3D.hpp"
 #include "engine/opengl/VertexColorArray.hpp"
 #include "zcraft/zcraft.hpp"
 #include "zcraft/BlockMeshMap.hpp"
 #include "zcraft/BlockMeshMaker.hpp"
 #include "zcraft/MapStreamer.hpp"
 #include "zcraft/IMapListener.hpp"
+#include "zcraft/FreeCamera.hpp"
 
 namespace zcraft
 {
-	class PerspectiveMapViewer : public engine::ABasicGame, public IMapListener
+	/*
+		This is a basic 3D map viewer (not really a game).
+		It only consists on a controllable flying camera and
+		an infinite map that keeps itself updated around.
+	*/
+
+	class PerspectiveMapViewer :
+		public engine::ABasicGame,
+		public IMapListener // To be notified of map changes through methods
 	{
 	private :
 
-		engine::Camera3D m_camera;
-		engine::bmfont::Font m_font;
-		BlockMap m_map;
-		BlockMeshMap m_meshMap;
-		MapStreamer * m_mapStreamer = nullptr;
-		BlockMeshMaker m_meshMaker;
+		FreeCamera m_camera;	// How to see
+		engine::bmfont::Font m_font; // How to draw text
+		BlockMap m_map; // Here are stored the voxels
+		BlockMeshMap m_meshMap; // Here is the graphical representation of the map
+		MapStreamer * m_mapStreamer = nullptr; // How to keep the map updated around us
+		BlockMeshMaker m_meshMaker; // How to transform voxel data into visual things
 
 	public :
 

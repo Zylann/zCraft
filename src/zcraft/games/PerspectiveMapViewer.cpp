@@ -26,11 +26,16 @@ namespace zcraft
 
 		//zcraft::init();
 
+		// Load a font
 		if(!m_font.loadFromFile("assets/fonts/arial32.fnt"))
 			return false;
 
+		// Init camera
 		m_camera.setPosition(Vector3f(0, -5, 64));
+		m_camera.updateViewport(Vector2f(
+			m_window.getSize().x, m_window.getSize().y));
 
+		// Init map stream
 		m_map.addListener(this);
 		m_mapStreamer = new MapStreamer(m_map, 7);
 		m_mapStreamer->update(Vector3i(0, 0, 0), true); // first update
@@ -40,61 +45,11 @@ namespace zcraft
 
 	void PerspectiveMapViewer::update(const engine::Time & delta)
 	{
+		// Update camera
+		m_camera.update(delta);
+
+		// Update map stream
 		Vector3f camPos = m_camera.getPosition();
-		Vector3f camFw = m_camera.getForward();
-		Vector3f camVert = m_camera.getVertical();
-		Vector3f camLeft = camFw;
-		camLeft.rotateXYBy(-90);
-
-		f32 a = 8.f * delta.s();
-		f32 aa = 90.f * delta.s();
-
-		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
-		{
-			camPos -= camLeft * a;
-		}
-		if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-		{
-			camPos += camLeft * a;
-		}
-		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
-		{
-			camPos += camFw * a;
-		}
-		if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-		{
-			camPos -= camFw * a;
-		}
-		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Add))
-		{
-			camPos += camVert * a;
-		}
-		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Subtract))
-		{
-			camPos -= camVert * a;
-		}
-		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-		{
-			camFw.rotateXYBy(aa);
-		}
-		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-		{
-			camFw.rotateXYBy(-aa);
-		}
-		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-		{
-			camFw.rotateYZBy(aa);
-		}
-		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-		{
-			camFw.rotateYZBy(-aa);
-		}
-
-		m_camera.setPosition(camPos);
-		m_camera.setForward(camFw);
-		m_camera.updateViewport(Vector2f(
-			m_window.getSize().x, m_window.getSize().y));
-
 		Vector3i pos(camPos.x, camPos.y, camPos.z);
 		Vector3i bpos(pos.x >> 4, pos.y >> 4, pos.z >> 4);
 		m_mapStreamer->update(bpos);
@@ -123,9 +78,8 @@ namespace zcraft
 		glPushMatrix();
 
 		m_camera.look();
-		glDisable(GL_BLEND);
 
-		//gl::drawCube(0.5f);
+		glDisable(GL_BLEND);
 
 		// Test VBO
 		m_meshMap.drawAll();
@@ -195,18 +149,17 @@ namespace zcraft
 		if(event.type == sf::Event::MouseWheelMoved)
 		{
 			//std::cout << event.mouseWheel.delta << std::endl;
-			float fov = m_camera.getFov();
-			fov += 2 * event.mouseWheel.delta;
-			if(fov < 50)
-				fov = 50;
-			else if(fov > 140)
-				fov = 140;
-			m_camera.setFov(fov);
+			m_camera.mouseWheelMoved(event.mouseWheel.delta);
 		}
 	}
 
 	void PerspectiveMapViewer::blockAdded(const Vector3i pos)
 	{
+		/*
+			Note : the code below will not stay here.
+			It is actually needed to keep the graphics of the map updated.
+		*/
+
 		// start block position
 		Vector3i startPos = pos * Block::SIZE;
 
