@@ -23,12 +23,12 @@ namespace engine
 
 	public :
 
-		/// Creates an origin-centered camera with no zoom and no rotation,
-		/// based on a viewport size. If not specified, the viewport size will
-		/// have a default value.
+		// Creates an origin-centered camera with no zoom and no rotation,
+		// based on a viewport size. If not specified, the viewport size will
+		// have a default value.
 		Camera2D(const Vector2f viewportSize = Vector2f(512));
 
-		/// Configures OpenGL matrixes before drawing
+		// Configures OpenGL matrixes before drawing
 		void look();
 
 		void setZoom(const f32 z);
@@ -41,11 +41,11 @@ namespace engine
 
 		void setRotation(const f32 rotationDegrees);
 
-		/// Manually updates the viewport size.
+		// Manually updates the viewport size.
 		void updateViewport(const Vector2f & viewportSize);
 
-		/// If set to true, viewport size will be automatically checked
-		/// when calling look() by querying OpenGL.
+		// If set to true, viewport size will be automatically checked
+		// when calling look() by querying OpenGL.
 		void setAutoViewportUpdate(bool enable);
 
 		void rotate(const f32 rotationDegrees);

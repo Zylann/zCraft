@@ -1,3 +1,9 @@
+/*
+BasicGame.hpp
+Copyright (C) 2010-2012 Marc GILLERON
+This file is part of the zCraft project.
+*/
+
 #ifndef BASICGAME_HPP_INCLUDED
 #define BASICGAME_HPP_INCLUDED
 

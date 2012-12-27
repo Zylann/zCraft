@@ -1,3 +1,9 @@
+/*
+Array3D.hpp
+Copyright (C) 2010-2012 Marc GILLERON
+This file is part of the zCraft project.
+*/
+
 #ifndef ENGINE_ARRAY3D_HPP_INCLUDED
 #define ENGINE_ARRAY3D_HPP_INCLUDED
 

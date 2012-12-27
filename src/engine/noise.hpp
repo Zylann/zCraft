@@ -1,3 +1,9 @@
+/*
+noise.hpp
+Copyright (C) 2010-2012 Marc GILLERON
+This file is part of the zCraft project.
+*/
+
 #ifndef NOISE_HPP_INCLUDED
 #define NOISE_HPP_INCLUDED
 
