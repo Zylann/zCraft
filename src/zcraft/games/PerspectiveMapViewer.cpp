@@ -32,7 +32,7 @@ namespace zcraft
 		m_camera.setPosition(Vector3f(0, -5, 64));
 
 		m_map.addListener(this);
-		m_mapStreamer = new MapStreamer(m_map, 3);
+		m_mapStreamer = new MapStreamer(m_map, 7);
 		m_mapStreamer->update(Vector3i(0, 0, 0), true); // first update
 
 		return true;
@@ -102,11 +102,21 @@ namespace zcraft
 
 	void PerspectiveMapViewer::render(const engine::Time & delta)
 	{
-		glClearColor(0.1f, 0.1f, 0.1f, 1);
+		glClearColor(0.1f, 0.5f, 0.9f, 1);
+		//glClearColor(0.0f, 0.0f, 0.0f, 1);
 		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_LINE_SMOOTH);
 		//glEnable(GL_CULL_FACE);
 		glHint(GL_LINE_SMOOTH, GL_FASTEST);
+
+		/*
+		f32 fogColor[4] = {0.0, 0.0, 0.0, 1.0};
+		glEnable(GL_FOG);
+		glFogi(GL_FOG_MODE, GL_EXP2);
+		glFogfv(GL_FOG_COLOR, fogColor);
+		glFogf(GL_FOG_DENSITY, 0.02f);
+		glHint(GL_FOG_HINT, GL_NICEST);
+		*/
 
 		/* Scene */
 
@@ -131,8 +141,11 @@ namespace zcraft
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		// Grid
-		glColor3f(0.5f,0.5f,0.5f);
-		gl::drawGrid(0,0,8);
+		glColor3f(0.f,0.f,0.f);
+		glPushMatrix();
+		glScalef(16, 16, 16);
+		gl::drawGrid(0, 0, 16);
+		glPopMatrix();
 
 		glPopMatrix();
 
@@ -140,6 +153,7 @@ namespace zcraft
 
 		// Pixel-match view
 
+		//glDisable(GL_FOG);
 		glDisable(GL_DEPTH_TEST);
 		glDisable(GL_CULL_FACE);
 		glMatrixMode(GL_PROJECTION);
