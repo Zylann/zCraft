@@ -7,6 +7,7 @@ This file is part of the zCraft project.
 #include <sstream>
 #include "engine/opengl/glutils.hpp"
 #include "zcraft/games/PerspectiveMapViewer.hpp"
+#include "zcraft/face.hpp"
 
 using namespace engine;
 
@@ -37,7 +38,7 @@ namespace zcraft
 
 		// Init map stream
 		m_map.addListener(this);
-		m_mapStreamer = new MapStreamer(m_map, 7);
+		m_mapStreamer = new MapStreamer(m_map, 8);
 		m_mapStreamer->update(Vector3i(0, 0, 0), true); // first update
 
 		return true;
@@ -64,14 +65,12 @@ namespace zcraft
 		//glEnable(GL_CULL_FACE);
 		glHint(GL_LINE_SMOOTH, GL_FASTEST);
 
-		/*
-		f32 fogColor[4] = {0.0, 0.0, 0.0, 1.0};
+		f32 fogColor[4] = {0.4f, 0.7f, 1.0f, 1.f};
 		glEnable(GL_FOG);
 		glFogi(GL_FOG_MODE, GL_EXP2);
 		glFogfv(GL_FOG_COLOR, fogColor);
-		glFogf(GL_FOG_DENSITY, 0.02f);
+		glFogf(GL_FOG_DENSITY, 0.005f);
 		glHint(GL_FOG_HINT, GL_NICEST);
-		*/
 
 		/* Scene */
 
@@ -107,7 +106,7 @@ namespace zcraft
 
 		// Pixel-match view
 
-		//glDisable(GL_FOG);
+		glDisable(GL_FOG);
 		glDisable(GL_DEPTH_TEST);
 		glDisable(GL_CULL_FACE);
 		glMatrixMode(GL_PROJECTION);
@@ -160,43 +159,63 @@ namespace zcraft
 			It is actually needed to keep the graphics of the map updated.
 		*/
 
-		// start block position
-		Vector3i startPos = pos * Block::SIZE;
+		// Note : in the following code, the newly added block will not be
+		// rendered immediately, but only when it will be surrounded by other
+		// blocks, so that we don't need to re-update its mesh each time its
+		// neighboring changes.
+		// Drawback : it reduces the view distance by 1 block, because edge
+		// blocks will not be visible. However I don't think its too much annoying
+		// with large distances.
 
-		// voxels area including neighbors
-		Vector3i minEdge = startPos - Vector3i(1,1,1);
-		Vector3i maxEdge = startPos + Vector3i(1,1,1) * Block::SIZE;
-		Area3D area;
-		area.setBounds(minEdge, maxEdge);
-
-		VoxelBuffer voxels;
-		voxels.create(area);
-
-		// copy voxels
-
-		Block * block = m_map.getBlock(pos);
-		if(block != nullptr)
-		{
-			block->copyTo(voxels);
-		}
-
-		// copy first neighbors voxels
-		/*
+		// Look at the neighbors of the block
+		Vector3i npos;
 		for(u8 dir = 0; dir < 6; dir++)
 		{
-			const Vector3i& dirVect = directionToVector3(dir);
-			Vector3i dirVect16(dirVect.x, dirVect.y, dirVect.z);
+			npos = pos + face::toVec3i(dir);
 
-			cdiv = map.getChunkDivision_const(pos + dirVect16);
-			if(cdiv != NULL)
+			if(m_meshMap.isMesh(npos))
+				continue;
+
+			std::list<Block*> neighbors;
+			m_map.getNeighboringBlocks(npos, neighbors);
+
+			if(neighbors.size() < 6)
+				continue;
+
+			// The neighbor is fully surrounded, we can make its mesh
+
+			// start block position
+			Vector3i startPos = npos * Block::SIZE;
+
+			// voxels area including neighbors
+			Vector3i minEdge = startPos - Vector3i(1,1,1);
+			Vector3i maxEdge = startPos + Vector3i(1,1,1) * Block::SIZE;
+			Area3D area;
+			area.setBounds(minEdge, maxEdge);
+
+			VoxelBuffer voxels;
+			voxels.create(area);
+
+			// copy voxels
+
+			Block * block = m_map.getBlock(npos);
+			if(block != nullptr)
 			{
-				cdiv->copyBorderTo(voxels, util::directionOpposite6(dir));
+				block->copyTo(voxels);
 			}
-		}
-		*/
 
-		gl::VertexColorArray * vbo = m_meshMaker.makeMesh(pos, voxels);
-		m_meshMap.setMesh(pos, vbo);
+			// copy first neighbors voxels
+
+			for(auto & neighbor : neighbors)
+			{
+				neighbor->copyBorderTo(voxels, npos - neighbor->getPosition());
+			}
+
+			// Make mesh
+
+			gl::VertexColorArray * vbo = m_meshMaker.makeMesh(npos, voxels);
+			m_meshMap.setMesh(npos, vbo);
+		}
 	}
 
 	void PerspectiveMapViewer::blockChanged(const Vector3i pos)

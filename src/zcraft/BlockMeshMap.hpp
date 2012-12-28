@@ -27,6 +27,8 @@ namespace zcraft
 
 		void clear();
 
+		bool isMesh(const Vector3i pos) const;
+
 		void setMesh(const Vector3i pos, engine::gl::VertexColorArray * mesh);
 
 		void eraseMesh(const Vector3i pos);

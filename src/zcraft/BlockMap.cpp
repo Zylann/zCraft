@@ -1,4 +1,11 @@
+/*
+BlockMap.cpp
+Copyright (C) 2010-2012 Marc GILLERON
+This file is part of the zCraft project.
+*/
+
 #include "zcraft/BlockMap.hpp"
+#include "zcraft/face.hpp"
 
 namespace zcraft
 {
@@ -145,6 +152,19 @@ namespace zcraft
 		{
 			notifyListenersForBlockRemove(it->first);
 			m_blocks.erase(it);
+		}
+	}
+
+	void BlockMap::getNeighboringBlocks(
+			const Vector3i blockPos,
+			std::list<Block*> & neighbors)
+	{
+		Block * block = nullptr;
+		for(u8 dir = 0; dir < 6; dir++)
+		{
+			block = getBlock(blockPos + face::toVec3i(dir));
+			if(block != nullptr)
+				neighbors.push_back(block);
 		}
 	}
 

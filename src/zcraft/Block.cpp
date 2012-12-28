@@ -8,7 +8,6 @@ namespace zcraft
 	Block::~Block()
 	{}
 
-	/// fill with one kind of node
 	void Block::fill(Node nodeValue)
 	{
 		dirty = true;
@@ -16,7 +15,6 @@ namespace zcraft
             m_nodes[i] = nodeValue;
 	}
 
-	/// copy nodes to a VoxelBuffer
 	void Block::copyTo(VoxelBuffer & vb) const
 	{
         Vector3i size(Block::SIZE, Block::SIZE, Block::SIZE);
@@ -29,51 +27,61 @@ namespace zcraft
         vb.copyFrom(m_nodes, area);
 	}
 
-	/// copy voxels from one side only to a VoxelBuffer
 	void Block::copyBorderTo(VoxelBuffer & vb, u8 dir) const
 	{
-        Vector3i startPos(
-            m_pos.x * Block::SIZE,
-            m_pos.y * Block::SIZE,
-            m_pos.z * Block::SIZE);
-
-        Vector3i relativeStartPos(0, 0, 0);
-        Vector3i relativeEndPos(Block::SIZE - 1, Block::SIZE - 1, Block::SIZE - 1);
-        Vector3i vdir = face::toVec3i(dir);
-
-        if(vdir.x < 0)
-            relativeEndPos.x = 0;
-        if(vdir.y < 0)
-            relativeEndPos.y = 0;
-        if(vdir.z < 0)
-            relativeEndPos.z = 0;
-
-        if(vdir.x > 0)
-            relativeStartPos.x = Block::SIZE - 1;
-        if(vdir.y > 0)
-            relativeStartPos.y = Block::SIZE - 1;
-        if(vdir.z > 0)
-            relativeStartPos.z = Block::SIZE - 1;
-
-        Vector3i pos;
-        u32 i_src;
-
-        for(pos.z = relativeStartPos.z; pos.z <= relativeEndPos.z; pos.z++)
-        for(pos.y = relativeStartPos.y; pos.y <= relativeEndPos.y; pos.y++)
-        for(pos.x = relativeStartPos.x; pos.x <= relativeEndPos.x; pos.x++)
-        {
-            i_src = index(pos.x, pos.y, pos.z);
-            vb.set(startPos + pos, m_nodes[i_src]);
-        }
+		copyBorderTo(vb, face::toVec3i(dir));
 	}
 
-	/// fill with empty nodes
+	void Block::copyBorderTo(VoxelBuffer & vb, const Vector3i vdir) const
+	{
+		// Debug check
+		if(!face::isOrthoDirection(vdir))
+		{
+			std::cout << "ERROR: Block::copyBorderTo: "
+				<< "given direction vector is not orthographic "
+				<< vdir << std::endl;
+			return;
+		}
+
+		Vector3i relativeStartPos(0, 0, 0);
+		Vector3i relativeEndPos(Block::SIZE - 1, Block::SIZE - 1, Block::SIZE - 1);
+
+		Vector3i startPos(
+			m_pos.x * Block::SIZE,
+			m_pos.y * Block::SIZE,
+			m_pos.z * Block::SIZE);
+
+		if(vdir.x < 0)
+			relativeEndPos.x = 0;
+		if(vdir.y < 0)
+			relativeEndPos.y = 0;
+		if(vdir.z < 0)
+			relativeEndPos.z = 0;
+
+		if(vdir.x > 0)
+			relativeStartPos.x = Block::SIZE - 1;
+		if(vdir.y > 0)
+			relativeStartPos.y = Block::SIZE - 1;
+		if(vdir.z > 0)
+			relativeStartPos.z = Block::SIZE - 1;
+
+		Vector3i pos;
+		u32 i_src;
+
+		for(pos.z = relativeStartPos.z; pos.z <= relativeEndPos.z; pos.z++)
+		for(pos.y = relativeStartPos.y; pos.y <= relativeEndPos.y; pos.y++)
+		for(pos.x = relativeStartPos.x; pos.x <= relativeEndPos.x; pos.x++)
+		{
+			i_src = index(pos.x, pos.y, pos.z);
+			vb.set(startPos + pos, m_nodes[i_src]);
+		}
+	}
+
 	void Block::clear()
 	{
         fill(Node());
 	}
 
-	/// Tests if the Block contains only empty nodes
 	bool Block::containsOnlyEmptyNodes() const
 	{
         for(u16 i = 0; i < Block::SIZE; i++)
@@ -84,7 +92,6 @@ namespace zcraft
         return true;
 	}
 
-	/// Tests if all edges are fully made of opaque cubes
 	bool Block::areEdgesFullyOpaque() const
 	{
         u16 x, y, z;
@@ -143,8 +150,6 @@ namespace zcraft
         return true;
 	}
 
-	/// Get upper Block position on Y axis
-	/// return relative position, -1 if no nodes
 	int Block::getUpperBlockPosition(u8 x, u8 z) const
 	{
 		s16 y;
@@ -156,7 +161,6 @@ namespace zcraft
         return y;
 	}
 
-	/// Makes a dynamically allocated copy of this object.
 	Block * Block::clone() const
 	{
         Block * c = new Block(m_pos.x, m_pos.y, m_pos.z);
@@ -167,13 +171,11 @@ namespace zcraft
 
 	/* Metadata */
 
-	/// Get Block position in Block coordinates
 	const Vector3i& Block::getPosition() const
 	{
 		return m_pos;
 	}
 
-	/// Makes a string containing basic informations about this object
 	std::string Block::toString() const
 	{
         std::string res = "Block\n";

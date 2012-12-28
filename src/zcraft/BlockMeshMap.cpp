@@ -29,6 +29,11 @@ namespace zcraft
 		m_meshs.clear();
 	}
 
+	bool BlockMeshMap::isMesh(const Vector3i pos) const
+	{
+		return m_meshs.find(pos) != m_meshs.end();
+	}
+
 	void BlockMeshMap::setMesh(const Vector3i pos, gl::VertexColorArray * mesh)
 	{
 		if(mesh == nullptr)
