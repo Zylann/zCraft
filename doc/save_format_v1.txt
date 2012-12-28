@@ -1,0 +1,60 @@
+================================================================================
+zcraft file structure spec 1.0 (2012/12/10)
+By Marc Gilleron
+================================================================================
+--------------------------------------------------------------------------------
+Block format
+--------------------------------------------------------------------------------
+
+Each block of 16*16*16 voxels are saved in individual files.
+A serialized block have a fixed size of :
+
+	16*16*16*sizeof(voxel)+sizeof(position) 
+	= 16*16*16*2+3*4
+	= 8204 bytes.
+
+The files are not compressed.
+
+The serialized data of a block looks like this :
+
+<s32 posX><s32 posY><s32 posZ>	| Block position
+<u8 type><u8 meta>				| 4096 voxels
+<u8 type><u8 meta>				| ...
+<u8 type><u8 meta>				|
+<u8 type><u8 meta>				|
+...
+
+The list of voxels are listed as X-wise rows. Each end of row increments Y,
+and so on for Z.
+
+--------------------------------------------------------------------------------
+Files structure
+--------------------------------------------------------------------------------
+
+Block files are stored in sub-directories representing their coordinates.
+They can be accessed through the following pattern :
+
+	../<worldName>/<x>/<y>/<z>.block
+
+coordinates x, y and z are written using their absolute value
+prepended by 'n' if negative, 'p' if positive. 0 is assumed positive.
+
+Examples :
+	4 => p4
+	-32 => n32
+	0 => p0
+
+The block at (-42, 6, 0) of the world 'world0' has the following path :
+	../world0/n42/p6/p0.block
+
+--------------------------------------------------------------------------------
+Evolution of the format
+--------------------------------------------------------------------------------
+
+This format has 3 drawbacks :
+- It is very slow on Windows
+- It creates too many tiny files, an average of 15% of disk space is wasted
+- Because not optimized/compressed, worlds become very memory-expensive
+
+This format is however simple, that's why I started with.
+See save_format_v2.txt for the future save format.

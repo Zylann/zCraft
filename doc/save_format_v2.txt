@@ -1,0 +1,12 @@
+================================================================================
+zcraft file structure spec 2.0 (2013/--/--)
+WORK IN PROGRESS
+By Marc Gilleron
+================================================================================
+
+This format is intented to fix the major drawbacks of the previous one.
+
+Ideas :
+- Store blocks in region files (like in Minecraft) to speed-up loading
+- Optimize uniform blocks
+- Maybe use some compression stuff?
