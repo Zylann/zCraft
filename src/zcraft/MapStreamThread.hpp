@@ -11,7 +11,7 @@ This file is part of the zCraft project.
 #include "engine/system/Thread.hpp"
 #include "engine/system/Mutex.hpp"
 #include "zcraft/MapLoader.hpp"
-#include "zcraft/MapGenerator.hpp"
+#include "zcraft/mapgen/MapGenerator.hpp"
 
 namespace zcraft
 {
@@ -59,7 +59,7 @@ namespace zcraft
 	private /* ATTRIBUTES */ :
 
 		MapLoader m_loader;
-		MapGenerator m_generator;
+		AMapGenerator * m_generator;
 		RunningInfo m_runningInfo;
 		// In
 		std::list<ImmergeRequest> m_immergeRequests;

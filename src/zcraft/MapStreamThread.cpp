@@ -6,6 +6,7 @@ This file is part of the zCraft project.
 
 #include <sstream> // for debug stuff
 #include "zcraft/MapStreamThread.hpp"
+#include "zcraft/mapgen/MapGeneratorHeightmap.hpp"
 
 using namespace engine;
 
@@ -13,13 +14,16 @@ namespace zcraft
 {
 	MapStreamThread::MapStreamThread(std::string worldDir, u32 genSeed)
 	: 	AThread("MapStreamThread"),
-		m_loader(worldDir),
-		m_generator(genSeed)
-	{}
+		m_loader(worldDir)
+	{
+		m_generator = new MapGeneratorHeightmap(genSeed);
+	}
 
 	MapStreamThread::~MapStreamThread()
 	{
 		clear();
+		if(m_generator != nullptr)
+			delete m_generator;
 	}
 
 	void MapStreamThread::clear()
@@ -92,7 +96,9 @@ namespace zcraft
 	{
 		m_runningInfo = RunningInfo();
 
-		// Retrieve requests
+		// Retrieve requests :
+		// The thread picks a bunch of requests at once instead of
+		// picking them one by one, to reduce synchronization locks.
 
 		const u32 pickLimit = 64;
 
@@ -155,11 +161,16 @@ namespace zcraft
 				}
 				else
 				{
-					block = m_generator.makeBlock(req.pos);
-					++m_runningInfo.generatedCount;
+					if(m_generator != nullptr)
+					{
+						block = m_generator->makeBlock(req.pos);
+						++m_runningInfo.generatedCount;
+					}
 				}
-				if(block != 0)
+
+				if(block != nullptr)
 				{
+					// Note : the thread has priority on its reply queue.
 					m_repliesMutex.lock();
 					m_replies.push_back(block);
 					m_repliesMutex.unlock();

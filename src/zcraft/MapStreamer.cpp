@@ -15,6 +15,7 @@ namespace zcraft
 	{
 		r_map = &map;
 		m_radius = radiusBlocks;
+		m_save = true;
 	}
 
 	MapStreamer::~MapStreamer()
@@ -72,7 +73,7 @@ namespace zcraft
 			if((*it) != nullptr)
 			{
 				Block * block = (*it);
-				if(block->dirty) // Is the block needs to be saved?
+				if(block->dirty && m_save) // Is the block needs to be saved?
 				{
 					// Save and drop (true)
 					immergeRequests.push_front(ImmergeRequest(block, true));

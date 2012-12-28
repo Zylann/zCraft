@@ -8,7 +8,7 @@ This file is part of the zCraft project.
 #define MAPSTREAMER_HPP_INCLUDED
 
 #include "zcraft/BlockMap.hpp"
-#include "zcraft/MapGenerator.hpp"
+#include "zcraft/mapgen/MapGenerator.hpp"
 #include "zcraft/MapStreamThread.hpp"
 
 namespace zcraft
@@ -33,6 +33,7 @@ namespace zcraft
 		BlockMap * r_map;
 		MapStreamThread m_streamThread;
 		std::set<Vector3i> m_requestedBlocksPositions;
+		bool m_save;
 
 		// TODO MapStreamer: add a cache
 
@@ -46,6 +47,9 @@ namespace zcraft
 
 		inline MapStreamThread::RunningInfo getThreadInfo()
 		{ return m_streamThread.getRunningInfo(); }
+
+		// Enables or disables map saving.
+		inline void setSave(bool enable) { m_save = enable; }
 
 	private :
 

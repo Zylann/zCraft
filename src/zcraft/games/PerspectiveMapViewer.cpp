@@ -32,7 +32,7 @@ namespace zcraft
 			return false;
 
 		// Init camera
-		m_camera.setPosition(Vector3f(0, -5, 64));
+		m_camera.setPosition(Vector3f(0, -5, 48));
 		m_camera.updateViewport(Vector2f(
 			m_window.getSize().x, m_window.getSize().y));
 
@@ -40,6 +40,7 @@ namespace zcraft
 		m_map.addListener(this);
 		m_mapStreamer = new MapStreamer(m_map, 8);
 		m_mapStreamer->update(Vector3i(0, 0, 0), true); // first update
+		m_mapStreamer->setSave(false); // For debug (the world will not be saved)
 
 		return true;
 	}
