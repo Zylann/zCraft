@@ -13,6 +13,8 @@ a thing, and learning some advanced OpenGL. I have some different ideas for the 
 but currently, YES, it appears to be another clone.
 Feel free to like the idea or not :-°
 
+![Screenshot(http://zylannprods.fr/games/zcraft/screenshots/2012-12-26-fog-test.png)
+
 Current main features
 =====================
 
@@ -25,11 +27,11 @@ Current main features
 Early planned features
 ================
 
-- Better camera control
 - Textures
 - AABB physics
 - World edition
 - Basic lighting
+- Better save format
 - And many little things in the code : see TODO comments
 
 Downloads
