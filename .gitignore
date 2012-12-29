@@ -5,6 +5,7 @@ obj/
 screenshots/
 src_old/
 worlds/
+releases/
 
 callstack.txt
 *.png

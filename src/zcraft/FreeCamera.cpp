@@ -30,10 +30,11 @@ namespace zcraft
 		Vector3f camLeft = camFw;
 		camLeft.rotateXYBy(-90);
 
-		f32 a = 16.f * delta.s(); // Linear speed
+		f32 a = 8.f * delta.s(); // Linear speed
 		f32 aa = 90.f * delta.s(); // Angular speed
 
-		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q) ||
+			sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		{
 			camPos -= camLeft * a;
 		}
@@ -41,7 +42,8 @@ namespace zcraft
 		{
 			camPos += camLeft * a;
 		}
-		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
+		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Z) ||
+			sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 		{
 			camPos += camFw * a;
 		}

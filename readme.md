@@ -37,8 +37,10 @@ Early planned features
 Downloads
 =========
 
-Nothing yet !
-But you can try compiling your own executable.
+Nothing "playable" at the moment, but you can try the test builds.
+
+Infinite scary cave-canyon test (Windows only) : 
+https://dl.dropbox.com/u/60408088/INFO/zCraft/2012-12-29-zcraft-map-test.zip
 
 Compiling
 =========
