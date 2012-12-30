@@ -15,9 +15,9 @@ You can access a node using its world coordinates.
 
 Nodes are packed into 16*16*16 blocks, which are called... Block.
 A distinction must be made between "world coordinates" and "block coordinates".
-Block coordinates are just world coordinates with a 4 bit-shift,
+Block coordinates are just world coordinates with a 4 right bit-shift,
 as if they were divided by 16.
-blockCoordinate = worldCoordinate << 4;
+blockCoordinate = worldCoordinate >> 4;
 
 A Chunk is a Z-wise stack of blocks. It might not explicitly be used for now
 in the code, but I think it's good to define what it is for vocabulary purpose.
@@ -42,10 +42,10 @@ There is two main processes of map streaming :
 - Immerge : request for a block to be unloaded. If it has been modified,
 	it will be saved on the hard drive.
 
-This is processed in a separate thread because these operations are very
+This is processed in a separate thread because these operations are CPU-
 expensive.
 There is a class called MapStreamer that handles all of this, given a player
-position and a radius in blocks (in Minecraft, the far vision uses a radius of 
+position and a radius in blocks (in Minecraft, the far vision has a radius of 
 16 chunks).
 
 
