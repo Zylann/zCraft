@@ -22,7 +22,7 @@ namespace zcraft
 
 		block = new Block(pos);
 
-		float n;
+		float n, n2;
 		float nr = 0.5f;
 		u8 x, y, z;
 
@@ -47,7 +47,13 @@ namespace zcraft
 			{
 				n = noise3dPerlin(org.x + x, org.y + y, org.z + z, m_seed, 5, 0.5f, 64);
 				if(n > 0.5f-nr && n < 0.5f+nr)
-					block->set(x, y, z, Node(node::STONE));
+				{
+					u8 type = node::DIRT;
+					n2 = noise3dPerlin(org.x + x, org.y + y, org.z + z, m_seed+1, 5, 0.5f, 64);
+					if(n2 < 0.5f)
+						type = node::STONE;
+					block->set(x, y, z, Node(type));
+				}
 			}
 		}
 
