@@ -7,17 +7,28 @@
 
 namespace zcraft
 {
-	struct NodeProperties
+	class NodeProperties
 	{
-		bool cube;
-		bool opaque;
-		std::string name;
-		engine::Color color;
+	public :
 
+		bool cube; // Is the node a cube?
+		bool opaque; // Is the node opaque?
+		std::string name; // Technical name
+		std::string displayableName; // Player-displayed name
+		engine::Color averageColor; // Average color (used for minimap)
+		engine::Color color; // Override color
+
+	public :
+
+		// Creates an opaque white cube
 		NodeProperties()
 		{
 			cube = true;
 			opaque = true;
+			color.set(255,255,255,255);
+			averageColor.set(color);
+			name = "undefined";
+			displayableName = "undefined";
 		}
 
 		inline bool isOpaqueCube() const

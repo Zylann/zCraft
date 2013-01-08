@@ -229,17 +229,19 @@ namespace zcraft
 					if(transDir.z != 0)
 						scale.z = continuousFacesCount;
 
-					// updating fastface
+					// update fastface
 					if(fc == 1)
 					{
-						updateFastFace(ff, texture0, light0, fpos,
-							   vFaceDir, false, scale);
+						updateFastFace(ff, texture0,
+							light0, nCur0.properties().color, fpos,
+							vFaceDir, false, scale);
 						faces.push_back(ff);
 					}
 					else if(fc == 2)
 					{
-						updateFastFace(ff, texture1, light1, fpos,
-							   -vFaceDir, true, scale);
+						updateFastFace(ff, texture1,
+							light1, nCur1.properties().color, fpos,
+							-vFaceDir, true, scale);
 						faces.push_back(ff);
 					}
 				}
@@ -264,6 +266,7 @@ namespace zcraft
 			FastFace & ff, // the fastface to set
 			sf::Texture * tex,
 			u8 light, // light shade (for differenciating sides)
+			Color color,
 			Vector3f pos, // face absolute origin
 			Vector3i vFaceDir, // direction vector
 			bool shift,
@@ -305,11 +308,12 @@ namespace zcraft
         // color
         //video::SColor color = video::SColor(255, light, light, light);
 
-		// TODO BlockMeshMaker: fix colors
 		for(u8 i = 0; i < 4; i++)
 		{
 			ff.vertices[i] = vertexPos[i];
-			ff.colors[i].set(light, light, light, 255);
+			Color ffc = color;
+			ffc.multiplyU8(light);
+			ff.colors[i].set(ffc);
 		}
 
         // update final vertices

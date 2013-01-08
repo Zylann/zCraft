@@ -88,6 +88,7 @@ namespace math
 
 	// TODO math: random functions
 	// TODO math: put interpolations here (lerp)
+	// TODO math: fast rsqrt for vector normalization
 
 } // namespace math
 } // namespace engine

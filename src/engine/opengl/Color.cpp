@@ -55,12 +55,29 @@ namespace engine
 		a = a0;
 	}
 
+	void Color::set(Color other)
+	{
+		r = other.r;
+		g = other.g;
+		b = other.b;
+		a = other.a;
+	}
+
 	void Color::multiplyRGB(float s)
 	{
 		r = math::min((f32)r * s, 255.f);
 		g = math::min((f32)g * s, 255.f);
 		b = math::min((f32)b * s, 255.f);
 		a = math::min((f32)a * s, 255.f);
+	}
+
+	void Color::multiplyU8(u8 ku)
+	{
+		const float kf = static_cast<float>(ku) / 255.f;
+		r = (u8)((float)r * kf);
+		g = (u8)((float)g * kf);
+		b = (u8)((float)b * kf);
+		a = (u8)((float)a * kf);
 	}
 
 	void Color::bind() const

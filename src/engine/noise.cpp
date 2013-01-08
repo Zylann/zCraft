@@ -34,7 +34,6 @@ namespace engine
          // "hazard" from known random sequences, seed and coordinates
         int n = RAND_SEQ_X*x + RAND_SEQ_Y*y + RAND_SEQ_SEED*seed;
         n &= 0x7fffffff; // clear last sign bit
-        // shifting, adding and noising stuff
         n = (n >> 13) ^ n;
         n = n * (n * n * RAND_SEQ1 + RAND_SEQ2) + RAND_SEQ3;
         n &= 0x7fffffff;
@@ -91,7 +90,6 @@ namespace engine
          // "hazard" from known random sequences, seed and coordinates
         int n = RAND_SEQ_X*x + RAND_SEQ_Y*y + RAND_SEQ_Z*z + RAND_SEQ_SEED*seed;
         n &= 0x7fffffff; // clear last sign bit
-        // shifting, adding and noising stuff
         n = (n >> 13) ^ n;
         n = n * (n * n * RAND_SEQ1 + RAND_SEQ2) + RAND_SEQ3;
         n &= 0x7fffffff;

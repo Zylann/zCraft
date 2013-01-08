@@ -53,6 +53,9 @@ namespace engine
 		// Assigns [0,255] integer values to this color
 		void set(u8 r0, u8 g0, u8 b0, u8 a0 = 255);
 
+		// Copies values from another color
+		void set(Color other);
+
 		// Binds this color to the current OpenGL state
 		void bind() const;
 
@@ -61,6 +64,10 @@ namespace engine
 
 		// Multiplies RGB values by a scalar (alpha is ignored)
 		void multiplyRGB(float s);
+
+		// Multiplies RGBA values by a scalar given in [0,255].
+		// It will be treated as a ratio.
+		void multiplyU8(u8 ku);
 
 		Color operator+(const Color & other);
 

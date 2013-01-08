@@ -52,6 +52,7 @@ namespace zcraft
 			FastFace & ff, // the fastface to set
 			sf::Texture * tex,
 			u8 light, // light shade (for differenciating sides)
+			engine::Color color,
 			Vector3f pos, // face absolute origin
 			Vector3i vFaceDir, // direction vector
 			bool shift,

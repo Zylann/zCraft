@@ -27,7 +27,7 @@ namespace zcraft
 		{
 			// Get color of the top node
 			std::pair<s32, Node> topNode = map.getUpperNode(offX + x, offY + y, minZ, maxZ);
-			color = topNode.second.properties().color;
+			color = topNode.second.properties().averageColor;
 
 			// Apply some height gradient
 			float k = 0.5f;
