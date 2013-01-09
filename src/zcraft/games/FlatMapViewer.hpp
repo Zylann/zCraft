@@ -7,7 +7,6 @@
 #include "zcraft/zcraft.hpp"
 #include "zcraft/cartographer/Cartography.hpp"
 #include "zcraft/MapStreamer.hpp"
-#include "zcraft/IMapListener.hpp"
 
 namespace zcraft
 {
@@ -27,11 +26,11 @@ namespace zcraft
 
 		~FlatMapViewer();
 
-		void blockAdded(const Vector3i pos) override;
+		void blockAdded(const Vector3i pos, BlockMap & map) override;
 
-		void blockChanged(const Vector3i pos) override;
+		void blockChanged(const Vector3i pos, BlockMap & map) override;
 
-		void blockRemoved(const Vector3i pos) override;
+		void blockRemoved(const Vector3i pos, BlockMap & map) override;
 
 	protected :
 
@@ -39,7 +38,9 @@ namespace zcraft
 
 		void update(const engine::Time & delta) override;
 
-		void render(const engine::Time & delta) override;
+		void renderScene(const engine::Time & delta) override;
+
+		void renderGUI(const engine::Time & delta) override;
 
 		void dispose() override;
 

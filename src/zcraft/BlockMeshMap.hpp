@@ -8,16 +8,19 @@ This file is part of the zCraft project.
 #define ZCRAFT_BLOCKMESHMAP_HPP_INCLUDED
 
 #include <map>
-#include "zcraft/common.hpp"
 #include "engine/opengl/VertexColorArray.hpp"
+#include "zcraft/common.hpp"
+#include "zcraft/IMapListener.hpp"
 
 namespace zcraft
 {
-	class BlockMeshMap
+	typedef engine::gl::VertexColorArray BlockMesh;
+
+	class BlockMeshMap : public IMapListener
 	{
 	private :
 
-		std::map<Vector3i,engine::gl::VertexColorArray*> m_meshs;
+		std::map<Vector3i,BlockMesh*> m_meshs;
 
 	public :
 
@@ -29,13 +32,21 @@ namespace zcraft
 
 		bool isMesh(const Vector3i pos) const;
 
-		void setMesh(const Vector3i pos, engine::gl::VertexColorArray * mesh);
+		void setMesh(const Vector3i pos, BlockMesh * mesh);
 
 		void eraseMesh(const Vector3i pos);
 
 		void drawAll();
 
 		inline u32 getCount() const { return m_meshs.size(); }
+
+		/* Methods inherited from IMapListener */
+
+		void blockAdded(const Vector3i pos, BlockMap & map) override;
+
+		void blockChanged(const Vector3i pos, BlockMap & map) override;
+
+		void blockRemoved(const Vector3i pos, BlockMap & map) override;
 
 	};
 

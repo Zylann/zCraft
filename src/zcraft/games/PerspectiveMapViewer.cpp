@@ -37,10 +37,10 @@ namespace zcraft
 			m_window.getSize().x, m_window.getSize().y));
 
 		// Init map stream
-		m_map.addListener(this);
+		m_map.addListener(&m_meshMap);
 		m_mapStreamer = new MapStreamer(m_map, 8);
 		m_mapStreamer->update(Vector3i(0, 0, 0), true); // first update
-		m_mapStreamer->setSave(false); // For debug (the world will not be saved)
+		m_mapStreamer->setSave(false); // Save turned off atm.
 
 		return true;
 	}
@@ -57,7 +57,7 @@ namespace zcraft
 		m_mapStreamer->update(bpos);
 	}
 
-	void PerspectiveMapViewer::render(const engine::Time & delta)
+	void PerspectiveMapViewer::renderScene(const engine::Time & delta)
 	{
 		//glClearColor(0.1f, 0.5f, 0.9f, 1);
 		glClearColor(0.0f, 0.0f, 0.0f, 1);
@@ -104,16 +104,14 @@ namespace zcraft
 
 		glPopMatrix();
 
-		/* HUD */
-
-		// Pixel-match view
-
 		glDisable(GL_FOG);
 		glDisable(GL_DEPTH_TEST);
 		glDisable(GL_CULL_FACE);
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-		gluOrtho2D(0, m_window.getSize().x, m_window.getSize().y, 0);
+	}
+
+	void PerspectiveMapViewer::renderGUI(const Time & delta)
+	{
+		/* HUD */
 
 		glColor4ub(255,255,255,255);
 
@@ -156,80 +154,6 @@ namespace zcraft
 		}
 	}
 
-	void PerspectiveMapViewer::blockAdded(const Vector3i pos)
-	{
-		/*
-			Note : the code below will not stay here.
-			It is actually needed to keep the graphics of the map updated.
-		*/
-
-		// Note : in the following code, the newly added block will not be
-		// rendered immediately, but only when it will be surrounded by other
-		// blocks, so that we don't need to re-update its mesh each time its
-		// neighboring changes.
-		// Drawback : it reduces the view distance by 1 block, because edge
-		// blocks will not be visible. However I don't think its too much annoying
-		// with large distances.
-
-		// Look at the neighbors of the block
-		Vector3i npos;
-		for(u8 dir = 0; dir < 6; dir++)
-		{
-			npos = pos + face::toVec3i(dir);
-
-			if(m_meshMap.isMesh(npos))
-				continue;
-
-			std::list<Block*> neighbors;
-			m_map.getNeighboringBlocks(npos, neighbors);
-
-			if(neighbors.size() < 6)
-				continue;
-
-			// The neighbor is fully surrounded, we can make its mesh
-
-			// start block position
-			Vector3i startPos = npos * Block::SIZE;
-
-			// voxels area including neighbors
-			Vector3i minEdge = startPos - Vector3i(1,1,1);
-			Vector3i maxEdge = startPos + Vector3i(1,1,1) * Block::SIZE;
-			Area3D area;
-			area.setBounds(minEdge, maxEdge);
-
-			VoxelBuffer voxels;
-			voxels.create(area);
-
-			// copy voxels
-
-			Block * block = m_map.getBlock(npos);
-			if(block != nullptr)
-			{
-				block->copyTo(voxels);
-			}
-
-			// copy first neighbors voxels
-
-			for(auto & neighbor : neighbors)
-			{
-				neighbor->copyBorderTo(voxels, npos - neighbor->getPosition());
-			}
-
-			// Make mesh
-
-			gl::VertexColorArray * vbo = m_meshMaker.makeMesh(npos, voxels);
-			m_meshMap.setMesh(npos, vbo);
-		}
-	}
-
-	void PerspectiveMapViewer::blockChanged(const Vector3i pos)
-	{
-	}
-
-	void PerspectiveMapViewer::blockRemoved(const Vector3i pos)
-	{
-		m_meshMap.eraseMesh(pos);
-	}
 
 } // namespace zcraft
 

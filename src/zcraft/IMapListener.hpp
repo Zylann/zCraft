@@ -9,17 +9,19 @@ This file is part of the zCraft project.
 
 namespace zcraft
 {
+	class BlockMap;
+
 	class IMapListener
 	{
 	public :
 
 		virtual ~IMapListener() {}
 
-		virtual void blockAdded(const Vector3i pos) = 0;
+		virtual void blockAdded(const Vector3i pos, BlockMap & map) = 0;
 
-		virtual void blockChanged(const Vector3i pos) = 0;
+		virtual void blockChanged(const Vector3i pos, BlockMap & map) = 0;
 
-		virtual void blockRemoved(const Vector3i pos) = 0;
+		virtual void blockRemoved(const Vector3i pos, BlockMap & map) = 0;
 
 	};
 

@@ -25,9 +25,7 @@ namespace zcraft
 		an infinite map that keeps itself updated around.
 	*/
 
-	class PerspectiveMapViewer :
-		public engine::ABasicGame,
-		public IMapListener // To be notified of map changes through methods
+	class PerspectiveMapViewer : public engine::ABasicGame
 	{
 	private :
 
@@ -36,7 +34,6 @@ namespace zcraft
 		BlockMap m_map; // Here are stored the voxels
 		BlockMeshMap m_meshMap; // Here is the graphical representation of the map
 		MapStreamer * m_mapStreamer = nullptr; // How to keep the map updated around us
-		BlockMeshMaker m_meshMaker; // How to transform voxel data into visual things
 
 	public :
 
@@ -44,19 +41,15 @@ namespace zcraft
 
 		~PerspectiveMapViewer();
 
-		void blockAdded(const Vector3i pos) override;
-
-		void blockChanged(const Vector3i pos) override;
-
-		void blockRemoved(const Vector3i pos) override;
-
 	protected :
 
 		bool init() override;
 
 		void update(const engine::Time & delta) override;
 
-		void render(const engine::Time & delta) override;
+		void renderScene(const engine::Time & delta) override;
+
+		void renderGUI(const engine::Time & delta) override;
 
 		void dispose() override;
 

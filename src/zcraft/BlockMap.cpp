@@ -235,19 +235,19 @@ namespace zcraft
 	void BlockMap::notifyListenersForBlockAdd(const Vector3i pos)
 	{
 		for(auto & listener : m_listeners)
-			listener->blockAdded(pos);
+			listener->blockAdded(pos, *this);
 	}
 
 	void BlockMap::notifyListenersForBlockChange(const Vector3i pos)
 	{
 		for(auto & listener : m_listeners)
-			listener->blockChanged(pos);
+			listener->blockChanged(pos, *this);
 	}
 
 	void BlockMap::notifyListenersForBlockRemove(const Vector3i pos)
 	{
 		for(auto & listener : m_listeners)
-			listener->blockRemoved(pos);
+			listener->blockRemoved(pos, *this);
 	}
 
 } // namespace zcraft

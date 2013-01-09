@@ -57,7 +57,7 @@ namespace zcraft
 		m_mapStreamer->update(bpos);
 	}
 
-	void FlatMapViewer::render(const engine::Time & delta)
+	void FlatMapViewer::renderScene(const Time & delta)
 	{
 		glClearColor(0.1f, 0.1f, 0.1f, 1);
 
@@ -80,14 +80,10 @@ namespace zcraft
 
 		glPopMatrix();
 
-		/* HUD */
+	}
 
-		// Pixel-match view
-
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-		gluOrtho2D(0, m_window.getSize().x, m_window.getSize().y, 0);
-
+	void FlatMapViewer::renderGUI(const Time & delta)
+	{
 		MapStreamThread::RunningInfo threadInfo = m_mapStreamer->getThreadInfo();
 		std::stringstream ss;
 		ss << "Rem:" << threadInfo.remainingRequests
@@ -97,7 +93,6 @@ namespace zcraft
 			<< ", D:" << threadInfo.droppedCount;
 		glColor3ub(255,255,255);
 		m_font.draw(ss.str(), 0, 0);
-
 	}
 
 	void FlatMapViewer::dispose()
@@ -121,19 +116,19 @@ namespace zcraft
 		}
 	}
 
-	void FlatMapViewer::blockAdded(const Vector3i pos)
+	void FlatMapViewer::blockAdded(const Vector3i pos, BlockMap & map)
 	{
 		sf::Image img = Cartographer::renderChunkTopDown(m_map, pos.x, pos.y, -64, 64);
 		m_cartography.setPictureFromImage(Vector2i(pos.x, pos.y), img);
 	}
 
-	void FlatMapViewer::blockChanged(const Vector3i pos)
+	void FlatMapViewer::blockChanged(const Vector3i pos, BlockMap & map)
 	{
 		sf::Image img = Cartographer::renderChunkTopDown(m_map, pos.x, pos.y, -64, 64);
 		m_cartography.setPictureFromImage(Vector2i(pos.x, pos.y), img);
 	}
 
-	void FlatMapViewer::blockRemoved(const Vector3i pos)
+	void FlatMapViewer::blockRemoved(const Vector3i pos, BlockMap & map)
 	{
 		m_cartography.erasePicture(Vector2i(pos.x, pos.y));
 	}

@@ -63,9 +63,7 @@ namespace engine
 			update(delta);
 
 			// Draw everything
-			preRender();
 			render(delta);
-			postRender();
 
 			// Swap buffers and displays the next frame
 			glFlush();
@@ -76,23 +74,30 @@ namespace engine
 		dispose();
 	}
 
-	void ABasicGame::preRender()
+	void ABasicGame::render(const Time & delta)
 	{
 		// Clear screen
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+		/* Scene */
+
+		// Configure basic view
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+
+		renderScene(delta);
+
+		/* GUI */
+
 		// Pixel-match view
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
-		gluOrtho2D(0, m_window.getSize().x, 0, m_window.getSize().y);
-
-		// Init matrix mode
+		// Note : Y axis is inverted to start from tom to bottom
+		gluOrtho2D(0, m_window.getSize().x, m_window.getSize().y, 0);
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
-	}
 
-	void ABasicGame::postRender()
-	{
+		renderGUI(delta);
 	}
 
 } // namespace engine

@@ -29,14 +29,14 @@ namespace zcraft
 
 	public :
 
-		engine::gl::VertexColorArray * makeMesh(
+		static engine::gl::VertexColorArray * makeMesh(
 			const Vector3i bpos, VoxelBuffer & vb);
 
 	private :
 
 		// fetch a row of blocks on a voxel stamp to convert them into fastfaces
 		// Note : tessellation algorithm is here
-		void updateFastFacesRow(
+		static void updateFastFacesRow(
 			Vector3i startPos, // absolute start position
 			Vector3i transDir, // iteration translation
 			Vector3i vFaceDir, // face direction vector, ex : (0,0,1) for back face (z+)
@@ -48,7 +48,7 @@ namespace zcraft
 		// sets parameters of a FastFace.
 		// light in [0,255] (not a lightCode)
 		// shift : if true, the face will be shifted of (-vFaceDir).
-		void updateFastFace(
+		static void updateFastFace(
 			FastFace & ff, // the fastface to set
 			sf::Texture * tex,
 			u8 light, // light shade (for differenciating sides)
@@ -59,11 +59,11 @@ namespace zcraft
 			Vector3f scale); // scale of the face (integer)
 
 		// get light shading of a face (to make differences between sides)
-		u8 getFaceLight(const Vector3i & vdir, u8 lightCode);
+		static u8 getFaceLight(const Vector3i & vdir, u8 lightCode);
 
-		u8 compareFaces(const Node a, const Node b);
+		static u8 compareFaces(const Node a, const Node b);
 
-		void getFaceVerticesFromDirVector(
+		static void getFaceVerticesFromDirVector(
 			Vector3i vDir, Vector3f vertices[4]);
 
 	};
