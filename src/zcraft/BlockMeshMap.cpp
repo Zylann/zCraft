@@ -72,7 +72,22 @@ namespace zcraft
 		for(auto & p : m_meshs)
 		{
 			if(p.second != nullptr)
+			{
 				p.second->draw();
+
+				// Debug : draws mesh AABBs
+//				if(!p.second->isEmpty())
+//				{
+//					glColor3ub(255,255,255);
+//					glPushMatrix();
+//					glTranslatef(
+//						Block::SIZE * p.first.x,
+//						Block::SIZE * p.first.y,
+//						Block::SIZE * p.first.z);
+//					gl::drawCubeLines(Block::SIZE);
+//					glPopMatrix();
+//				}
+			}
 			else
 			{
 				// This should never happen.

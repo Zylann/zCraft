@@ -32,7 +32,9 @@ namespace gl
 
 	void drawGrid(const float cx, const float cy, const float r);
 
-	void drawCube(const float c = 1);
+	void drawTestCube(const float c = 1);
+
+	void drawCubeLines(const float c = 1);
 
 } // namespace gl
 } // namespace engine

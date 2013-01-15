@@ -105,7 +105,7 @@ namespace gl
 		glEnd();
 	}
 
-	void drawCube(const float c)
+	void drawTestCube(const float c)
 	{
 		glBegin(GL_QUADS);
 
@@ -151,6 +151,57 @@ namespace gl
 		glVertex3f( c, c, -c);
 		glVertex3f( c, c,  c);
 
+		glEnd();
+	}
+
+	void drawCubeLines(const float c = 1)
+	{
+		// Bottom
+		glBegin(GL_LINE_STRIP);
+		glVertex3f(-c, -c, -c);
+		glVertex3f(-c,  c, -c);
+		glVertex3f( c,  c, -c);
+		glVertex3f( c, -c, -c);
+		glEnd();
+
+		// Top
+		glBegin(GL_LINE_STRIP);
+		glVertex3f(-c, -c, c);
+		glVertex3f(-c,  c, c);
+		glVertex3f( c,  c, c);
+		glVertex3f( c, -c, c);
+		glEnd();
+
+		// West
+		glBegin(GL_LINE_STRIP);
+		glVertex3f(-c, -c, -c);
+		glVertex3f(-c,  c, -c);
+		glVertex3f(-c,  c,  c);
+		glVertex3f(-c, -c,  c);
+		glEnd();
+
+		// East
+		glBegin(GL_LINE_STRIP);
+		glVertex3f(c, -c, -c);
+		glVertex3f(c,  c, -c);
+		glVertex3f(c,  c,  c);
+		glVertex3f(c, -c,  c);
+		glEnd();
+
+		// South
+		glBegin(GL_LINE_STRIP);
+		glVertex3f(-c, -c,  c);
+		glVertex3f(-c, -c, -c);
+		glVertex3f( c, -c, -c);
+		glVertex3f( c, -c,  c);
+		glEnd();
+
+		// North
+		glBegin(GL_LINE_STRIP);
+		glVertex3f(-c, c,  c);
+		glVertex3f(-c, c, -c);
+		glVertex3f( c, c, -c);
+		glVertex3f( c, c,  c);
 		glEnd();
 	}
 
