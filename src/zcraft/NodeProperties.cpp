@@ -14,6 +14,7 @@ namespace zcraft
 		// AIR
 		np.opaque = false;
 		np.cube = true;
+		np.solid = false;
 		np.name = "air";
 		np.color.set(0,0,0,0);
 		np.averageColor.set(0,0,0,0);
@@ -22,6 +23,7 @@ namespace zcraft
 		// STONE
 		np.opaque = true;
 		np.cube = true;
+		np.solid = true;
 		np.name = "stone";
 		np.color.set(127, 127, 127);
 		np.averageColor.set(127, 127, 127);
@@ -30,6 +32,7 @@ namespace zcraft
 		// DIRT
 		np.opaque = true;
 		np.cube = true;
+		np.solid = true;
 		np.name = "dirt";
 		np.color.set(128, 64, 0);
 		np.averageColor.set(128, 64, 0);
@@ -38,6 +41,7 @@ namespace zcraft
 		// GRASS
 		np.opaque = true;
 		np.cube = true;
+		np.solid = true;
 		np.name = "grass";
 		np.color.set(64, 192, 32);
 		np.averageColor.set(64, 192, 32);

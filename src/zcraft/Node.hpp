@@ -70,6 +70,12 @@ namespace zcraft
 
 	};
 
+	struct LocatedNode
+	{
+		Node node;
+		Vector3i pos;
+	};
+
 } // namespace zcraft
 
 #endif // NODE_HPP_INCLUDED

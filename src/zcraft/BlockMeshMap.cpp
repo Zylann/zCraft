@@ -8,7 +8,6 @@ This file is part of the zCraft project.
 #include <list>
 #include "zcraft/BlockMap.hpp"
 #include "zcraft/BlockMeshMap.hpp"
-#include "zcraft/BlockMeshMaker.hpp"
 #include "zcraft/face.hpp"
 
 using namespace engine;
@@ -142,14 +141,52 @@ namespace zcraft
 
 			// Make mesh
 
-			BlockMesh * vbo = BlockMeshMaker::makeMesh(npos, voxels);
-			setMesh(npos, vbo);
+			BlockMesh * bm = new BlockMesh();
+			bm->buildFromVoxelData(npos, voxels);
+			setMesh(npos, bm);
 		}
 	}
 
 	void BlockMeshMap::blockChanged(const Vector3i pos, BlockMap & map)
 	{
-		// TODO BlockMeshMap: blockChanged
+		std::list<Block*> neighbors;
+		map.getNeighboringBlocks(pos, neighbors);
+
+		if(neighbors.size() < 6)
+			return;
+
+		// The neighbor is fully surrounded, we can make its mesh
+
+		// start block position
+		Vector3i startPos = pos * Block::SIZE;
+
+		// voxels area including neighbors
+		Vector3i minEdge = startPos - Vector3i(1,1,1);
+		Vector3i maxEdge = startPos + Vector3i(1,1,1) * Block::SIZE;
+		Area3D area;
+		area.setBounds(minEdge, maxEdge);
+
+		VoxelBuffer voxels;
+		voxels.create(area);
+
+		// copy voxels
+
+		Block * block = map.getBlock(pos);
+		if(block != nullptr)
+		{
+			block->copyTo(voxels);
+		}
+
+		// copy first neighbors voxels
+
+		for(auto & neighbor : neighbors)
+		{
+			neighbor->copyBorderTo(voxels, pos - neighbor->getPosition());
+		}
+
+		BlockMesh * bm = new BlockMesh();
+		bm->buildFromVoxelData(pos, voxels);
+		setMesh(pos, bm);
 	}
 
 	void BlockMeshMap::blockRemoved(const Vector3i pos, BlockMap & map)

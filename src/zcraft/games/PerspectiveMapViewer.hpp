@@ -12,7 +12,6 @@ This file is part of the zCraft project.
 #include "engine/opengl/VertexColorArray.hpp"
 #include "zcraft/zcraft.hpp"
 #include "zcraft/BlockMeshMap.hpp"
-#include "zcraft/BlockMeshMaker.hpp"
 #include "zcraft/MapStreamer.hpp"
 #include "zcraft/IMapListener.hpp"
 #include "zcraft/FreeCamera.hpp"

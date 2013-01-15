@@ -6,6 +6,7 @@ This file is part of the zCraft project.
 
 #include "zcraft/BlockMap.hpp"
 #include "zcraft/face.hpp"
+#include "zcraft/NodeProperties.hpp"
 
 namespace zcraft
 {
@@ -237,6 +238,53 @@ namespace zcraft
 		for(auto & listener : m_listeners)
 			listener->blockAdded(pos, *this);
 	}
+
+	RayCastResult BlockMap::raycastToSolidNode(
+			Vector3f start, Vector3f dir, f32 maxDistance)
+	{
+		// TODO BlockMap: optimize raycasting
+
+		Node n, nprev;
+		Vector3i nPos, nprevPos;
+		Vector3f pos = start;
+		float d, step = 0.1f;
+		RayCastResult result;
+
+		dir.normalize();
+		Vector3f u = dir * step;
+
+		for(d = 0; d < maxDistance; d += step)
+		{
+			nprev = n;
+			nprevPos = nPos;
+
+			nPos.x = floor(pos.x);
+			nPos.y = floor(pos.y);
+			nPos.z = floor(pos.z);
+
+			n = getNode(nPos);
+
+			if(n.properties().solid)
+			{
+				result.collision = true;
+				break;
+			}
+
+			pos += u;
+		}
+
+		result.distanceCrossed = d;
+		result.hit.node = n;
+		result.hit.pos = nPos;
+		result.hitPrevious.node = nprev;
+		result.hitPrevious.pos = nprevPos;
+
+		return result;
+	}
+
+	/*
+		Listeners
+	*/
 
 	void BlockMap::notifyListenersForBlockChange(const Vector3i pos)
 	{

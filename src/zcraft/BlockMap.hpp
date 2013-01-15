@@ -15,6 +15,20 @@ This file is part of the zCraft project.
 
 namespace zcraft
 {
+	struct RayCastResult
+	{
+		bool collision;
+		float distanceCrossed;
+		LocatedNode hit;
+		LocatedNode hitPrevious;
+
+		RayCastResult()
+		{
+			collision = false;
+			distanceCrossed = 0;
+		}
+	};
+
 	class BlockMap
 	{
 	private :
@@ -94,6 +108,11 @@ namespace zcraft
 		// Finds the upper non-AIR node Z-wise on (x, y).
 		// Search will begin at maxZ and end at minZ if not found.
 		std::pair<s32, Node> getUpperNode(s32 x, s32 y, s32 minZ, s32 maxZ);
+
+		// Casts a vector-oriented ray from the given position until it reaches a solid node.
+		RayCastResult raycastToSolidNode(Vector3f start, Vector3f dir, f32 maxDistance);
+
+		/* Listeners */
 
 		void addListener(IMapListener * listener);
 

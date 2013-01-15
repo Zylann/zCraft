@@ -11,11 +11,10 @@ This file is part of the zCraft project.
 #include "engine/opengl/VertexColorArray.hpp"
 #include "zcraft/common.hpp"
 #include "zcraft/IMapListener.hpp"
+#include "zcraft/BlockMesh.hpp"
 
 namespace zcraft
 {
-	typedef engine::gl::VertexColorArray BlockMesh;
-
 	class BlockMeshMap : public IMapListener
 	{
 	private :

@@ -13,6 +13,7 @@ namespace zcraft
 
 		bool cube; // Is the node a cube?
 		bool opaque; // Is the node opaque?
+		bool solid; // Is the node solid (collisions) ?
 		std::string name; // Technical name
 		std::string displayableName; // Player-displayed name
 		engine::Color averageColor; // Average color (used for minimap)
@@ -29,6 +30,7 @@ namespace zcraft
 			averageColor.set(color);
 			name = "undefined";
 			displayableName = "undefined";
+			solid = false;
 		}
 
 		inline bool isOpaqueCube() const
