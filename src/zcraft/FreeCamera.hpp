@@ -39,6 +39,8 @@ namespace zcraft
 
 		inline void setPosition(const Vector3f pos) { m_camera.setPosition(pos); }
 
+		inline Vector3f getForward() const { return m_camera.getForward(); }
+
 		inline Vector3f getPosition() const { return m_camera.getPosition(); }
 
 		// Set both spherical look angles of the camera.

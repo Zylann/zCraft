@@ -118,6 +118,11 @@ namespace zcraft
 		std::stringstream ss;
 		ss << "WASD/ZQSD to move, arrows to rotate, +/- to go up and down\n";
 
+		// Target
+		glColor3ub(255,255,255);
+		glLineWidth(2);
+		gl::drawCross(m_window.getSize().x / 2, m_window.getSize().y / 2, 32);
+
 		// FPS
 		ss << "FPS=" << (int)delta.hz();
 
@@ -156,8 +161,29 @@ namespace zcraft
 		{
 			m_camera.mouseMoved(event.mouseMove.x, event.mouseMove.y);
 		}
+		else if(event.type == sf::Event::MouseButtonPressed)
+		{
+			RayCastResult raycast =
+				m_map.raycastToSolidNode(
+					m_camera.getPosition(),
+					m_camera.getForward(), 16);
+
+			if(raycast.collision)
+			{
+				if(event.mouseButton.button == sf::Mouse::Left)
+				{
+					m_map.setNode(raycast.hit.pos, Node(node::AIR));
+				}
+				else if(event.mouseButton.button == sf::Mouse::Right)
+				{
+					m_map.setNode(raycast.hitPrevious.pos, Node(node::STONE));
+				}
+			}
+		}
 	}
 
-
 } // namespace zcraft
+
+
+
 
