@@ -152,6 +152,10 @@ namespace zcraft
 			//std::cout << event.mouseWheel.delta << std::endl;
 			m_camera.mouseWheelMoved(event.mouseWheel.delta);
 		}
+		else if(event.type == sf::Event::MouseMoved)
+		{
+			m_camera.mouseMoved(event.mouseMove.x, event.mouseMove.y);
+		}
 	}
 
 

@@ -25,6 +25,9 @@ namespace zcraft
 		engine::Camera3D m_camera;
 		f32 m_yaw;
 		f32 m_pitch;
+		s32 m_lastMouseX;
+		s32 m_lastMouseY;
+		f32 m_sensitivity;
 
 	public :
 
@@ -42,11 +45,13 @@ namespace zcraft
 		// The vertical axis is Z+.
 		void setAngles(f32 yawDegrees, f32 pitchDegrees);
 
+		void setSensitivity(f32 degreesPerPixel);
+
 		// Real-time update
 		void update(const engine::Time & delta);
 
 		// Must be called on mouse move events
-		void mouseMoved(s32 oldX, s32 oldY, s32 newX, s32 newY);
+		void mouseMoved(s32 newX, s32 newY);
 
 		// Must be called on mouse wheel events
 		void mouseWheelMoved(s32 delta);

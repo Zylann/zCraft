@@ -86,6 +86,16 @@ namespace math
 		return a < b ? b : a;
 	}
 
+	template<class T>
+	inline const T & clamp(const T & x, const T & min, const T & max)
+	{
+		if(x > max)
+			return max;
+		else if(x < min)
+			return min;
+		return x;
+	}
+
 	// TODO math: random functions
 	// TODO math: put interpolations here (lerp)
 	// TODO math: fast rsqrt for vector normalization

@@ -4,8 +4,11 @@ Copyright (C) 2010-2012 Marc GILLERON
 This file is part of the zCraft project.
 */
 
+#include <iostream>
 #include "zcraft/FreeCamera.hpp"
 #include "engine/opengl/glutils.hpp"
+
+using namespace engine;
 
 namespace zcraft
 {
@@ -15,6 +18,9 @@ namespace zcraft
 		m_yaw = 0;
 		m_camera.setVertical(Vector3f(0, 0, 1));
 		m_camera.setForward(Vector3f(0, 1, 0));
+		m_lastMouseX = -1;
+		m_lastMouseY = -1;
+		m_sensitivity = 0.25f;
 	}
 
 	void FreeCamera::look()
@@ -29,6 +35,9 @@ namespace zcraft
 		Vector3f camVert = m_camera.getVertical();
 		Vector3f camLeft = camFw;
 		camLeft.rotateXYBy(-90);
+
+		f32 yaw = m_yaw;
+		f32 pitch = m_pitch;
 
 		f32 a = 8.f * delta.s(); // Linear speed
 		f32 aa = 90.f * delta.s(); // Angular speed
@@ -61,32 +70,25 @@ namespace zcraft
 		}
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 		{
-			m_yaw += aa;
+			yaw += aa;
 		}
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 		{
-			m_yaw -= aa;
+			yaw -= aa;
 		}
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 		{
-			m_pitch -= aa;
+			pitch -= aa;
 		}
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 		{
-			m_pitch += aa;
+			pitch += aa;
 		}
 
-		// Yaw normalization
-		if(m_yaw > 180)
-			m_yaw -= 360;
-		else if(m_yaw < -180)
-			m_yaw += 360;
-
-		// Pitch clamping
-		if(m_pitch > 90)
-			m_pitch = 89;
-		else if(m_pitch < -90)
-			m_pitch = -89;
+		if(m_yaw != yaw || m_pitch != pitch)
+		{
+			setAngles(yaw, pitch);
+		}
 
 		// Update position
 		m_camera.setPosition(camPos);
@@ -102,15 +104,47 @@ namespace zcraft
 	{
 		m_yaw = yawDegrees;
 		m_pitch = pitchDegrees;
+
+		// Yaw normalization
+		if(m_yaw > 180)
+			m_yaw -= 360;
+		else if(m_yaw < -180)
+			m_yaw += 360;
+
+		// Pitch clamping
+		m_pitch = math::clamp(m_pitch, -89.f, 89.f);
 	}
 
-	void FreeCamera::mouseMoved(s32 oldX, s32 oldY, s32 newX, s32 newY)
+	void FreeCamera::setSensitivity(f32 degreesPerPixel)
 	{
-		s32 deltaX = newX - oldX;
-		s32 deltaY = newY - oldY;
+		m_sensitivity = degreesPerPixel;
+	}
 
-		m_pitch += deltaX;
-		m_yaw += deltaY;
+	inline float f(const float x)
+	{
+		if(x > 0)
+			return x + 0.025f * x*x;
+		else if(x < 0)
+			return x - 0.025f * x*x;
+		else
+			return 0;
+	}
+
+	void FreeCamera::mouseMoved(s32 newX, s32 newY)
+	{
+		if(m_lastMouseX >= 0 || m_lastMouseY >= 0)
+		{
+			s32 deltaX = newX - m_lastMouseX;
+			s32 deltaY = newY - m_lastMouseY;
+
+			f32 dtx = -f(deltaX * m_sensitivity);
+			f32 dty = -f(deltaY * m_sensitivity);
+
+			setAngles(m_yaw + dtx, m_pitch + dty);
+		}
+
+		m_lastMouseX = newX;
+		m_lastMouseY = newY;
 	}
 
 	void FreeCamera::mouseWheelMoved(s32 delta)
