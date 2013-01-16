@@ -48,7 +48,7 @@ namespace zcraft
 	void PerspectiveMapViewer::update(const engine::Time & delta)
 	{
 		// Update camera
-		m_camera.update(delta);
+		m_camera.update(delta, m_window);
 
 		updatePointedVoxel();
 
@@ -57,7 +57,6 @@ namespace zcraft
 		Vector3i pos(camPos.x, camPos.y, camPos.z);
 		Vector3i bpos(pos.x >> 4, pos.y >> 4, pos.z >> 4);
 		m_mapStreamer->update(bpos);
-
 	}
 
 	void PerspectiveMapViewer::renderScene(const engine::Time & delta)
@@ -132,13 +131,15 @@ namespace zcraft
 
 		glColor4ub(255,255,255,255);
 
-		std::stringstream ss;
-		ss << "WASD/ZQSD to move, arrows to rotate, +/- to go up and down\n";
-
 		// Target
-		glColor3ub(255,255,255);
 		glLineWidth(2);
 		gl::drawCross(m_window.getSize().x / 2, m_window.getSize().y / 2, 16);
+
+		std::stringstream ss;
+
+		// Tips
+		ss << "WASD/ZQSD to move, arrows to rotate, +/- to go up and down, "
+			<< "ESC to disable camera\n";
 
 		// FPS
 		ss << "FPS=" << (int)delta.hz();
@@ -151,9 +152,11 @@ namespace zcraft
 			<< ", S:" << threadInfo.savedCount
 			<< ", D:" << threadInfo.droppedCount;
 
+		// MeshMap
 		ss << "\nBlocks: " << m_map.getBlockCount()
 			<< " Meshs: " << m_meshMap.getCount();
 
+		// Position
 		Vector3f fpos = m_camera.getPosition();
 		ss << "\nPos: " << Vector3i(floor(fpos.x), floor(fpos.y), floor(fpos.y));
 
@@ -174,12 +177,7 @@ namespace zcraft
 	{
 		if(event.type == sf::Event::MouseWheelMoved)
 		{
-			//std::cout << event.mouseWheel.delta << std::endl;
 			m_camera.mouseWheelMoved(event.mouseWheel.delta);
-		}
-		else if(event.type == sf::Event::MouseMoved)
-		{
-			m_camera.mouseMoved(event.mouseMove.x, event.mouseMove.y);
 		}
 		else if(event.type == sf::Event::MouseButtonPressed)
 		{
@@ -194,6 +192,11 @@ namespace zcraft
 					m_map.setNode(m_raycast.hitPrevious.pos, Node(node::STONE));
 				}
 			}
+		}
+		else if(event.type == sf::Event::KeyPressed)
+		{
+			if(event.key.code == sf::Keyboard::Key::Escape)
+				m_camera.setEnabled(!m_camera.isEnabled());
 		}
 	}
 

@@ -12,6 +12,18 @@ using namespace engine;
 
 namespace zcraft
 {
+	// This function is used to modify the linearity of camera's angular velocity
+	inline float f(const float x)
+	{
+		// Linear with small moves, slightly quadratic on bigger moves
+		if(x > 0)
+			return x + 0.025f * x*x;
+		else if(x < 0)
+			return x - 0.025f * x*x;
+		else
+			return 0;
+	}
+
 	FreeCamera::FreeCamera()
 	{
 		m_pitch = 0;
@@ -22,6 +34,7 @@ namespace zcraft
 		m_lastMouseX = -1;
 		m_lastMouseY = -1;
 		m_sensitivity = 0.25f;
+		m_enabled = true;
 	}
 
 	void FreeCamera::look()
@@ -29,8 +42,13 @@ namespace zcraft
 		m_camera.look();
 	}
 
-	void FreeCamera::update(const engine::Time & delta)
+	void FreeCamera::update(const engine::Time & delta, const sf::Window & window)
 	{
+		if(!m_enabled)
+			return;
+
+		/* Useful variables for movement */
+
 		Vector3f camPos = m_camera.getPosition();
 		Vector3f camFw = m_camera.getForward();
 		Vector3f camVert = m_camera.getVertical();
@@ -44,6 +62,9 @@ namespace zcraft
 		f32 a = 8.f * delta.s(); // Linear speed
 		f32 aa = 90.f * delta.s(); // Angular speed
 
+		/* Keyboard control */
+
+		// Strafe, ascend, descend, forward and backward
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q) ||
 			sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		{
@@ -70,6 +91,7 @@ namespace zcraft
 		{
 			camPos -= camVert * a;
 		}
+		// Rotation
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 		{
 			yaw += aa;
@@ -87,6 +109,31 @@ namespace zcraft
 			pitch += aa;
 		}
 
+		/* Mouse control */
+		// Note : sf::Window is only needed for this part.
+
+		sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+		sf::Vector2u screenSize = window.getSize();
+		sf::Vector2i screenCenter(screenSize.x / 2, screenSize.y / 2);
+
+		// Get mouse variation
+		Vector2i mouseDelta(
+			mousePos.x - screenCenter.x,
+			mousePos.y - screenCenter.y);
+
+		// Convert to rotation
+		f32 dtx = -f(mouseDelta.x * m_sensitivity);
+		f32 dty = -f(mouseDelta.y * m_sensitivity);
+		yaw += dtx;
+		pitch += dty;
+
+		// Re-center the mouse so it stays in the window.
+		// Warning: it is strongly recommended that the player can disable
+		// the camera, because warping the mouse is a constraining method.
+		sf::Mouse::setPosition(screenCenter, window);
+
+		/* Movement + rotation application */
+
 		if(m_yaw != yaw || m_pitch != pitch)
 		{
 			setAngles(yaw, pitch);
@@ -100,6 +147,7 @@ namespace zcraft
 		camFw.rotateYZBy(m_pitch);
 		camFw.rotateXYBy(m_yaw);
 		m_camera.setForward(camFw);
+
 	}
 
 	void FreeCamera::setAngles(f32 yawDegrees, f32 pitchDegrees)
@@ -122,35 +170,11 @@ namespace zcraft
 		m_sensitivity = degreesPerPixel;
 	}
 
-	inline float f(const float x)
-	{
-		if(x > 0)
-			return x + 0.025f * x*x;
-		else if(x < 0)
-			return x - 0.025f * x*x;
-		else
-			return 0;
-	}
-
-	void FreeCamera::mouseMoved(s32 newX, s32 newY)
-	{
-		if(m_lastMouseX >= 0 || m_lastMouseY >= 0)
-		{
-			s32 deltaX = newX - m_lastMouseX;
-			s32 deltaY = newY - m_lastMouseY;
-
-			f32 dtx = -f(deltaX * m_sensitivity);
-			f32 dty = -f(deltaY * m_sensitivity);
-
-			setAngles(m_yaw + dtx, m_pitch + dty);
-		}
-
-		m_lastMouseX = newX;
-		m_lastMouseY = newY;
-	}
-
 	void FreeCamera::mouseWheelMoved(s32 delta)
 	{
+		if(!m_enabled)
+			return;
+
 		float fov = m_camera.getFov();
 		fov += 2 * delta;
 		if(fov < 50)

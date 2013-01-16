@@ -7,9 +7,10 @@ This file is part of the zCraft project.
 #ifndef FREECAMERA_HPP_INCLUDED
 #define FREECAMERA_HPP_INCLUDED
 
-#include "zcraft/common.hpp"
+#include <SFML/Window.hpp>
 #include "engine/system/Time.hpp"
 #include "engine/opengl/Camera3D.hpp"
+#include "zcraft/common.hpp"
 
 namespace zcraft
 {
@@ -28,6 +29,7 @@ namespace zcraft
 		s32 m_lastMouseX;
 		s32 m_lastMouseY;
 		f32 m_sensitivity;
+		bool m_enabled;
 
 	public :
 
@@ -43,17 +45,19 @@ namespace zcraft
 
 		inline Vector3f getPosition() const { return m_camera.getPosition(); }
 
+		inline void setEnabled(bool e) { m_enabled = e; }
+
+		inline bool isEnabled() const { return m_enabled; }
+
 		// Set both spherical look angles of the camera.
 		// The vertical axis is Z+.
 		void setAngles(f32 yawDegrees, f32 pitchDegrees);
 
 		void setSensitivity(f32 degreesPerPixel);
 
-		// Real-time update
-		void update(const engine::Time & delta);
-
-		// Must be called on mouse move events
-		void mouseMoved(s32 newX, s32 newY);
+		// Real-time update.
+		// The window reference is needed because it involves mouse grabbing.
+		void update(const engine::Time & delta, const sf::Window & window);
 
 		// Must be called on mouse wheel events
 		void mouseWheelMoved(s32 delta);
