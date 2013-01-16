@@ -18,6 +18,7 @@ namespace zcraft
 		m_yaw = 0;
 		m_camera.setVertical(Vector3f(0, 0, 1));
 		m_camera.setForward(Vector3f(0, 1, 0));
+		m_camera.setNearAndFar(0.1f, 512);
 		m_lastMouseX = -1;
 		m_lastMouseY = -1;
 		m_sensitivity = 0.25f;
