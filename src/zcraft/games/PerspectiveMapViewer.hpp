@@ -33,6 +33,7 @@ namespace zcraft
 		BlockMap m_map; // Here are stored the voxels
 		BlockMeshMap m_meshMap; // Here is the graphical representation of the map
 		MapStreamer * m_mapStreamer = nullptr; // How to keep the map updated around us
+		RayCastResult m_raycast; // Pointed voxel
 
 	public :
 
@@ -55,6 +56,8 @@ namespace zcraft
 		void resized(const Vector2i & newSize) override;
 
 		void processEvent(const sf::Event & event) override;
+
+		void updatePointedVoxel();
 
 	};
 

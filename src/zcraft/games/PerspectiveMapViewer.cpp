@@ -50,11 +50,14 @@ namespace zcraft
 		// Update camera
 		m_camera.update(delta);
 
+		updatePointedVoxel();
+
 		// Update map stream
 		Vector3f camPos = m_camera.getPosition();
 		Vector3i pos(camPos.x, camPos.y, camPos.z);
 		Vector3i bpos(pos.x >> 4, pos.y >> 4, pos.z >> 4);
 		m_mapStreamer->update(bpos);
+
 	}
 
 	void PerspectiveMapViewer::renderScene(const engine::Time & delta)
@@ -82,8 +85,22 @@ namespace zcraft
 
 		glDisable(GL_BLEND);
 
-		// Test VBO
+		// Draw the map
 		m_meshMap.drawAll();
+
+		// Pointed voxel
+		if(m_raycast.collision)
+		{
+			glPushMatrix();
+			glTranslatef(
+				0.5f + m_raycast.hit.pos.x,
+				0.5f + m_raycast.hit.pos.y,
+				0.5f + m_raycast.hit.pos.z);
+			glColor3ub(255,255,255);
+			glLineWidth(2.f);
+			gl::drawCubeLines(0.501f);
+			glPopMatrix();
+		}
 
 		// Axes
 		glDisable(GL_TEXTURE_2D);
@@ -121,7 +138,7 @@ namespace zcraft
 		// Target
 		glColor3ub(255,255,255);
 		glLineWidth(2);
-		gl::drawCross(m_window.getSize().x / 2, m_window.getSize().y / 2, 32);
+		gl::drawCross(m_window.getSize().x / 2, m_window.getSize().y / 2, 16);
 
 		// FPS
 		ss << "FPS=" << (int)delta.hz();
@@ -136,6 +153,9 @@ namespace zcraft
 
 		ss << "\nBlocks: " << m_map.getBlockCount()
 			<< " Meshs: " << m_meshMap.getCount();
+
+		Vector3f fpos = m_camera.getPosition();
+		ss << "\nPos: " << Vector3i(floor(fpos.x), floor(fpos.y), floor(fpos.y));
 
 		m_font.draw(ss.str(), 0, 0);
 	}
@@ -163,23 +183,26 @@ namespace zcraft
 		}
 		else if(event.type == sf::Event::MouseButtonPressed)
 		{
-			RayCastResult raycast =
-				m_map.raycastToSolidNode(
-					m_camera.getPosition(),
-					m_camera.getForward(), 16);
-
-			if(raycast.collision)
+			if(m_raycast.collision)
 			{
 				if(event.mouseButton.button == sf::Mouse::Left)
 				{
-					m_map.setNode(raycast.hit.pos, Node(node::AIR));
+					m_map.setNode(m_raycast.hit.pos, Node(node::AIR));
 				}
 				else if(event.mouseButton.button == sf::Mouse::Right)
 				{
-					m_map.setNode(raycast.hitPrevious.pos, Node(node::STONE));
+					m_map.setNode(m_raycast.hitPrevious.pos, Node(node::STONE));
 				}
 			}
 		}
+	}
+
+	void PerspectiveMapViewer::updatePointedVoxel()
+	{
+		m_raycast =
+			m_map.raycastToSolidNode(
+				m_camera.getPosition(),
+				m_camera.getForward(), 16);
 	}
 
 } // namespace zcraft

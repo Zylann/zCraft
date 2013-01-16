@@ -157,7 +157,7 @@ namespace gl
 	void drawCubeLines(const float c = 1)
 	{
 		// Bottom
-		glBegin(GL_LINE_STRIP);
+		glBegin(GL_LINE_LOOP);
 		glVertex3f(-c, -c, -c);
 		glVertex3f(-c,  c, -c);
 		glVertex3f( c,  c, -c);
@@ -165,7 +165,7 @@ namespace gl
 		glEnd();
 
 		// Top
-		glBegin(GL_LINE_STRIP);
+		glBegin(GL_LINE_LOOP);
 		glVertex3f(-c, -c, c);
 		glVertex3f(-c,  c, c);
 		glVertex3f( c,  c, c);
@@ -173,7 +173,7 @@ namespace gl
 		glEnd();
 
 		// West
-		glBegin(GL_LINE_STRIP);
+		glBegin(GL_LINE_LOOP);
 		glVertex3f(-c, -c, -c);
 		glVertex3f(-c,  c, -c);
 		glVertex3f(-c,  c,  c);
@@ -181,7 +181,7 @@ namespace gl
 		glEnd();
 
 		// East
-		glBegin(GL_LINE_STRIP);
+		glBegin(GL_LINE_LOOP);
 		glVertex3f(c, -c, -c);
 		glVertex3f(c,  c, -c);
 		glVertex3f(c,  c,  c);
@@ -189,7 +189,7 @@ namespace gl
 		glEnd();
 
 		// South
-		glBegin(GL_LINE_STRIP);
+		glBegin(GL_LINE_LOOP);
 		glVertex3f(-c, -c,  c);
 		glVertex3f(-c, -c, -c);
 		glVertex3f( c, -c, -c);
@@ -197,7 +197,7 @@ namespace gl
 		glEnd();
 
 		// North
-		glBegin(GL_LINE_STRIP);
+		glBegin(GL_LINE_LOOP);
 		glVertex3f(-c, c,  c);
 		glVertex3f(-c, c, -c);
 		glVertex3f( c, c, -c);
