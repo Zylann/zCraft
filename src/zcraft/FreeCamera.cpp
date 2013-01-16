@@ -33,7 +33,8 @@ namespace zcraft
 		Vector3f camPos = m_camera.getPosition();
 		Vector3f camFw = m_camera.getForward();
 		Vector3f camVert = m_camera.getVertical();
-		Vector3f camLeft = camFw;
+		Vector3f camLeft = Vector3f(camFw.x, camFw.y, 0);
+		camLeft.normalize();
 		camLeft.rotateXYBy(-90);
 
 		f32 yaw = m_yaw;
