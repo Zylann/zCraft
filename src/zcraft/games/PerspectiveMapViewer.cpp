@@ -65,7 +65,7 @@ namespace zcraft
 		glClearColor(0.0f, 0.0f, 0.0f, 1);
 		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_LINE_SMOOTH);
-		//glEnable(GL_CULL_FACE);
+		glEnable(GL_CULL_FACE);
 		glHint(GL_LINE_SMOOTH, GL_FASTEST);
 
 		//f32 fogColor[4] = {0.4f, 0.7f, 1.0f, 1.f};
@@ -122,7 +122,7 @@ namespace zcraft
 
 //		glDisable(GL_FOG);
 //		glDisable(GL_DEPTH_TEST);
-//		glDisable(GL_CULL_FACE);
+		glDisable(GL_CULL_FACE);
 	}
 
 	void PerspectiveMapViewer::renderGUI(const Time & delta)

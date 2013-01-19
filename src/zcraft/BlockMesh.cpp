@@ -77,39 +77,39 @@ namespace zcraft
 		{
 		case face::BOTTOM :
 			vertices[0] = Vector3f(0,0,0);
-			vertices[1] = Vector3f(1,0,0);
+			vertices[1] = Vector3f(0,1,0);
 			vertices[2] = Vector3f(1,1,0);
-			vertices[3] = Vector3f(0,1,0);
+			vertices[3] = Vector3f(1,0,0);
 			break;
 		case face::TOP :
-			vertices[0] = Vector3f(1,0,1);
-			vertices[1] = Vector3f(0,0,1);
-			vertices[2] = Vector3f(0,1,1);
-			vertices[3] = Vector3f(1,1,1);
+			vertices[0] = Vector3f(0,0,1);
+			vertices[1] = Vector3f(1,0,1);
+			vertices[2] = Vector3f(1,1,1);
+			vertices[3] = Vector3f(0,1,1);
 			break;
 		case face::WEST :
-			vertices[0] = Vector3f(0,0,1);
-			vertices[1] = Vector3f(0,0,0);
-			vertices[2] = Vector3f(0,1,0);
-			vertices[3] = Vector3f(0,1,1);
+			vertices[0] = Vector3f(0,0,0);
+			vertices[1] = Vector3f(0,0,1);
+			vertices[2] = Vector3f(0,1,1);
+			vertices[3] = Vector3f(0,1,0);
 			break;
 		case face::EAST :
 			vertices[0] = Vector3f(1,0,0);
-			vertices[1] = Vector3f(1,0,1);
+			vertices[1] = Vector3f(1,1,0);
 			vertices[2] = Vector3f(1,1,1);
-			vertices[3] = Vector3f(1,1,0);
+			vertices[3] = Vector3f(1,0,1);
 			break;
 		case face::SOUTH :
-			vertices[0] = Vector3f(0,0,1);
-			vertices[1] = Vector3f(1,0,1);
-			vertices[2] = Vector3f(1,0,0);
-			vertices[3] = Vector3f(0,0,0);
+			vertices[0] = Vector3f(0,0,0);
+			vertices[1] = Vector3f(1,0,0);
+			vertices[2] = Vector3f(1,0,1);
+			vertices[3] = Vector3f(0,0,1);
 			break;
 		case face::NORTH :
 			vertices[0] = Vector3f(0,1,0);
-			vertices[1] = Vector3f(1,1,0);
+			vertices[1] = Vector3f(0,1,1);
 			vertices[2] = Vector3f(1,1,1);
-			vertices[3] = Vector3f(0,1,1);
+			vertices[3] = Vector3f(1,1,0);
 			break;
 
 		default :
