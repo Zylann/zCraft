@@ -13,7 +13,7 @@ zCraft project dependencies :
 - glew
 
 Estimated total dev time
-- Marc Gilleron : 51h
+- Marc Gilleron : 55h
 
 */
 

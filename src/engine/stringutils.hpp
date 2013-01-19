@@ -9,6 +9,8 @@ This file is part of the zCraft project.
 
 namespace engine
 {
+	// TODO stringutils: use std::to_string and make standard functions
+
     std::string toString(float x);
     std::string toString(double x);
     std::string toString(int x);

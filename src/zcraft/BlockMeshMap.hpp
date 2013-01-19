@@ -39,6 +39,8 @@ namespace zcraft
 
 		inline u32 getCount() const { return m_meshs.size(); }
 
+		void updateMesh(const Vector3i blockPos, BlockMap & map);
+
 		/* Methods inherited from IMapListener */
 
 		void blockAdded(const Vector3i pos, BlockMap & map) override;

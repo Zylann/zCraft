@@ -69,12 +69,12 @@ namespace zcraft
 		glHint(GL_LINE_SMOOTH, GL_FASTEST);
 
 		//f32 fogColor[4] = {0.4f, 0.7f, 1.0f, 1.f};
-		f32 fogColor[4] = {0, 0, 0, 1};
-		glEnable(GL_FOG);
-		glFogi(GL_FOG_MODE, GL_EXP2);
-		glFogfv(GL_FOG_COLOR, fogColor);
-		glFogf(GL_FOG_DENSITY, 0.019f);
-		glHint(GL_FOG_HINT, GL_NICEST);
+//		f32 fogColor[4] = {0, 0, 0, 1};
+//		glEnable(GL_FOG);
+//		glFogi(GL_FOG_MODE, GL_EXP2);
+//		glFogfv(GL_FOG_COLOR, fogColor);
+//		glFogf(GL_FOG_DENSITY, 0.019f);
+//		glHint(GL_FOG_HINT, GL_NICEST);
 
 		/* Scene */
 
@@ -120,9 +120,9 @@ namespace zcraft
 
 		glPopMatrix();
 
-		glDisable(GL_FOG);
-		glDisable(GL_DEPTH_TEST);
-		glDisable(GL_CULL_FACE);
+//		glDisable(GL_FOG);
+//		glDisable(GL_DEPTH_TEST);
+//		glDisable(GL_CULL_FACE);
 	}
 
 	void PerspectiveMapViewer::renderGUI(const Time & delta)
@@ -158,7 +158,7 @@ namespace zcraft
 
 		// Position
 		Vector3f fpos = m_camera.getPosition();
-		ss << "\nPos: " << Vector3i(floor(fpos.x), floor(fpos.y), floor(fpos.y));
+		ss << "\nPos: " << Vector3i(floor(fpos.x), floor(fpos.y), floor(fpos.z));
 
 		m_font.draw(ss.str(), 0, 0);
 	}

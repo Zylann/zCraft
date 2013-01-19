@@ -97,6 +97,47 @@ namespace zcraft
 		}
 	}
 
+	void BlockMeshMap::updateMesh(const Vector3i blockPos, BlockMap & map)
+	{
+		// start block position
+		Vector3i startPos = blockPos * Block::SIZE;
+
+		// voxels area including neighbors
+		Vector3i minEdge = startPos - Vector3i(1,1,1);
+		Vector3i maxEdge = startPos + Vector3i(1,1,1) * Block::SIZE;
+		Area3D area;
+		area.setBounds(minEdge, maxEdge);
+
+		VoxelBuffer voxels;
+		voxels.create(area);
+
+		// copy voxels
+
+		Block * block = map.getBlock(blockPos);
+		if(block != nullptr)
+		{
+			block->copyTo(voxels);
+		}
+
+		// copy side neighbors voxels
+
+		std::list<Block*> neighbors;
+		map.getNeighboringBlocks(blockPos, neighbors);
+		for(auto & neighbor : neighbors)
+		{
+			neighbor->copyBorderTo(voxels, blockPos - neighbor->getPosition());
+		}
+
+		// Make mesh and add it to the map
+
+		BlockMesh * mesh = new BlockMesh();
+		mesh->buildFromVoxelData(blockPos, voxels);
+		if(mesh->isEmpty())
+			delete mesh;
+		else
+			setMesh(blockPos, mesh);
+	}
+
 	void BlockMeshMap::blockAdded(const Vector3i pos, BlockMap & map)
 	{
 		// Note : in the following code, the newly added block will not be
@@ -110,7 +151,7 @@ namespace zcraft
 		// FIXME some rare blocks are not computed
 		// -> a block is always not computed near the spawn
 
-		// Look at the neighbors of the block
+		// Update block's neighbor meshs if they are surrounded
 		Vector3i npos;
 		for(u8 dir = 0; dir < 6; dir++)
 		{
@@ -119,46 +160,22 @@ namespace zcraft
 			if(isMesh(npos))
 				continue;
 
-			std::list<Block*> neighbors;
-			map.getNeighboringBlocks(npos, neighbors);
+			std::list<Block*> neighbors2;
+			map.getNeighboringBlocks(npos, neighbors2);
 
-			if(neighbors.size() < 6)
+			if(neighbors2.size() < 6)
 				continue;
 
 			// The neighbor is fully surrounded, we can make its mesh
+			updateMesh(npos, map);
+		}
 
-			// start block position
-			Vector3i startPos = npos * Block::SIZE;
-
-			// voxels area including neighbors
-			Vector3i minEdge = startPos - Vector3i(1,1,1);
-			Vector3i maxEdge = startPos + Vector3i(1,1,1) * Block::SIZE;
-			Area3D area;
-			area.setBounds(minEdge, maxEdge);
-
-			VoxelBuffer voxels;
-			voxels.create(area);
-
-			// copy voxels
-
-			Block * block = map.getBlock(npos);
-			if(block != nullptr)
-			{
-				block->copyTo(voxels);
-			}
-
-			// copy first neighbors voxels
-
-			for(auto & neighbor : neighbors)
-			{
-				neighbor->copyBorderTo(voxels, npos - neighbor->getPosition());
-			}
-
-			// Make mesh
-
-			BlockMesh * bm = new BlockMesh();
-			bm->buildFromVoxelData(npos, voxels);
-			setMesh(npos, bm);
+		// Update block's mesh if it is surrounded
+		std::list<Block*> neighbors;
+		map.getNeighboringBlocks(pos, neighbors);
+		if(neighbors.size() == 6)
+		{
+			updateMesh(pos, map);
 		}
 	}
 
@@ -171,37 +188,7 @@ namespace zcraft
 			return;
 
 		// The neighbor is fully surrounded, we can make its mesh
-
-		// start block position
-		Vector3i startPos = pos * Block::SIZE;
-
-		// voxels area including neighbors
-		Vector3i minEdge = startPos - Vector3i(1,1,1);
-		Vector3i maxEdge = startPos + Vector3i(1,1,1) * Block::SIZE;
-		Area3D area;
-		area.setBounds(minEdge, maxEdge);
-
-		VoxelBuffer voxels;
-		voxels.create(area);
-
-		// copy voxels
-
-		Block * block = map.getBlock(pos);
-		if(block != nullptr)
-		{
-			block->copyTo(voxels);
-		}
-
-		// copy first neighbors voxels
-
-		for(auto & neighbor : neighbors)
-		{
-			neighbor->copyBorderTo(voxels, pos - neighbor->getPosition());
-		}
-
-		BlockMesh * bm = new BlockMesh();
-		bm->buildFromVoxelData(pos, voxels);
-		setMesh(pos, bm);
+		updateMesh(pos, map);
 	}
 
 	void BlockMeshMap::blockRemoved(const Vector3i pos, BlockMap & map)
