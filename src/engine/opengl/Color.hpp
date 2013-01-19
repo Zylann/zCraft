@@ -17,7 +17,7 @@ This file is part of the zCraft project.
 namespace engine
 {
 	/*
-		Stores a color using 4 float values for red, green, blue and alpha.
+		Stores a color using 4 unsigned byte values for red, green, blue and alpha.
 		This version is well-suited for performance and storage.
 	*/
 
