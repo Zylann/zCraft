@@ -1,5 +1,6 @@
 #include <iostream>
 #include <GL/glew.h>
+#include <cmath>
 
 namespace engine
 {
@@ -202,6 +203,16 @@ namespace gl
 		glVertex3f(-c, c, -c);
 		glVertex3f( c, c, -c);
 		glVertex3f( c, c,  c);
+		glEnd();
+	}
+
+	void fillCircle(const float x, const float y, const float r)
+	{
+		glBegin(GL_POLYGON);
+
+		for(float t = -3.1415; t < 3.1415; t += 0.2f)
+			glVertex2f(x + r * cos(t), y + r * sin(t));
+
 		glEnd();
 	}
 

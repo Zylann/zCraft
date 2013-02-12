@@ -36,6 +36,8 @@ namespace gl
 
 	void drawCubeLines(const float c = 1);
 
+	void fillCircle(const float x, const float y, const float r);
+
 } // namespace gl
 } // namespace engine
 
