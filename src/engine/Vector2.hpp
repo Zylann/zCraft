@@ -207,7 +207,7 @@ namespace engine
 		/// Get distance from another point.
 		T getDistanceFrom(const Vector2<T>& other) const
 		{
-			return Vector2<T>(x - other.x, y - other.y).getLength();
+			return Vector2<T>(x - other.x, y - other.y).length();
 		}
 
 		/// Returns squared distance from another point.
@@ -224,10 +224,10 @@ namespace engine
 			f64 lengthSQ = x*x + y*y;
 			if(math::equals(lengthSQ, 0.0))
 				return *this;
-			length = 1.f / sqrtf(lengthSQ);
+			const float l = 1.f / sqrtf(lengthSQ);
 
-			x = (T)(x * length);
-			y = (T)(y * length);
+			x = (T)(x * l);
+			y = (T)(y * l);
 			return *this;
 		}
 
