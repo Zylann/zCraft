@@ -29,7 +29,7 @@ namespace engine
     */
 
     // [0,1]
-    double noise2d(int x, int y, int seed)
+    float noise2d(int x, int y, int seed)
     {
          // "hazard" from known random sequences, seed and coordinates
         int n = RAND_SEQ_X*x + RAND_SEQ_Y*y + RAND_SEQ_SEED*seed;
@@ -38,29 +38,29 @@ namespace engine
         n = n * (n * n * RAND_SEQ1 + RAND_SEQ2) + RAND_SEQ3;
         n &= 0x7fffffff;
         // returning [0,1] float
-        return (double)n / MAX_INT7;
+        return (float)n / MAX_INT7;
     }
 
-    double noise2dGradient(double x, double y, int seed)
+    float noise2dGradient(float x, float y, int seed)
     {
         // Calculate the integer coordinates
         int x0 = (x > 0.0 ? (int)x : (int)x - 1);
         int y0 = (y > 0.0 ? (int)y : (int)y - 1);
         // Calculate the remaining part of the coordinates
-        double xl = x - (double)x0;
-        double yl = y - (double)y0;
+        float xl = x - (float)x0;
+        float yl = y - (float)y0;
         // Get values for corners of square
-        double v00 = noise2d(x0, y0, seed);
-        double v10 = noise2d(x0+1, y0, seed);
-        double v01 = noise2d(x0, y0+1, seed);
-        double v11 = noise2d(x0+1, y0+1, seed);
+        float v00 = noise2d(x0, y0, seed);
+        float v10 = noise2d(x0+1, y0, seed);
+        float v01 = noise2d(x0, y0+1, seed);
+        float v11 = noise2d(x0+1, y0+1, seed);
         // Interpolate
         return biLinearInterpolation(v00,v10,v01,v11,xl,yl);
     }
 
-    double noise2dPerlin(
-			double x, double y, int seed,
-			int octaves, double persistence, double period)
+    float noise2dPerlin(
+			float x, float y, int seed,
+			int octaves, float persistence, float period)
     {
         if(octaves < 1)
             return 0;
@@ -68,10 +68,10 @@ namespace engine
         x /= period;
         y /= period;
 
-        double noise = 0; // noise
-        double f = 1.0;
-        double amp = 1.0; // amplitude of an octave
-        double ampMax = 0; // total amplitude
+        float noise = 0; // noise
+        float f = 1.0;
+        float amp = 1.0; // amplitude of an octave
+        float ampMax = 0; // total amplitude
 
         for(int i = 0; i < octaves; i++)
         {
@@ -85,7 +85,7 @@ namespace engine
     }
 
     // [0,1]
-    double noise3d(int x, int y, int z, int seed)
+    float noise3d(int x, int y, int z, int seed)
     {
          // "hazard" from known random sequences, seed and coordinates
         int n = RAND_SEQ_X*x + RAND_SEQ_Y*y + RAND_SEQ_Z*z + RAND_SEQ_SEED*seed;
@@ -94,35 +94,35 @@ namespace engine
         n = n * (n * n * RAND_SEQ1 + RAND_SEQ2) + RAND_SEQ3;
         n &= 0x7fffffff;
         // returning [0,1] float
-        return (double)n / MAX_INT7;
+        return (float)n / MAX_INT7;
     }
 
-	double noise3dGradient(double x, double y, double z, int seed)
+	float noise3dGradient(float x, float y, float z, int seed)
     {
         // Calculate the integer coordinates
         int x0 = (x > 0.0 ? (int)x : (int)x - 1);
         int y0 = (y > 0.0 ? (int)y : (int)y - 1);
         int z0 = (z > 0.0 ? (int)z : (int)z - 1);
         // Calculate the remaining part of the coordinates
-        double xl = x - (double)x0;
-        double yl = y - (double)y0;
-        double zl = z - (double)z0;
+        float xl = x - (float)x0;
+        float yl = y - (float)y0;
+        float zl = z - (float)z0;
         // Get values for corners of cube
-        double v000 = noise3d(x0, y0, z0, seed);
-        double v100 = noise3d(x0+1, y0, z0, seed);
-        double v010 = noise3d(x0, y0+1, z0, seed);
-        double v110 = noise3d(x0+1, y0+1, z0, seed);
-        double v001 = noise3d(x0, y0, z0+1, seed);
-        double v101 = noise3d(x0+1, y0, z0+1, seed);
-        double v011 = noise3d(x0, y0+1, z0+1, seed);
-        double v111 = noise3d(x0+1, y0+1, z0+1, seed);
+        float v000 = noise3d(x0, y0, z0, seed);
+        float v100 = noise3d(x0+1, y0, z0, seed);
+        float v010 = noise3d(x0, y0+1, z0, seed);
+        float v110 = noise3d(x0+1, y0+1, z0, seed);
+        float v001 = noise3d(x0, y0, z0+1, seed);
+        float v101 = noise3d(x0+1, y0, z0+1, seed);
+        float v011 = noise3d(x0, y0+1, z0+1, seed);
+        float v111 = noise3d(x0+1, y0+1, z0+1, seed);
         // Interpolate
         return triLinearInterpolation(v000,v100,v010,v110,v001,v101,v011,v111,xl,yl,zl);
     }
 
-    double noise3dPerlin(
-			double x, double y, double z, int seed,
-			int octaves, double persistence, double period)
+    float noise3dPerlin(
+			float x, float y, float z, int seed,
+			int octaves, float persistence, float period)
     {
         if(octaves < 1)
             return 0;
@@ -131,10 +131,10 @@ namespace engine
         y /= period;
         z /= period;
 
-        double noise = 0;
-        double f = 1.0;
-        double amp = 1.0;
-        double ampMax = 0;
+        float noise = 0;
+        float f = 1.0;
+        float amp = 1.0;
+        float ampMax = 0;
 
         for(int i=0; i<octaves; i++)
         {

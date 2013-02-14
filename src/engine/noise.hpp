@@ -4,28 +4,28 @@ Copyright (C) 2010-2012 Marc GILLERON
 This file is part of the zCraft project.
 */
 
-#ifndef NOISE_HPP_INCLUDED
-#define NOISE_HPP_INCLUDED
+#ifndef ENGINE_NOISE_HPP_INCLUDED
+#define ENGINE_NOISE_HPP_INCLUDED
 
 namespace engine
 {
-    double noise2d(int x, int y, int seed);
+    float noise2d(int x, int y, int seed);
 
-    double noise2dGradient(double x, double y, int seed);
+    float noise2dGradient(float x, float y, int seed);
 
-    double noise2dPerlin(
-        double x, double y, int seed,
-        int octaves, double persistence, double period);
+    float noise2dPerlin(
+        float x, float y, int seed,
+        int octaves, float persistence, float period);
 
-	double noise3d(int x, int y, int z, int seed);
+	float noise3d(int x, int y, int z, int seed);
 
-    double noise3dGradient(double x, double y, double z, int seed);
+    float noise3dGradient(float x, float y, float z, int seed);
 
-    double noise3dPerlin(
-        double x, double y, double z, int seed,
-        int octaves, double persistence, double period);
+    float noise3dPerlin(
+        float x, float y, float z, int seed,
+        int octaves, float persistence, float period);
 
 } // namespace engine
 
 
-#endif // NOISE_HPP_INCLUDED
+#endif // ENGINE_NOISE_HPP_INCLUDED

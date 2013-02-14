@@ -12,9 +12,9 @@ This file is part of the zCraft project.
 namespace engine
 {
     // x in [0,1]
-    inline double smoothCurve(double x)
+    inline float smoothCurve(float x)
     {
-        return 6*pow(x,5)-15*pow(x,4)+10*pow(x,3);
+        return 6*x*x*x*x*x - 15*x*x*x*x + 10*x*x*x;
     }
 
     /*
@@ -27,14 +27,14 @@ namespace engine
     }
 
     float biLinearInterpolation(
-        float x0y0, float x1y0,
-        float x0y1, float x1y1,
-        float x, float y);
+        const float x0y0, const float x1y0,
+        const float x0y1, const float x1y1,
+        const float x, const float y);
 
     float triLinearInterpolation(
-        float v000, float v100, float v010, float v110,
-        float v001, float v101, float v011, float v111,
-        float x, float y, float z);
+		const float v000, const float v100, const float v010, const float v110,
+		const float v001, const float v101, const float v011, const float v111,
+		const float x, const float y, const float z);
 
     /*
         Cubic interpolations
