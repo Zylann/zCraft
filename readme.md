@@ -19,19 +19,19 @@ Current main features
 =====================
 
 - Simple map generators using 2D or 3D perlin noise
-- World save format based on 16*16*16 block files
+- World save format based on 16*16*16 block files (not efficient, but working)
 - Built-in 2D top-down world cartographer
-- 3D free-flight viewer supporting viewing ranges up to 13*16 nodes without
+- 3D free-flight viewer supporting viewing ranges up to 13*16 cubes without
 	dropping under 60fps (on a 2009 laptop, didn't tested over that limit).
 
 Early planned features
 ================
 
-- Textures
+- OpenGL 3.x
+- Frustum culling
 - AABB physics
-- World edition
-- Basic lighting
-- Better save format
+- Faster voxel archive save format
+- Voxel animated models
 - And many little things in the code : see TODO comments
 
 Downloads
