@@ -4,13 +4,13 @@ Copyright (C) 2010-2012 Marc GILLERON
 This file is part of the zCraft project.
 */
 
-#ifndef ENGINE_GL_VERTEXCOLORARRAY_HPP_INCLUDED
-#define ENGINE_GL_VERTEXCOLORARRAY_HPP_INCLUDED
+#ifndef EXPERIMENTAL_GL_VERTEXCOLORARRAY_HPP_INCLUDED
+#define EXPERIMENTAL_GL_VERTEXCOLORARRAY_HPP_INCLUDED
 
 #include "engine/Array.hpp"
-#include "engine/opengl/opengl.hpp"
+#include "opengl.hpp"
 
-namespace engine
+namespace experimental
 {
 namespace gl
 {
@@ -24,17 +24,17 @@ namespace gl
 	private :
 
 		// Data to send to the graphics card. Empty once hosted.
-		Array<f32> m_vertices;
-		Array<u8> m_colors;
+		engine::Array<engine::f32> m_vertices;
+		engine::Array<engine::u8> m_colors;
 
 		// Metadata
 		GLuint m_bufferID = 0;
 		GLenum m_primitiveType = 0;
-		u32 m_vertexCount = 0;
-		u32 m_valuesPerVertex = 0;
-		u32 m_valuesPerColor = 0;
-		u32 m_verticesOffset = 0;
-		u32 m_colorsOffset = 0;
+		engine::u32 m_vertexCount = 0;
+		engine::u32 m_valuesPerVertex = 0;
+		engine::u32 m_valuesPerColor = 0;
+		engine::u32 m_verticesOffset = 0;
+		engine::u32 m_colorsOffset = 0;
 
 	public :
 
@@ -46,11 +46,11 @@ namespace gl
 
 		// Transfers vertices from the given array to this array.
 		// Returns false if given parameters are wrong.
-		bool moveVertices(Array<f32> & vertices, const u32 valuesPerVertex = 3);
+		bool moveVertices(engine::Array<engine::f32> & vertices, const engine::u32 valuesPerVertex = 3);
 
 		// Transfers colors from the given array to this array
 		// Returns false if given parameters are wrong.
-		bool moveColors(Array<u8> & colors, const u32 valuesPerColor = 3);
+		bool moveColors(engine::Array<engine::u8> & colors, const engine::u32 valuesPerColor = 3);
 
 		// Clears the array and hosted data
 		void clear();
@@ -74,8 +74,8 @@ namespace gl
 	};
 
 } // namespace gl
-} // namespace engine
+} // namespace experimental
 
-#endif // ENGINE_GL_VERTEXCOLORARRAY_HPP_INCLUDED
+#endif // EXPERIMENTAL_GL_VERTEXCOLORARRAY_HPP_INCLUDED
 
 

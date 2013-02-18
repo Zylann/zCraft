@@ -3,7 +3,7 @@
 
 #include <string>
 #include "zcraft/common.hpp"
-#include "engine/opengl/Color.hpp"
+#include "engine/Color.hpp"
 
 namespace zcraft
 {

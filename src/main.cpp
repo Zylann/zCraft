@@ -8,12 +8,14 @@ This file is part of the zCraft project.
 zCraft project dependencies :
 - C++0x (gcc 4.7.2 +)
 - sfml 2.0
-- opengl
+- opengl 2.0
 - glu
 - glew
 
+Note : the engine/ folder is independent from zcraft.
+
 Estimated total dev time
-- Marc Gilleron : 55h
+- Marc Gilleron : 65h
 
 */
 
@@ -23,6 +25,10 @@ Estimated total dev time
 #include "zcraft/games/PerspectiveMapViewer.hpp"
 #include "zcraft/cartographer/Cartographer.hpp"
 
+//#include "experimental/tween/TweenTest.hpp"
+#include "experimental/opengl33/game.hpp"
+
+// TODO engine: rename namespace to 'zn' (for zENG)
 using namespace engine;
 
 int runGame(IGame * game)
@@ -111,6 +117,9 @@ int main(int argc, char * argv[])
 
 	try
 	{
+		//code = runGame(new experimental::TweenTest());
+		//code = experimental::gl::testgl33();
+
 		if(argc <= 1) // Note : the first arg is the execution path
 			code = launchPerspectiveMapViewer();
 		else
@@ -121,6 +130,7 @@ int main(int argc, char * argv[])
 		std::cout << "MAIN EXCEPTION: " << e.what() << std::endl;
 		std::cout << "Please inform the development team to help fix the problem." << std::endl;
 		std::cout << "The program will exit. Press any key...";
+		code = -1;
 		getchar();
 	}
 

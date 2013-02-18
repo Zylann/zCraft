@@ -107,7 +107,7 @@ namespace engine
 
 		void fill(const T fillValue)
 		{
-			// TODO Array: maybe use memset?
+			// TODO Array: maybe use memset for native number types?
 			for(u32 i = 0; i < m_size; i++)
 				m_data[i] = fillValue;
 		}

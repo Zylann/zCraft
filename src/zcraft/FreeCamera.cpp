@@ -6,7 +6,7 @@ This file is part of the zCraft project.
 
 #include <iostream>
 #include "zcraft/FreeCamera.hpp"
-#include "engine/opengl/glutils.hpp"
+#include "engine/opengl/opengl.hpp"
 
 using namespace engine;
 

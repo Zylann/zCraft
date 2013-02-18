@@ -30,7 +30,7 @@ namespace fs
     /// if treatAsFile is set to true, the last part of the path will not be used.
     bool makeAllDirs(std::string path, bool treatAsFile = false);
 
-    // TODO remove files function
+    // TODO filesystem: remove files function
     //bool removeFilesRecursive(std::string path);
 
 } // namespace fs

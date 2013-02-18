@@ -7,10 +7,10 @@ This file is part of the zCraft project.
 #ifndef BASICGAME_HPP_INCLUDED
 #define BASICGAME_HPP_INCLUDED
 
-#include <engine/opengl/glutils.hpp>
 #include <SFML/Window.hpp>
 #include <string>
 
+#include "engine/opengl/opengl.hpp"
 #include "engine/Vector2.hpp"
 #include "engine/Game.hpp"
 
@@ -30,7 +30,9 @@ namespace engine
 
 	public :
 
-		ABasicGame(u32 width, u32 height, const std::string title = "Untitled game");
+		ABasicGame(
+			u32 width, u32 height,
+			const std::string title = "Untitled game");
 
 		virtual ~ABasicGame();
 

@@ -5,12 +5,13 @@ This file is part of the zCraft project.
 */
 
 #include <iostream>
-#include "engine/opengl/VertexColorArray.hpp"
-#include "engine/opengl/opengl.hpp"
+#include "VertexColorArray.hpp"
 
 #define BUFFER_OFFSET(a) ((char*)nullptr + (a))
 
-namespace engine
+using namespace engine;
+
+namespace experimental
 {
 namespace gl
 {
@@ -87,8 +88,6 @@ namespace gl
 
 	void VertexColorArray::draw()
 	{
-	#if defined ZN_OPENGL2 //{
-
 		if(!isHosted()) // Not hosted
 			host();
 		else if(m_vertices.size() != 0) // Hosted, but updated
@@ -97,43 +96,33 @@ namespace gl
 		// Start using our buffer
 		glBindBuffer(GL_ARRAY_BUFFER, m_bufferID);
 
-		// Use vertex data
-		glVertexPointer(
-			m_valuesPerVertex, // How many values per vertex
+		glEnableVertexAttribArray(ShaderIn::POSITION);
+		glEnableVertexAttribArray(ShaderIn::COLOR);
+
+		glVertexAttribPointer(
+			ShaderIn::POSITION,
+			m_valuesPerVertex,
 			GL_FLOAT, // Vertex value type
+			GL_FALSE, // Don't normalize
 			0, // Stride
 			BUFFER_OFFSET(m_verticesOffset));
 
-		// Use color data
-		glColorPointer(
-			m_valuesPerColor, // How many values per color
+		glVertexAttribPointer(
+			ShaderIn::COLOR,
+			m_valuesPerColor,
 			GL_UNSIGNED_BYTE, // Color value type
+			GL_FALSE, // Don't normalize
 			0, // Stride
 			BUFFER_OFFSET(m_colorsOffset));
 
-		// Start using VBOs
-		glEnableClientState(GL_VERTEX_ARRAY);
-		glEnableClientState(GL_COLOR_ARRAY);
-
-		// Draw stuff
 		glDrawArrays(m_primitiveType, 0, m_vertexCount);
 
-		// End using VBOs
-		glDisableClientState(GL_COLOR_ARRAY);
-		glDisableClientState(GL_VERTEX_ARRAY);
-
-	//} ZN_OPENGL2
-	#elif defined ZN_OPENGL3
-
-		#error "This file doesn't supports OpenGL 3"
-
-	#endif // ZN_OPENGL3
+		glDisableVertexAttribArray(ShaderIn::POSITION);
+		glDisableVertexAttribArray(ShaderIn::COLOR);
 	}
 
 	void VertexColorArray::host()
 	{
-		// Note : this code is the same for OpenGL 2 and 3
-
 		if(m_vertices.size() == 0 || m_colors.size() == 0)
 			return; // Nothing to host
 
@@ -184,7 +173,7 @@ namespace gl
 	}
 
 } // namespace gl
-} // namespace engine
+} // namespace experimental
 
 
 

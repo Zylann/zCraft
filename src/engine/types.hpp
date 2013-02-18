@@ -7,10 +7,7 @@ This file is part of the zCraft project.
 #ifndef ENG_TYPES_HPP_INCLUDED
 #define ENG_TYPES_HPP_INCLUDED
 
-// Indicates that we use SFML
-#ifndef SFML_API
-	#define SFML_API
-#endif
+#include "engine/config.hpp"
 
 namespace engine
 {

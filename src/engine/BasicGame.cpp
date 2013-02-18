@@ -3,11 +3,29 @@
 
 namespace engine
 {
-	ABasicGame::ABasicGame(u32 width, u32 height, const std::string title)
+	ABasicGame::ABasicGame(
+			u32 width, u32 height, const std::string title)
 	{
+		sf::ContextSettings contextSettings;
+		contextSettings.depthBits = 32;
+		contextSettings.antialiasingLevel = 0;
+		contextSettings.stencilBits = 0;
+
+	#if defined ZN_OPENGL2
+		contextSettings.majorVersion = 2;
+		contextSettings.minorVersion = 0;
+	#elif defined ZN_OPENGL3
+		contextSettings.majorVersion = 3;
+		contextSettings.minorVersion = 3;
+	#endif
+
+		std::cout << "Target OpenGL version : "
+			<< contextSettings.majorVersion << "."
+			<< contextSettings.minorVersion << std::endl;
+
 		m_window.create(
 			sf::VideoMode(width, height), title,
-			sf::Style::Default, sf::ContextSettings(32));
+			sf::Style::Default, contextSettings);
 		m_window.setVerticalSyncEnabled(true);
 		//m_window.setFramerateLimit(60);
 		m_running = false;
@@ -79,7 +97,11 @@ namespace engine
 		// Clear screen
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+	#if defined ZN_OPENGL2 //{
+
 		/* Scene */
+
+		glPushMatrix();
 
 		// Configure basic view
 		glMatrixMode(GL_MODELVIEW);
@@ -87,17 +109,28 @@ namespace engine
 
 		renderScene(delta);
 
+		glPopMatrix();
+
 		/* GUI */
 
+		glPushMatrix();
 		// Pixel-match view
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
-		// Note : Y axis is inverted to start from tom to bottom
+		// Note : Y axis is inverted to start from top to bottom
 		gluOrtho2D(0, m_window.getSize().x, m_window.getSize().y, 0);
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
 
 		renderGUI(delta);
+		glPopMatrix();
+
+	//} ZN_OPENGL2
+	#elif defined ZN_OPENGL3 // defined
+
+		#error "zn::ABasicGame doesn't supports OpenGL 3"
+
+	#endif
 	}
 
 } // namespace engine

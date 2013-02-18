@@ -5,11 +5,12 @@ This file is part of the zCraft project.
 */
 
 #include <list>
-#include "engine/opengl/Color.hpp"
+#include "engine/Color.hpp"
 #include "BlockMesh.hpp"
 #include "face.hpp"
 #include "NodeProperties.hpp"
 #include "Block.hpp"
+//#include "engine/noise.hpp"
 
 using namespace engine;
 
@@ -187,7 +188,7 @@ namespace zcraft
         getFaceVerticesFromDirVector(vFaceDir, vertexPos);
 
         // normal
-        // TODO fix normal in some cases (when the face is shifted)
+        // TODO BlockMesh: fix normal in some cases (when the face is shifted)
         //Vector3f normal(vFaceDir.X, vFaceDir.Y, vFaceDir.Z);
 
         if(shift)
@@ -221,13 +222,14 @@ namespace zcraft
 		for(u8 i = 0; i < 4; i++)
 		{
 			ff.vertices[i] = vertexPos[i];
+			//u8 col = 127 + 127.f*engine::noise3d(pos.x, pos.y, pos.z, 131183);
 			Color ffc = color;
 			ffc.multiplyU8(light);
 			ff.colors[i].set(ffc);
 		}
 
         // update final vertices
-        // TODO FEATURE smooth lighting with a lightColor(light) function
+        // TODO BlockMesh: smooth lighting with a lightColor(light) function
         /*
         ff.vertices[0] = video::S3DVertex(vertexPos[0], normal, color,
             Vector2f(0, 1));

@@ -3,6 +3,8 @@
 
 namespace zcraft
 {
+	// TODO Node: rename Voxel
+
 	Node::Node(u8 type0, u8 metaType0, u8 light0)
 	{
 		type = type0;

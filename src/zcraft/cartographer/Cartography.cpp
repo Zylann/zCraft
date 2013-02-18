@@ -1,7 +1,7 @@
 #include <SFML/System.hpp>
 #include "zcraft/cartographer/Cartography.hpp"
 #include "zcraft/Block.hpp"
-#include "engine/opengl/glutils.hpp"
+#include "engine/opengl/opengl.hpp"
 
 using namespace engine;
 
@@ -116,6 +116,8 @@ namespace zcraft
 
 	void Cartography::render(float scale, bool grid)
 	{
+	#if defined ZN_OPENGL2 //{
+
 		glPushMatrix();
 
 		glEnable(GL_TEXTURE_2D);
@@ -151,6 +153,11 @@ namespace zcraft
 		}
 
 		glPopMatrix();
+
+	//} OpenGL2
+	#elif defined ZN_OPENGL3
+		#warning "zcraft::Cartography doesn't supports OpenGL3"
+	#endif
 	}
 
 } // namespace zcraft

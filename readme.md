@@ -54,3 +54,27 @@ Libraries :
 - Glu
 - Glew (I recompiled it for MinGW)
 
+Folder structure
+================
+
+The project is divided in two main parts, where only one depends on the other.
+
+- zENG, namespace engine::
+
+engine/	: Generic code for many things. Doesn't depend on zcraft/.
+engine/opengl/ : Everything that is OpenGL-related is here.
+engine/bmfont/ : Implementation of a BMFont renderer. Depends on engine/opengl/.
+engine/system/ : OS-specific stuff (macros, threading, files...)
+
+experimental/ : experimental undocumented stuff based on engine/.
+	its contents may be future features. I added this to the repo to have a
+	cloud copy of it (I don't trust my HD) and to ease sharing.
+
+- zCraft, namespace zcraft::
+
+zcraft/ : The voxel engine. It is based on the engine/ package.
+zcraft/games/ : Test-purpose games based on zcraft/.
+zcraft/cartographer/ : built-in map cartographer
+zcraft/mapgen/ : map generators
+
+

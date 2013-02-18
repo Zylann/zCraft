@@ -48,7 +48,7 @@ namespace bmfont
 
 		// Draws a text at (x,y) using the font. The invertYAxis parameter is
 		// useful when you have a coordinate system where Y axis goes upside.
-		void draw(const std::string text, float x, float y, bool invertYAxis = false);
+		void draw(const std::string text, float x0, float y0, bool invertYAxis = false);
 
 		// Draws a text using the current OpenGL state. The invertYAxis parameter is
 		// useful when you have a coordinate system where Y axis goes upside.

@@ -1,4 +1,4 @@
-#include "engine/opengl/Color.hpp"
+#include "engine/Color.hpp"
 #include "zcraft/NodeProperties.hpp"
 #include "zcraft/cartographer/Cartographer.hpp"
 #include "zcraft/MapLoader.hpp"

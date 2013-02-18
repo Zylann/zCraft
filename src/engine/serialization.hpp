@@ -186,7 +186,7 @@ namespace engine
         }
     }
 
-#ifdef SFML_API
+#ifdef ZN_SFML
 
 	//////////////////////////////////////////////
 	// SFML-dependant part
@@ -224,7 +224,7 @@ namespace engine
 		unserialize(is, vec.y);
 	}
 
-#endif // SFML_API
+#endif // ZN_SFML
 
 } // namespace engine
 

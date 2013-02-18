@@ -9,7 +9,9 @@ This file is part of the zCraft project.
 #include <fstream>
 #include <sstream>
 #include <string>
-#include <GL/glew.h>
+
+#include "engine/opengl/opengl.hpp"
+#include "engine/config.hpp"
 #include "engine/bmfont/Font.hpp"
 #include "engine/stringutils.hpp" // for cropStr()
 
@@ -17,6 +19,8 @@ namespace engine
 {
 namespace bmfont
 {
+	// TODO Font: handle accentued characters
+
 	Font::Font()
 	{
 		m_textures = nullptr;
@@ -221,11 +225,9 @@ namespace bmfont
 		return true;
 	}
 
-	void Font::draw(const std::string text, float x, float y, bool invertYAxis)
+	void Font::draw(const std::string text, bool invertYAxis)
 	{
-		glTranslatef(x, y, 0);
-		draw(text, invertYAxis);
-		glTranslatef(-x, -y, 0);
+		draw(text, 0, 0, invertYAxis);
 	}
 
 	// TODO Font: add kerning support
@@ -233,19 +235,18 @@ namespace bmfont
 
 	// TODO Font: optimize rendering
 
-	void Font::draw(const std::string text, bool invertYAxis)
+	void Font::draw(const std::string text, float x0, float y0, bool invertYAxis)
 	{
-		unsigned int originX = 0, originY = 0; // Cursor position
+		unsigned int originX = x0, originY = y0; // Cursor position
 		unsigned int x, y; // Shifted position
 		float tx, ty, tw, th; // Texture sub-rect coordinates
 		char c; // Current read character
 
+	#if defined ZN_OPENGL2
 		glEnable(GL_TEXTURE_2D);
+	#endif
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-		if(invertYAxis)
-			glScalef(1, -1, 1); // Invert Y because text is displayed top->bottom
 
 		for(unsigned int i = 0; i < text.size(); i++)
 		{
@@ -255,7 +256,7 @@ namespace bmfont
 			if(c == '\n')
 			{
 				originY += m_settings.lineHeight;
-				originX = 0;
+				originX = x0;
 				continue;
 			}
 			else if(c == '\r')
@@ -273,7 +274,6 @@ namespace bmfont
 
 			// Use the glyph atlas texture
 			const sf::Texture & tex = m_textures[cd->page];
-			tex.bind();
 
 			// Get glyph texture sub-rect
 			const sf::Vector2u ts = tex.getSize();
@@ -288,21 +288,26 @@ namespace bmfont
 
 			// Draw glyph
 
-			glBegin(GL_QUADS);
+			tex.bind();
+			gl::drawTexturedRect(
+				x, y, cd->width, cd->height,
+				tx, ty, tw, th);
 
-			glTexCoord2f(tx, ty);
-			glVertex2i(x, y);
-
-			glTexCoord2f(tx + tw, ty);
-			glVertex2i(x + cd->width, y);
-
-			glTexCoord2f(tx + tw, ty + th);
-			glVertex2i(x + cd->width, y + cd->height);
-
-			glTexCoord2f(tx, ty + th);
-			glVertex2i(x, y + cd->height);
-
-			glEnd();
+//			glBegin(GL_QUADS);
+//
+//			glTexCoord2f(tx, ty);
+//			glVertex2i(x, y);
+//
+//			glTexCoord2f(tx + tw, ty);
+//			glVertex2i(x + cd->width, y);
+//
+//			glTexCoord2f(tx + tw, ty + th);
+//			glVertex2i(x + cd->width, y + cd->height);
+//
+//			glTexCoord2f(tx, ty + th);
+//			glVertex2i(x, y + cd->height);
+//
+//			glEnd();
 
 			// Advance cursor
 			originX += cd->xadvance;
@@ -332,9 +337,6 @@ namespace bmfont
 			glEnable(GL_TEXTURE_2D);
 			*/
 		}
-
-		if(invertYAxis)
-			glScalef(1, -1, 1); // Restablish natural OpenGL Y axis
 	}
 
 } // namespace bmfont

@@ -10,7 +10,7 @@ This file is part of the zCraft project.
 #include <string>
 #include "engine/types.hpp"
 
-#ifdef SFML_API
+#ifdef ZN_SFML
 	#include <SFML/Graphics.hpp>
 #endif
 
@@ -38,12 +38,12 @@ namespace engine
 		// Constructs a color from another color
 		Colorf(const Colorf & other);
 
-	#ifdef SFML_API
+	#ifdef ZN_SFML
 		// Constructs a color from a SFML color
 		Colorf(const sf::Color & color);
 	#endif
 
-	#ifdef SFML_API
+	#ifdef ZN_SFML
 		// Converts this color to a SFML color
 		sf::Color toSfColor() const;
 	#endif
@@ -56,9 +56,6 @@ namespace engine
 
 		// Clamps color values in [0,1]
 		void normalize();
-
-		// Binds this color to the current OpenGL state
-		void bind() const;
 
 		// Converts the object to a human-readable form
 		std::string toString() const;

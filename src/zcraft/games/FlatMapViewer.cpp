@@ -20,7 +20,7 @@ namespace zcraft
 
 	bool FlatMapViewer::init()
 	{
-		if(!gl::initOpenglExtensions(true, true))
+		if(!gl::initExtensions(true, true))
 			return false;
 
 		//zcraft::init();
@@ -63,6 +63,8 @@ namespace zcraft
 
 		/* Scene */
 
+	#if defined ZN_OPENGL2 //{
+
 		glPushMatrix();
 		m_camera.look();
 
@@ -80,10 +82,15 @@ namespace zcraft
 
 		glPopMatrix();
 
+	//} OpenGL2
+	#elif defined ZN_OPENGL3
+		#warning "zcraft::FlatMapViewer doesn't supports OpenGL 3"
+	#endif // ZN_OPENGL2
 	}
 
 	void FlatMapViewer::renderGUI(const Time & delta)
 	{
+	#if defined ZN_OPENGL2
 		MapStreamThread::RunningInfo threadInfo = m_mapStreamer->getThreadInfo();
 		std::stringstream ss;
 		ss << "Rem:" << threadInfo.remainingRequests
@@ -93,6 +100,9 @@ namespace zcraft
 			<< ", D:" << threadInfo.droppedCount;
 		glColor3ub(255,255,255);
 		m_font.draw(ss.str(), 0, 0);
+	#elif defined ZN_OPENGL3
+		#warning "zcraft::FlatMapViewer doesn't supports OpenGL 3"
+	#endif // defined
 	}
 
 	void FlatMapViewer::dispose()

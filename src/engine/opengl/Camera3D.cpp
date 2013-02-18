@@ -4,7 +4,7 @@ Copyright (C) 2010-2012 Marc GILLERON
 This file is part of the zCraft project.
 */
 
-#include "engine/opengl/glutils.hpp"
+#include "engine/opengl/opengl.hpp"
 #include "engine/Vector2.hpp"
 #include "engine/Vector3.hpp"
 #include "engine/opengl/Camera3D.hpp"
@@ -62,6 +62,8 @@ namespace engine
 
 	void Camera3D::look()
 	{
+	#if defined ZN_OPENGL2 //{
+
 		// Projection
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
@@ -79,6 +81,10 @@ namespace engine
 
 		m_positionChanged = false;
 		m_projectionChanged = false;
+
+	#elif defined ZN_OPENGL3
+		#error "This file doesn't supports OpenGL 3"
+	#endif // if
 	}
 
 } // namespace engine

@@ -5,7 +5,7 @@ This file is part of the zCraft project.
 */
 
 #include <sstream>
-#include "engine/opengl/glutils.hpp"
+#include "engine/opengl/opengl.hpp"
 #include "zcraft/games/PerspectiveMapViewer.hpp"
 #include "zcraft/face.hpp"
 
@@ -22,7 +22,7 @@ namespace zcraft
 
 	bool PerspectiveMapViewer::init()
 	{
-		if(!gl::initOpenglExtensions(true, true))
+		if(!gl::initExtensions(true, true))
 			return false;
 
 		//zcraft::init();
@@ -32,7 +32,7 @@ namespace zcraft
 			return false;
 
 		// Init camera
-		m_camera.setPosition(Vector3f(0, -5, 160));
+		m_camera.setPosition(Vector3f(0, -5, 32));
 		m_camera.updateViewport(Vector2f(
 			m_window.getSize().x, m_window.getSize().y));
 
@@ -68,15 +68,9 @@ namespace zcraft
 		glEnable(GL_CULL_FACE);
 		glHint(GL_LINE_SMOOTH, GL_FASTEST);
 
-		//f32 fogColor[4] = {0.4f, 0.7f, 1.0f, 1.f};
-//		f32 fogColor[4] = {0, 0, 0, 1};
-//		glEnable(GL_FOG);
-//		glFogi(GL_FOG_MODE, GL_EXP2);
-//		glFogfv(GL_FOG_COLOR, fogColor);
-//		glFogf(GL_FOG_DENSITY, 0.019f);
-//		glHint(GL_FOG_HINT, GL_NICEST);
-
 		/* Scene */
+
+	#if defined ZN_OPENGL2
 
 		glPushMatrix();
 
@@ -120,7 +114,10 @@ namespace zcraft
 
 		glPopMatrix();
 
-//		glDisable(GL_FOG);
+	#elif defined ZN_OPENGL3
+		#warning "zcraft::PerspectiveMapViewer doesn't supports OpenGL3"
+	#endif // defined
+
 //		glDisable(GL_DEPTH_TEST);
 		glDisable(GL_CULL_FACE);
 	}
@@ -129,11 +126,17 @@ namespace zcraft
 	{
 		/* HUD */
 
+	#if defined ZN_OPENGL2
+
 		glColor4ub(255,255,255,255);
 
 		// Target
 		glLineWidth(2);
 		gl::drawCross(m_window.getSize().x / 2, m_window.getSize().y / 2, 16);
+
+	#elif defined ZN_OPENGL2
+		#warning "zcraft::PerspectiveMapViewer doesn't supports OpenGL3"
+	#endif // defined
 
 		std::stringstream ss;
 

@@ -6,7 +6,7 @@ This file is part of the zCraft project.
 
 #include <sstream>
 #include <iostream>
-#include "engine/opengl/glutils.hpp"
+#include "engine/opengl/opengl.hpp"
 #include "engine/opengl/Camera2D.hpp"
 
 namespace engine
@@ -29,6 +29,8 @@ namespace engine
 			glGetIntegerv(GL_VIEWPORT, vps);
 			updateViewport(Vector2f(vps[2] - vps[0], vps[3] - vps[1]));
 		}
+
+	#if defined ZN_OPENGL2 //{
 
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
@@ -55,6 +57,13 @@ namespace engine
 
 		if(m_rotationDegrees != 0)
 			glRotatef(m_rotationDegrees, 0, 0, 1);
+
+	//} ZN_OPENGL2
+	#elif defined ZN_OPENGL3 //{
+
+		#error "This file doesn't supports OpenGL 3"
+
+	#endif // ZN_OPENGL3
 	}
 
 	void Camera2D::updateViewport(const Vector2f & viewportSize)

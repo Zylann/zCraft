@@ -5,8 +5,7 @@ This file is part of the zCraft project.
 */
 
 #include <sstream>
-#include "engine/opengl/glutils.hpp"
-#include "engine/opengl/Color.hpp"
+#include "engine/Color.hpp"
 #include "engine/math.hpp"
 
 namespace engine
@@ -25,14 +24,14 @@ namespace engine
 		a = other.a;
 	}
 
-#ifdef SFML_API
+#if defined ZN_SFML
 	Color::Color(const sf::Color & color)
 	{
 		set(color.r, color.g, color.b, color.a);
 	}
 #endif
 
-#ifdef SFML_API
+#if defined ZN_SFML
 	sf::Color Color::toSfColor() const
 	{
 		return sf::Color(r, g, b, a);
@@ -78,11 +77,6 @@ namespace engine
 		g = (u8)((float)g * kf);
 		b = (u8)((float)b * kf);
 		a = (u8)((float)a * kf);
-	}
-
-	void Color::bind() const
-	{
-		glColor4ub(r, g, b, a);
 	}
 
 	std::string Color::toString() const
