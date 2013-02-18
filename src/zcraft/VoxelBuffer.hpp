@@ -1,7 +1,7 @@
 #ifndef VOXELBUFFER_HPP_INCLUDED
 #define VOXELBUFFER_HPP_INCLUDED
 
-#include "engine/Array3D.hpp"
+#include "engine/ShiftArray3D.hpp"
 #include "zcraft/Voxel.hpp"
 
 namespace zcraft
@@ -10,7 +10,7 @@ namespace zcraft
 		3D buffer specialized in Voxel manipulation
 	*/
 
-	class VoxelBuffer : public zn::Array3D<Voxel>
+	class VoxelBuffer : public zn::ShiftArray3D<Voxel>
 	{
 	public :
 

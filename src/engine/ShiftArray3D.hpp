@@ -1,11 +1,11 @@
 /*
-Array3D.hpp
+ShiftArray3D.hpp
 Copyright (C) 2010-2012 Marc GILLERON
 This file is part of the zCraft project.
 */
 
-#ifndef ENGINE_ARRAY3D_HPP_INCLUDED
-#define ENGINE_ARRAY3D_HPP_INCLUDED
+#ifndef ENGINE_SHIFTARRAY3D_HPP_INCLUDED
+#define ENGINE_SHIFTARRAY3D_HPP_INCLUDED
 
 #include <ostream>
 #include <cstring>
@@ -22,7 +22,7 @@ namespace zn
     */
 
     template <typename T>
-    class Array3D
+    class ShiftArray3D
     {
 	private :
 
@@ -32,17 +32,17 @@ namespace zn
 	public :
 
 		// creates an empty buffer
-		Array3D()
+		ShiftArray3D()
 		{}
 
 		// creates a buffer with the specified area
-		Array3D(const Area3D & area)
+		ShiftArray3D(const Area3D & area)
 		{
 			create(area);
 		}
 
 		// creates a buffer from another (copy)
-		Array3D(const Array3D & other)
+		ShiftArray3D(const ShiftArray3D & other)
 		{
 			clear();
 			m_area = other.m_area;
@@ -50,7 +50,7 @@ namespace zn
 			memcpy(m_data, other.m_data, m_area.getVolume() * sizeof(T));
 		}
 
-		~Array3D()
+		~ShiftArray3D()
 		{
 			clear();
 		}
@@ -62,7 +62,7 @@ namespace zn
 		{
 			// Check if the given area is correct
 			if(area.getVolume() <= 0)
-				std::cout << "WARNING: Array3D::create received empty area ("
+				std::cout << "WARNING: ShiftArray3D::create received empty area ("
 						<< area.getVolume() << ")" << std::endl;
 
 			// Delete old data
@@ -98,7 +98,7 @@ namespace zn
 			const int vol = m_area.getVolume();
 			for(int i = 0; i < vol; i++)
 				m_data[i] = val;
-			// TODO Array3D: maybe use memset?
+			// TODO ShiftArray3D: maybe use memset?
 		}
 
 		const Area3D & getArea() const
@@ -122,7 +122,7 @@ namespace zn
 		{
 			if(!m_area.contains(srcArea))
 				throw Exception(
-					"Array3D::copyFrom m_area=" + m_area.toString() +
+					"ShiftArray3D::copyFrom m_area=" + m_area.toString() +
 					" srcArea=" + srcArea.toString());
 
 			Vector3i pos;
@@ -144,7 +144,7 @@ namespace zn
 		{
 			if(!dstArea.contains(m_area))
 				throw Exception(
-					"Array3D::copyTo m_area=" + m_area.toString() +
+					"ShiftArray3D::copyTo m_area=" + m_area.toString() +
 					" dstArea=" + dstArea.toString());
 
 			Vector3i pos;
@@ -172,7 +172,7 @@ namespace zn
 			if(m_area.contains(pos))
 				return getNoEx(pos);
 			else
-				throw Exception("Array3D::get " + pos);
+				throw Exception("ShiftArray3D::get " + pos);
 		}
 
 		// set an element without position validation (it must be valid !)
@@ -188,7 +188,7 @@ namespace zn
 			if(m_area.contains(pos))
 				setNoEx(pos, value);
 			else
-				throw Exception("Array3D::set " + pos);
+				throw Exception("ShiftArray3D::set " + pos);
 		}
 
 		// Prints buffer description in an output stream (for debug purposes).
@@ -196,7 +196,7 @@ namespace zn
 		// lines and lines of data (not very useful).
 		void print(std::ostream & os) const
 		{
-			os << "=========== Array3D ==========" << std::endl;
+			os << "=========== ShiftArray3D ==========" << std::endl;
 			os << "m_area = " << m_area.toString() << std::endl;
 			os << "m_data =" << std::endl;
 
@@ -228,8 +228,8 @@ namespace zn
 			os << "O";
 		}
 
-    }; // class Array3D
+    }; // class ShiftArray3D
 
 } // namespace util
 
-#endif // ENGINE_ARRAY3D_HPP_INCLUDED
+#endif // ENGINE_SHIFTARRAY3D_HPP_INCLUDED

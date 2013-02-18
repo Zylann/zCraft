@@ -1,9 +1,9 @@
-#include "engine/Array3D.hpp"
+#include "engine/ShiftArray3D.hpp"
 #include "zcraft/VoxelBuffer.hpp"
 
 namespace zcraft
 {
-    VoxelBuffer::VoxelBuffer() : zn::Array3D<Voxel>()
+    VoxelBuffer::VoxelBuffer() : zn::ShiftArray3D<Voxel>()
     {}
 
     VoxelBuffer::~VoxelBuffer()
