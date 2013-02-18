@@ -82,14 +82,14 @@ namespace zcraft
         fill(Voxel());
 	}
 
-	bool Block::containsOnlyEmptyVoxels() const
+	bool Block::computeIsUniform(const Voxel voxelValue) const
 	{
-        for(u16 i = 0; i < Block::SIZE; i++)
-        {
-            if(m_voxels[i].type != voxel::AIR)
-                return false;
-        }
-        return true;
+		for(u16 i = 0; i < Block::SIZE; ++i)
+		{
+			if(m_voxels[i].type != voxelValue.type)
+				return false;
+		}
+		return true;
 	}
 
 	bool Block::areEdgesFullyOpaque() const

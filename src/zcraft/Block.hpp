@@ -91,8 +91,8 @@ namespace zcraft
 		// fill with empty voxels
 		void clear();
 
-		// Tests if the block contains only empty voxels
-		bool containsOnlyEmptyVoxels() const;
+		// Calculates if the block contains only one kind of voxel
+		bool computeIsUniform(const Voxel voxelValue) const;
 
 		// Tests if all edges are fully made of opaque cubes
 		bool areEdgesFullyOpaque() const;
