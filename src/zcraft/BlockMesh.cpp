@@ -150,15 +150,15 @@ namespace zcraft
 
 		if(vdir.x != 0) // EAST and WEST
 		{
-			lightf *= 0.78f;
+			lightf *= 0.75f;
 		}
 		else if(vdir.y != 0) // NORTH and SOUTH
 		{
-			lightf *= 0.56f;
+			lightf *= 0.50f;
 		}
 		else if(vdir.z == -1) // BOTTOM
 		{
-			lightf *= 0.34f;
+			lightf *= 0.25f;
 		}
 		else // TOP
 		{

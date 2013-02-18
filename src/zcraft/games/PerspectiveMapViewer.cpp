@@ -32,7 +32,7 @@ namespace zcraft
 			return false;
 
 		// Init camera
-		m_camera.setPosition(Vector3f(0, -5, 32));
+		m_camera.setPosition(Vector3f(0, -5, 16));
 		m_camera.updateViewport(Vector2f(
 			m_window.getSize().x, m_window.getSize().y));
 
@@ -62,7 +62,7 @@ namespace zcraft
 	void PerspectiveMapViewer::renderScene(const zn::Time & delta)
 	{
 		//glClearColor(0.1f, 0.5f, 0.9f, 1);
-		glClearColor(0.0f, 0.0f, 0.0f, 1);
+		glClearColor(0.5f, 0.75f, 1.0f, 1);
 		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_LINE_SMOOTH);
 		glEnable(GL_CULL_FACE);

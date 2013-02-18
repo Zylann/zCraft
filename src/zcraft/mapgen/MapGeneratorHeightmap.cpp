@@ -51,7 +51,7 @@ namespace zcraft
 							x + org.x, y + org.y, z + org.z, m_seed, 5, 0.5, 128);
 
 						if(n2 > 0.3f && n2 < 0.7f)
-							block->set(x, y, z, Voxel(voxel::STONE));
+							block->set(x, y, z, Voxel(voxel::GRASS));
 					}
 				}
 			}
