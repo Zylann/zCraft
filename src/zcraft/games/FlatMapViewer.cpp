@@ -2,7 +2,7 @@
 #include <fstream>
 #include "zcraft/games/FlatMapViewer.hpp"
 #include "zcraft/cartographer/Cartographer.hpp"
-#include "zcraft/NodeProperties.hpp"
+#include "zcraft/VoxelProperties.hpp"
 
 using namespace zn;
 using namespace bmfont;

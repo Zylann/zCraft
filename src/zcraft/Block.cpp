@@ -1,5 +1,5 @@
 #include "zcraft/Block.hpp"
-#include "zcraft/NodeProperties.hpp"
+#include "zcraft/VoxelProperties.hpp"
 #include "zcraft/face.hpp"
 #include "engine/serialization.hpp"
 
@@ -8,11 +8,11 @@ namespace zcraft
 	Block::~Block()
 	{}
 
-	void Block::fill(Node nodeValue)
+	void Block::fill(Voxel voxelValue)
 	{
 		dirty = true;
-        for(u32 i = 0; i < NODE_COUNT; i++)
-            m_nodes[i] = nodeValue;
+        for(u32 i = 0; i < VOXEL_COUNT; i++)
+            m_voxels[i] = voxelValue;
 	}
 
 	void Block::copyTo(VoxelBuffer & vb) const
@@ -24,7 +24,7 @@ namespace zcraft
             m_pos.z * Block::SIZE);
 
         zn::Area3D area(startPos, size);
-        vb.copyFrom(m_nodes, area);
+        vb.copyFrom(m_voxels, area);
 	}
 
 	void Block::copyBorderTo(VoxelBuffer & vb, u8 dir) const
@@ -73,20 +73,20 @@ namespace zcraft
 		for(pos.x = relativeStartPos.x; pos.x <= relativeEndPos.x; pos.x++)
 		{
 			i_src = index(pos.x, pos.y, pos.z);
-			vb.set(startPos + pos, m_nodes[i_src]);
+			vb.set(startPos + pos, m_voxels[i_src]);
 		}
 	}
 
 	void Block::clear()
 	{
-        fill(Node());
+        fill(Voxel());
 	}
 
-	bool Block::containsOnlyEmptyNodes() const
+	bool Block::containsOnlyEmptyVoxels() const
 	{
         for(u16 i = 0; i < Block::SIZE; i++)
         {
-            if(m_nodes[i].type != node::AIR)
+            if(m_voxels[i].type != voxel::AIR)
                 return false;
         }
         return true;
@@ -102,12 +102,12 @@ namespace zcraft
             for(y = 0; y < Block::SIZE; y++)
             {
                 z = 0;
-                const NodeProperties & p0 = get(x,y,z).properties();
+                const VoxelProperties & p0 = get(x,y,z).properties();
                 if(!p0.isOpaqueCube())
                     return false;
 
                 z = Block::SIZE - 1;
-                const NodeProperties & p1 = get(x,y,z).properties();
+                const VoxelProperties & p1 = get(x,y,z).properties();
                 if(!p1.isOpaqueCube())
                     return false;
             }
@@ -119,12 +119,12 @@ namespace zcraft
             for(y = 0; y < Block::SIZE; y++)
             {
                 x = 0;
-                const NodeProperties & p0 = get(x,y,z).properties();
+                const VoxelProperties & p0 = get(x,y,z).properties();
                 if(!p0.isOpaqueCube())
                     return false;
 
                 x = Block::SIZE - 1;
-                const NodeProperties & p1 = get(x,y,z).properties();
+                const VoxelProperties & p1 = get(x,y,z).properties();
                 if(!p1.isOpaqueCube())
                     return false;
             }
@@ -136,12 +136,12 @@ namespace zcraft
             for(x = 0; x < Block::SIZE; x++)
             {
                 y = 0;
-                const NodeProperties & p0 = get(x,y,z).properties();
+                const VoxelProperties & p0 = get(x,y,z).properties();
                 if(!p0.isOpaqueCube())
                     return false;
 
                 y = Block::SIZE - 1;
-                const NodeProperties & p1 = get(x,y,z).properties();
+                const VoxelProperties & p1 = get(x,y,z).properties();
                 if(!p1.isOpaqueCube())
                     return false;
             }
@@ -155,7 +155,7 @@ namespace zcraft
 		s16 y;
         for(y = Block::SIZE-1; y >= 0; y--)
         {
-            if(get(x,y,z).type != node::AIR)
+            if(get(x,y,z).type != voxel::AIR)
                 break;
         }
         return y;
@@ -164,7 +164,7 @@ namespace zcraft
 	Block * Block::clone() const
 	{
         Block * c = new Block(m_pos.x, m_pos.y, m_pos.z);
-        memcpy(c->m_nodes, m_nodes, NODE_COUNT * sizeof(Node));
+        memcpy(c->m_voxels, m_voxels, VOXEL_COUNT * sizeof(Voxel));
         c->dirty = dirty;
         return c;
 	}
@@ -187,7 +187,7 @@ namespace zcraft
 	void Block::serialize(std::ostream & os) const
 	{
         /*
-            <cx><cy><cz><Node><Node>...<Node>
+            <cx><cy><cz><Voxel><Voxel>...<Voxel>
         */
 
         // position
@@ -195,9 +195,9 @@ namespace zcraft
         zn::serialize(os, m_pos.y);
         zn::serialize(os, m_pos.z);
 
-        // nodes
-        for(u32 i = 0; i < Block::NODE_COUNT; i++)
-            m_nodes[i].serialize(os);
+        // voxels
+        for(u32 i = 0; i < Block::VOXEL_COUNT; i++)
+            m_voxels[i].serialize(os);
 	}
 
 	void Block::unserialize(std::istream & is)
@@ -207,9 +207,9 @@ namespace zcraft
         zn::unserialize(is, m_pos.y);
         zn::unserialize(is, m_pos.z);
 
-        // nodes
-        for(u32 i = 0; i < Block::NODE_COUNT; i++)
-            m_nodes[i].unserialize(is);
+        // voxels
+        for(u32 i = 0; i < Block::VOXEL_COUNT; i++)
+            m_voxels[i].unserialize(is);
 	}
 
 } // namespace zcraft

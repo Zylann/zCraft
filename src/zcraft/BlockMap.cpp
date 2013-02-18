@@ -6,7 +6,7 @@ This file is part of the zCraft project.
 
 #include "zcraft/BlockMap.hpp"
 #include "zcraft/face.hpp"
-#include "zcraft/NodeProperties.hpp"
+#include "zcraft/VoxelProperties.hpp"
 
 namespace zcraft
 {
@@ -169,11 +169,11 @@ namespace zcraft
 		}
 	}
 
-	/* Node access */
+	/* Voxel access */
 
 	// TODO BlockMap: clarify coordinate systems
 
-	Node BlockMap::getNode(const Vector3i & pos)
+	Voxel BlockMap::getVoxel(const Vector3i & pos)
 	{
 		Block * b = getBlock(Vector3i(pos.x >> 4, pos.y >> 4, pos.z >> 4));
 		if(b != nullptr)
@@ -183,10 +183,10 @@ namespace zcraft
 						 pos.z & 0x0000000f);
 		}
 		else
-			return Node(node::AIR, node::AIR_UNLOADED, 0x02);
+			return Voxel(voxel::AIR, voxel::AIR_UNLOADED, 0x02);
 	}
 
-	bool BlockMap::setNode(const Vector3i & pos, Node n)
+	bool BlockMap::setVoxel(const Vector3i & pos, Voxel n)
 	{
 		Block * b = getBlock(Vector3i(pos.x >> 4, pos.y >> 4, pos.z >> 4));
 		if(b != nullptr)
@@ -206,17 +206,17 @@ namespace zcraft
 		return m_blocks.size();
 	}
 
-	std::pair<s32, Node> BlockMap::getUpperNode(s32 x, s32 y, s32 minZ, s32 maxZ)
+	std::pair<s32, Voxel> BlockMap::getUpperVoxel(s32 x, s32 y, s32 minZ, s32 maxZ)
 	{
-		// TODO BlockMap: optimize getUpperNode()
+		// TODO BlockMap: optimize getUpperVoxel()
 
-		std::pair<s32,Node> p;
+		std::pair<s32,Voxel> p;
 		Vector3i pos(x, y, maxZ);
 
 		for(; pos.z >= minZ; pos.z--)
 		{
-			p.second = getNode(pos);
-			if(p.second.type != node::AIR)
+			p.second = getVoxel(pos);
+			if(p.second.type != voxel::AIR)
 				break;
 		}
 		p.first = pos.z;
@@ -239,12 +239,12 @@ namespace zcraft
 			listener->blockAdded(pos, *this);
 	}
 
-	RayCastResult BlockMap::raycastToSolidNode(
+	RayCastResult BlockMap::raycastToSolidVoxel(
 			Vector3f start, Vector3f dir, f32 maxDistance)
 	{
 		// TODO BlockMap: optimize raycasting
 
-		Node n, nprev;
+		Voxel n, nprev;
 		Vector3i nPos, nprevPos;
 		Vector3f pos = start;
 		float d, step = 0.1f;
@@ -262,7 +262,7 @@ namespace zcraft
 			nPos.y = floor(pos.y);
 			nPos.z = floor(pos.z);
 
-			n = getNode(nPos);
+			n = getVoxel(nPos);
 
 			if(n.properties().solid)
 			{
@@ -274,9 +274,9 @@ namespace zcraft
 		}
 
 		result.distanceCrossed = d;
-		result.hit.node = n;
+		result.hit.voxel = n;
 		result.hit.pos = nPos;
-		result.hitPrevious.node = nprev;
+		result.hitPrevious.voxel = nprev;
 		result.hitPrevious.pos = nprevPos;
 
 		return result;

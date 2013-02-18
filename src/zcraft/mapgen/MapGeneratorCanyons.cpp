@@ -48,11 +48,11 @@ namespace zcraft
 				n = noise3dPerlin(org.x + x, org.y + y, org.z + z, m_seed, 5, 0.5f, 64);
 				if(n > 0.5f-nr && n < 0.5f+nr)
 				{
-					u8 type = node::DIRT;
+					u8 type = voxel::DIRT;
 					n2 = noise3dPerlin(org.x + x, org.y + y, org.z + z, m_seed+1, 5, 0.5f, 64);
 					if(n2 < 0.5f)
-						type = node::STONE;
-					block->set(x, y, z, Node(type));
+						type = voxel::STONE;
+					block->set(x, y, z, Voxel(type));
 				}
 			}
 		}

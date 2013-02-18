@@ -9,7 +9,7 @@ namespace zcraft
 		if(!s_initialized)
 		{
 			std::cout << "zcraft::init..." << std::endl;
-			NodeProperties::initList();
+			VoxelProperties::initList();
 			s_initialized = true;
 		}
 		else
@@ -24,7 +24,7 @@ namespace zcraft
 		if(s_initialized)
 		{
 			std::cout << "zcraft::free..." << std::endl;
-			NodeProperties::freeList();
+			VoxelProperties::freeList();
 			s_initialized = false;
 		}
 		else

@@ -1,5 +1,5 @@
-#ifndef NODEPROPERTIES_HPP_INCLUDED
-#define NODEPROPERTIES_HPP_INCLUDED
+#ifndef VOXELPROPERTIES_HPP_INCLUDED
+#define VOXELPROPERTIES_HPP_INCLUDED
 
 #include <string>
 #include "zcraft/common.hpp"
@@ -7,13 +7,13 @@
 
 namespace zcraft
 {
-	class NodeProperties
+	class VoxelProperties
 	{
 	public :
 
-		bool cube; // Is the node a cube?
-		bool opaque; // Is the node opaque?
-		bool solid; // Is the node solid (collisions) ?
+		bool cube; // Is the voxel a cube?
+		bool opaque; // Is the voxel opaque?
+		bool solid; // Is the voxel solid (collisions) ?
 		std::string name; // Technical name
 		std::string displayableName; // Player-displayed name
 		zn::Color averageColor; // Average color (used for minimap)
@@ -22,7 +22,7 @@ namespace zcraft
 	public :
 
 		// Creates an opaque white cube
-		NodeProperties()
+		VoxelProperties()
 		{
 			cube = true;
 			opaque = true;
@@ -42,10 +42,10 @@ namespace zcraft
 
 		static void freeList();
 
-		static const NodeProperties & get(u8 type);
+		static const VoxelProperties & get(u8 type);
 
 	};
 
 } // namespace zcraft
 
-#endif // NODEPROPERTIES_HPP_INCLUDED
+#endif // VOXELPROPERTIES_HPP_INCLUDED

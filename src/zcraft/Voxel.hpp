@@ -1,16 +1,16 @@
-#ifndef NODE_HPP_INCLUDED
-#define NODE_HPP_INCLUDED
+#ifndef VOXEL_HPP_INCLUDED
+#define VOXEL_HPP_INCLUDED
 
 #include <iostream>
 #include "zcraft/common.hpp"
 
 namespace zcraft
 {
-	namespace node
+	namespace voxel
 	{
 		/** Basic types **/
 
-		enum NodeType
+		enum VoxelType
 		{
 			AIR = 0,
 			STONE,
@@ -27,15 +27,14 @@ namespace zcraft
 			AIR_NORMAL = 0,
 			AIR_UNLOADED
 		};
-
 	}
 
-	struct NodeProperties;
+	struct VoxelProperties;
 
-	/// Nodes are the basis of maps.
+	/// Voxels are the basis of maps.
 	/// They consist on voxels.
 
-	struct Node
+	struct Voxel
 	{
 		// Constants
 
@@ -50,18 +49,18 @@ namespace zcraft
 		// Methods
 
 		// Constructs an empty air block.
-		Node(u8 type0 = node::AIR, u8 metaType0 = 0x0, u8 light0 = LIGHT_MAX);
+		Voxel(u8 type0 = voxel::AIR, u8 metaType0 = 0x0, u8 light0 = LIGHT_MAX);
 
 		// Gets the common properties of the block
-		const NodeProperties & properties() const;
+		const VoxelProperties & properties() const;
 
-		// Writes the node in a binary stream
+		// Writes the voxel in a binary stream
 		void serialize(std::ostream & os) const;
 
-		// Reads the node from a binary stream
+		// Reads the voxel from a binary stream
 		void unserialize(std::istream & is);
 
-		// Gets the light code of the node, between LIGHT_MIN and LIGHT_MAX.
+		// Gets the light code of the voxel, between LIGHT_MIN and LIGHT_MAX.
 		// (Must be converted for drawing in 0-255 range)
 		inline u8 getLight() const
 		{
@@ -70,15 +69,15 @@ namespace zcraft
 
 	};
 
-	struct LocatedNode
+	struct LocatedVoxel
 	{
-		Node node;
+		Voxel voxel;
 		Vector3i pos;
 	};
 
 } // namespace zcraft
 
-#endif // NODE_HPP_INCLUDED
+#endif // VOXEL_HPP_INCLUDED
 
 
 

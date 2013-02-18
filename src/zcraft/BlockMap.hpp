@@ -19,8 +19,8 @@ namespace zcraft
 	{
 		bool collision;
 		float distanceCrossed;
-		LocatedNode hit;
-		LocatedNode hitPrevious;
+		LocatedVoxel hit;
+		LocatedVoxel hitPrevious;
 
 		RayCastResult()
 		{
@@ -92,25 +92,25 @@ namespace zcraft
 			const Vector3i blockPos,
 			std::list<Block*> & neighbors);
 
-		/* Node access */
+		/* Voxel access */
 
-		// Gets the node at the specified pos.
-		// Returns AIR:UNLOADED if there is no nodes loaded here.
-		Node getNode(const Vector3i & pos);
+		// Gets the voxel at the specified pos.
+		// Returns AIR:UNLOADED if there is no voxels loaded here.
+		Voxel getVoxel(const Vector3i & pos);
 
-		// Sets the node at the specified pos.
-		// Returns true if success, false if there was no nodes loaded here.
-		bool setNode(const Vector3i & pos, Node n);
+		// Sets the voxel at the specified pos.
+		// Returns true if success, false if there was no voxels loaded here.
+		bool setVoxel(const Vector3i & pos, Voxel n);
 
 		// Get how many blocks contains the map
 		u32 getBlockCount() const;
 
-		// Finds the upper non-AIR node Z-wise on (x, y).
+		// Finds the upper non-AIR voxel Z-wise on (x, y).
 		// Search will begin at maxZ and end at minZ if not found.
-		std::pair<s32, Node> getUpperNode(s32 x, s32 y, s32 minZ, s32 maxZ);
+		std::pair<s32, Voxel> getUpperVoxel(s32 x, s32 y, s32 minZ, s32 maxZ);
 
-		// Casts a vector-oriented ray from the given position until it reaches a solid node.
-		RayCastResult raycastToSolidNode(Vector3f start, Vector3f dir, f32 maxDistance);
+		// Casts a vector-oriented ray from the given position until it reaches a solid voxel.
+		RayCastResult raycastToSolidVoxel(Vector3f start, Vector3f dir, f32 maxDistance);
 
 		/* Listeners */
 

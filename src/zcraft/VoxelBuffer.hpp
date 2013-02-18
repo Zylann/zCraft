@@ -1,26 +1,26 @@
-#ifndef NODEBUFFER_HPP_INCLUDED
-#define NODEBUFFER_HPP_INCLUDED
+#ifndef VOXELBUFFER_HPP_INCLUDED
+#define VOXELBUFFER_HPP_INCLUDED
 
 #include "engine/Array3D.hpp"
-#include "zcraft/Node.hpp"
+#include "zcraft/Voxel.hpp"
 
 namespace zcraft
 {
 	/*
-		3D buffer specialized in Node manipulation
+		3D buffer specialized in Voxel manipulation
 	*/
 
-	class VoxelBuffer : public zn::Array3D<Node>
+	class VoxelBuffer : public zn::Array3D<Voxel>
 	{
 	public :
 
 		VoxelBuffer();
 		~VoxelBuffer();
 
-		virtual void printDataItem(std::ostream & os, Node & item) const;
+		virtual void printDataItem(std::ostream & os, Voxel & item) const;
 
 	};
 
 } // namespace zcraft
 
-#endif // NODEBUFFER_HPP_INCLUDED
+#endif // VOXELBUFFER_HPP_INCLUDED

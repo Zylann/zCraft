@@ -51,14 +51,14 @@ namespace zcraft
 							x + org.x, y + org.y, z + org.z, m_seed, 5, 0.5, 128);
 
 						if(n2 > 0.3f && n2 < 0.7f)
-							block->set(x, y, z, Node(node::STONE));
+							block->set(x, y, z, Voxel(voxel::STONE));
 					}
 				}
 			}
 		}
 		else if(org.z < 0)
 		{
-			block->fill(Node(node::STONE));
+			block->fill(Voxel(voxel::STONE));
 		}
 
 		if(block != nullptr)

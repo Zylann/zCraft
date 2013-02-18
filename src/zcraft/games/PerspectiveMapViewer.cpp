@@ -188,11 +188,11 @@ namespace zcraft
 			{
 				if(event.mouseButton.button == sf::Mouse::Left)
 				{
-					m_map.setNode(m_raycast.hit.pos, Node(node::AIR));
+					m_map.setVoxel(m_raycast.hit.pos, Voxel(voxel::AIR));
 				}
 				else if(event.mouseButton.button == sf::Mouse::Right)
 				{
-					m_map.setNode(m_raycast.hitPrevious.pos, Node(node::STONE));
+					m_map.setVoxel(m_raycast.hitPrevious.pos, Voxel(voxel::STONE));
 				}
 			}
 		}
@@ -206,7 +206,7 @@ namespace zcraft
 	void PerspectiveMapViewer::updatePointedVoxel()
 	{
 		m_raycast =
-			m_map.raycastToSolidNode(
+			m_map.raycastToSolidVoxel(
 				m_camera.getPosition(),
 				m_camera.getForward(), 16);
 	}

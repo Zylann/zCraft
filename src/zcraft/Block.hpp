@@ -8,25 +8,25 @@ This file is part of the zCraft project.
 #define BLOCK_HPP_INCLUDED
 
 #include "zcraft/common.hpp"
-#include "zcraft/Node.hpp"
+#include "zcraft/Voxel.hpp"
 #include "zcraft/VoxelBuffer.hpp"
 
 namespace zcraft
 {
-	// A block is a fixed-size cubic array of nodes
+	// A block is a fixed-size cubic array of voxels
 
 	class Block
 	{
 	public :
 
 		static const u32 SIZE = 16;
-		static const u32 NODE_COUNT = SIZE * SIZE * SIZE;
+		static const u32 VOXEL_COUNT = SIZE * SIZE * SIZE;
 
 	private :
 
 		// access is done using the index(x,y,z) function
 		// TODO Block: optimize for empty blocks
-		Node m_nodes[NODE_COUNT];
+		Voxel m_voxels[VOXEL_COUNT];
 
 		// must not be modified after creation/loading/generation
 		Vector3i m_pos;
@@ -52,9 +52,9 @@ namespace zcraft
 
 		~Block();
 
-		/* Nodes access and modification */
+		/* Voxels access and modification */
 
-		// Node index from relative coordinates
+		// Voxel index from relative coordinates
 		// x, y and z must be in [0,15]
 		inline u16 index(s32 x, s32 y, s32 z) const
 		{
@@ -63,23 +63,23 @@ namespace zcraft
 			return (z << 8) | (y << 4) | x;
 		}
 
-		// get node at (x,y,z). Use relatives coordinates (in [0,15])
-		inline Node get(s32 x, s32 y, s32 z) const
+		// get voxel at (x,y,z). Use relatives coordinates (in [0,15])
+		inline Voxel get(s32 x, s32 y, s32 z) const
 		{
-			return m_nodes[index(x, y, z)];
+			return m_voxels[index(x, y, z)];
 		}
 
-		// Modifies a node and rises the dirty flag
-		inline void set(s32 x, s32 y, s32 z, Node b)
+		// Modifies a voxel and rises the dirty flag
+		inline void set(s32 x, s32 y, s32 z, Voxel b)
 		{
 			dirty = true;
-			m_nodes[index(x,y,z)] = b;
+			m_voxels[index(x,y,z)] = b;
 		}
 
-		// fill with one kind of node
-		void fill(Node nodeValue);
+		// fill with one kind of voxel
+		void fill(Voxel voxelValue);
 
-		// copy nodes to a VoxelBuffer
+		// copy voxels to a VoxelBuffer
 		void copyTo(VoxelBuffer & vb) const;
 
 		// copy voxels from one side only to a VoxelBuffer
@@ -88,17 +88,17 @@ namespace zcraft
 		// copy voxels from one side only to a VoxelBuffer
 		void copyBorderTo(VoxelBuffer & vb, const Vector3i vdir) const;
 
-		// fill with empty nodes
+		// fill with empty voxels
 		void clear();
 
-		// Tests if the block contains only empty nodes
-		bool containsOnlyEmptyNodes() const;
+		// Tests if the block contains only empty voxels
+		bool containsOnlyEmptyVoxels() const;
 
 		// Tests if all edges are fully made of opaque cubes
 		bool areEdgesFullyOpaque() const;
 
 		// Get upper block position on Y axis
-		// return relative position, -1 if no nodes
+		// return relative position, -1 if no voxels
 		s32 getUpperBlockPosition(u8 x, u8 z) const;
 
 		// Makes a dynamically allocated copy of this object.

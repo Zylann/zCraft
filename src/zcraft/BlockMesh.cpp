@@ -8,7 +8,7 @@ This file is part of the zCraft project.
 #include "engine/Color.hpp"
 #include "BlockMesh.hpp"
 #include "face.hpp"
-#include "NodeProperties.hpp"
+#include "VoxelProperties.hpp"
 #include "Block.hpp"
 //#include "engine/noise.hpp"
 
@@ -118,9 +118,9 @@ namespace zcraft
 		}
     }
 
-	u8 compareFaces(const Node a, const Node b)
+	u8 compareFaces(const Voxel a, const Voxel b)
 	{
-		if(a.type == node::AIR && b.type == node::AIR)
+		if(a.type == voxel::AIR && b.type == voxel::AIR)
 		{
 			return 0; // Both empty
 		}
@@ -128,7 +128,7 @@ namespace zcraft
 		{
 			return 0; // Both hidden
 		}
-		else if(a.type != node::AIR && b.type == node::AIR)
+		else if(a.type != voxel::AIR && b.type == voxel::AIR)
 		{
 			return 1; // first is solid
 		}
@@ -264,13 +264,13 @@ namespace zcraft
 		Vector3i nextPos1;
 
 		// current block
-		Node nCur0 = vb.get(startPos);
+		Voxel vCur0 = vb.get(startPos);
 		// block above the face of current block
-		Node nCur1 = vb.get(startPos + vFaceDir);
+		Voxel vCur1 = vb.get(startPos + vFaceDir);
 		// next block
-		Node nNext0;
+		Voxel vNext0;
 		// block above the face of next block
-		Node nNext1;
+		Voxel vNext1;
 
 		u8 continuousFacesCount = 0;
 
@@ -286,14 +286,14 @@ namespace zcraft
 				// getting next blocks
 				nextPos0 = curPos + transDir;
 				nextPos1 = nextPos0 + vFaceDir;
-				nNext0 = vb.get(startPos + nextPos0);
-				nNext1 = vb.get(startPos + nextPos1);
+				vNext0 = vb.get(startPos + nextPos0);
+				vNext1 = vb.get(startPos + nextPos1);
 
 				// determining if the next block appearance is the same
-				if( nCur0.type == nNext0.type &&
-					nCur0.meta == nNext0.meta &&
-					nCur1.type == nNext1.type &&
-					nCur1.meta == nNext1.meta)
+				if( vCur0.type == vNext0.type &&
+					vCur0.meta == vNext0.meta &&
+					vCur1.type == vNext1.type &&
+					vCur1.meta == vNext1.meta)
 				{
 					nextIsDifferent = false;
 				}
@@ -304,7 +304,7 @@ namespace zcraft
 			if(nextIsDifferent)
 			{
 				// determining FastFace orientation
-				u8 fc = compareFaces(nCur0, nCur1);
+				u8 fc = compareFaces(vCur0, vCur1);
 
 				// if a FastFace must be drawn
 				if(fc != 0)
@@ -314,16 +314,16 @@ namespace zcraft
 					// getting textures
 					/*
 					video::ITexture* texture0 =
-						textures->getBlockTexture(nCur0, dir);
+						textures->getBlockTexture(vCur0, dir);
 					video::ITexture* texture1 =
-						textures->getBlockTexture(nCur1, game::block::oppositeFace(dir));
+						textures->getBlockTexture(vCur1, game::block::oppositeFace(dir));
 					*/
 					sf::Texture * texture0 = nullptr;
 					sf::Texture * texture1 = nullptr;
 
 					// getting light
-					const u8 light0 = getFaceLight(vFaceDir, nCur1.getLight());
-					const u8 light1 = getFaceLight(-vFaceDir, nCur0.getLight());
+					const u8 light0 = getFaceLight(vFaceDir, vCur1.getLight());
+					const u8 light1 = getFaceLight(-vFaceDir, vCur0.getLight());
 
 					// fastface absolute start position
 					Vector3i ffStart =
@@ -344,14 +344,14 @@ namespace zcraft
 					if(fc == 1)
 					{
 						updateFastFace(ff, texture0,
-							light0, nCur0.properties().color, fpos,
+							light0, vCur0.properties().color, fpos,
 							vFaceDir, false, scale);
 						faces.push_back(ff);
 					}
 					else if(fc == 2)
 					{
 						updateFastFace(ff, texture1,
-							light1, nCur1.properties().color, fpos,
+							light1, vCur1.properties().color, fpos,
 							-vFaceDir, true, scale);
 						faces.push_back(ff);
 					}
@@ -361,8 +361,8 @@ namespace zcraft
 			} // if(nextIsDifferent)
 
 			// shift next to current
-			nCur0 = nNext0;
-			nCur1 = nNext1;
+			vCur0 = vNext0;
+			vCur1 = vNext1;
 			curPos += transDir;
 
 		} // for each voxel [i] in the row

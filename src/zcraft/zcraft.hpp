@@ -3,7 +3,7 @@
 
 #include "zcraft/common.hpp"
 #include "zcraft/BlockMap.hpp"
-#include "zcraft/NodeProperties.hpp"
+#include "zcraft/VoxelProperties.hpp"
 
 namespace zcraft
 {

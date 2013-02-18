@@ -76,6 +76,7 @@ namespace zcraft
 				p.second->draw();
 
 				// Debug : draws mesh AABBs
+//			#if defined ZN_OPENGL2
 //				if(!p.second->isEmpty())
 //				{
 //					glColor3ub(255,255,255);
@@ -87,6 +88,7 @@ namespace zcraft
 //					gl::drawCubeLines(Block::SIZE);
 //					glPopMatrix();
 //				}
+//			#endif
 			}
 			else
 			{

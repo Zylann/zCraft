@@ -1,5 +1,5 @@
 #include "engine/Color.hpp"
-#include "zcraft/NodeProperties.hpp"
+#include "zcraft/VoxelProperties.hpp"
 #include "zcraft/cartographer/Cartographer.hpp"
 #include "zcraft/MapLoader.hpp"
 
@@ -21,18 +21,18 @@ namespace zcraft
 		img.create(Block::SIZE, Block::SIZE);
 		Color color;
 
-		// For each Z-wise node line
+		// For each Z-wise voxel line
 		for(u8 y = 0; y < Block::SIZE; y++)
 		for(u8 x = 0; x < Block::SIZE; x++)
 		{
-			// Get color of the top node
-			std::pair<s32, Node> topNode = map.getUpperNode(offX + x, offY + y, minZ, maxZ);
-			color = topNode.second.properties().averageColor;
+			// Get color of the top voxel
+			std::pair<s32, Voxel> topVoxel = map.getUpperVoxel(offX + x, offY + y, minZ, maxZ);
+			color = topVoxel.second.properties().averageColor;
 
 			// Apply some height gradient
 			float k = 0.5f;
-			if(topNode.first >= minZ)
-				k = 0.1f + 0.9f * (float)(topNode.first - minZ) / (float)(maxZ - minZ);
+			if(topVoxel.first >= minZ)
+				k = 0.1f + 0.9f * (float)(topVoxel.first - minZ) / (float)(maxZ - minZ);
 
 			color.multiplyRGB(k);
 
