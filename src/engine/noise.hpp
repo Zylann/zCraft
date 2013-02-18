@@ -7,7 +7,7 @@ This file is part of the zCraft project.
 #ifndef ENGINE_NOISE_HPP_INCLUDED
 #define ENGINE_NOISE_HPP_INCLUDED
 
-namespace engine
+namespace zn
 {
     float noise2d(int x, int y, int seed);
 
@@ -25,7 +25,7 @@ namespace engine
         float x, float y, float z, int seed,
         int octaves, float persistence, float period);
 
-} // namespace engine
+} // namespace zn
 
 
 #endif // ENGINE_NOISE_HPP_INCLUDED

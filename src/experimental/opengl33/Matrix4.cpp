@@ -8,7 +8,7 @@ This file is part of the zCraft project.
 #include <cmath>
 #include "Matrix4.hpp"
 
-using namespace engine;
+using namespace zn;
 
 namespace experimental
 {

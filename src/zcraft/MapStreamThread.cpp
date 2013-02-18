@@ -9,7 +9,7 @@ This file is part of the zCraft project.
 #include "zcraft/mapgen/MapGeneratorHeightmap.hpp"
 //#include "zcraft/mapgen/MapGeneratorCanyons.hpp"
 
-using namespace engine;
+using namespace zn;
 
 namespace zcraft
 {
@@ -194,7 +194,7 @@ namespace zcraft
 		*/
 
 		// Sleep a little to save CPU usage
-		engine::sleep(50);
+		zn::sleep(50);
 	}
 
 } // namespace zcraft

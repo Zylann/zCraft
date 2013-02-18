@@ -9,7 +9,7 @@ This file is part of the zCraft project.
 
 #define BUFFER_OFFSET(a) ((char*)nullptr + (a))
 
-using namespace engine;
+using namespace zn;
 
 namespace experimental
 {
@@ -117,8 +117,8 @@ namespace gl
 
 		glDrawArrays(m_primitiveType, 0, m_vertexCount);
 
-		glDisableVertexAttribArray(ShaderIn::POSITION);
 		glDisableVertexAttribArray(ShaderIn::COLOR);
+		glDisableVertexAttribArray(ShaderIn::POSITION);
 	}
 
 	void VertexColorArray::host()

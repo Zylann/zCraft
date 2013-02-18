@@ -9,7 +9,7 @@ This file is part of the zCraft project.
 
 /* Header-only */
 
-namespace engine
+namespace zn
 {
 	/**
 		Singleton pattern is used for classes that must have only one instance.
@@ -61,7 +61,7 @@ namespace engine
 	template <typename T>
 	T * Singleton<T>::s_instance = 0;
 
-} // namespace engine
+} // namespace zn
 
 #endif // ENGINE_SINGLETON_HPP_INCLUDED
 

@@ -8,7 +8,7 @@ This file is part of the zCraft project.
 #include "engine/Color.hpp"
 #include "engine/math.hpp"
 
-namespace engine
+namespace zn
 {
 	Color::Color() : r(0), g(0), b(0), a(1)
 	{}
@@ -133,7 +133,7 @@ namespace engine
 		return os << col.toString();
 	}
 
-} // namespace engine
+} // namespace zn
 
 
 

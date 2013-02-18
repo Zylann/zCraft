@@ -14,7 +14,7 @@ This file is part of the zCraft project.
 #include "engine/Area3D.hpp"
 #include "engine/Exception.hpp"
 
-namespace engine
+namespace zn
 {
     /*
         3D data defined by a width, a height, a depth and a position (Area3D).

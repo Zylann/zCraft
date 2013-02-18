@@ -10,7 +10,7 @@ This file is part of the zCraft project.
 #include "engine/Array.hpp"
 #include "engine/opengl/opengl.hpp"
 
-namespace engine
+namespace zn
 {
 namespace gl
 {
@@ -74,7 +74,7 @@ namespace gl
 	};
 
 } // namespace gl
-} // namespace engine
+} // namespace zn
 
 #endif // ENGINE_GL_VERTEXCOLORARRAY_HPP_INCLUDED
 

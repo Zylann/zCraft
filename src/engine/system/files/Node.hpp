@@ -9,7 +9,7 @@ This file is part of the zCraft project.
 
 #include <string>
 
-namespace engine
+namespace zn
 {
 namespace fs
 {
@@ -26,6 +26,6 @@ namespace fs
     };
 
 } // namespace fs
-} // namespace engine
+} // namespace zn
 
 #endif // ENGINE_FILESYSTEM_NODE_HPP_INCLUDED

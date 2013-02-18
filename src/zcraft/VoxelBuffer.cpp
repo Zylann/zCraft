@@ -3,7 +3,7 @@
 
 namespace zcraft
 {
-    VoxelBuffer::VoxelBuffer() : engine::Array3D<Node>()
+    VoxelBuffer::VoxelBuffer() : zn::Array3D<Node>()
     {}
 
     VoxelBuffer::~VoxelBuffer()

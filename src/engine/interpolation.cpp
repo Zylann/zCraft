@@ -6,7 +6,7 @@ This file is part of the zCraft project.
 
 #include "engine/interpolation.hpp"
 
-namespace engine
+namespace zn
 {
     /*
         Linear intepolations

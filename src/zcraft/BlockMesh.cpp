@@ -12,7 +12,7 @@ This file is part of the zCraft project.
 #include "Block.hpp"
 //#include "engine/noise.hpp"
 
-using namespace engine;
+using namespace zn;
 
 namespace zcraft
 {
@@ -222,7 +222,7 @@ namespace zcraft
 		for(u8 i = 0; i < 4; i++)
 		{
 			ff.vertices[i] = vertexPos[i];
-			//u8 col = 127 + 127.f*engine::noise3d(pos.x, pos.y, pos.z, 131183);
+			//u8 col = 127 + 127.f*zn::noise3d(pos.x, pos.y, pos.z, 131183);
 			Color ffc = color;
 			ffc.multiplyU8(light);
 			ff.colors[i].set(ffc);

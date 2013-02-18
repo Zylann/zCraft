@@ -9,7 +9,7 @@ This file is part of the zCraft project.
 
 #include "engine/config.hpp"
 
-namespace engine
+namespace zn
 {
 	typedef unsigned int u32;
 	typedef unsigned short u16;

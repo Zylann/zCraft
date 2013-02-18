@@ -9,7 +9,7 @@ This file is part of the zCraft project.
 
 #include "engine/stringutils.hpp"
 
-namespace engine
+namespace zn
 {
 	// TODO stringutils: may be optimized
 
@@ -149,6 +149,6 @@ namespace engine
 		return str;
 	}
 
-} // namespace engine
+} // namespace zn
 
 

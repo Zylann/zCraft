@@ -29,7 +29,7 @@ Estimated total dev time
 #include "experimental/opengl33/game.hpp"
 
 // TODO engine: rename namespace to 'zn' (for zENG)
-using namespace engine;
+using namespace zn;
 
 int runGame(IGame * game)
 {

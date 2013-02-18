@@ -13,7 +13,7 @@ This file is part of the zCraft project.
 #include "engine/math.hpp"
 #include "engine/stringutils.hpp"
 
-namespace engine
+namespace zn
 {
 	template <typename T>
 	class Vector3
@@ -343,9 +343,9 @@ namespace engine
 
 		std::string toString() const
 		{
-			return "(" + engine::toString(x)
-				+ ", " + engine::toString(y)
-				+ ", " + engine::toString(z) + ")";
+			return "(" + zn::toString(x)
+				+ ", " + zn::toString(y)
+				+ ", " + zn::toString(z) + ")";
 		}
 
 	};
@@ -405,7 +405,7 @@ namespace engine
 		return abs(a.x - b.x) + abs(a.y - b.y) + abs(a.z - b.z);
 	}
 
-} // namespace engine
+} // namespace zn
 
 #endif // ENGINE_VECTOR3_HPP_INCLUDED
 

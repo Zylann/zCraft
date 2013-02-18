@@ -13,7 +13,7 @@ This file is part of the zCraft project.
 #include <string>
 #include "engine/bmfont/CharDescriptor.hpp"
 
-namespace engine
+namespace zn
 {
 namespace bmfont
 {
@@ -105,7 +105,7 @@ namespace bmfont
 	};
 
 } // namespace bmfont
-} // namespace engine
+} // namespace zn
 
 #endif // ENGINE_BM_FONTSETTINGS_HPP_INCLUDED
 

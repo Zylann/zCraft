@@ -24,17 +24,17 @@ namespace gl
 	private :
 
 		// Data to send to the graphics card. Empty once hosted.
-		engine::Array<engine::f32> m_vertices;
-		engine::Array<engine::u8> m_colors;
+		zn::Array<zn::f32> m_vertices;
+		zn::Array<zn::u8> m_colors;
 
 		// Metadata
 		GLuint m_bufferID = 0;
 		GLenum m_primitiveType = 0;
-		engine::u32 m_vertexCount = 0;
-		engine::u32 m_valuesPerVertex = 0;
-		engine::u32 m_valuesPerColor = 0;
-		engine::u32 m_verticesOffset = 0;
-		engine::u32 m_colorsOffset = 0;
+		zn::u32 m_vertexCount = 0;
+		zn::u32 m_valuesPerVertex = 0;
+		zn::u32 m_valuesPerColor = 0;
+		zn::u32 m_verticesOffset = 0;
+		zn::u32 m_colorsOffset = 0;
 
 	public :
 
@@ -46,11 +46,11 @@ namespace gl
 
 		// Transfers vertices from the given array to this array.
 		// Returns false if given parameters are wrong.
-		bool moveVertices(engine::Array<engine::f32> & vertices, const engine::u32 valuesPerVertex = 3);
+		bool moveVertices(zn::Array<zn::f32> & vertices, const zn::u32 valuesPerVertex = 3);
 
 		// Transfers colors from the given array to this array
 		// Returns false if given parameters are wrong.
-		bool moveColors(engine::Array<engine::u8> & colors, const engine::u32 valuesPerColor = 3);
+		bool moveColors(zn::Array<zn::u8> & colors, const zn::u32 valuesPerColor = 3);
 
 		// Clears the array and hosted data
 		void clear();

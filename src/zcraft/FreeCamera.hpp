@@ -23,7 +23,7 @@ namespace zcraft
 	{
 	private :
 
-		engine::Camera3D m_camera;
+		zn::Camera3D m_camera;
 		f32 m_yaw;
 		f32 m_pitch;
 		s32 m_lastMouseX;
@@ -57,7 +57,7 @@ namespace zcraft
 
 		// Real-time update.
 		// The window reference is needed because it involves mouse grabbing.
-		void update(const engine::Time & delta, const sf::Window & window);
+		void update(const zn::Time & delta, const sf::Window & window);
 
 		// Must be called on mouse wheel events
 		void mouseWheelMoved(s32 delta);

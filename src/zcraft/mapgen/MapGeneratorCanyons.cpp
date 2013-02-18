@@ -7,7 +7,7 @@ This file is part of the zCraft project.
 #include "engine/noise.hpp"
 #include "zcraft/mapgen/MapGeneratorCanyons.hpp"
 
-using namespace engine;
+using namespace zn;
 
 namespace zcraft
 {

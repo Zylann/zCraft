@@ -12,7 +12,7 @@ This file is part of the zCraft project.
 #include "engine/math.hpp"
 #include "engine/stringutils.hpp"
 
-namespace engine
+namespace zn
 {
 	template <typename T>
 	class Vector2
@@ -282,8 +282,8 @@ namespace engine
 
 		std::string toString() const
 		{
-			return "(" + engine::toString(x)
-				+ ", " + engine::toString(y) + ")";
+			return "(" + zn::toString(x)
+				+ ", " + zn::toString(y) + ")";
 		}
 
 	};
@@ -335,7 +335,7 @@ namespace engine
 	typedef Vector2<s32> Vector2i;
 	typedef Vector2<f32> Vector2f;
 
-} // namespace engine
+} // namespace zn
 
 #endif // ENGINE_VECTOR2_HPP_INCLUDED
 

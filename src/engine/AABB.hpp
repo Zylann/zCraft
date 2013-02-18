@@ -8,7 +8,7 @@
 
 #include "engine/Vector3.hpp"
 
-namespace engine
+namespace zn
 {
 	/*
 		Axis Aligned Bounding Box
@@ -52,7 +52,7 @@ namespace engine
 		return os << aabb.toString();
 	}
 
-} // namespace engine
+} // namespace zn
 
 #endif // AABB_HPP_INCLUDED
 

@@ -8,7 +8,7 @@
 	#error "This file doesn't supports OpenGL 3, and is outdated. Use opengl.hpp instead (experimental)"
 #endif // ZN_OPENGL3
 
-namespace engine
+namespace zn
 {
 namespace gl
 {
@@ -309,7 +309,7 @@ namespace gl
 	}
 
 } // namespace gl
-} // namespace engine
+} // namespace zn
 
 
 

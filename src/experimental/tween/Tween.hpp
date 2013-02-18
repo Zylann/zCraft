@@ -10,7 +10,7 @@ namespace experimental
 	{
 	private :
 
-		engine::Array<std::array<float,key_size>> m_keys;
+		zn::Array<std::array<float,key_size>> m_keys;
 
 	public :
 

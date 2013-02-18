@@ -16,8 +16,8 @@ namespace zcraft
 		bool solid; // Is the node solid (collisions) ?
 		std::string name; // Technical name
 		std::string displayableName; // Player-displayed name
-		engine::Color averageColor; // Average color (used for minimap)
-		engine::Color color; // Override color
+		zn::Color averageColor; // Average color (used for minimap)
+		zn::Color color; // Override color
 
 	public :
 

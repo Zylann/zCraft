@@ -10,7 +10,7 @@ This file is part of the zCraft project.
 
 #define BUFFER_OFFSET(a) ((char*)nullptr + (a))
 
-namespace engine
+namespace zn
 {
 namespace gl
 {
@@ -184,7 +184,7 @@ namespace gl
 	}
 
 } // namespace gl
-} // namespace engine
+} // namespace zn
 
 
 

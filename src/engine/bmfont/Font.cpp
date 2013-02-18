@@ -15,7 +15,7 @@ This file is part of the zCraft project.
 #include "engine/bmfont/Font.hpp"
 #include "engine/stringutils.hpp" // for cropStr()
 
-namespace engine
+namespace zn
 {
 namespace bmfont
 {
@@ -340,7 +340,7 @@ namespace bmfont
 	}
 
 } // namespace bmfont
-} // namespace engine
+} // namespace zn
 
 
 

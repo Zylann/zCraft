@@ -10,7 +10,7 @@ This file is part of the zCraft project.
 #include "engine/system/files/filesystem.hpp"
 #include "engine/stringutils.hpp"
 
-using namespace engine;
+using namespace zn;
 
 namespace zcraft
 {

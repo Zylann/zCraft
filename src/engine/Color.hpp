@@ -14,7 +14,7 @@ This file is part of the zCraft project.
 	#include <SFML/Graphics.hpp>
 #endif
 
-namespace engine
+namespace zn
 {
 	/*
 		Stores a color using 4 unsigned byte values for red, green, blue and alpha.
@@ -81,7 +81,7 @@ namespace engine
 
 	std::ostream & operator<<(std::ostream & os, const Color & col);
 
-} // namespace engine
+} // namespace zn
 
 #endif // ENGINE_COLOR_HPP_INCLUDED
 

@@ -7,7 +7,7 @@ This file is part of the zCraft project.
 #ifndef FONTINFO_HPP_INCLUDED
 #define FONTINFO_HPP_INCLUDED
 
-namespace engine
+namespace zn
 {
 namespace bmfont
 {

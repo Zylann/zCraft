@@ -8,7 +8,7 @@ This file is part of the zCraft project.
 #include "engine/Area3D.hpp"
 #include "engine/stringutils.hpp"
 
-namespace engine
+namespace zn
 {
     Area3D::Area3D()
     {
@@ -128,5 +128,5 @@ namespace engine
                p_pos.x;
     }
 
-} // namespace engine
+} // namespace zn
 

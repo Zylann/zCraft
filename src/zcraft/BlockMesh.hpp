@@ -17,7 +17,7 @@ namespace zcraft
 	{
 	private :
 
-		engine::gl::VertexColorArray * m_vbo = nullptr;
+		zn::gl::VertexColorArray * m_vbo = nullptr;
 
 	public :
 

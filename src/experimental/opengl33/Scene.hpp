@@ -20,32 +20,32 @@ namespace gl
 
 		// Adds a node to the scene and sets its ID.
 		// Returns the ID.
-		engine::u32 addNode(ISceneNode * sceneNode);
+		zn::u32 addNode(ISceneNode * sceneNode);
 
 		// Gets a node from its ID
-		ISceneNode * getNode(engine::u32 ID);
+		ISceneNode * getNode(zn::u32 ID);
 
 		// Removes a node from the scene without destroy it.
 		// ID: the ID of the node
-		ISceneNode * removeNode(engine::u32 ID);
+		ISceneNode * removeNode(zn::u32 ID);
 
 		// Removes and destroys a node from the scene
 		// ID: the ID of the node
-		bool eraseNode(engine::u32 ID);
+		bool eraseNode(zn::u32 ID);
 
 		// Draws everything
 		void renderAll();
 
-		inline engine::u32 getNodeCount() const { return m_nodes.size(); }
+		inline zn::u32 getNodeCount() const { return m_nodes.size(); }
 
 	private :
 
 		void clear();
 
-		engine::u32 makeID();
+		zn::u32 makeID();
 
-		std::unordered_map<engine::u32, ISceneNode*> m_nodes;
-		engine::u32 m_counterID = 0;
+		std::unordered_map<zn::u32, ISceneNode*> m_nodes;
+		zn::u32 m_counterID = 0;
 
 	};
 

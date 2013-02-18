@@ -11,7 +11,7 @@ namespace gl
 	{
 	public :
 
-		engine::u32 ID = -1;
+		zn::u32 ID = -1;
 
 		virtual ~ISceneNode() {}
 

@@ -8,7 +8,7 @@ This file is part of the zCraft project.
 #include "zcraft/FreeCamera.hpp"
 #include "engine/opengl/opengl.hpp"
 
-using namespace engine;
+using namespace zn;
 
 namespace zcraft
 {
@@ -42,7 +42,7 @@ namespace zcraft
 		m_camera.look();
 	}
 
-	void FreeCamera::update(const engine::Time & delta, const sf::Window & window)
+	void FreeCamera::update(const zn::Time & delta, const sf::Window & window)
 	{
 		if(!m_enabled)
 			return;

@@ -1,7 +1,7 @@
 #include <iostream>
 #include "engine/BasicGame.hpp"
 
-namespace engine
+namespace zn
 {
 	ABasicGame::ABasicGame(
 			u32 width, u32 height, const std::string title)
@@ -133,7 +133,7 @@ namespace engine
 	#endif
 	}
 
-} // namespace engine
+} // namespace zn
 
 
 

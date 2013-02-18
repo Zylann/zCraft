@@ -9,7 +9,7 @@ This file is part of the zCraft project.
 #include "engine/Vector3.hpp"
 #include "engine/opengl/Camera3D.hpp"
 
-namespace engine
+namespace zn
 {
 	Camera3D::Camera3D(const Vector2f viewportSize)
 	{
@@ -87,7 +87,7 @@ namespace engine
 	#endif // if
 	}
 
-} // namespace engine
+} // namespace zn
 
 
 

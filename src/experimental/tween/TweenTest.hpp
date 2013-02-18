@@ -5,7 +5,7 @@
 
 namespace experimental
 {
-	class TweenTest : public engine::ABasicGame
+	class TweenTest : public zn::ABasicGame
 	{
 	public :
 
@@ -19,11 +19,11 @@ namespace experimental
 
 		bool init() override;
 
-		void update(const engine::Time & delta) override;
+		void update(const zn::Time & delta) override;
 
-		void renderScene(const engine::Time & delta) override;
+		void renderScene(const zn::Time & delta) override;
 
-		void renderGUI(const engine::Time & delta) override;
+		void renderGUI(const zn::Time & delta) override;
 
 		void processEvent(const sf::Event & event) override;
 

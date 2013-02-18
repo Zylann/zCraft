@@ -9,7 +9,7 @@ This file is part of the zCraft project.
 
 #include "engine/Vector2.hpp"
 
-namespace engine
+namespace zn
 {
 	class Camera2D
 	{
@@ -69,7 +69,7 @@ namespace engine
 	std::ostream & operator<<(std::ostream & os, const Camera2D & cam);
 	std::string operator+(std::string const & a, Camera2D const & b);
 
-} // namespace engine
+} // namespace zn
 
 
 #endif // ENGINE_CAMERA2D_HPP_INCLUDED

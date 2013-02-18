@@ -7,7 +7,7 @@ This file is part of the zCraft project.
 #include <sstream>
 #include "engine/AABB.hpp"
 
-namespace engine
+namespace zn
 {
 	bool AABB::intersects(const AABB & other) const
 	{
@@ -63,7 +63,7 @@ namespace engine
 		return ss.str();
 	}
 
-} // namespace engine
+} // namespace zn
 
 
 

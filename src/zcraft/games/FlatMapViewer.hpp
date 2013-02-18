@@ -10,15 +10,15 @@
 
 namespace zcraft
 {
-	class FlatMapViewer : public engine::ABasicGame, public IMapListener
+	class FlatMapViewer : public zn::ABasicGame, public IMapListener
 	{
 	private :
 
 		MapStreamer * m_mapStreamer;
 		BlockMap m_map;
 		Cartography m_cartography;
-		engine::Camera2D m_camera;
-		engine::bmfont::Font m_font;
+		zn::Camera2D m_camera;
+		zn::bmfont::Font m_font;
 
 	public :
 
@@ -36,11 +36,11 @@ namespace zcraft
 
 		bool init() override;
 
-		void update(const engine::Time & delta) override;
+		void update(const zn::Time & delta) override;
 
-		void renderScene(const engine::Time & delta) override;
+		void renderScene(const zn::Time & delta) override;
 
-		void renderGUI(const engine::Time & delta) override;
+		void renderGUI(const zn::Time & delta) override;
 
 		void dispose() override;
 

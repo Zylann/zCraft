@@ -10,7 +10,7 @@ This file is part of the zCraft project.
 #include "engine/Vector2.hpp"
 #include "engine/Vector3.hpp"
 
-namespace engine
+namespace zn
 {
 	/*
 		This is a basic 3D camera implementation.
@@ -63,7 +63,7 @@ namespace engine
 
 	};
 
-} // namespace engine
+} // namespace zn
 
 #endif // ENGINE_CAMERA3D_HPP_INCLUDED
 

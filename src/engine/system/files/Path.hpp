@@ -12,7 +12,7 @@ This file is part of the zCraft project.
 #include "engine/system/osdefines.hpp"
 #include "engine/system/files/Node.hpp"
 
-namespace engine
+namespace zn
 {
 namespace fs
 {
@@ -47,6 +47,6 @@ namespace fs
     };
 
 } // namespace filesystem
-} // namespace engine
+} // namespace zn
 
 #endif // ENGINE_FILESYSTEM_PATH_HPP_INCLUDED

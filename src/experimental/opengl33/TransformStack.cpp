@@ -8,7 +8,7 @@ This file is part of the zCraft project.
 #include "TransformStack.hpp"
 #include "engine/types.hpp"
 
-using namespace engine;
+using namespace zn;
 
 namespace experimental
 {

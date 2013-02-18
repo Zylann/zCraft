@@ -9,7 +9,7 @@ This file is part of the zCraft project.
 #include "engine/opengl/opengl.hpp"
 #include "engine/opengl/Camera2D.hpp"
 
-namespace engine
+namespace zn
 {
 	Camera2D::Camera2D(const Vector2f viewportSize)
 	{
@@ -132,7 +132,7 @@ namespace engine
 		return a + b.toString();
 	}
 
-} // namespace engine
+} // namespace zn
 
 
 

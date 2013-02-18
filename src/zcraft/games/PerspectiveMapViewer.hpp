@@ -24,12 +24,12 @@ namespace zcraft
 		an infinite map that keeps itself updated around.
 	*/
 
-	class PerspectiveMapViewer : public engine::ABasicGame
+	class PerspectiveMapViewer : public zn::ABasicGame
 	{
 	private :
 
 		FreeCamera m_camera;	// How to see
-		engine::bmfont::Font m_font; // How to draw text
+		zn::bmfont::Font m_font; // How to draw text
 		BlockMap m_map; // Here are stored the voxels
 		BlockMeshMap m_meshMap; // Here is the graphical representation of the map
 		MapStreamer * m_mapStreamer = nullptr; // How to keep the map updated around us
@@ -45,11 +45,11 @@ namespace zcraft
 
 		bool init() override;
 
-		void update(const engine::Time & delta) override;
+		void update(const zn::Time & delta) override;
 
-		void renderScene(const engine::Time & delta) override;
+		void renderScene(const zn::Time & delta) override;
 
-		void renderGUI(const engine::Time & delta) override;
+		void renderGUI(const zn::Time & delta) override;
 
 		void dispose() override;
 

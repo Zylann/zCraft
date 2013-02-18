@@ -10,7 +10,7 @@ This file is part of the zCraft project.
 #include "opengl.hpp"
 #include "ShaderProgram.hpp"
 
-using namespace engine;
+using namespace zn;
 
 namespace experimental
 {

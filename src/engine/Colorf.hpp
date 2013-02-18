@@ -14,7 +14,7 @@ This file is part of the zCraft project.
 	#include <SFML/Graphics.hpp>
 #endif
 
-namespace engine
+namespace zn
 {
 	/*
 		Stores a color using 4 float values for red, green, blue and alpha.
@@ -93,7 +93,7 @@ namespace engine
 
 	std::ostream & operator<<(std::ostream & os, const Colorf & col);
 
-} // namespace engine
+} // namespace zn
 
 #endif // ENGINE_COLORF_HPP_INCLUDED
 

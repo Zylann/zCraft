@@ -7,7 +7,7 @@ This file is part of the zCraft project.
 #ifndef DIRCONTENT_HPP_INCLUDED
 #define DIRCONTENT_HPP_INCLUDED
 
-namespace engine
+namespace zn
 {
 namespace fs
 {
@@ -31,7 +31,7 @@ namespace fs
     };
 
 } // namespace fs
-} // namespace engine
+} // namespace zn
 
 #endif // DIRCONTENT_HPP_INCLUDED
 

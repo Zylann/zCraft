@@ -10,7 +10,7 @@ namespace zcraft
 		3D buffer specialized in Node manipulation
 	*/
 
-	class VoxelBuffer : public engine::Array3D<Node>
+	class VoxelBuffer : public zn::Array3D<Node>
 	{
 	public :
 

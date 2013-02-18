@@ -12,7 +12,7 @@ This file is part of the zCraft project.
 #include "engine/bmfont/FontSettings.hpp"
 #include "engine/bmfont/FontInfo.hpp"
 
-namespace engine
+namespace zn
 {
 namespace bmfont
 {
@@ -62,7 +62,7 @@ namespace bmfont
 	};
 
 } // namespace bmfont
-} // namespace engine
+} // namespace zn
 
 #endif // ENGINE_BM_FONT_HPP_INCLUDED
 

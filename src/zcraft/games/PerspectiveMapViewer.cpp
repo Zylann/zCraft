@@ -9,7 +9,7 @@ This file is part of the zCraft project.
 #include "zcraft/games/PerspectiveMapViewer.hpp"
 #include "zcraft/face.hpp"
 
-using namespace engine;
+using namespace zn;
 
 namespace zcraft
 {
@@ -45,7 +45,7 @@ namespace zcraft
 		return true;
 	}
 
-	void PerspectiveMapViewer::update(const engine::Time & delta)
+	void PerspectiveMapViewer::update(const zn::Time & delta)
 	{
 		// Update camera
 		m_camera.update(delta, m_window);
@@ -59,7 +59,7 @@ namespace zcraft
 		m_mapStreamer->update(bpos);
 	}
 
-	void PerspectiveMapViewer::renderScene(const engine::Time & delta)
+	void PerspectiveMapViewer::renderScene(const zn::Time & delta)
 	{
 		//glClearColor(0.1f, 0.5f, 0.9f, 1);
 		glClearColor(0.0f, 0.0f, 0.0f, 1);

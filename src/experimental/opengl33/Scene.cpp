@@ -7,7 +7,7 @@ This file is part of the zCraft project.
 #include "Scene.hpp"
 #include "engine/types.hpp"
 
-using namespace engine;
+using namespace zn;
 
 namespace experimental
 {

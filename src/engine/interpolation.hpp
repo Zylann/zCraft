@@ -9,7 +9,7 @@ This file is part of the zCraft project.
 
 #include <cmath>
 
-namespace engine
+namespace zn
 {
     // x in [0,1]
     inline float smoothCurve(float x)
@@ -43,7 +43,7 @@ namespace engine
     float cubicInterpolation(float x0, float x1, float x2, float x3, float t);
     float biCubicInterpolation(float x0y[4], float x1y[4], float x2y[4], float x3y[4], float x);
 
-} // namespace engine
+} // namespace zn
 
 
 #endif // INTERPOLATION_HPP_INCLUDED

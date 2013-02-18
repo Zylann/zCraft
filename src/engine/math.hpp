@@ -10,7 +10,7 @@ This file is part of the zCraft project.
 #include <cmath>
 #include "engine/types.hpp"
 
-namespace engine
+namespace zn
 {
 namespace math
 {
@@ -101,7 +101,7 @@ namespace math
 	// TODO math: fast rsqrt for vector normalization
 
 } // namespace math
-} // namespace engine
+} // namespace zn
 
 
 #endif // MATH_HPP_INCLUDED

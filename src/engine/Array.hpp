@@ -10,7 +10,7 @@ This file is part of the zCraft project.
 #include <iostream> // originally for debug
 #include "engine/types.hpp"
 
-namespace engine
+namespace zn
 {
 	/*
 		Fixed-size dynamic array.
@@ -147,7 +147,7 @@ namespace engine
 
 	};
 
-} // namespace engine
+} // namespace zn
 
 #endif // ENGINE_ARRAY_HPP_INCLUDED
 

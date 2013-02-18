@@ -43,7 +43,7 @@ namespace zcraft
 		ImmergeRequest(Block * b, bool pdrop) : block(b), drop(pdrop) {}
 	};
 
-	class MapStreamThread : public engine::AThread
+	class MapStreamThread : public zn::AThread
 	{
 	public /* TYPES */ :
 
@@ -64,10 +64,10 @@ namespace zcraft
 		// In
 		std::list<ImmergeRequest> m_immergeRequests;
 		std::list<EmergeRequest> m_emergeRequests;
-		engine::Mutex m_requestsMutex;
+		zn::Mutex m_requestsMutex;
 		// Out
 		std::list<Block*> m_replies;
-		engine::Mutex m_repliesMutex;
+		zn::Mutex m_repliesMutex;
 
 	public /* METHODS */ :
 

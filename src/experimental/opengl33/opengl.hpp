@@ -33,7 +33,7 @@ namespace gl
 
 	void dispose();
 
-	void color(engine::u8 r, engine::u8 g, engine::u8 b, engine::u8 a = 255);
+	void color(zn::u8 r, zn::u8 g, zn::u8 b, zn::u8 a = 255);
 
 	void useProgram(const GLuint ID);
 
@@ -42,8 +42,8 @@ namespace gl
 	void drawAxes();
 
 	void drawTexturedRect(
-		const engine::f32 x, const engine::f32 y, const engine::f32 w, const engine::f32 h,
-		const engine::f32 tx=0, const engine::f32 ty=0, const engine::f32 tw=1, const engine::f32 th=1);
+		const zn::f32 x, const zn::f32 y, const zn::f32 w, const zn::f32 h,
+		const zn::f32 tx=0, const zn::f32 ty=0, const zn::f32 tw=1, const zn::f32 th=1);
 
 	void drawTestCube();
 

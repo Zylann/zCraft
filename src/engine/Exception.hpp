@@ -14,7 +14,7 @@ This file is part of the zCraft project.
     This file is header-only
 */
 
-namespace engine
+namespace zn
 {
     class Exception : public std::exception
     {
@@ -55,7 +55,7 @@ namespace engine
         }
     };
 
-} // namespace engine
+} // namespace zn
 
 
 #endif // EXCEPTION_HPP_INCLUDED

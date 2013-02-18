@@ -10,7 +10,7 @@ This file is part of the zCraft project.
 #include "zcraft/BlockMeshMap.hpp"
 #include "zcraft/face.hpp"
 
-using namespace engine;
+using namespace zn;
 
 namespace zcraft
 {

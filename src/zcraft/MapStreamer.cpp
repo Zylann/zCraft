@@ -6,7 +6,7 @@
 	for(__pos.y = __min.y; __pos.y <= __max.y; __pos.y++) \
 	for(__pos.x = __min.x; __pos.x <= __max.x; __pos.x++)
 
-using namespace engine;
+using namespace zn;
 
 namespace zcraft
 {

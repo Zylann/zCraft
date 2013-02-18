@@ -3,7 +3,7 @@
 #include "zcraft/Block.hpp"
 #include "engine/opengl/opengl.hpp"
 
-using namespace engine;
+using namespace zn;
 
 namespace zcraft
 {

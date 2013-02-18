@@ -20,7 +20,7 @@ typedef char int8;
 typedef short int int16;
 typedef int int32;
 
-namespace engine
+namespace zn
 {
 	/*
 		Unsigned integers
@@ -226,7 +226,7 @@ namespace engine
 
 #endif // ZN_SFML
 
-} // namespace engine
+} // namespace zn
 
 
 #endif // SERIALIZATION_HPP_INCLUDED

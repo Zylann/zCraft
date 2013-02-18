@@ -21,7 +21,7 @@ This file is part of the zCraft project.
 // constant
 #define MAX_INT7 0x7fffffff
 
-namespace engine
+namespace zn
 {
     /*
         These functions generate noise from a seed and coordinates.
@@ -146,5 +146,5 @@ namespace engine
         return noise / ampMax;
     }
 
-} // namespace engine
+} // namespace zn
 

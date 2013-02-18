@@ -7,7 +7,7 @@ This file is part of the zCraft project.
 #ifndef STRINGUTILS_HPP_INCLUDED
 #define STRINGUTILS_HPP_INCLUDED
 
-namespace engine
+namespace zn
 {
 	// TODO stringutils: use std::to_string and make standard functions
 
@@ -31,6 +31,6 @@ namespace engine
     std::string cropStr(std::string str, char c);
 
 
-} // namespace engine
+} // namespace zn
 
 #endif // STRINGUTILS_HPP_INCLUDED

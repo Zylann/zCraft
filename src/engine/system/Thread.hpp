@@ -10,7 +10,7 @@ This file is part of the zCraft project.
 #include <iostream>
 #include <SFML/System.hpp>
 
-namespace engine
+namespace zn
 {
 	/**
 		Simple thread class wrapper.
@@ -126,7 +126,7 @@ namespace engine
 		sf::sleep(sf::milliseconds(milliseconds));
 	}
 
-} // namespace engine
+} // namespace zn
 
 #endif // ENGINE_THREAD_HPP_INCLUDED
 

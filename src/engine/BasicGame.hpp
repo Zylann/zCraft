@@ -14,7 +14,7 @@ This file is part of the zCraft project.
 #include "engine/Vector2.hpp"
 #include "engine/Game.hpp"
 
-namespace engine
+namespace zn
 {
 	class ABasicGame : public IGame
 	{
@@ -60,7 +60,7 @@ namespace engine
 
 	};
 
-} // namespace engine
+} // namespace zn
 
 #endif // BASICGAME_HPP_INCLUDED
 

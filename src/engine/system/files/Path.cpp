@@ -6,7 +6,7 @@ This file is part of the zCraft project.
 
 #include "engine/system/files/Path.hpp"
 
-namespace engine
+namespace zn
 {
 namespace fs
 {
@@ -73,6 +73,6 @@ namespace fs
 	}
 
 } // namespace fs
-} // namespace engine
+} // namespace zn
 
 

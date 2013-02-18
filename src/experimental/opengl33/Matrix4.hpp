@@ -42,9 +42,9 @@ namespace experimental
 			const float right, const float bottom);
 
 		void loadLookAt(
-			const engine::Vector3f & eye,
-			const engine::Vector3f & target,
-			const engine::Vector3f & up);
+			const zn::Vector3f & eye,
+			const zn::Vector3f & target,
+			const zn::Vector3f & up);
 
 		// Sets the matrix to a translation matrix.
 		void loadTranslation(const float vx, const float vy, const float vz);

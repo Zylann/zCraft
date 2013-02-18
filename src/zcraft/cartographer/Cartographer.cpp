@@ -3,7 +3,7 @@
 #include "zcraft/cartographer/Cartographer.hpp"
 #include "zcraft/MapLoader.hpp"
 
-using namespace engine;
+using namespace zn;
 
 namespace zcraft
 {

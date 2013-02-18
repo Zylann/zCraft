@@ -11,7 +11,7 @@
 
 #include "engine/types.hpp"
 
-namespace engine
+namespace zn
 {
 namespace gl
 {
@@ -45,7 +45,7 @@ namespace gl
 	void fillCircle(const float x, const float y, const float r);
 
 } // namespace gl
-} // namespace engine
+} // namespace zn
 
 #endif // GLUTILS_HPP_INCLUDED
 

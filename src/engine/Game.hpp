@@ -9,7 +9,7 @@ This file is part of the zCraft project.
 
 #include "engine/system/Time.hpp"
 
-namespace engine
+namespace zn
 {
 	class IGame
 	{
@@ -40,7 +40,7 @@ namespace engine
 
 	};
 
-} // namespace engine
+} // namespace zn
 
 #endif // ENGINE_GAME_HPP_INCLUDED
 

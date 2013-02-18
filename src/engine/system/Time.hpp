@@ -3,7 +3,7 @@
 
 #include "engine/types.hpp"
 
-namespace engine
+namespace zn
 {
 	class Time
 	{
@@ -38,6 +38,6 @@ namespace engine
 
 	};
 
-} // namespace engine
+} // namespace zn
 
 #endif // TIME_HPP_INCLUDED

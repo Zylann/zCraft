@@ -23,7 +23,7 @@ namespace zcraft
             m_pos.y * Block::SIZE,
             m_pos.z * Block::SIZE);
 
-        engine::Area3D area(startPos, size);
+        zn::Area3D area(startPos, size);
         vb.copyFrom(m_nodes, area);
 	}
 
@@ -191,9 +191,9 @@ namespace zcraft
         */
 
         // position
-        engine::serialize(os, m_pos.x);
-        engine::serialize(os, m_pos.y);
-        engine::serialize(os, m_pos.z);
+        zn::serialize(os, m_pos.x);
+        zn::serialize(os, m_pos.y);
+        zn::serialize(os, m_pos.z);
 
         // nodes
         for(u32 i = 0; i < Block::NODE_COUNT; i++)
@@ -203,9 +203,9 @@ namespace zcraft
 	void Block::unserialize(std::istream & is)
 	{
         // position
-        engine::unserialize(is, m_pos.x);
-        engine::unserialize(is, m_pos.y);
-        engine::unserialize(is, m_pos.z);
+        zn::unserialize(is, m_pos.x);
+        zn::unserialize(is, m_pos.y);
+        zn::unserialize(is, m_pos.z);
 
         // nodes
         for(u32 i = 0; i < Block::NODE_COUNT; i++)

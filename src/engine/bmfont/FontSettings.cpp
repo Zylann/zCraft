@@ -6,7 +6,7 @@ This file is part of the zCraft project.
 
 #include "FontSettings.hpp"
 
-namespace engine
+namespace zn
 {
 namespace bmfont
 {

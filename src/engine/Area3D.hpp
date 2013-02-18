@@ -10,7 +10,7 @@ This file is part of the zCraft project.
 #include "engine/types.hpp"
 #include "engine/Vector3.hpp"
 
-namespace engine
+namespace zn
 {
 	/*
 		Area3D represents an orthogonal discrete space area
@@ -97,7 +97,7 @@ namespace engine
 		}
     };
 
-} // namespace engine
+} // namespace zn
 
 
 #endif // AREA3D_HPP_INCLUDED

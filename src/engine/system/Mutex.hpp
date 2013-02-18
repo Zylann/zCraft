@@ -11,7 +11,7 @@ This file is part of the zCraft project.
 
 #include <SFML/System.hpp>
 
-namespace engine
+namespace zn
 {
 	/**
 		Wrapper class for mutexes.
@@ -69,6 +69,6 @@ namespace engine
 		}
 	};
 
-} // namespace engine
+} // namespace zn
 
 #endif // ENGINE_MUTEX_HPP_INCLUDED

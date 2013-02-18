@@ -14,7 +14,7 @@ This file is part of the zCraft project.
 #include "experimental/opengl33/AxesSceneNode.hpp"
 #include "experimental/opengl33/ShaderProgram.hpp"
 
-using namespace engine;
+using namespace zn;
 
 namespace experimental
 {
