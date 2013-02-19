@@ -25,7 +25,7 @@ namespace zcraft
 		if(!gl::initExtensions(true, true))
 			return false;
 
-		//zcraft::init();
+		//zcraft::init(); // done in main()
 
 		// Load a font
 		if(!m_font.loadFromFile("assets/fonts/arial32.fnt"))
@@ -42,6 +42,13 @@ namespace zcraft
 		m_mapStreamer->update(Vector3i(0, 0, 0), true); // first update
 		m_mapStreamer->setSave(false); // Save turned off atm.
 
+		// Init raycaster
+		auto isSolidVoxel = [this](const Vector3i & pos) -> bool
+		{
+			return this->m_map.getVoxel(pos).properties().solid;
+		};
+		m_raycaster = new zn::RayCaster(isSolidVoxel, 16);
+
 		return true;
 	}
 
@@ -50,7 +57,9 @@ namespace zcraft
 		// Update camera
 		m_camera.update(delta, m_window);
 
-		updatePointedVoxel();
+		// Update pointed voxel
+		Ray ray(m_camera.getPosition(), m_camera.getForward());
+		m_raycaster->cast(ray);
 
 		// Update map stream
 		Vector3f camPos = m_camera.getPosition();
@@ -82,13 +91,13 @@ namespace zcraft
 		m_meshMap.drawAll();
 
 		// Pointed voxel
-		if(m_raycast.collision)
+		if(m_raycaster->isHit)
 		{
 			glPushMatrix();
 			glTranslatef(
-				0.5f + m_raycast.hit.pos.x,
-				0.5f + m_raycast.hit.pos.y,
-				0.5f + m_raycast.hit.pos.z);
+				0.5f + m_raycaster->hit.pos.x,
+				0.5f + m_raycaster->hit.pos.y,
+				0.5f + m_raycaster->hit.pos.z);
 			glColor3ub(255,255,255);
 			glLineWidth(2.f);
 			gl::drawCubeLines(0.501f);
@@ -168,6 +177,7 @@ namespace zcraft
 
 	void PerspectiveMapViewer::dispose()
 	{
+		delete m_raycaster;
 		m_meshMap.clear();
 	}
 
@@ -184,15 +194,17 @@ namespace zcraft
 		}
 		else if(event.type == sf::Event::MouseButtonPressed)
 		{
-			if(m_raycast.collision)
+			if(m_raycaster->isHit)
 			{
 				if(event.mouseButton.button == sf::Mouse::Left)
 				{
-					m_map.setVoxel(m_raycast.hit.pos, Voxel(voxel::AIR));
+					// Delete pointed voxel
+					m_map.setVoxel(m_raycaster->hit.pos, Voxel(voxel::AIR));
 				}
 				else if(event.mouseButton.button == sf::Mouse::Right)
 				{
-					m_map.setVoxel(m_raycast.hitPrevious.pos, Voxel(voxel::STONE));
+					// Place a voxel
+					m_map.setVoxel(m_raycaster->hit.prevPos, Voxel(voxel::STONE));
 				}
 			}
 		}
@@ -201,14 +213,6 @@ namespace zcraft
 			if(event.key.code == sf::Keyboard::Key::Escape)
 				m_camera.setEnabled(!m_camera.isEnabled());
 		}
-	}
-
-	void PerspectiveMapViewer::updatePointedVoxel()
-	{
-		m_raycast =
-			m_map.raycastToSolidVoxel(
-				m_camera.getPosition(),
-				m_camera.getForward(), 16);
 	}
 
 } // namespace zcraft

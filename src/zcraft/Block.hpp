@@ -19,7 +19,9 @@ namespace zcraft
 	{
 	public :
 
+		// Note : don't forget to modify index(x,y,z) if modified !
 		static const u32 SIZE = 16;
+
 		static const u32 VOXEL_COUNT = SIZE * SIZE * SIZE;
 
 	private :
@@ -28,7 +30,7 @@ namespace zcraft
 		// TODO Block: optimize for empty blocks
 		Voxel m_voxels[VOXEL_COUNT];
 
-		// must not be modified after creation/loading/generation
+		// Should not be modified after creation/loading/generation
 		Vector3i m_pos;
 
 	public :

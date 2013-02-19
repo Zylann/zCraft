@@ -109,9 +109,6 @@ namespace zcraft
 		// Search will begin at maxZ and end at minZ if not found.
 		std::pair<s32, Voxel> getUpperVoxel(s32 x, s32 y, s32 minZ, s32 maxZ);
 
-		// Casts a vector-oriented ray from the given position until it reaches a solid voxel.
-		RayCastResult raycastToSolidVoxel(Vector3f start, Vector3f dir, f32 maxDistance);
-
 		/* Listeners */
 
 		void addListener(IMapListener * listener);

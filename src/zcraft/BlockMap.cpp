@@ -239,49 +239,6 @@ namespace zcraft
 			listener->blockAdded(pos, *this);
 	}
 
-	RayCastResult BlockMap::raycastToSolidVoxel(
-			Vector3f start, Vector3f dir, f32 maxDistance)
-	{
-		// TODO BlockMap: optimize raycasting
-
-		Voxel n, nprev;
-		Vector3i nPos, nprevPos;
-		Vector3f pos = start;
-		float d, step = 0.1f;
-		RayCastResult result;
-
-		dir.normalize();
-		Vector3f u = dir * step;
-
-		for(d = 0; d < maxDistance; d += step)
-		{
-			nprev = n;
-			nprevPos = nPos;
-
-			nPos.x = floor(pos.x);
-			nPos.y = floor(pos.y);
-			nPos.z = floor(pos.z);
-
-			n = getVoxel(nPos);
-
-			if(n.properties().solid)
-			{
-				result.collision = true;
-				break;
-			}
-
-			pos += u;
-		}
-
-		result.distanceCrossed = d;
-		result.hit.voxel = n;
-		result.hit.pos = nPos;
-		result.hitPrevious.voxel = nprev;
-		result.hitPrevious.pos = nprevPos;
-
-		return result;
-	}
-
 	/*
 		Listeners
 	*/

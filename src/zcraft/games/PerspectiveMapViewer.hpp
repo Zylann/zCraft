@@ -10,6 +10,7 @@ This file is part of the zCraft project.
 #include "engine/BasicGame.hpp"
 #include "engine/bmfont/Font.hpp"
 #include "engine/opengl/VertexColorArray.hpp"
+#include "engine/raycast.hpp"
 #include "zcraft/zcraft.hpp"
 #include "zcraft/BlockMeshMap.hpp"
 #include "zcraft/MapStreamer.hpp"
@@ -33,7 +34,7 @@ namespace zcraft
 		BlockMap m_map; // Here are stored the voxels
 		BlockMeshMap m_meshMap; // Here is the graphical representation of the map
 		MapStreamer * m_mapStreamer = nullptr; // How to keep the map updated around us
-		RayCastResult m_raycast; // Pointed voxel
+		zn::RayCaster * m_raycaster = nullptr; // How to know which voxel we are pointing
 
 	public :
 
