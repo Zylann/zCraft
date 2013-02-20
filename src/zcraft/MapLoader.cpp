@@ -88,7 +88,7 @@ namespace zcraft
 		ifs.close();
 
 		// Debug
-		if(pos != block->getPosition() && pos.x == 26 && pos.y == -28 && pos.z == -4)
+		if(pos != block->getPosition())
 		{
 			std::cout << "WARNING: MapLoader::loadBlock: "
 				<< "block position and path-deduced position differ."
@@ -102,6 +102,14 @@ namespace zcraft
 
 	bool MapLoader::saveBlock(const Block * block)
 	{
+		if(Block::SIZE != 16)
+		{
+			std::cout << "ERROR: MapLoader::saveBlock: "
+				<< "the current save format doesn't support non-16 block size."
+				<< std::endl;
+			return false;
+		}
+
 		// Check if the block is null
 		if(block == nullptr)
 		{
