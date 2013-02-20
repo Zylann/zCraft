@@ -175,25 +175,29 @@ namespace zcraft
 
 	Voxel BlockMap::getVoxel(const Vector3i & pos)
 	{
-		Block * b = getBlock(Vector3i(pos.x >> 4, pos.y >> 4, pos.z >> 4));
+		Block * b = getBlock(Block::toBlockCoords(pos));
 		if(b != nullptr)
 		{
-			return b->get(pos.x & 0x0000000f,
-						 pos.y & 0x0000000f,
-						 pos.z & 0x0000000f);
+			return b->get(
+				Block::toInnerCoord(pos.x),
+				Block::toInnerCoord(pos.y),
+				Block::toInnerCoord(pos.z));
 		}
 		else
 			return Voxel(voxel::AIR, voxel::AIR_UNLOADED, 0x02);
 	}
 
-	bool BlockMap::setVoxel(const Vector3i & pos, Voxel n)
+	bool BlockMap::setVoxel(const Vector3i & pos, Voxel voxel)
 	{
-		Block * b = getBlock(Vector3i(pos.x >> 4, pos.y >> 4, pos.z >> 4));
+		Block * b = getBlock(Block::toBlockCoords(pos));
 		if(b != nullptr)
 		{
-			b->set(pos.x & 0x0000000f,
-				 pos.y & 0x0000000f,
-				 pos.z & 0x0000000f, n);
+			b->set(
+				Block::toInnerCoord(pos.x),
+				Block::toInnerCoord(pos.y),
+				Block::toInnerCoord(pos.z),
+				voxel);
+
 			notifyListenersForBlockChange(b->getPosition());
 		}
 		else

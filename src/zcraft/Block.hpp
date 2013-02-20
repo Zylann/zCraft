@@ -19,9 +19,11 @@ namespace zcraft
 	{
 	public :
 
-		// Note : don't forget to modify index(x,y,z) if modified !
-		static const u32 SIZE = 16;
-
+		// Block size configuration :
+		// Size bit |   0|   1|   2|   3|   4|   5|   6|   7|   8|
+		// Size     |   1|   2|   4|   8|  16|  32|  64| 128| 256|
+		static const u32 SIZE_BIT = 4;
+		static const u32 SIZE = 1 << SIZE_BIT; // 16
 		static const u32 VOXEL_COUNT = SIZE * SIZE * SIZE;
 
 	private :
@@ -56,13 +58,34 @@ namespace zcraft
 
 		/* Voxels access and modification */
 
-		// Voxel index from relative coordinates
+		// Converts block inner relative coordinates into an index
 		// x, y and z must be in [0,15]
-		inline u16 index(s32 x, s32 y, s32 z) const
+		static inline u16 index(s32 x, s32 y, s32 z)
 		{
-			// equivalent to (x + 16*y + 16*16*z)
-			// Convention : [z][y][x]
-			return (z << 8) | (y << 4) | x;
+			//return x | (y << 4) | (z << 8); // for SIZE = 16
+			return x | (y << SIZE_BIT) | (z << (SIZE_BIT << 1));
+		}
+
+		// Converts world voxel coordinates into block coordinates
+		static inline u32 toBlockCoord(s32 worldVoxelCoord)
+		{
+			return worldVoxelCoord >> SIZE_BIT;
+		}
+
+		// Converts world voxel coordinates into block coordinates
+		static inline Vector3i toBlockCoords(const Vector3i & worldVoxelCoords)
+		{
+			return Vector3i(
+				toBlockCoord(worldVoxelCoords.x),
+				toBlockCoord(worldVoxelCoords.y),
+				toBlockCoord(worldVoxelCoords.z));
+		}
+
+		// Converts world voxel coordinates into block inner relative coordinates
+		static inline u32 toInnerCoord(s32 worldVoxelCoord)
+		{
+			//return x & 0x0000000f; // for SIZE = 16
+			return worldVoxelCoord & (SIZE - 1);
 		}
 
 		// get voxel at (x,y,z). Use relatives coordinates (in [0,15])

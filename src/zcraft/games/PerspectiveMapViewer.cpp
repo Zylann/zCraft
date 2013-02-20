@@ -64,7 +64,7 @@ namespace zcraft
 		// Update map stream
 		Vector3f camPos = m_camera.getPosition();
 		Vector3i pos(camPos.x, camPos.y, camPos.z);
-		Vector3i bpos(pos.x >> 4, pos.y >> 4, pos.z >> 4);
+		Vector3i bpos = Block::toBlockCoords(pos);
 		m_mapStreamer->update(bpos);
 	}
 
