@@ -24,13 +24,13 @@ namespace zcraft
 		block = new Block(pos);
 
 		// Generates a simple heightmap
-		if(org.z >= -48 && org.z < 80)
+		if(org.z >= -96 && org.z < 160)
 		{
 			for(u8 y = 0; y < Block::SIZE; y++)
 			for(u8 x = 0; x < Block::SIZE; x++)
 			{
-				s16 h = (u16)(128.f * (float)noise2dPerlin(
-							x + org.x, y + org.y, m_seed, 5, 0.5, 128)) - 48;
+				s16 h = (u16)(256.f * (float)noise2dPerlin(
+							x + org.x, y + org.y, m_seed, 6, 0.5, 256)) - 96;
 
 				if(h >= org.z)
 					h -= org.z;
