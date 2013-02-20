@@ -15,20 +15,6 @@ This file is part of the zCraft project.
 
 namespace zcraft
 {
-	struct RayCastResult
-	{
-		bool collision;
-		float distanceCrossed;
-		LocatedVoxel hit;
-		LocatedVoxel hitPrevious;
-
-		RayCastResult()
-		{
-			collision = false;
-			distanceCrossed = 0;
-		}
-	};
-
 	class BlockMap
 	{
 	private :
