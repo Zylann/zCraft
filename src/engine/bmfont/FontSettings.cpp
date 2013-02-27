@@ -15,7 +15,7 @@ namespace bmfont
 		m_kernings.push_back(k);
 	}
 
-	const short FontSettings::getKerning(int first, int second) const
+	short FontSettings::getKerning(int first, int second) const
 	{
 		for(auto & k : m_kernings)
 		{

@@ -97,7 +97,7 @@ namespace bmfont
 	public :
 
 		void addKerning(Kerning k);
-		const short getKerning(int first, int second) const;
+		short getKerning(int first, int second) const;
 
 		void addChar(CharDescriptor cd);
 		const CharDescriptor * getChar(int id) const;
