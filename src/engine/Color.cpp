@@ -13,6 +13,11 @@ namespace zn
 	Color::Color() : r(0), g(0), b(0), a(1)
 	{}
 
+	Color::Color(unsigned int hex)
+	{
+		setFromHexRGBA(hex);
+	}
+
 	Color::Color(u8 r0, u8 g0, u8 b0, u8 a0) : r(r0), g(g0), b(b0), a(a0)
 	{}
 
@@ -60,6 +65,23 @@ namespace zn
 		g = other.g;
 		b = other.b;
 		a = other.a;
+	}
+
+	void Color::setFromHexRGBA(unsigned int hex)
+	{
+						a = hex & 0xf;
+		hex = hex >> 8;	b = hex & 0xf;
+		hex = hex >> 8; g = hex & 0xf;
+		hex = hex >> 8; r = hex & 0xf;
+	}
+
+	unsigned int Color::asHexRGBA() const
+	{
+		unsigned int hex = r;
+		hex << 8; hex |= g;
+		hex << 8; hex |= b;
+		hex << 8; hex |= a;
+		return hex;
 	}
 
 	void Color::multiplyRGB(float s)

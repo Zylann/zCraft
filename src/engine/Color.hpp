@@ -31,6 +31,9 @@ namespace zn
 		// Constructs an opaque black color.
 		Color();
 
+		// Constructs a color from an hexadecimal value (RGBA)
+		Color(unsigned int hex);
+
 		// Constructs a color using integer values in [0,255]
 		Color(u8 r0, u8 g0, u8 b0, u8 a0 = 255);
 
@@ -55,6 +58,12 @@ namespace zn
 
 		// Copies values from another color
 		void set(Color other);
+
+		// Sets the color to an hexadecimal-specified color (RGBA)
+		void setFromHexRGBA(unsigned int hex);
+
+		// Gets the color as hexadecimal RGBA color
+		unsigned int asHexRGBA() const;
 
 		// Converts the object to a human-readable form
 		std::string toString() const;
