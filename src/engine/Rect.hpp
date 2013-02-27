@@ -132,6 +132,18 @@ namespace zn
 			max += off;
 		}
 
+		// Moves the rectangle to have its origin at the given position
+		inline void setPositionFromOrigin(const T x, const T y)
+		{
+			offset(x - min.x, y - min.y);
+		}
+
+		// Moves the rectangle to have its origin at the given position
+		inline void setPositionFromOrigin(const Vector2<T> & p)
+		{
+			offset(p - min);
+		}
+
 	};
 
 	// Textual representation
