@@ -43,7 +43,7 @@ namespace zcraft
 		np.cube = true;
 		np.solid = true;
 		np.name = "grass";
-		np.color.set(64, 192, 32);
+		np.color.set(96, 192, 32);
 		np.averageColor.set(64, 192, 32);
 		s_list[voxel::GRASS] = np;
 
