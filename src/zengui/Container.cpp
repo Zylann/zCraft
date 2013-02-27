@@ -152,10 +152,13 @@ namespace ui
 		// Fetch children first
 		for(auto & w : m_children)
 		{
-			if(w->processInput(e))
+			if(w->isVisible())
 			{
-				if(w->blocksInput())
-					return true;
+				if(w->processInput(e))
+				{
+					if(w->blocksInput())
+						return true;
+				}
 			}
 		}
 
@@ -165,21 +168,30 @@ namespace ui
 
 	void AContainer::render(IRenderer & r)
 	{
-		if(r_theme != nullptr)
-			r_theme->drawDummyWidget(r, *this);
-		renderChildren(r);
+		if(m_visible)
+		{
+			if(r_theme != nullptr)
+				r_theme->drawDummyWidget(r, *this);
+			renderChildren(r);
+		}
 	}
 
 	void AContainer::animate(float dt)
 	{
-		animateChildren(dt);
+		if(m_visible)
+		{
+			animateChildren(dt);
+		}
 	}
 
 	void AContainer::renderChildren(IRenderer & r)
 	{
+		Widget * w;
 		for(auto it = m_children.rbegin(); it != m_children.rend(); it++)
 		{
-			(*it)->render(r);
+			w = (*it);
+			if(w->isVisible())
+				w->render(r);
 		}
 	}
 
@@ -187,7 +199,8 @@ namespace ui
 	{
 		for(auto & w : m_children)
 		{
-			w->animate(dt);
+			if(w->isVisible())
+				w->animate(dt);
 		}
 	}
 
