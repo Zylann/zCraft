@@ -8,14 +8,19 @@ This file is part of the zCraft project.
 #include "engine/opengl/opengl.hpp"
 #include "zcraft/games/PerspectiveMapViewer.hpp"
 #include "zcraft/face.hpp"
+#include "version.hpp"
 
 using namespace zn;
 
 namespace zcraft
 {
 	PerspectiveMapViewer::PerspectiveMapViewer(u32 width, u32 height)
-	: 	ABasicGame(width, height, "zCraft :: 3D map viewer - indev")
-	{}
+	: 	ABasicGame(width, height)
+	{
+		std::string title = "zCraft :: 3D map viewer - indev ";
+		title += autoversion::FULLVERSION_STRING;
+		setTitle(title);
+	}
 
 	PerspectiveMapViewer::~PerspectiveMapViewer()
 	{}
@@ -117,7 +122,7 @@ namespace zcraft
 		// Grid
 		glColor3f(0.f,0.f,0.f);
 		glPushMatrix();
-		glScalef(16, 16, 16);
+		glScalef(Block::SIZE, Block::SIZE, Block::SIZE);
 		gl::drawGrid(0, 0, 16);
 		glPopMatrix();
 
