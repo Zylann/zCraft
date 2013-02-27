@@ -16,14 +16,14 @@ This file is part of the zCraft project.
 
 namespace zn
 {
-    /*
-        3D data defined by a width, a height, a depth and a position (Area3D).
-        Note : this is not a basic array because positions can be offset.
-    */
+	/*
+		3D data defined by a width, a height, a depth and a position (Area3D).
+		Note : this is not a basic array because positions can be offset.
+	*/
 
-    template <typename T>
-    class ShiftArray3D
-    {
+	template <typename T>
+	class ShiftArray3D
+	{
 	private :
 
 		T * m_data = nullptr;	// linear data storage (NULL if empty)
@@ -50,7 +50,9 @@ namespace zn
 			memcpy(m_data, other.m_data, m_area.getVolume() * sizeof(T));
 		}
 
-		~ShiftArray3D()
+		// TODO ShiftArray3D: operator=
+
+		virtual ~ShiftArray3D()
 		{
 			clear();
 		}
@@ -222,13 +224,14 @@ namespace zn
 		}
 
 		// defines the way an item must be printed
+		// TODO ShiftArray3D: remove this. Pointless.
 		virtual void printDataItem(std::ostream & os, T & item) const
 		{
 			//os << item;
 			os << "O";
 		}
 
-    }; // class ShiftArray3D
+	}; // class ShiftArray3D
 
 } // namespace util
 
