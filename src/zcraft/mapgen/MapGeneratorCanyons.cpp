@@ -48,6 +48,10 @@ namespace zcraft
 				n = noise3dPerlin(org.x + x, org.y + y, org.z + z, m_seed, 5, 0.5f, 64);
 				if(n > 0.5f-nr && n < 0.5f+nr)
 				{
+					// NOTE: mapgen: could do some LOD computations?
+					// compute low-res noise, test if it is close to the threshold,
+					// then compute full-res noise if so
+
 					u8 type = voxel::DIRT;
 					n2 = noise3dPerlin(org.x + x, org.y + y, org.z + z, m_seed+1, 5, 0.5f, 64);
 					if(n2 < 0.5f)
