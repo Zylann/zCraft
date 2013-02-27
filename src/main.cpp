@@ -5,17 +5,20 @@ This file is part of the zCraft project.
 */
 
 /*
-zCraft project dependencies :
+lib/compiler dependencies :
 - C++0x (gcc 4.7.2 +)
 - sfml 2.0
 - opengl 2.0
 - glu
 - glew
 
-Note : the engine/ folder is independent from zcraft.
+zcraft/ 		depends on engine/.
+experimental/ 	depends on engine/.
+zengui/ 		depends on engine/, but can be made independent easily.
+engine/ has no project-scope dependency.
 
 Estimated total dev time
-- Marc Gilleron : 65h
+- Marc Gilleron : 75h
 
 */
 
@@ -26,9 +29,9 @@ Estimated total dev time
 #include "zcraft/cartographer/Cartographer.hpp"
 
 //#include "experimental/tween/TweenTest.hpp"
-#include "experimental/opengl33/game.hpp"
+//#include "experimental/opengl33/game.hpp"
+#include "experimental/gui/GuiTest.hpp"
 
-// TODO engine: rename namespace to 'zn' (for zENG)
 using namespace zn;
 
 int runGame(IGame * game)
@@ -47,7 +50,7 @@ int runGame(IGame * game)
 		std::cout << "The game will exit. Press any key...";
 		getchar();
 
-		if(game != 0)
+		if(game != nullptr)
 			delete game;
 		code = -1;
 	}
@@ -117,13 +120,14 @@ int main(int argc, char * argv[])
 
 	try
 	{
-		//code = runGame(new experimental::TweenTest());
-		//code = experimental::gl::testgl33();
+//		code = runGame(new experimental::TweenTest());
+//		code = experimental::gl::testgl33();
+		code = runGame(new experimental::GuiTest());
 
-		if(argc <= 1) // Note : the first arg is the execution path
-			code = launchPerspectiveMapViewer();
-		else
-			code = shell(argc, argv);
+//		if(argc <= 1) // Note : the first arg is the execution path
+//			code = launchPerspectiveMapViewer();
+//		else
+//			code = shell(argc, argv);
 	}
 	catch(std::exception & e)
 	{

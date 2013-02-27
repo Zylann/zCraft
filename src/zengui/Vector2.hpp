@@ -1,0 +1,6 @@
+#ifndef ZENGUI_VECTOR2_HPP_INCLUDED
+#define ZENGUI_VECTOR2_HPP_INCLUDED
+
+#include "engine/Vector2.hpp"
+
+#endif // ZENGUI_VECTOR2_HPP_INCLUDED
