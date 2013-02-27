@@ -13,10 +13,8 @@ namespace zn
 
 	public :
 
-		Time(u32 ms)
-		{
-			m_millis = ms;
-		}
+		Time(u32 ms) : m_millis(ms)
+		{}
 
 		inline f32 s() const
 		{

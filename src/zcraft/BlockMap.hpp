@@ -30,6 +30,8 @@ namespace zcraft
 
 	public :
 
+		// TODO BlockMap: make non-copyable
+
 		// Constructs an empty infinite map with no blocks inside it
 		BlockMap();
 

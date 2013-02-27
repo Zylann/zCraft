@@ -49,6 +49,7 @@ namespace zn
 		}
 
 		// TODO Array: support for initializer lists
+		// TODO Array: operator=
 
 		~Array()
 		{

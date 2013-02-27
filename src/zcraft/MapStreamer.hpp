@@ -18,7 +18,7 @@ namespace zcraft
 		efficiently around players while they move.
 		This version currently only supports 1 player.
 	**/
-
+	// TODO MapStreamer: make non-copyable
 	class MapStreamer
 	{
 	public :

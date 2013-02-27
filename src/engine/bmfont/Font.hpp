@@ -41,6 +41,8 @@ namespace bmfont
 		// Destroys the font.
 		~Font();
 
+		// TODO Font: copy constructor and operator=
+
 		// Loads the font settings and texture from a FNT file.
 		// The FNT file must be in text format.
 		// Cannot be called twice.

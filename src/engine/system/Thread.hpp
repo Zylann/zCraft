@@ -24,6 +24,7 @@ namespace zn
 		sf::Thread m_thread;
 		bool m_isRunning;           // externally viewed flag
 		std::string m_name;   // Thread's name
+		// TODO Thread: make non-copyable
 
 	protected :
 

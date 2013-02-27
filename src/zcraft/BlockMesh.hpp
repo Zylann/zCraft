@@ -25,6 +25,8 @@ namespace zcraft
 
 		~BlockMesh();
 
+		// TODO BlockMesh: make non-copyable
+
 		void draw();
 
 		bool isEmpty() const;

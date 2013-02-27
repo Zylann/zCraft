@@ -17,7 +17,7 @@ namespace zn
 		Wrapper class for mutexes.
 		SFML backend.
 	**/
-
+	// TODO Mutex: use an attribute instead of inheriting, because the base has no virtual destructor.
 	class Mutex : private sf::Mutex
 	{
 	private :

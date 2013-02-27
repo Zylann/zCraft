@@ -43,6 +43,7 @@ namespace zcraft
 		ImmergeRequest(Block * b, bool pdrop) : block(b), drop(pdrop) {}
 	};
 
+	// TODO MapStreamThread: make non-copyable
 	class MapStreamThread : public zn::AThread
 	{
 	public /* TYPES */ :
