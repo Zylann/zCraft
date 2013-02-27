@@ -2,7 +2,7 @@ zCraft
 ======
 
 A C++ voxel game engine.
-Copyright 2010-2012 (c) Marc Gilleron
+Copyright 2010-2013 (c) Marc Gilleron
 
 The project is in an early stage of development, so many things can change
 on every new commit. I try to ensure that each version between pushes can
@@ -22,13 +22,14 @@ Current main features
 Early planned features
 ================
 
+- GUI (WIP)
 - Frustum culling
-- GUI
 - OpenGL 3.x (easier switching, at least)
 - AABB physics
 - Faster voxel archive save format
 - Voxel sprites
 - And many little things in the code : see TODO comments
+- Simplex noise, mapgen optimization
 
 Downloads
 =========
@@ -42,35 +43,46 @@ Compiling
 =========
 
 Compiler settings :
-- C++11 norm with GCC 4.7.2 (I use MinGW on Windows)
+- C++11 norm, compiles fine with GCC 4.7.2 (I use MinGW on Windows)
 
 Dependencies :
 - SFML 2 RC (I recompiled it for the last MinGW)
-- OpenGL 2.1
+- OpenGL 2.1 (I should switch to 3 one day)
 - Glu
 - Glew (I recompiled it for MinGW)
 
 Folder structure
 ================
 
-The project is divided in two main parts, where only one depends on the other.
+The project is divided in several main parts :
 
-- zENG, namespace engine::
+- zENG, namespace zn::
 
+This is a set of generic tools I wrote for making games.
 engine/	: Generic code for many things. Doesn't depend on zcraft/.
 engine/opengl/ : Everything that is OpenGL-related is here.
 engine/bmfont/ : Implementation of a BMFont renderer. Depends on engine/opengl/.
 engine/system/ : OS-specific stuff (macros, threading, files...)
 
-experimental/ : experimental undocumented stuff based on engine/.
-	its contents may be future features. I added this to the repo to have a
-	cloud copy of it (I don't trust my HD) and to ease sharing.
-
 - zCraft, namespace zcraft::
 
 zcraft/ : The voxel engine. It is based on the engine/ package.
-zcraft/games/ : Test-purpose games based on zcraft/.
+zcraft/games/ : Test-purpose minigames based on zcraft/.
 zcraft/cartographer/ : built-in map cartographer
 zcraft/mapgen/ : map generators
 
+- zENGui, namespace zn::ui::
+
+This is a generic gui that doesn't depend on anything, except for "very" basic
+files such as Vector2, Rect and Color. It is currently developped as part of the
+project. All you have to do to use it is to provide your renderer and input.
+
+zengui/ : the core library
+zengui/plugin/ : additionnal features, input adapters, renderers...
+
+- Experimental, namespace experimental::
+
+experimental/ : experimental undocumented stuff based on engine/.
+	its contents may be future features. I added this to the repo to have a
+	cloud copy of it (I don't trust my HD) and to ease sharing.
 
