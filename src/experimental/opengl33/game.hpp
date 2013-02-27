@@ -1,5 +1,5 @@
-#ifndef GAME_HPP_INCLUDED
-#define GAME_HPP_INCLUDED
+#ifndef EXPERIMENTAL_GL33_GAME_HPP_INCLUDED
+#define EXPERIMENTAL_GL33_GAME_HPP_INCLUDED
 
 namespace experimental
 {
@@ -10,4 +10,4 @@ namespace gl
 } // namespace gl
 } // namespace experimental
 
-#endif // GAME_HPP_INCLUDED
+#endif // EXPERIMENTAL_GL33_GAME_HPP_INCLUDED

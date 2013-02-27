@@ -16,8 +16,13 @@ namespace experimental
 {
 namespace gl
 {
-	ShaderProgram g_colorShader;
-	ShaderProgram g_textureShader;
+	// Global variables are evil !
+	// ShaderPrograms can cause end-of-app crashes if instancied statically.
+	// That's why I use dynamic allocation as a workaround.
+	// But that's not enough, later I will preferably write a classy renderer...
+
+	ShaderProgram * g_colorShader;
+	ShaderProgram * g_textureShader;
 	//u32 g_currentShader;
 	Matrix4 g_modelview;
 	Matrix4 g_projection;
@@ -45,14 +50,16 @@ namespace gl
 
 		/* Load shaders */
 
-		if(!g_colorShader.load(
+		g_colorShader = new ShaderProgram();
+		if(!g_colorShader->load(
 			"assets/shaders/basic3d.vert",
 			"assets/shaders/basic.frag"))
 		{
 			return false;
 		}
 
-		if(!g_textureShader.load(
+		g_textureShader = new ShaderProgram();
+		if(!g_textureShader->load(
 			"assets/shaders/basic3d.vert",
 			"assets/shaders/textured.frag"))
 		{
@@ -64,7 +71,16 @@ namespace gl
 
 	void dispose()
 	{
-
+		if(g_colorShader != nullptr)
+		{
+			delete g_colorShader;
+			g_colorShader = nullptr;
+		}
+		if(g_textureShader != nullptr)
+		{
+			delete g_textureShader;
+			g_textureShader = nullptr;
+		}
 	}
 
 	void useProgram(const GLuint ID)
@@ -74,7 +90,7 @@ namespace gl
 
 	void beginRender()
 	{
-		glUseProgram(g_colorShader.getID());
+		glUseProgram(g_colorShader->getID());
 
 		glEnableVertexAttribArray(ShaderIn::POSITION);
 		glEnableVertexAttribArray(ShaderIn::COLOR);
