@@ -133,6 +133,11 @@ namespace zn
 	#endif
 	}
 
+	void ABasicGame::setTitle(const std::string & title)
+	{
+		m_window.setTitle(title);
+	}
+
 } // namespace zn
 
 

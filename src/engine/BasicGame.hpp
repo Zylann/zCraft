@@ -36,9 +36,11 @@ namespace zn
 
 		virtual ~ABasicGame();
 
-		virtual void start();
+		void start() override;
 
-		virtual void stop();
+		void stop() override;
+
+		void setTitle(const std::string & title);
 
 	protected :
 
@@ -49,7 +51,7 @@ namespace zn
 		virtual void renderScene(const Time & delta) = 0;
 
 		// Draws the GUI on a pixel-match rendering configuration (by default)
-		virtual void renderGUI(const Time & delta) {};
+		virtual void renderGUI(const Time & delta) {}
 
 		// Called when the game window is resized
 		virtual void resized(const Vector2i & newSize) {}
