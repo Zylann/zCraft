@@ -12,10 +12,17 @@ This file is part of the zCraft project.
 #include "Block.hpp"
 //#include "engine/noise.hpp"
 
+
 using namespace zn;
 
 namespace zcraft
 {
+//#define PROFILE_MESH_BUILD
+#ifdef PROFILE_MESH_BUILD
+	float g_meshBuildTime = 0;
+	int g_meshBuildCount = 0;
+#endif // PROFILE_MESH_BUILD
+
 	/*
 		BlockMesh simple use methods
 	*/
@@ -118,7 +125,7 @@ namespace zcraft
 		}
     }
 
-	u8 compareFaces(const Voxel a, const Voxel b)
+	inline u8 compareFaces(const Voxel a, const Voxel b)
 	{
 		if(a.type == voxel::AIR && b.type == voxel::AIR)
 		{
@@ -139,7 +146,7 @@ namespace zcraft
 	}
 
 	// get light shading of a face (to make differences between sides)
-	u8 getFaceLight(const Vector3i & vdir, u8 lightCode)
+	inline u8 getFaceLight(const Vector3i & vdir, u8 lightCode)
 	{
 		float lightf = (float)lightCode / 16.f;
 
@@ -374,6 +381,11 @@ namespace zcraft
 
 	void BlockMesh::buildFromVoxelData(const Vector3i bpos, VoxelBuffer & vb)
 	{
+	#ifdef PROFILE_MESH_BUILD
+		sf::Clock timer;
+	#endif
+
+		// Ensure the mesh is clean
 		clear();
 
 		const Vector3i min = bpos * Block::SIZE;
@@ -401,9 +413,9 @@ namespace zcraft
 			u32 x,y,z;
 
 			// Go through every y,z and get north(y+) faces in rows of x+
-			for(y = 0; y < Block::SIZE; y++)
+			for(y = 0; y < Block::SIZE; ++y)
 			{
-				for(z = 0; z < Block::SIZE; z++)
+				for(z = 0; z < Block::SIZE; ++z)
 				{
 					updateFastFacesRow(
 						Vector3i(min.x, min.y+y, min.z+z),
@@ -416,9 +428,9 @@ namespace zcraft
 			}
 
 			// Go through every x,y and get east(x+) faces in rows of z+
-			for(x = 0; x < Block::SIZE; x++)
+			for(x = 0; x < Block::SIZE; ++x)
 			{
-				for(y = 0; y < Block::SIZE; y++)
+				for(y = 0; y < Block::SIZE; ++y)
 				{
 					updateFastFacesRow(
 						Vector3i(min.x+x, min.y+y, min.z),
@@ -431,9 +443,9 @@ namespace zcraft
 			}
 
 			// Go through every y,z and get top(z+) faces in rows of x+
-			for(z = 0; z < Block::SIZE; z++)
+			for(z = 0; z < Block::SIZE; ++z)
 			{
-				for(y = 0; y < Block::SIZE; y++)
+				for(y = 0; y < Block::SIZE; ++y)
 				{
 					updateFastFacesRow(
 						Vector3i(min.x, min.y+y, min.z+z),
@@ -490,6 +502,16 @@ namespace zcraft
 		}
 
 		m_vbo = vbo; // Remainder: Can be null
+
+	#ifdef PROFILE_MESH_BUILD
+		g_meshBuildTime += timer.getElapsedTime().asSeconds();
+		++g_meshBuildCount;
+		if(g_meshBuildCount % 32 == 0) // to avoid too much printings
+		{
+			std::cout << "Average mesh build time : "
+				<< 1000.f * g_meshBuildTime / (float)g_meshBuildCount << "ms" << std::endl;
+		}
+	#endif // PROFILE_MESH_BUILD
 	}
 
 } // namespace zcraft
