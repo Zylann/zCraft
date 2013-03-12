@@ -8,6 +8,13 @@ This file is part of the zCraft project.
 #include "zcraft/MapStreamThread.hpp"
 #include "zcraft/mapgen/MapGeneratorHeightmap.hpp"
 //#include "zcraft/mapgen/MapGeneratorCanyons.hpp"
+//#include "zcraft/mapgen/MapGeneratorGrid.hpp"
+
+//#define PROFILE_BLOCK_GENERATION
+#ifdef PROFILE_BLOCK_GENERATION
+float g_blockGenTime = 0;
+int g_blockGenCount = 0;
+#endif // PROFILE_BLOCK_GENERATION
 
 using namespace zn;
 
@@ -19,6 +26,7 @@ namespace zcraft
 	{
 		m_generator = new MapGeneratorHeightmap(genSeed);
 //		m_generator = new MapGeneratorCanyons(genSeed);
+//		m_generator = new MapGeneratorGrid(genSeed);
 	}
 
 	MapStreamThread::~MapStreamThread()
@@ -165,8 +173,21 @@ namespace zcraft
 				{
 					if(m_generator != nullptr)
 					{
+					#ifdef PROFILE_BLOCK_GENERATION
+						sf::Clock profileTimer;
+					#endif
 						block = m_generator->makeBlock(req.pos);
 						++m_runningInfo.generatedCount;
+					#ifdef PROFILE_BLOCK_GENERATION
+						++g_blockGenCount;
+						g_blockGenTime += profileTimer.getElapsedTime().asSeconds();
+						if(g_blockGenCount % 32 == 0)
+						{
+							std::cout << "Average block gen time : "
+								<< 1000.f * g_blockGenTime / (float)g_blockGenCount
+								<< "ms" << std::endl;
+						}
+					#endif
 					}
 				}
 
