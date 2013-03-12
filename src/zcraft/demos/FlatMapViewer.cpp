@@ -1,6 +1,6 @@
 #include <iostream>
 #include <fstream>
-#include "zcraft/games/FlatMapViewer.hpp"
+#include "zcraft/demos/FlatMapViewer.hpp"
 #include "zcraft/cartographer/Cartographer.hpp"
 #include "zcraft/VoxelProperties.hpp"
 

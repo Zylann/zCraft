@@ -6,7 +6,7 @@ This file is part of the zCraft project.
 
 #include <sstream>
 #include "engine/opengl/opengl.hpp"
-#include "zcraft/games/PerspectiveMapViewer.hpp"
+#include "zcraft/demos/PerspectiveMapViewer.hpp"
 #include "zcraft/face.hpp"
 #include "version.hpp"
 
@@ -37,7 +37,7 @@ namespace zcraft
 			return false;
 
 		// Init camera
-		m_camera.setPosition(Vector3f(0, -5, 16));
+		m_camera.setPosition(Vector3f(0, -5, 32));
 		m_camera.updateViewport(Vector2f(
 			m_window.getSize().x, m_window.getSize().y));
 
