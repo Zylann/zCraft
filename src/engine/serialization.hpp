@@ -4,8 +4,8 @@ Copyright (C) 2010-2012 Marc GILLERON
 This file is part of the zCraft project.
 */
 
-#ifndef SERIALIZATION_HPP_INCLUDED
-#define SERIALIZATION_HPP_INCLUDED
+#ifndef ZN_SERIALIZATION_HPP_INCLUDED
+#define ZN_SERIALIZATION_HPP_INCLUDED
 
 /* header-only */
 

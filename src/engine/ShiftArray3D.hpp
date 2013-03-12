@@ -4,8 +4,8 @@ Copyright (C) 2010-2012 Marc GILLERON
 This file is part of the zCraft project.
 */
 
-#ifndef ENGINE_SHIFTARRAY3D_HPP_INCLUDED
-#define ENGINE_SHIFTARRAY3D_HPP_INCLUDED
+#ifndef ZN_SHIFTARRAY3D_HPP_INCLUDED
+#define ZN_SHIFTARRAY3D_HPP_INCLUDED
 
 #include <ostream>
 #include <cstring>
