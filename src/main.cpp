@@ -24,8 +24,8 @@ Estimated total dev time
 
 #include <iostream>
 #include <cstdio>
-#include "zcraft/games/FlatMapViewer.hpp"
-#include "zcraft/games/PerspectiveMapViewer.hpp"
+#include "zcraft/demos/FlatMapViewer.hpp"
+#include "zcraft/demos/PerspectiveMapViewer.hpp"
 #include "zcraft/cartographer/Cartographer.hpp"
 
 //#include "experimental/tween/TweenTest.hpp"
@@ -122,12 +122,12 @@ int main(int argc, char * argv[])
 	{
 //		code = runGame(new experimental::TweenTest());
 //		code = experimental::gl::testgl33();
-		code = runGame(new experimental::GuiTest());
+//		code = runGame(new experimental::GuiTest());
 
-//		if(argc <= 1) // Note : the first arg is the execution path
-//			code = launchPerspectiveMapViewer();
-//		else
-//			code = shell(argc, argv);
+		if(argc <= 1) // Note : the first arg is the execution path
+			code = launchPerspectiveMapViewer();
+		else
+			code = shell(argc, argv);
 	}
 	catch(std::exception & e)
 	{
