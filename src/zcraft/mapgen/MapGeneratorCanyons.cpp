@@ -4,7 +4,7 @@ Copyright (C) 2010-2012 Marc GILLERON
 This file is part of the zCraft project.
 */
 
-#include "engine/noise.hpp"
+#include "engine/noise/noise.hpp"
 #include "zcraft/mapgen/MapGeneratorCanyons.hpp"
 
 using namespace zn;

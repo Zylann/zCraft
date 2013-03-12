@@ -4,7 +4,6 @@ Copyright (C) 2010-2012 Marc GILLERON
 This file is part of the zCraft project.
 */
 
-#include "engine/noise.hpp"
 #include "zcraft/mapgen/MapGeneratorGrid.hpp"
 
 using namespace zn;

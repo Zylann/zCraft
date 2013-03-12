@@ -7,7 +7,7 @@ This file is part of the zCraft project.
 #include <cmath>
 #include <iostream>
 
-#include "engine/noise.hpp"
+#include "engine/noise/noise.hpp"
 #include "engine/interpolation.hpp"
 
 // set at random
