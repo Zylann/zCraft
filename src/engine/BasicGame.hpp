@@ -4,15 +4,15 @@ Copyright (C) 2010-2012 Marc GILLERON
 This file is part of the zCraft project.
 */
 
-#ifndef BASICGAME_HPP_INCLUDED
-#define BASICGAME_HPP_INCLUDED
+#ifndef ZN_BASICGAME_HPP_INCLUDED
+#define ZN_BASICGAME_HPP_INCLUDED
 
 #include <SFML/Window.hpp>
 #include <string>
 
 #include "engine/opengl/opengl.hpp"
-#include "engine/Vector2.hpp"
-#include "engine/Game.hpp"
+#include "engine/core/Vector2.hpp"
+#include "engine/core/Game.hpp"
 
 namespace zn
 {
@@ -64,6 +64,6 @@ namespace zn
 
 } // namespace zn
 
-#endif // BASICGAME_HPP_INCLUDED
+#endif // ZN_BASICGAME_HPP_INCLUDED
 
 

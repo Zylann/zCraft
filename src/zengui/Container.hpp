@@ -15,7 +15,7 @@ namespace ui
 {
 	class AContainer : public AWidget
 	{
-	private :
+	protected :
 
 		// List of widgets ordered by reverse adding time.
 		// events will be received in this order, but rendered the reverse way,
@@ -67,6 +67,10 @@ namespace ui
 		// If the given pointer is null, this will unfocus all children.
 		void focusChild(const AWidget * widget);
 
+		virtual void layout() override;
+
+		unsigned int getChildCount() const override { return m_children.size(); }
+
 		/*
 			Main loop
 		*/
@@ -82,7 +86,10 @@ namespace ui
 
 	protected :
 
+		// Calls render() on each child of the container
 		void renderChildren(IRenderer & r);
+
+		// Calls animate() on each child of the container
 		void animateChildren(float dt);
 
 	private :

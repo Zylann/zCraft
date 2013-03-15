@@ -11,8 +11,8 @@ This file is part of the zCraft project.
 #include <cstring>
 #include <iostream>
 
-#include "engine/Area3D.hpp"
-#include "engine/Exception.hpp"
+#include "Area3D.hpp"
+#include "Exception.hpp"
 
 namespace zn
 {
@@ -193,6 +193,8 @@ namespace zn
 				throw Exception("ShiftArray3D::set " + pos);
 		}
 
+		// TODO ShiftArray3D: methods below may be useless.
+
 		// Prints buffer description in an output stream (for debug purposes).
 		// Note : very large buffers should not be printed, it would create
 		// lines and lines of data (not very useful).
@@ -235,4 +237,4 @@ namespace zn
 
 } // namespace util
 
-#endif // ENGINE_SHIFTARRAY3D_HPP_INCLUDED
+#endif // ZN_SHIFTARRAY3D_HPP_INCLUDED

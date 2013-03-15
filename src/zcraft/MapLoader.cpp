@@ -8,7 +8,7 @@ This file is part of the zCraft project.
 #include <cstdlib>
 #include "zcraft/MapLoader.hpp"
 #include "engine/system/files/filesystem.hpp"
-#include "engine/stringutils.hpp"
+#include "engine/core/stringutils.hpp"
 
 using namespace zn;
 

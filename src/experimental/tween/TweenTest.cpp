@@ -2,7 +2,7 @@
 #include <iostream>
 
 #include "TweenTest.hpp"
-#include "engine/noise.hpp"
+#include "engine/noise/noise.hpp"
 
 using namespace zn;
 

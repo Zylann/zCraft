@@ -18,10 +18,10 @@ namespace ui
 	// Note : coordinates use 2D axes where Y goes down
 	struct RectBorder
 	{
-		int left;
-		int right;
-		int top;
-		int bottom;
+		short left;
+		short right;
+		short top;
+		short bottom;
 
 		RectBorder() : left(0), right(0), top(0), bottom(0) {}
 		RectBorder(int l, int r, int t, int b) : left(l), right(r), top(t), bottom(b) {}
@@ -33,14 +33,16 @@ namespace ui
 	enum Align // Should fit in a byte
 	{
 		NONE 		= 0,
-		LEFT 		= (1 << 1),
-		RIGHT 		= (1 << 2),
-		TOP 		= (1 << 3),
-		BOTTOM 		= (1 << 4),
+		LEFT 		= 1,
+		RIGHT 		= (1 << 1),
+		TOP 		= (1 << 2),
+		BOTTOM 		= (1 << 3),
+		CENTER_H 	= (1 << 4),
 		CENTER_V 	= (1 << 5),
-		CENTER_H 	= (1 << 6),
 		CENTER 		= CENTER_V | CENTER_H,
-		FILL 		= (1 << 7)
+		FILL_H 		= (1 << 6),
+		FILL_V		= (1 << 7),
+		FILL		= FILL_V | FILL_H
 	};
 
 	class Root;
@@ -67,9 +69,8 @@ namespace ui
 
 		/* Style */
 
-		IntRect m_bounds;
-		Vector2i m_minSize; // zero size means what it means
-		Vector2i m_maxSize; // zero size means no limit
+		IntRect m_bounds; // parent-relative bounds
+		IntRect m_sizeLimit;
 
 		Margin m_margin;
 		Padding m_padding;
@@ -134,11 +135,17 @@ namespace ui
 		// Get absolute position
 		Vector2i getAbsolutePosition() const;
 
-		// Sets the maximal bounds the widget should have.
-		void setMinSize(const Vector2i & minSize);
+		// Sets the size limit the widget should have.
+		void setSizeLimits(const Vector2i & minSize, const Vector2i & maxSize);
 
-		// Sets the minimal bounds the widget should have.
-		void setMaxSize(const Vector2i & maxSize);
+		// Sets the margins of the widget.
+		void setMargin(const Margin & m);
+
+		// Sets the inner margins of the widget
+		void setPadding(const Padding & p);
+
+		inline const Margin & getMargin() const { return m_margin; }
+		inline const Padding & getPadding() const { return m_padding; }
 
 		// Sets the theme used by this widget.
 		// If recursive is set to true, the theme will be applied to all of children too.
@@ -148,10 +155,14 @@ namespace ui
 		// Sets the preferred alignment this widget should have.
 		// It will be ignored in certain cases depending on the layout of
 		// the container.
-		// NOTE: Not supported yet
-//		void setAlign(Align align);
-//
-//		inline Align getAlign() const { return m_align; }
+		void setAlign(Align align);
+
+		inline Align getAlign() const { return m_align; }
+
+		// Updates widget's position and size according to align,
+		// size and parent constraints.
+		// Returns true if the widget changed its geometry, false if not.
+		virtual void layout();
 
 		/*
 			State
@@ -204,6 +215,8 @@ namespace ui
 
 		inline bool blocksInput() const { return m_blocksInput; }
 
+		virtual unsigned int getChildCount() const { return 0; }
+
 		/*
 			Main loop
 		*/
@@ -244,6 +257,12 @@ namespace ui
 
 		virtual void onShow() {}
 		virtual void onHide() {}
+
+	private :
+
+		// Updates widget's size according to its limits.
+		// It does this ONLY for this widget (parent and children are ignored)
+		bool applySizeLimit();
 
 	};
 

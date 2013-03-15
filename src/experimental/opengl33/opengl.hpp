@@ -1,9 +1,9 @@
-#ifndef OPENGL_HPP_INCLUDED
-#define OPENGL_HPP_INCLUDED
+#ifndef ZN_OPENGL_HPP_INCLUDED
+#define ZN_OPENGL_HPP_INCLUDED
 
 #include <GL/glew.h>
 
-#include "engine/types.hpp"
+#include "engine/core/types.hpp"
 
 namespace experimental
 {
@@ -51,4 +51,4 @@ namespace gl
 } // namespace gl
 } // namespace experimental
 
-#endif // OPENGL_HPP_INCLUDED
+#endif // ZN_OPENGL_HPP_INCLUDED

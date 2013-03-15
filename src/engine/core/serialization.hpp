@@ -9,6 +9,9 @@ This file is part of the zCraft project.
 
 /* header-only */
 
+// This is simple binary serialization functions.
+// Some may be added to match more specific dependencies such as extlibs.
+
 #include <iostream>
 
 // TODO serialization: switch to common types (defined in types.hpp)

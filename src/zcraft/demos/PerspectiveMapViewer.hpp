@@ -10,7 +10,7 @@ This file is part of the zCraft project.
 #include "engine/BasicGame.hpp"
 #include "engine/bmfont/Font.hpp"
 #include "engine/opengl/VertexColorArray.hpp"
-#include "engine/raycast.hpp"
+#include "engine/core/raycast.hpp"
 #include "zcraft/zcraft.hpp"
 #include "zcraft/BlockMeshMap.hpp"
 #include "zcraft/MapStreamer.hpp"

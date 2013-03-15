@@ -4,10 +4,10 @@ Copyright (C) 2010-2012 Marc GILLERON
 This file is part of the zCraft project.
 */
 
-#ifndef ENGINE_GL_VERTEXCOLORARRAY_HPP_INCLUDED
-#define ENGINE_GL_VERTEXCOLORARRAY_HPP_INCLUDED
+#ifndef ZN_GL_VERTEXCOLORARRAY_HPP_INCLUDED
+#define ZN_GL_VERTEXCOLORARRAY_HPP_INCLUDED
 
-#include "engine/Array.hpp"
+#include "engine/core/Array.hpp"
 #include "engine/opengl/opengl.hpp"
 
 namespace zn
@@ -76,6 +76,6 @@ namespace gl
 } // namespace gl
 } // namespace zn
 
-#endif // ENGINE_GL_VERTEXCOLORARRAY_HPP_INCLUDED
+#endif // ZN_GL_VERTEXCOLORARRAY_HPP_INCLUDED
 
 

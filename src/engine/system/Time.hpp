@@ -1,7 +1,7 @@
-#ifndef TIME_HPP_INCLUDED
-#define TIME_HPP_INCLUDED
+#ifndef ZN_TIME_HPP_INCLUDED
+#define ZN_TIME_HPP_INCLUDED
 
-#include "engine/types.hpp"
+#include "engine/core/types.hpp"
 
 namespace zn
 {
@@ -34,8 +34,9 @@ namespace zn
 			return -1;
 		}
 
+		// TODO Time: static millis()
 	};
 
 } // namespace zn
 
-#endif // TIME_HPP_INCLUDED
+#endif // ZN_TIME_HPP_INCLUDED

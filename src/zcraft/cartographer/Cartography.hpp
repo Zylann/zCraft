@@ -3,7 +3,7 @@
 
 #include <map>
 #include <SFML/Graphics.hpp>
-#include "engine/Vector2.hpp"
+//#include "engine/core/Vector2.hpp"
 #include "zcraft/common.hpp"
 
 namespace zcraft

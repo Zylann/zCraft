@@ -1,7 +1,7 @@
 #ifndef VOXELBUFFER_HPP_INCLUDED
 #define VOXELBUFFER_HPP_INCLUDED
 
-#include "engine/ShiftArray3D.hpp"
+#include "engine/core/ShiftArray3D.hpp"
 #include "zcraft/Voxel.hpp"
 
 namespace zcraft

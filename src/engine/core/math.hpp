@@ -8,7 +8,7 @@ This file is part of the zCraft project.
 #define ENGINE_MATH_HPP_INCLUDED
 
 #include <cmath>
-#include "engine/types.hpp"
+#include "engine/core/types.hpp"
 
 namespace zn
 {

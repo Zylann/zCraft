@@ -5,7 +5,7 @@ This file is part of the zCraft project.
 */
 
 #include <sstream>
-#include "engine/Colorf.hpp"
+#include "Colorf.hpp"
 
 namespace zn
 {

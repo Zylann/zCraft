@@ -6,7 +6,7 @@
 #include <string>
 #include <iostream>
 
-#include "engine/Vector3.hpp"
+#include "engine/core/Vector3.hpp"
 
 namespace zn
 {

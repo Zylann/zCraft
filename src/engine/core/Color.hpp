@@ -8,7 +8,7 @@ This file is part of the zCraft project.
 #define ENGINE_COLOR_HPP_INCLUDED
 
 #include <string>
-#include "engine/types.hpp"
+#include "types.hpp"
 
 #ifdef ZN_SFML
 	#include <SFML/Graphics.hpp>

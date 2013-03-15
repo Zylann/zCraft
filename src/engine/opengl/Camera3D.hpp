@@ -4,11 +4,11 @@ Copyright (C) 2010-2012 Marc GILLERON
 This file is part of the zCraft project.
 */
 
-#ifndef ENGINE_CAMERA3D_HPP_INCLUDED
-#define ENGINE_CAMERA3D_HPP_INCLUDED
+#ifndef ZN_CAMERA3D_HPP_INCLUDED
+#define ZN_CAMERA3D_HPP_INCLUDED
 
-#include "engine/Vector2.hpp"
-#include "engine/Vector3.hpp"
+#include "engine/core/Vector2.hpp"
+#include "engine/core/Vector3.hpp"
 
 namespace zn
 {
@@ -65,6 +65,6 @@ namespace zn
 
 } // namespace zn
 
-#endif // ENGINE_CAMERA3D_HPP_INCLUDED
+#endif // ZN_CAMERA3D_HPP_INCLUDED
 
 

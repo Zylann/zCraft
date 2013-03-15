@@ -4,13 +4,13 @@ Copyright (C) 2010-2012 Marc GILLERON
 This file is part of the zCraft project.
 */
 
-#ifndef ENGINE_VECTOR2_HPP_INCLUDED
-#define ENGINE_VECTOR2_HPP_INCLUDED
+#ifndef ZN_VECTOR2_HPP_INCLUDED
+#define ZN_VECTOR2_HPP_INCLUDED
 
 #include <string>
-#include "engine/types.hpp"
-#include "engine/math.hpp"
-#include "engine/stringutils.hpp"
+#include "types.hpp"
+#include "math.hpp"
+#include "stringutils.hpp"
 
 namespace zn
 {
@@ -337,6 +337,6 @@ namespace zn
 
 } // namespace zn
 
-#endif // ENGINE_VECTOR2_HPP_INCLUDED
+#endif // ZN_VECTOR2_HPP_INCLUDED
 
 

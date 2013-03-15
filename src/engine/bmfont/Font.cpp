@@ -13,7 +13,7 @@ This file is part of the zCraft project.
 #include "engine/opengl/opengl.hpp"
 #include "engine/config.hpp"
 #include "engine/bmfont/Font.hpp"
-#include "engine/stringutils.hpp" // for cropStr()
+#include "engine/core/stringutils.hpp" // for cropStr()
 
 namespace zn
 {

@@ -5,7 +5,7 @@ This file is part of the zCraft project.
 */
 
 #include <sstream>
-#include "engine/AABB.hpp"
+#include "engine/core/AABB.hpp"
 
 namespace zn
 {

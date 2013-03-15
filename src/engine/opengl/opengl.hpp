@@ -1,5 +1,5 @@
-#ifndef GLUTILS_HPP_INCLUDED
-#define GLUTILS_HPP_INCLUDED
+#ifndef ZN_OPENGL_HPP_INCLUDED
+#define ZN_OPENGL_HPP_INCLUDED
 
 /*
 	This header declares several utility functions dealing with OpenGL.
@@ -9,7 +9,7 @@
 #include <GL/glew.h>
 #include <SFML/Graphics.hpp>
 
-#include "engine/types.hpp"
+#include "engine/core/types.hpp"
 
 namespace zn
 {
@@ -47,7 +47,7 @@ namespace gl
 } // namespace gl
 } // namespace zn
 
-#endif // GLUTILS_HPP_INCLUDED
+#endif // ZN_OPENGL_HPP_INCLUDED
 
 
 

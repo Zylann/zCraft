@@ -1,9 +1,9 @@
 #ifndef COMMON_HPP_INCLUDED
 #define COMMON_HPP_INCLUDED
 
-#include "engine/types.hpp"
-#include "engine/Vector2.hpp"
-#include "engine/Vector3.hpp"
+#include "engine/core/types.hpp"
+#include "engine/core/Vector2.hpp"
+#include "engine/core/Vector3.hpp"
 
 namespace zcraft
 {

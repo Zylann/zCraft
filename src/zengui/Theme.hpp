@@ -27,7 +27,9 @@ namespace ui
 		std::string getName();
 
 		// Default rendering of unknown widgets. Usually for debug.
-		virtual void drawDummyWidget(IRenderer & r, const AWidget & w) {};
+		virtual void drawDummyWidget(IRenderer & r, const AWidget & w) {}
+
+		virtual void drawPanel(IRenderer & r, const AWidget & panel) = 0;
 
 		//...
 	};

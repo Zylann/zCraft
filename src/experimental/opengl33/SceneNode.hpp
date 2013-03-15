@@ -1,7 +1,7 @@
 #ifndef SCENENODE_HPP_INCLUDED
 #define SCENENODE_HPP_INCLUDED
 
-#include "engine/types.hpp"
+#include "engine/core/types.hpp"
 
 namespace experimental
 {

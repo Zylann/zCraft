@@ -4,11 +4,11 @@ Copyright (C) 2010-2012 Marc GILLERON
 This file is part of the zCraft project.
 */
 
-#ifndef ENGINE_ARRAY_HPP_INCLUDED
-#define ENGINE_ARRAY_HPP_INCLUDED
+#ifndef ZN_ARRAY_HPP_INCLUDED
+#define ZN_ARRAY_HPP_INCLUDED
 
 #include <iostream> // originally for debug
-#include "engine/types.hpp"
+#include "types.hpp"
 
 namespace zn
 {
@@ -150,7 +150,7 @@ namespace zn
 
 } // namespace zn
 
-#endif // ENGINE_ARRAY_HPP_INCLUDED
+#endif // ZN_ARRAY_HPP_INCLUDED
 
 
 

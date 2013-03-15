@@ -7,7 +7,7 @@ This file is part of the zCraft project.
 #ifndef MATRIX4_HPP_INCLUDED
 #define MATRIX4_HPP_INCLUDED
 
-#include "engine/Vector3.hpp"
+#include "engine/core/Vector3.hpp"
 
 namespace experimental
 {

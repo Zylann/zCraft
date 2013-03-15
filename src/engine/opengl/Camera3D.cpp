@@ -4,9 +4,9 @@ Copyright (C) 2010-2012 Marc GILLERON
 This file is part of the zCraft project.
 */
 
+#include "engine/core/Vector2.hpp"
+#include "engine/core/Vector3.hpp"
 #include "engine/opengl/opengl.hpp"
-#include "engine/Vector2.hpp"
-#include "engine/Vector3.hpp"
 #include "engine/opengl/Camera3D.hpp"
 
 namespace zn

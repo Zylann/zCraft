@@ -30,6 +30,22 @@ namespace experimental
 		r.drawRect(pos.x, pos.y, width, height, false);
 	}
 
+	void BasicTheme::drawPanel(IRenderer & r, const AWidget & panel)
+	{
+		Vector2i pos = panel.getAbsolutePosition();
+		const int width = panel.getBounds().width();
+		const int height = panel.getBounds().height();
+
+		static const Color borderColor(224, 224, 224);
+		static const Color fillColor(224, 224, 224);
+
+		r.setColor(borderColor);
+		r.drawRect(pos.x, pos.y, width, height, false);
+		r.setColor(fillColor);
+		r.drawRect(pos.x, pos.y, width, height, true);
+	}
+
+
 } // namespace experimental
 
 

@@ -5,8 +5,8 @@ This file is part of the zCraft project.
 */
 
 #include <sstream>
-#include "engine/Area3D.hpp"
-#include "engine/stringutils.hpp"
+#include "engine/core/Area3D.hpp"
+#include "engine/core/stringutils.hpp"
 
 namespace zn
 {

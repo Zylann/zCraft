@@ -144,6 +144,10 @@ namespace ui
 		}
 	}
 
+	void AContainer::layout()
+	{
+	}
+
 	bool AContainer::processInput(const InputEvent & e)
 	{
 		if(!isVisible())
@@ -186,7 +190,7 @@ namespace ui
 
 	void AContainer::renderChildren(IRenderer & r)
 	{
-		Widget * w;
+		AWidget * w;
 		for(auto it = m_children.rbegin(); it != m_children.rend(); it++)
 		{
 			w = (*it);

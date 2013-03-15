@@ -6,7 +6,7 @@ This file is part of the zCraft project.
 
 #include <iostream>
 
-#include "engine/types.hpp"
+#include "engine/core/types.hpp"
 #include "opengl.hpp"
 #include "ShaderProgram.hpp"
 

@@ -5,7 +5,7 @@ This file is part of the zCraft project.
 */
 
 #include <list>
-#include "engine/Color.hpp"
+#include "engine/core/Color.hpp"
 #include "BlockMesh.hpp"
 #include "face.hpp"
 #include "VoxelProperties.hpp"

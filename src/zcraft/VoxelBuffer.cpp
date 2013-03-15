@@ -1,4 +1,4 @@
-#include "engine/ShiftArray3D.hpp"
+#include "engine/core/ShiftArray3D.hpp"
 #include "zcraft/VoxelBuffer.hpp"
 
 namespace zcraft

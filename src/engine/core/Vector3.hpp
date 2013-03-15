@@ -9,9 +9,9 @@ This file is part of the zCraft project.
 
 #include <string>
 #include <cstdlib>
-#include "engine/types.hpp"
-#include "engine/math.hpp"
-#include "engine/stringutils.hpp"
+#include "engine/core/types.hpp"
+#include "engine/core/math.hpp"
+#include "engine/core/stringutils.hpp"
 
 namespace zn
 {

@@ -28,6 +28,7 @@ namespace ui
 
 		inline const std::string & getText() const { return m_text; }
 
+		void render(IRenderer & r) override;
 
 	};
 

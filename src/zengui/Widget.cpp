@@ -72,22 +72,22 @@ namespace ui
 		return m_bounds.min;
 	}
 
-	void AWidget::setMinSize(const Vector2i & minSize)
+	void AWidget::setSizeLimits(const Vector2i & minSize, const Vector2i & maxSize)
 	{
-		m_minSize = minSize;
-		if(m_minSize.x < 0)
-			m_minSize.x = 0;
-		if(m_minSize.y < 0)
-			m_minSize.y = 0;
-	}
+		m_sizeLimit.min = minSize;
+		m_sizeLimit.max = maxSize;
 
-	void AWidget::setMaxSize(const Vector2i & maxSize)
-	{
-		m_maxSize = maxSize;
-		if(m_maxSize.x < 0)
-			m_maxSize.x = 0;
-		if(m_maxSize.y < 0)
-			m_maxSize.y = 0;
+		if(m_sizeLimit.min.x < 0)
+			m_sizeLimit.min.x = 0;
+		if(m_sizeLimit.min.y < 0)
+			m_sizeLimit.min.y = 0;
+
+		if(m_sizeLimit.max.x < 0)
+			m_sizeLimit.max.x = 0;
+		if(m_sizeLimit.max.y < 0)
+			m_sizeLimit.max.y = 0;
+
+		m_sizeLimit.normalize();
 	}
 
 	void AWidget::setTheme(ITheme & theme, bool recursive)
@@ -121,6 +121,59 @@ namespace ui
 		}
 		else
 			setFocused(true);
+	}
+
+	void AWidget::setAlign(Align align)
+	{
+		m_align = align;
+	}
+
+	bool AWidget::applySizeLimit()
+	{
+		bool changed = false;
+
+		/* Apply size limits */
+
+		if(m_sizeLimit.max.x > 0 && m_sizeLimit.max.y > 0)
+		{
+			if(m_bounds.width() > m_sizeLimit.max.x)
+			{
+				m_bounds.max.x = m_bounds.min.x + m_sizeLimit.max.x;
+				changed = true;
+			}
+			if(m_bounds.height() > m_sizeLimit.max.y)
+			{
+				m_bounds.max.y = m_bounds.min.y + m_sizeLimit.max.y;
+				changed = true;
+			}
+		}
+
+		if(m_bounds.width() < m_sizeLimit.min.x)
+		{
+			m_bounds.max.x = m_bounds.min.x + m_sizeLimit.min.x;
+			changed = true;
+		}
+		if(m_bounds.height() < m_sizeLimit.min.y)
+		{
+			m_bounds.max.y = m_bounds.min.y + m_sizeLimit.min.y;
+			changed = true;
+		}
+
+		return changed;
+	}
+
+	void AWidget::setMargin(const Margin & m)
+	{
+		m_margin = m;
+	}
+
+	void AWidget::setPadding(const Padding & p)
+	{
+		m_padding = p;
+	}
+
+	void AWidget::layout()
+	{
 	}
 
 	/*

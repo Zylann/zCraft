@@ -1,7 +1,7 @@
 #include "zcraft/Block.hpp"
 #include "zcraft/VoxelProperties.hpp"
 #include "zcraft/face.hpp"
-#include "engine/serialization.hpp"
+#include "engine/core/serialization.hpp"
 
 namespace zcraft
 {

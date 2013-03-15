@@ -4,11 +4,11 @@ Copyright (C) 2010-2012 Marc GILLERON
 This file is part of the zCraft project.
 */
 
-#ifndef ENGINE_COLORF_HPP_INCLUDED
-#define ENGINE_COLORF_HPP_INCLUDED
+#ifndef ZN_COLORF_HPP_INCLUDED
+#define ZN_COLORF_HPP_INCLUDED
 
 #include <string>
-#include "engine/types.hpp"
+#include "types.hpp"
 
 #ifdef ZN_SFML
 	#include <SFML/Graphics.hpp>
@@ -95,6 +95,6 @@ namespace zn
 
 } // namespace zn
 
-#endif // ENGINE_COLORF_HPP_INCLUDED
+#endif // ZN_COLORF_HPP_INCLUDED
 
 

@@ -1,4 +1,4 @@
-#include "engine/math.hpp"
+#include "engine/core/math.hpp"
 #include "zcraft/MapStreamer.hpp"
 
 #define for_xyz(__pos, __min, __max) \

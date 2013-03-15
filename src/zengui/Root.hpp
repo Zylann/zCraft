@@ -16,7 +16,9 @@ namespace ui
 {
 	/*
 		This is the main GUI object, the root of widgets arborescence.
-		It can only be created once.
+		It should only be created once.
+		Note: it could be a singleton, but I don't want it to be accessible
+		from Everywhere...
 	*/
 	class Root : public AContainer
 	{

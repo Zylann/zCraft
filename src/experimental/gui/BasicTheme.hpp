@@ -21,6 +21,8 @@ namespace experimental
 
 		virtual void drawDummyWidget(zn::ui::IRenderer & r, const zn::ui::AWidget & w) override;
 
+		virtual void drawPanel(zn::ui::IRenderer & r, const zn::ui::AWidget & panel) override;
+
 	};
 
 } // namespace experimental

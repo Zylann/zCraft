@@ -7,8 +7,8 @@ This file is part of the zCraft project.
 #ifndef AREA3D_HPP_INCLUDED
 #define AREA3D_HPP_INCLUDED
 
-#include "engine/types.hpp"
-#include "engine/Vector3.hpp"
+#include "engine/core/types.hpp"
+#include "engine/core/Vector3.hpp"
 
 namespace zn
 {

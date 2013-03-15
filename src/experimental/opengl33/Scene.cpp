@@ -5,7 +5,7 @@ This file is part of the zCraft project.
 */
 
 #include "Scene.hpp"
-#include "engine/types.hpp"
+#include "engine/core/types.hpp"
 
 using namespace zn;
 
