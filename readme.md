@@ -1,4 +1,4 @@
-zCraft
+﻿zCraft
 ======
 
 A C++ voxel game engine.
@@ -29,7 +29,7 @@ Early planned features
 - Faster voxel archive save format
 - Voxel sprites
 - And many little things in the code : see TODO comments
-- Simplex noise, mapgen optimization
+- mapgen optimization
 
 Downloads
 =========
@@ -58,18 +58,15 @@ The project is divided in several main parts :
 
 - zENG, namespace zn::
 
-This is a set of generic tools I wrote for making games.
+This is a set of generic tools I wrote for making games,
+and may be used for other projects than zCraft.
+It is heavily based on SFML, but some parts are independent.
+
 engine/	: Generic code for many things. Doesn't depend on zcraft/.
+engine/core/ : basic stuff that don't depend on anything but C++11.
 engine/opengl/ : Everything that is OpenGL-related is here.
 engine/bmfont/ : Implementation of a BMFont renderer. Depends on engine/opengl/.
 engine/system/ : OS-specific stuff (macros, threading, files...)
-
-- zCraft, namespace zcraft::
-
-zcraft/ : The voxel engine. It is based on the engine/ package.
-zcraft/games/ : Test-purpose minigames based on zcraft/.
-zcraft/cartographer/ : built-in map cartographer
-zcraft/mapgen/ : map generators
 
 - zENGui, namespace zn::ui::
 
@@ -79,6 +76,13 @@ project. All you have to do to use it is to provide your renderer and input.
 
 zengui/ : the core library
 zengui/plugin/ : additionnal features, input adapters, renderers...
+
+- zCraft, namespace zcraft::
+
+zcraft/ : The voxel engine. It is based on the engine/ package.
+zcraft/demos/ : Test-purpose demos.
+zcraft/cartographer/ : built-in map cartographer
+zcraft/mapgen/ : map generators
 
 - Experimental, namespace experimental::
 
