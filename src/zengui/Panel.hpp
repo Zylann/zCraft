@@ -20,7 +20,7 @@ namespace ui
 		Panel() : AContainer() {}
 		virtual ~Panel() {}
 
-		virtual render(IRenderer & r) override
+		virtual void render(IRenderer & r) override
 		{
 			if(r_theme != nullptr)
 				r_theme->drawPanel(r, *this);
