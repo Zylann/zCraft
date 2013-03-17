@@ -131,43 +131,47 @@ namespace zn
 		// Offsets borders of the rectangle :
 		// negative value means contracting,
 		// positive value means expanding.
-		inline void pad(const T p)
+		inline Rect<T> & pad(const T p)
 		{
 			min.x -= p;
 			min.y -= p;
 			max.x += p;
 			max.y += p;
+			return *this;
 		}
 
 		// Offsets borders of the rectangle :
 		// negative values means contracting,
 		// positive values means expanding.
-		inline void pad(const T x, const T y)
+		inline Rect<T> & pad(const T x, const T y)
 		{
 			min.x -= x;
 			min.y -= y;
 			max.x += x;
 			max.y += y;
+			return *this;
 		}
 
 		// Offsets borders of the rectangle :
 		// negative values means contracting,
 		// positive values means expanding.
-		inline void pad(const T minx, const T miny, const T maxx, const T maxy)
+		inline Rect<T> & pad(const T minx, const T miny, const T maxx, const T maxy)
 		{
 			min.x -= minx;
 			min.y -= miny;
 			max.x += maxx;
 			max.y += maxy;
+			return *this;
 		}
 
 		// Moves the rectangle by a vector
-		inline void offset(const T x, const T y)
+		inline Rect<T> & offset(const T x, const T y)
 		{
 			min.x += x;
 			min.y += y;
 			max.x += x;
 			max.y += y;
+			return *this;
 		}
 
 		// Moves the rectangle by a vector
