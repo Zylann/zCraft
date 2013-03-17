@@ -75,17 +75,17 @@ namespace ui
 		Margin m_margin;
 		Padding m_padding;
 
-		Align m_align = Align::NONE;
+		Align m_align = Align::NONE; // How the widget should use the space where it is
 
 		ITheme * r_theme = nullptr;
 
 		/* State */
 
-		bool m_visible; // Is the widget visible?
-		bool m_enabled; // Can we interact with the widget?
-		bool m_hovered; // Is the mouse over the widget?
-		bool m_pressed; // Are we pressing the widget (i.e. mouseDown) ?
-		bool m_focused; // Does this widget has the focus?
+		bool m_visible = true; // Is the widget visible?
+		bool m_enabled = true; // Can we interact with the widget?
+		bool m_hovered = false; // Is the mouse over the widget?
+		bool m_pressed = false; // Are we pressing the widget (i.e. mouseDown) ?
+		bool m_focused = false; // Does this widget has the focus?
 
 		bool m_blocksInput = true;
 
