@@ -9,55 +9,92 @@ This file is part of the zCraft project.
 
 #include "ShaderProgram.hpp"
 
-namespace experimental
+namespace zn
 {
 namespace gl
 {
-	ShaderProgram::ShaderProgram(
-			const std::string & vertSourcePath,
-			const std::string & fragSourcePath)
-	{
-		m_vertexSourcePath = vertSourcePath;
-		m_fragmentSourcePath = fragSourcePath;
-	}
-
 	ShaderProgram::~ShaderProgram()
 	{
+		unload();
+	}
+
+	void ShaderProgram::unload()
+	{
 		glDeleteProgram(m_programID);
+		m_programID = 0;
+
+		if(m_vertex != nullptr)
+		{
+			glDetachShader(m_programID, m_vertex->ID);
+			glDeleteShader(m_vertex->ID);
+			delete m_vertex;
+			m_vertex = nullptr;
+		}
+		if(m_geometry != nullptr)
+		{
+			glDetachShader(m_programID, m_geometry->ID);
+			glDeleteShader(m_geometry->ID);
+			delete m_geometry;
+			m_geometry = nullptr;
+		}
+		if(m_fragment != nullptr)
+		{
+			glDetachShader(m_programID, m_fragment->ID);
+			glDeleteShader(m_fragment->ID);
+			delete m_fragment;
+			m_fragment = nullptr;
+		}
 	}
 
 	bool ShaderProgram::load(
 			const std::string & vertSourcePath,
+			const std::string & geomSourcePath,
 			const std::string & fragSourcePath)
 	{
-		m_vertexSourcePath = vertSourcePath;
-		m_fragmentSourcePath = fragSourcePath;
-		return load();
-	}
-
-	bool ShaderProgram::load()
-	{
-		if(m_vertexSourcePath.empty() || m_fragmentSourcePath.empty())
+		if(vertSourcePath.empty() && geomSourcePath.empty() && fragSourcePath.empty())
 		{
-			std::cout << "ERROR: ShaderProgram::load(void): "
-				<< "a source path is empty." << std::endl;
+			std::cout << "ERROR: ShaderProgram::load: "
+				<< "all source paths are empty." << std::endl;
 			return false;
 		}
 
 		// Deletes the program if it was already loaded
-		glDeleteProgram(m_programID);
+		unload();
 
 		/* Create shaders */
 
+		GLuint sID;
+
 		// Vertex shader
-		if(!loadShader(m_vertexID, GL_VERTEX_SHADER, m_vertexSourcePath))
-			return false; // Failed
+		if(!vertSourcePath.empty()) // If specified
+		{
+			if(!loadShader(sID, GL_VERTEX_SHADER, vertSourcePath))
+			{
+				return false;
+			}
+			m_vertex = new Shader(sID, vertSourcePath);
+		}
+
+		// Geometry shader
+		if(!geomSourcePath.empty()) // If specified
+		{
+			if(!loadShader(sID, GL_GEOMETRY_SHADER, geomSourcePath))
+			{
+				unload(); // Cancel all
+				return false; // Failed
+			}
+			m_geometry = new Shader(sID, geomSourcePath);
+		}
 
 		// Pixel shader
-		if(!loadShader(m_fragmentID, GL_FRAGMENT_SHADER, m_fragmentSourcePath))
+		if(!fragSourcePath.empty()) // If specified
 		{
-			glDeleteShader(m_vertexID);
-			return false; // Failed
+			if(!loadShader(sID, GL_FRAGMENT_SHADER, fragSourcePath))
+			{
+				unload(); // Cancel all
+				return false; // Failed
+			}
+			m_fragment = new Shader(sID, fragSourcePath);
 		}
 
 		/* Link shaders into a program */
@@ -67,14 +104,18 @@ namespace gl
 		m_programID = glCreateProgram();
 
 		// Attach shaders to the program
-		glAttachShader(m_programID, m_vertexID);
-		glAttachShader(m_programID, m_fragmentID);
+		if(m_vertex != nullptr)
+			glAttachShader(m_programID, m_vertex->ID);
+		if(m_geometry != nullptr)
+			glAttachShader(m_programID, m_geometry->ID);
+		if(m_fragment != nullptr)
+			glAttachShader(m_programID, m_fragment->ID);
 
-		// Generic input shader variables
-		glBindAttribLocation(m_programID, ShaderIn::POSITION, "in_Position");
-		glBindAttribLocation(m_programID, ShaderIn::COLOR, "in_Color");
-		glBindAttribLocation(m_programID, ShaderIn::TEXCOORD0, "in_TexCoord0");
-		glBindAttribLocation(m_programID, ShaderIn::NORMAL, "in_Normal");
+		// Generic input shader variables (only for OpenGL3-based experimental version)
+//		glBindAttribLocation(m_programID, Attrib::POSITION, "in_Position");
+//		glBindAttribLocation(m_programID, Attrib::COLOR, "in_Color");
+//		glBindAttribLocation(m_programID, Attrib::TEXCOORD0, "in_TexCoord0");
+//		glBindAttribLocation(m_programID, Attrib::NORMAL, "in_Normal");
 
 		glLinkProgram(m_programID);
 
@@ -102,18 +143,9 @@ namespace gl
 
 			// Free memory and return
 			delete[] errorStr;
-			glDeleteProgram(m_programID);
-			// Don't leak shaders
-			glDeleteShader(m_vertexID);
-			glDeleteShader(m_fragmentID);
-
+			unload(); // Rollback
 			return false; // Error
 		}
-
-		/* Linked successfully, now detach shaders */
-
-		glDetachShader(m_programID, m_vertexID);
-		glDetachShader(m_programID, m_fragmentID);
 
 		return true; // Fine !
 	}
@@ -132,8 +164,8 @@ namespace gl
 		if(!sourceFile)
 		{
 			std::cout << "ERROR: ShaderProgram::loadShader: "
-				<< "Unable to read source file. "
-				<< "Cause : can't open, or file don't exists." << std::endl;
+				<< "Unable to read source file (" << sourcePath
+				<< "). Cause : can't open, or file don't exists." << std::endl;
 			return false;
 		}
 
@@ -193,15 +225,34 @@ namespace gl
 		return true; // Fine !
 	}
 
-	void ShaderProgram::setMatrix4(
-			std::string name, bool transpose, const Matrix4 & matrix)
+	void ShaderProgram::setUniform(const std::string & name, const float value)
 	{
-		// TODO ShaderProgram: map uniforms into an unordered_map
-		glUniformMatrix4fv(
-			glGetUniformLocation(m_programID, name.c_str()),
-			1, transpose, matrix.values());
+		glUniform1f(getUniformLocation(name), value);
 	}
 
+	void ShaderProgram::setUniformMat4(
+			const std::string & name, bool transpose, const float matrixValues[16])
+	{
+		glUniformMatrix4fv(
+			getUniformLocation(name),
+			1, transpose, matrixValues);
+	}
+
+	GLint ShaderProgram::getUniformLocation(const std::string & name)
+	{
+		GLint loc;
+		auto it = m_uniforms.find(name);
+		if(it == m_uniforms.end())
+		{
+			loc = glGetUniformLocation(m_programID, name.c_str());
+			m_uniforms[name] = loc;
+		}
+		else
+		{
+			loc = it->second;
+		}
+		return loc;
+	}
 
 } // namespace gl
 } // namespace zn

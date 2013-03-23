@@ -6,6 +6,7 @@ This file is part of the zCraft project.
 
 #include <iostream>
 #include "VertexColorArray.hpp"
+#include "engine/opengl/ShaderProgram.hpp"
 
 #define BUFFER_OFFSET(a) ((char*)nullptr + (a))
 
@@ -96,11 +97,11 @@ namespace gl
 		// Start using our buffer
 		glBindBuffer(GL_ARRAY_BUFFER, m_bufferID);
 
-		glEnableVertexAttribArray(ShaderIn::POSITION);
-		glEnableVertexAttribArray(ShaderIn::COLOR);
+		glEnableVertexAttribArray(zn::gl::Attrib::POSITION);
+		glEnableVertexAttribArray(zn::gl::Attrib::COLOR);
 
 		glVertexAttribPointer(
-			ShaderIn::POSITION,
+			zn::gl::Attrib::POSITION,
 			m_valuesPerVertex,
 			GL_FLOAT, // Vertex value type
 			GL_FALSE, // Don't normalize
@@ -108,7 +109,7 @@ namespace gl
 			BUFFER_OFFSET(m_verticesOffset));
 
 		glVertexAttribPointer(
-			ShaderIn::COLOR,
+			zn::gl::Attrib::COLOR,
 			m_valuesPerColor,
 			GL_UNSIGNED_BYTE, // Color value type
 			GL_FALSE, // Don't normalize
@@ -117,8 +118,8 @@ namespace gl
 
 		glDrawArrays(m_primitiveType, 0, m_vertexCount);
 
-		glDisableVertexAttribArray(ShaderIn::COLOR);
-		glDisableVertexAttribArray(ShaderIn::POSITION);
+		glDisableVertexAttribArray(zn::gl::Attrib::COLOR);
+		glDisableVertexAttribArray(zn::gl::Attrib::POSITION);
 	}
 
 	void VertexColorArray::host()

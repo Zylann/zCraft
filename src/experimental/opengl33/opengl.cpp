@@ -8,7 +8,8 @@ This file is part of the zCraft project.
 
 #include "engine/core/types.hpp"
 #include "opengl.hpp"
-#include "ShaderProgram.hpp"
+#include "engine/opengl/ShaderProgram.hpp"
+#include "Matrix4.hpp"
 
 using namespace zn;
 
@@ -21,8 +22,8 @@ namespace gl
 	// That's why I use dynamic allocation as a workaround.
 	// But that's not enough, later I will preferably write a classy renderer...
 
-	ShaderProgram * g_colorShader;
-	ShaderProgram * g_textureShader;
+	zn::gl::ShaderProgram * g_colorShader;
+	zn::gl::ShaderProgram * g_textureShader;
 	//u32 g_currentShader;
 	Matrix4 g_modelview;
 	Matrix4 g_projection;
@@ -50,18 +51,18 @@ namespace gl
 
 		/* Load shaders */
 
-		g_colorShader = new ShaderProgram();
+		g_colorShader = new zn::gl::ShaderProgram();
 		if(!g_colorShader->load(
-			"assets/shaders/basic3d.vert",
-			"assets/shaders/basic.frag"))
+			"assets/shaders/150/basic3d.vert", "",
+			"assets/shaders/150/basic.frag"))
 		{
 			return false;
 		}
 
-		g_textureShader = new ShaderProgram();
+		g_textureShader = new zn::gl::ShaderProgram();
 		if(!g_textureShader->load(
-			"assets/shaders/basic3d.vert",
-			"assets/shaders/textured.frag"))
+			"assets/shaders/150/basic3d.vert", "",
+			"assets/shaders/150/textured.frag"))
 		{
 			return false;
 		}
@@ -92,25 +93,25 @@ namespace gl
 	{
 		glUseProgram(g_colorShader->getID());
 
-		glEnableVertexAttribArray(ShaderIn::POSITION);
-		glEnableVertexAttribArray(ShaderIn::COLOR);
-		//glEnableVertexAttribArray(ShaderIn::TEXCOORD0);
-		//glEnableVertexAttribArray(ShaderIn::NORMAL);
+		glEnableVertexAttribArray(zn::gl::Attrib::POSITION);
+		glEnableVertexAttribArray(zn::gl::Attrib::COLOR);
+		//glEnableVertexAttribArray(Attrib::TEXCOORD0);
+		//glEnableVertexAttribArray(Attrib::NORMAL);
 	}
 
 	void endRender()
 	{
-		//glDisableVertexAttribArray(ShaderIn::NORMAL);
-		//glDisableVertexAttribArray(ShaderIn::TEXCOORD0);
-		glDisableVertexAttribArray(ShaderIn::COLOR);
-		glDisableVertexAttribArray(ShaderIn::POSITION);
+		//glDisableVertexAttribArray(Attrib::NORMAL);
+		//glDisableVertexAttribArray(Attrib::TEXCOORD0);
+		glDisableVertexAttribArray(zn::gl::Attrib::COLOR);
+		glDisableVertexAttribArray(zn::gl::Attrib::POSITION);
 
 		glFlush();
 	}
 
 	void color(u8 r, u8 g, u8 b, u8 a)
 	{
-		glVertexAttrib4f(ShaderIn::COLOR, r/255.f, g/255.f, b/255.f, a/255.f);
+		glVertexAttrib4f(zn::gl::Attrib::COLOR, r/255.f, g/255.f, b/255.f, a/255.f);
 	}
 
 	/*
@@ -142,9 +143,9 @@ namespace gl
 
 	void drawAxes()
 	{
-		glVertexAttribPointer(ShaderIn::POSITION, 3, GL_UNSIGNED_BYTE, GL_FALSE, 0, g_axes_positions);
+		glVertexAttribPointer(zn::gl::Attrib::POSITION, 3, GL_UNSIGNED_BYTE, GL_FALSE, 0, g_axes_positions);
 
-		glVertexAttribPointer(ShaderIn::COLOR, 3, GL_UNSIGNED_BYTE, GL_FALSE, 0, g_axes_colors);
+		glVertexAttribPointer(zn::gl::Attrib::COLOR, 3, GL_UNSIGNED_BYTE, GL_FALSE, 0, g_axes_colors);
 
 		glDrawArrays(GL_LINES, 0, 6);
 
@@ -170,16 +171,16 @@ namespace gl
 			tx, ty+th
 		};
 
-		glVertexAttribPointer(ShaderIn::POSITION, 2, GL_FLOAT, GL_FALSE, 0, positions);
-		//glEnableVertexAttribArray(ShaderIn::POSITION);
+		glVertexAttribPointer(zn::gl::Attrib::POSITION, 2, GL_FLOAT, GL_FALSE, 0, positions);
+		//glEnableVertexAttribArray(Attrib::POSITION);
 
-		glVertexAttribPointer(ShaderIn::TEXCOORD0, 2, GL_FLOAT, GL_FALSE, 0, texCoords);
-		//glEnableVertexAttribArray(ShaderIn::TEXCOORD0);
+		glVertexAttribPointer(zn::gl::Attrib::TEXCOORD0, 2, GL_FLOAT, GL_FALSE, 0, texCoords);
+		//glEnableVertexAttribArray(Attrib::TEXCOORD0);
 
 		glDrawArrays(GL_QUADS, 0, 4);
 
-		//glDisableVertexAttribArray(ShaderIn::TEXCOORD0);
-		//glDisableVertexAttribArray(ShaderIn::POSITION);
+		//glDisableVertexAttribArray(Attrib::TEXCOORD0);
+		//glDisableVertexAttribArray(Attrib::POSITION);
 	}
 
 	float g_cubePositions[6*4*3]

@@ -9,18 +9,6 @@ namespace experimental
 {
 namespace gl
 {
-	// These constants are used to identify generic shader attributes
-	// for OpenGL 3.x. They are not required by GL, but it's good to define
-	// them once for a custom render pipeline.
-	// >> See ShaderProgram
-	enum ShaderIn
-	{
-		POSITION = 0,
-		COLOR = 1,
-		TEXCOORD0 = 2,
-		NORMAL = 3
-	};
-
 	// Compiles required basic shaders and
 	// initializes all available OpenGL extensions using GLEW and returns true if success.
 	// Returns false and prints an error message if GLEW init failed,

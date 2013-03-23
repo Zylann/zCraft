@@ -135,17 +135,17 @@ namespace gl
 			tx, ty+th
 		};
 
-		glVertexAttribPointer(ShaderIn::POSITION, 2, GL_FLOAT, GL_FALSE, 0, positions);
-		glEnableVertexAttribArray(ShaderIn::POSITION);
+		glVertexAttribPointer(Attrib::POSITION, 2, GL_FLOAT, GL_FALSE, 0, positions);
+		glEnableVertexAttribArray(Attrib::POSITION);
 
-		glVertexAttribPointer(ShaderIn::TEXCOORD0, 2, GL_FLOAT, GL_FALSE, 0, texCoords);
-		glEnableVertexAttribArray(ShaderIn::TEXCOORD0);
+		glVertexAttribPointer(Attrib::TEXCOORD0, 2, GL_FLOAT, GL_FALSE, 0, texCoords);
+		glEnableVertexAttribArray(Attrib::TEXCOORD0);
 
 
 		glDrawArrays(GL_QUADS, 0, 4);
 
-		glDisableVertexAttribArray(ShaderIn::COLOR);
-		glDisableVertexAttribArray(ShaderIn::POSITION);
+		glDisableVertexAttribArray(Attrib::COLOR);
+		glDisableVertexAttribArray(Attrib::POSITION);
 	#endif // defined
 	}
 

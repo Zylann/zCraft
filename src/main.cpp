@@ -18,7 +18,7 @@ zengui/ 		depends on engine/, but can be made independent easily.
 engine/ has no project-scope dependency.
 
 Estimated total dev time
-- Marc Gilleron : 75h
+- Marc Gilleron : 76h
 
 */
 
@@ -33,6 +33,8 @@ Estimated total dev time
 #include "experimental/gui/GuiTest.hpp"
 
 using namespace zn;
+
+// TODO put zCraft functions into zcraft package
 
 int runGame(IGame * game)
 {
