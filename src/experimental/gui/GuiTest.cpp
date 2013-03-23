@@ -20,6 +20,14 @@ namespace experimental
 		m_guiTheme = new BasicTheme();
 		m_gui->setTheme(*m_guiTheme);
 
+		r_panel = new ui::Panel();
+		r_panel->setBounds(IntRect(100, 100, 300, 250));
+		m_gui->add(r_panel);
+
+		ui::Panel * panel2 = new ui::Panel();
+		panel2->setBounds(IntRect(400, 200, 600, 300));
+		m_gui->add(panel2);
+
 		return true;
 	}
 
@@ -40,6 +48,15 @@ namespace experimental
 
 	void GuiTest::update(const zn::Time & delta)
 	{
+		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
+		{
+			r_panel->setBounds(IntRect(r_panel->getBounds()).offset(-1, 0));
+		}
+		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
+		{
+			r_panel->setBounds(IntRect(r_panel->getBounds()).offset(1, 0));
+		}
+
 		m_gui->animate(delta.hz());
 	}
 

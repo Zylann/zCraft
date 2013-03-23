@@ -36,12 +36,21 @@ namespace experimental
 		const int width = panel.getBounds().width();
 		const int height = panel.getBounds().height();
 
-		static const Color borderColor(224, 224, 224);
-		static const Color fillColor(224, 224, 224);
+		static const Color borderColor(160, 160, 160);
+		static const Color borderColorHover(224, 224, 224);
+		static const Color fillColor(64, 64, 64);
+		static const Color fillColorPress(48, 48, 48);
 
-		r.setColor(borderColor);
-		r.drawRect(pos.x, pos.y, width, height, false);
-		r.setColor(fillColor);
+		if(panel.isHovered())
+			r.setColor(borderColorHover);
+		else
+			r.setColor(borderColor);
+		r.drawRect(pos.x, pos.y-1, width+1, height+1, false);
+
+		if(panel.isPressed())
+			r.setColor(fillColorPress);
+		else
+			r.setColor(fillColor);
 		r.drawRect(pos.x, pos.y, width, height, true);
 	}
 

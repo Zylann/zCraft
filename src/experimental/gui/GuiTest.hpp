@@ -5,6 +5,7 @@
 #include "engine/BasicGame.hpp"
 #include "zengui/Root.hpp"
 #include "zengui/plugin/SFMLInputAdapter.hpp"
+#include "zengui/Panel.hpp"
 
 namespace experimental
 {
@@ -13,6 +14,7 @@ namespace experimental
 	private :
 
 		zn::ui::Root * m_gui;
+		zn::ui::Panel * r_panel;
 		zn::ui::SFMLInputAdapter m_guiInput;
 		BasicTheme * m_guiTheme;
 

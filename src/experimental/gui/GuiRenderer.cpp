@@ -100,9 +100,9 @@ namespace experimental
 			glBegin(GL_LINE_LOOP);
 
 		glVertex2f(x, y);
-		glVertex2f(x + w, y);
-		glVertex2f(x + w, y + h);
-		glVertex2f(x, y + h);
+		glVertex2f(x+w-1 , y);
+		glVertex2f(x+w-1, y+h-1);
+		glVertex2f(x, y+h-1);
 
 		glEnd();
 	#else
