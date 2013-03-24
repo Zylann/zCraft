@@ -20,9 +20,6 @@ namespace zcraft
 
 	bool FlatMapViewer::init()
 	{
-		if(!gl::initExtensions(true, true))
-			return false;
-
 		//zcraft::init();
 
 		if(!m_font.loadFromFile("assets/fonts/arial32.fnt"))

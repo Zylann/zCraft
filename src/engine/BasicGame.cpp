@@ -42,6 +42,14 @@ namespace zn
 
 	void ABasicGame::start()
 	{
+		// OpenGL extensions
+		if(!gl::initExtensions(true, true))
+		{
+			std::cout << "ERROR: Failed to initialize required OpenGL extensions." << std::endl;
+			return;
+		}
+
+		// User-defined initialization
 		if(!init())
 		{
 			std::cout << "Failed to initialize the game." << std::endl;

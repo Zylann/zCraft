@@ -27,9 +27,6 @@ namespace zcraft
 
 	bool PerspectiveMapViewer::init()
 	{
-		if(!gl::initExtensions(true, true))
-			return false;
-
 		//zcraft::init(); // done in main()
 
 		// Load a font
