@@ -22,11 +22,13 @@ namespace zn
 
 		bool m_running;
 
+		sf::Clock m_deltaTimer; // Used for frame time
+
 	protected :
 
 		sf::Window m_window;
 
-		sf::Clock m_time;
+		sf::Clock m_time; // Used for app time
 
 	public :
 

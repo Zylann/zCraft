@@ -50,10 +50,11 @@ namespace zn
 
 		m_running = true;
 		m_time.restart();
+		m_deltaTimer.restart();
 
 		while(m_running)
 		{
-			Time delta(m_time.restart().asMilliseconds());
+			Time delta(m_deltaTimer.restart().asMilliseconds());
 
 			// Poll events
 			sf::Event event;
@@ -103,7 +104,7 @@ namespace zn
 
 		glPushMatrix();
 
-		// Configure basic view
+		// Pre-configure basic view
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
 
