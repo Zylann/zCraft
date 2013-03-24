@@ -225,12 +225,43 @@ namespace gl
 		return true; // Fine !
 	}
 
+	void ShaderProgram::bind()
+	{
+		glUseProgram(m_programID);
+	}
+
+	void ShaderProgram::unbind()
+	{
+		glUseProgram(0);
+	}
+
 	void ShaderProgram::setUniform(const std::string & name, const float value)
 	{
 		glUniform1f(getUniformLocation(name), value);
 	}
 
-	void ShaderProgram::setUniformMat4(
+	void ShaderProgram::setUniform(
+			const std::string & name,
+			const float x, const float y)
+	{
+		glUniform2f(getUniformLocation(name), x, y);
+	}
+
+	void ShaderProgram::setUniform(
+			const std::string & name,
+			const float x, const float y, const float z)
+	{
+		glUniform3f(getUniformLocation(name), x, y, z);
+	}
+
+	void ShaderProgram::setUniform(
+			const std::string & name,
+			const float x, const float y, const float z, const float w)
+	{
+		glUniform4f(getUniformLocation(name), x, y, z, w);
+	}
+
+	void ShaderProgram::setUniform(
 			const std::string & name, bool transpose, const float matrixValues[16])
 	{
 		glUniformMatrix4fv(

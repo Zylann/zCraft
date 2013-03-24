@@ -62,15 +62,42 @@ namespace gl
 			const std::string & geomSourcePath,
 			const std::string & fragSourcePath);
 
+		// load() shortcut with only vertex and fragment shader
+		inline bool load(
+			const std::string & vertSourcePath,
+			const std::string & fragSourcePath)
+		{
+			return load(vertSourcePath, "", fragSourcePath);
+		}
+
 		// Deletes the program and its shaders.
 		void unload();
 
 		// Returns the program's ID.
 		inline GLuint getID() const { return m_programID; }
 
-		void setUniform(const std::string & name, const float value);
+		// Starts using the program
+		void bind();
 
-		void setUniformMat4(
+		// Stops using the (any) program
+		void unbind();
+
+		//
+		// Uniforms
+		//
+
+		void setUniform(const std::string & name, const float x);
+
+		void setUniform(const std::string & name,
+						const float x, const float y);
+
+		void setUniform(const std::string & name,
+						const float x, const float y, const float z);
+
+		void setUniform(const std::string & name,
+						const float x, const float y, const float z, const float w);
+
+		void setUniform(
 			const std::string & name,
 			bool transpose, const float matrixValues[16]);
 
