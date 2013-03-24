@@ -8,6 +8,10 @@ The project is in an early stage of development, so many things can change
 on every new commit. I try to ensure that each version between pushes can
 be used without too much bugs or quirks.
 
+Note : the voxel part is only a layer over a set of packages I design
+for generic purpose (game structure, gui, core functionnalities),
+so this project is not only a voxel engine.
+
 ![Screenshot](http://zylannprods.fr/games/zcraft/screenshots/2013-02-19-crafted-zcraft.png)
 
 Current main features
