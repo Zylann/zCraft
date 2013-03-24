@@ -36,7 +36,7 @@ namespace zn
 
 		/// Get the unique instance of T.
 		/// It is created on first call.
-		static T * instance()
+		static T * get()
 		{
 			if(s_instance == nullptr)
 			{
