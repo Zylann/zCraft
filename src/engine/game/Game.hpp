@@ -40,6 +40,10 @@ namespace zn
 
 	};
 
+	// Convenience routine that runs the given game and handles top-level exceptions.
+	// Returns -1 if an exception occured, 0 otherwise.
+	int runGame(IGame * game);
+
 } // namespace zn
 
 #endif // ENGINE_GAME_HPP_INCLUDED

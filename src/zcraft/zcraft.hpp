@@ -7,11 +7,14 @@
 
 namespace zcraft
 {
-	// Initializes zcraft
+	// Initializes zcraft (called by the shell)
 	void init();
 
-	// De-initializes zcraft
+	// De-initializes zcraft (called by the shell)
 	void free();
+
+	// Runs the zCraft shell
+	int shell(int argc, char * argv[]);
 
 } // namespace zcraft
 
