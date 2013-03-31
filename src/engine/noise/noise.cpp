@@ -8,7 +8,7 @@ This file is part of the zCraft project.
 #include <iostream>
 
 #include "engine/noise/noise.hpp"
-#include "engine/interpolation.hpp"
+#include "engine/core/interpolation.hpp"
 
 // set at random
 #define RAND_SEQ_X 72699

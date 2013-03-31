@@ -7,6 +7,8 @@ This file is part of the zCraft project.
 #ifndef STRINGUTILS_HPP_INCLUDED
 #define STRINGUTILS_HPP_INCLUDED
 
+#include <string>
+
 namespace zn
 {
 	// TODO stringutils: use std::to_string and make standard functions

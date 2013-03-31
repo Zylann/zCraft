@@ -6,8 +6,8 @@ This file is part of the zCraft project.
 
 #include <sstream> // for debug stuff
 #include "zcraft/MapStreamThread.hpp"
-#include "zcraft/mapgen/MapGeneratorHeightmap.hpp"
-//#include "zcraft/mapgen/MapGeneratorCanyons.hpp"
+//#include "zcraft/mapgen/MapGeneratorHeightmap.hpp"
+#include "zcraft/mapgen/MapGeneratorCanyons.hpp"
 //#include "zcraft/mapgen/MapGeneratorGrid.hpp"
 
 //#define PROFILE_BLOCK_GENERATION
@@ -24,8 +24,8 @@ namespace zcraft
 	: 	AThread("MapStreamThread"),
 		m_loader(worldDir)
 	{
-		m_generator = new MapGeneratorHeightmap(genSeed);
-//		m_generator = new MapGeneratorCanyons(genSeed);
+//		m_generator = new MapGeneratorHeightmap(genSeed);
+		m_generator = new MapGeneratorCanyons(genSeed);
 //		m_generator = new MapGeneratorGrid(genSeed);
 	}
 

@@ -12,7 +12,7 @@ This file is part of the zCraft project.
 #include "experimental/opengl33/game.hpp"
 #include "experimental/opengl33/Scene.hpp"
 #include "experimental/opengl33/AxesSceneNode.hpp"
-#include "experimental/opengl33/ShaderProgram.hpp"
+#include "engine/opengl/ShaderProgram.hpp"
 #include "experimental/opengl33/opengl.hpp"
 
 using namespace zn;
