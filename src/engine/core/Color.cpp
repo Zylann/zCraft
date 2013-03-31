@@ -69,10 +69,10 @@ namespace zn
 
 	void Color::setFromRGBA32(unsigned int hex)
 	{
-						a = hex & 0xf;
-		hex = hex >> 8;	b = hex & 0xf;
-		hex = hex >> 8; g = hex & 0xf;
-		hex = hex >> 8; r = hex & 0xf;
+						a = hex & 0xff;
+		hex = hex >> 8;	b = hex & 0xff;
+		hex = hex >> 8; g = hex & 0xff;
+		hex = hex >> 8; r = hex & 0xff;
 	}
 
 	u32 Color::asRGBA32() const
