@@ -86,7 +86,7 @@ namespace ui
 
 		case sf::Keyboard::Key::Add : 		return Keyboard::Key::ADD;
 		case sf::Keyboard::Key::BackSlash : return Keyboard::Key::BACKSLASH;
-		case sf::Keyboard::Key::BackSpace : return Keyboard::Key::BACK;
+		case sf::Keyboard::Key::BackSpace :	return Keyboard::Key::BACK;
 		case sf::Keyboard::Key::Comma : 	return Keyboard::Key::COMMA;
 		case sf::Keyboard::Key::Dash :		return Keyboard::Key::DASH;
 		case sf::Keyboard::Key::Delete :	return Keyboard::Key::DELETE;
@@ -123,7 +123,7 @@ namespace ui
 		case sf::Keyboard::Key::Subtract :	return Keyboard::Key::SUBTRACT;
 		case sf::Keyboard::Key::Tab :		return Keyboard::Key::TAB;
 		case sf::Keyboard::Key::Tilde :		return Keyboard::Key::TILDE;
-		case sf::Keyboard::Key::Unknown :	return Keyboard::Key::UNKNOWN;
+//		case sf::Keyboard::Key::Unknown :	return Keyboard::Key::UNKNOWN;
 		case sf::Keyboard::Key::Up :		return Keyboard::Key::UP;
 
 		case sf::Keyboard::Key::F1 :		return Keyboard::Key::F1;

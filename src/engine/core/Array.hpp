@@ -141,15 +141,15 @@ namespace zn
 		}
 
 		// Returns the data size of an element in bytes
-		inline u32 elementSize() const
+		inline u32 elementByteCount() const
 		{
 			return sizeof(T);
 		}
 
 		// Returns the size of the data contained in the array in bytes
-		inline u32 dataSize() const
+		inline u32 byteCount() const
 		{
-			return size() * elementSize();
+			return m_size * elementByteCount();
 		}
 
 		// Provides read-only access to raw array data

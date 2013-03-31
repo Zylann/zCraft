@@ -142,8 +142,8 @@ namespace gl
 
 		//std::cout << "Hosting VBO..." << std::endl;
 
-		const u32 verticesDataSize = m_vertices.dataSize();
-		const u32 colorsDataSize = m_colors.dataSize();
+		const u32 verticesDataSize = m_vertices.byteCount();
+		const u32 colorsDataSize = m_colors.byteCount();
 
 		m_verticesOffset = 0; // At the beginning
 		m_colorsOffset = verticesDataSize; // After vertices

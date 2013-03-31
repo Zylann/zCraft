@@ -12,7 +12,7 @@ This file is part of the zCraft project.
 
 #include "engine/opengl/opengl.hpp"
 #include "engine/core/Vector2.hpp"
-#include "engine/core/Game.hpp"
+#include "engine/game/Game.hpp"
 
 namespace zn
 {

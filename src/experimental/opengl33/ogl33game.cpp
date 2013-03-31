@@ -9,11 +9,11 @@ This file is part of the zCraft project.
 #include <SFML/Graphics.hpp>
 #include "engine/system/Time.hpp"
 
-#include "experimental/opengl33/game.hpp"
+#include "experimental/opengl33/ogl33game.hpp"
 #include "experimental/opengl33/Scene.hpp"
 #include "experimental/opengl33/AxesSceneNode.hpp"
 #include "engine/opengl/ShaderProgram.hpp"
-#include "experimental/opengl33/opengl.hpp"
+#include "experimental/opengl33/opengl3.hpp"
 
 using namespace zn;
 

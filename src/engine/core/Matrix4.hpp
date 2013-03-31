@@ -4,12 +4,12 @@ Copyright (C) 2010-2012 Marc GILLERON
 This file is part of the zCraft project.
 */
 
-#ifndef MATRIX4_HPP_INCLUDED
-#define MATRIX4_HPP_INCLUDED
+#ifndef ZN_MATRIX4_HPP_INCLUDED
+#define ZN_MATRIX4_HPP_INCLUDED
 
-#include "engine/core/Vector3.hpp"
+#include "Vector3.hpp"
 
-namespace experimental
+namespace zn
 {
 	class Matrix4
 	{
@@ -78,6 +78,7 @@ namespace experimental
 		float m_v[16];
 	};
 
-} // namespace experimental
+} // namespace zn
 
-#endif // MATRIX4_HPP_INCLUDED
+#endif // ZN_MATRIX4_HPP_INCLUDED
+

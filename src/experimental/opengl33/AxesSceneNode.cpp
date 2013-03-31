@@ -5,7 +5,7 @@ This file is part of the zCraft project.
 */
 
 //#include <iostream>
-#include "opengl.hpp"
+#include "opengl3.hpp"
 #include "AxesSceneNode.hpp"
 
 namespace experimental

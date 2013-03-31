@@ -4,13 +4,11 @@ Copyright (C) 2010-2012 Marc GILLERON
 This file is part of the zCraft project.
 */
 
-#include <cstring>
+#include <cstring> // For memcpy
 #include <cmath>
 #include "Matrix4.hpp"
 
-using namespace zn;
-
-namespace experimental
+namespace zn
 {
 	Matrix4::Matrix4()
 	{
@@ -228,5 +226,5 @@ namespace experimental
 		m_v[15] = 1;
 	}
 
-} // namespace experimental
+} // namespace zn
 

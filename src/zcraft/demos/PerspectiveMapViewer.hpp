@@ -7,9 +7,11 @@ This file is part of the zCraft project.
 #ifndef ZCRAFT_PERSPECTIVEMAPVIEWER_HPP_INCLUDED
 #define ZCRAFT_PERSPECTIVEMAPVIEWER_HPP_INCLUDED
 
-#include "engine/BasicGame.hpp"
+#include "engine/game/BasicGame.hpp"
 #include "engine/bmfont/Font.hpp"
 #include "engine/opengl/VertexColorArray.hpp"
+#include "engine/opengl/ShaderProgram.hpp"
+
 #include "engine/core/raycast.hpp"
 #include "zcraft/zcraft.hpp"
 #include "zcraft/BlockMeshMap.hpp"
@@ -35,6 +37,8 @@ namespace zcraft
 		BlockMeshMap m_meshMap; // Here is the graphical representation of the map
 		MapStreamer * m_mapStreamer = nullptr; // How to keep the map updated around us
 		zn::RayCaster * m_raycaster = nullptr; // How to know which voxel we are pointing
+		zn::gl::ShaderProgram m_shaderProgram;
+		float m_depthSliceZ = 0;
 
 	public :
 

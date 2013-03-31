@@ -1,7 +1,13 @@
+/*
+FlatMapViewer.hpp
+Copyright (C) 2010-2012 Marc GILLERON
+This file is part of the zCraft project.
+*/
+
 #ifndef FLATMAPVIEWER_HPP_INCLUDED
 #define FLATMAPVIEWER_HPP_INCLUDED
 
-#include "engine/BasicGame.hpp"
+#include "engine/game/BasicGame.hpp"
 #include "engine/bmfont/Font.hpp"
 #include "engine/opengl/Camera2D.hpp"
 #include "zcraft/zcraft.hpp"

@@ -7,9 +7,9 @@ This file is part of the zCraft project.
 #include <iostream>
 
 #include "engine/core/types.hpp"
-#include "opengl.hpp"
+#include "opengl3.hpp"
 #include "engine/opengl/ShaderProgram.hpp"
-#include "Matrix4.hpp"
+#include "engine/core/Matrix4.hpp"
 
 using namespace zn;
 

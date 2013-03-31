@@ -34,7 +34,7 @@ namespace zcraft
 			return false;
 
 		// Init camera
-		m_camera.setPosition(Vector3f(0, -5, 32));
+		m_camera.setPosition(Vector3f(0, -5, 160));
 		m_camera.updateViewport(Vector2f(
 			m_window.getSize().x, m_window.getSize().y));
 
@@ -50,6 +50,9 @@ namespace zcraft
 			return this->m_map.getVoxel(pos).properties().solid;
 		};
 		m_raycaster = new zn::RayCaster(isSolidVoxel, 16);
+
+		if(!m_shaderProgram.load("assets\\shaders\\basic.vert", "assets\\shaders\\depthslice.frag"))
+			return false;
 
 		return true;
 	}
@@ -68,12 +71,17 @@ namespace zcraft
 		Vector3i pos(camPos.x, camPos.y, camPos.z);
 		Vector3i bpos = Block::toBlockCoords(pos);
 		m_mapStreamer->update(bpos);
+
+		m_depthSliceZ += 48.f * delta.s();
+		if(m_depthSliceZ > 128.f)
+			m_depthSliceZ = 0;
 	}
 
 	void PerspectiveMapViewer::renderScene(const zn::Time & delta)
 	{
 		//glClearColor(0.1f, 0.5f, 0.9f, 1);
-		glClearColor(0.5f, 0.75f, 1.0f, 1);
+		glClearColor(0,0,0,1);
+//		glClearColor(0.5f, 0.75f, 1.0f, 1);
 		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_LINE_SMOOTH);
 		glEnable(GL_CULL_FACE);
@@ -90,7 +98,13 @@ namespace zcraft
 		glDisable(GL_BLEND);
 
 		// Draw the map
+		m_shaderProgram.bind();
+		m_shaderProgram.setUniform("depth", m_depthSliceZ);
+		m_shaderProgram.setUniform("interval", 4.5f);
+		m_shaderProgram.setUniform("sliceColor", 1, 1, 1, 1);
+//		m_shaderProgram.setUniform("time", m_time.getElapsedTime().asSeconds());
 		m_meshMap.drawAll();
+		m_shaderProgram.unbind();
 
 		// Pointed voxel
 		if(m_raycaster->isHit)

@@ -2,7 +2,7 @@
 #define ENGINE_TRANSFORMSTACK_HPP_INCLUDED
 
 #include <stack>
-#include "Matrix4.hpp"
+#include "engine/core/Matrix4.hpp"
 
 namespace experimental
 {
@@ -16,7 +16,7 @@ namespace experimental
 
 		void reset();
 
-		void set(const Matrix4 & m);
+		void set(const zn::Matrix4 & m);
 
 		void translate(const float x, const float y, const float z);
 
@@ -26,14 +26,14 @@ namespace experimental
 
 		void rotate(const float a, float ax, float ay, float az);
 
-		inline const Matrix4 & getMatrix() const { return m_matrix; }
+		inline const zn::Matrix4 & getMatrix() const { return m_matrix; }
 
 	private :
 
-		Matrix4 m_op1; // Used for operations
-		Matrix4 m_op2; // Used for operations
-		Matrix4 m_matrix; // Transformation matrix
-		std::stack<Matrix4> m_stack;
+		zn::Matrix4 m_op1; // Used for operations
+		zn::Matrix4 m_op2; // Used for operations
+		zn::Matrix4 m_matrix; // Transformation matrix
+		std::stack<zn::Matrix4> m_stack;
 
 	};
 

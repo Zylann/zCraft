@@ -1,7 +1,7 @@
 #ifndef TWEENTEST_HPP_INCLUDED
 #define TWEENTEST_HPP_INCLUDED
 
-#include "engine/BasicGame.hpp"
+#include "engine/game/BasicGame.hpp"
 
 namespace experimental
 {

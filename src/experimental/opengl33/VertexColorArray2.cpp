@@ -5,7 +5,7 @@ This file is part of the zCraft project.
 */
 
 #include <iostream>
-#include "VertexColorArray.hpp"
+#include "VertexColorArray2.hpp"
 #include "engine/opengl/ShaderProgram.hpp"
 
 #define BUFFER_OFFSET(a) ((char*)nullptr + (a))
@@ -132,8 +132,8 @@ namespace gl
 
 		//std::cout << "Hosting VBO..." << std::endl;
 
-		const u32 verticesDataSize = m_vertices.dataSize();
-		const u32 colorsDataSize = m_colors.dataSize();
+		const u32 verticesDataSize = m_vertices.byteCount();
+		const u32 colorsDataSize = m_colors.byteCount();
 
 		m_verticesOffset = 0; // At the beginning
 		m_colorsOffset = verticesDataSize; // After vertices

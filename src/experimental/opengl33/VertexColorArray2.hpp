@@ -8,7 +8,7 @@ This file is part of the zCraft project.
 #define EXPERIMENTAL_GL_VERTEXCOLORARRAY_HPP_INCLUDED
 
 #include "engine/core/Array.hpp"
-#include "opengl.hpp"
+#include "opengl3.hpp"
 
 namespace experimental
 {

@@ -2,7 +2,7 @@
 #define EXPERIMENTAL_TESTGUI_H_INCLUDED
 
 #include "BasicTheme.hpp"
-#include "engine/BasicGame.hpp"
+#include "engine/game/BasicGame.hpp"
 #include "zengui/Root.hpp"
 #include "zengui/plugin/SFMLInputAdapter.hpp"
 #include "zengui/Panel.hpp"
