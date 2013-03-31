@@ -16,16 +16,20 @@ namespace zn
 		Time(u32 ms) : m_millis(ms)
 		{}
 
+		// Returns the time value in seconds
 		inline f32 s() const
 		{
 			return (f32)m_millis / 1000.f;
 		}
 
+		// Returns the time value in milliseconds
 		inline s32 ms() const
 		{
 			return m_millis;
 		}
 
+		// Returns the time frequency in hertz.
+		// Returns -1 if the time is 0.
 		inline f32 hz() const
 		{
 			const float seconds = s();
