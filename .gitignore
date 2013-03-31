@@ -13,3 +13,7 @@ callstack.txt
 *.cbp
 *.depend
 *.layout
+
+#QtCreator
+*.pro
+*.pro.user
