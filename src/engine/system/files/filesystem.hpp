@@ -1,5 +1,5 @@
-#ifndef ENGINE_FILESYSTEM_HPP_INCLUDED
-#define ENGINE_FILESYSTEM_HPP_INCLUDED
+#ifndef ZN_FILESYSTEM_HPP_INCLUDED
+#define ZN_FILESYSTEM_HPP_INCLUDED
 
 #include <string>
 
@@ -36,6 +36,6 @@ namespace fs
 } // namespace fs
 } // namespace util
 
-#endif // ENGINE_FILESYSTEM_HPP_INCLUDED
+#endif // ZN_FILESYSTEM_HPP_INCLUDED
 
 

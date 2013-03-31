@@ -4,8 +4,8 @@ Copyright (C) 2010-2012 Marc GILLERON
 This file is part of the zCraft project.
 */
 
-#ifndef ENG_TYPES_HPP_INCLUDED
-#define ENG_TYPES_HPP_INCLUDED
+#ifndef ZN_TYPES_HPP_INCLUDED
+#define ZN_TYPES_HPP_INCLUDED
 
 #include "engine/config.hpp"
 
@@ -23,4 +23,4 @@ namespace zn
 	typedef double f64;
 }
 
-#endif // ENG_TYPES_HPP_INCLUDED
+#endif // ZN_TYPES_HPP_INCLUDED
