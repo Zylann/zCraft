@@ -24,15 +24,15 @@ namespace fs
 #if defined(OS_WINDOWS)
 
     bool isPathExists(std::string path)
-    {
-        return (GetFileAttributes(path.c_str()) != INVALID_FILE_ATTRIBUTES);
+	{
+		return (GetFileAttributesA(path.c_str()) != INVALID_FILE_ATTRIBUTES);
     }
 
     bool makeDir(std::string path)
     {
         if(path.empty())
             return false;
-        bool success = CreateDirectory(path.c_str(), NULL);
+		bool success = CreateDirectoryA(path.c_str(), NULL);
         if(success)
             return true;
         if(GetLastError() == ERROR_ALREADY_EXISTS)
@@ -47,11 +47,11 @@ namespace fs
     {
         std::string nodeName, fileName;
         bool searchResult;
-        WIN32_FIND_DATA findData;
+		WIN32_FIND_DATAA findData;
 
         content.dirPath = dirPath;
         std::string path = dirPath + "\\*.*";
-        HANDLE l_searchHandle = FindFirstFile(path.c_str(), & findData);
+		HANDLE l_searchHandle = FindFirstFileA(path.c_str(), & findData);
 
         if(l_searchHandle == INVALID_HANDLE_VALUE)
         {
@@ -59,7 +59,7 @@ namespace fs
             return false;
         }
 
-        while( (searchResult = FindNextFile(l_searchHandle, &findData)) == true )
+		while( (searchResult = FindNextFileA(l_searchHandle, &findData)) == true )
         {
             bool isDirectory = false;
             if(findData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
