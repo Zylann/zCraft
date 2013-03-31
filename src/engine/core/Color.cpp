@@ -15,7 +15,7 @@ namespace zn
 
 	Color::Color(unsigned int hex)
 	{
-		setFromHexRGBA(hex);
+		setFromRGBA32(hex);
 	}
 
 	Color::Color(u8 r0, u8 g0, u8 b0, u8 a0) : r(r0), g(g0), b(b0), a(a0)
@@ -67,7 +67,7 @@ namespace zn
 		a = other.a;
 	}
 
-	void Color::setFromHexRGBA(unsigned int hex)
+	void Color::setFromRGBA32(unsigned int hex)
 	{
 						a = hex & 0xf;
 		hex = hex >> 8;	b = hex & 0xf;
@@ -75,13 +75,30 @@ namespace zn
 		hex = hex >> 8; r = hex & 0xf;
 	}
 
-	unsigned int Color::asHexRGBA() const
+	u32 Color::asRGBA32() const
 	{
-		unsigned int hex = r;
-		hex << 8; hex |= g;
-		hex << 8; hex |= b;
-		hex << 8; hex |= a;
+		u32 hex = r;
+		hex = hex << 8; hex |= g;
+		hex = hex << 8; hex |= b;
+		hex = hex << 8; hex |= a;
 		return hex;
+	}
+
+	u16 Color::asRGBA16() const
+	{
+		u16 oct = r >> 4;
+		oct = oct << 8; oct |= g >> 4;
+		oct = oct << 8; oct |= b >> 4;
+		oct = oct << 8; oct |= a >> 4;
+		return oct;
+	}
+
+	void Color::multiply(float s)
+	{
+		r = math::min((f32)r * s, 255.f);
+		g = math::min((f32)g * s, 255.f);
+		b = math::min((f32)b * s, 255.f);
+		a = math::min((f32)a * s, 255.f);
 	}
 
 	void Color::multiplyRGB(float s)
@@ -89,7 +106,6 @@ namespace zn
 		r = math::min((f32)r * s, 255.f);
 		g = math::min((f32)g * s, 255.f);
 		b = math::min((f32)b * s, 255.f);
-		a = math::min((f32)a * s, 255.f);
 	}
 
 	void Color::multiplyU8(u8 ku)

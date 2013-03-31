@@ -60,16 +60,22 @@ namespace zn
 		void set(Color other);
 
 		// Sets the color to an hexadecimal-specified color (RGBA)
-		void setFromHexRGBA(unsigned int hex);
+		void setFromRGBA32(unsigned int hex);
 
 		// Gets the color as hexadecimal RGBA color
-		unsigned int asHexRGBA() const;
+		u32 asRGBA32() const;
+
+		// Gets the color as hexadecimal 16-bit RGBA color
+		u16 asRGBA16() const;
 
 		// Converts the object to a human-readable form
 		std::string toString() const;
 
 		// Multiplies RGB values by a scalar (alpha is ignored)
 		void multiplyRGB(float s);
+
+		// Multiplies RGBA values by a scalar
+		void multiply(float s);
 
 		// Multiplies RGBA values by a scalar given in [0,255].
 		// It will be treated as a ratio.
