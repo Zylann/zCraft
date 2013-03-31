@@ -4,8 +4,8 @@ Copyright (C) 2010-2012 Marc GILLERON
 This file is part of the zCraft project.
 */
 
-#ifndef ENGINE_THREAD_HPP_INCLUDED
-#define ENGINE_THREAD_HPP_INCLUDED
+#ifndef ZN_THREAD_HPP_INCLUDED
+#define ZN_THREAD_HPP_INCLUDED
 
 #include <iostream>
 #include <SFML/System.hpp>
@@ -129,6 +129,6 @@ namespace zn
 
 } // namespace zn
 
-#endif // ENGINE_THREAD_HPP_INCLUDED
+#endif // ZN_THREAD_HPP_INCLUDED
 
 

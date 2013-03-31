@@ -4,8 +4,8 @@ Copyright (C) 2010-2012 Marc GILLERON
 This file is part of the zCraft project.
 */
 
-#ifndef ENGINE_MUTEX_HPP_INCLUDED
-#define ENGINE_MUTEX_HPP_INCLUDED
+#ifndef ZN_MUTEX_HPP_INCLUDED
+#define ZN_MUTEX_HPP_INCLUDED
 
 /* Header-only */
 
@@ -17,33 +17,34 @@ namespace zn
 		Wrapper class for mutexes.
 		SFML backend.
 	**/
-	// TODO Mutex: use an attribute instead of inheriting, because the base has no virtual destructor.
-	class Mutex : private sf::Mutex
+
+	class Mutex
 	{
 	private :
 
+		sf::Mutex m_mutex;
 		bool m_locked; // tells if the mutex is locked
 
 	public :
 
-		Mutex() : sf::Mutex()
+		Mutex()
 		{
 			m_locked = false;
 		}
 
 		void lock()
 		{
-			sf::Mutex::lock();
+			m_mutex.lock();
 			m_locked = true;
 		}
 
 		void unlock()
 		{
+			m_mutex.unlock();
 			m_locked = false;
-			sf::Mutex::unlock();
 		}
 
-		bool isLocked() const
+		inline bool isLocked() const
 		{
 			return m_locked;
 		}
@@ -71,4 +72,6 @@ namespace zn
 
 } // namespace zn
 
-#endif // ENGINE_MUTEX_HPP_INCLUDED
+#endif // ZN_MUTEX_HPP_INCLUDED
+
+
