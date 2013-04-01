@@ -122,7 +122,7 @@ namespace ui
 		if(it != m_children.end())
 		{
 			m_children.erase(it);
-			m_children.push_back(child);
+			m_children.push_front(child);
 		}
 	}
 
