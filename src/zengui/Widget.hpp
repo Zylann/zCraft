@@ -225,7 +225,7 @@ namespace ui
 		virtual void render(IRenderer & r);
 
 		// Animates the widget for a given time delta (in seconds)
-		virtual void animate(float dt) {};
+		virtual void animate(float dt) {}
 
 	protected :
 
