@@ -118,6 +118,7 @@ namespace ui
 		if(r_parent != nullptr)
 		{
 			r_parent->focusChild(this);
+			bringToFront();
 		}
 		else
 			setFocused(true);
