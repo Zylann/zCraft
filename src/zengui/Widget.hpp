@@ -180,6 +180,9 @@ namespace ui
 		// Warning: this is just a setter, other widgets will not loose focus !
 		inline void setFocused(bool f) { m_focused = f; }
 
+		// Sets the widget as hovered, and triggers onMouseOver/onMouseQuit
+		void setHovered(bool h);
+
 		virtual void show();
 		virtual void hide();
 
@@ -201,7 +204,7 @@ namespace ui
 
 		inline const std::string & getID() const { return m_ID; }
 
-		// Note : despite no ID unicity check isn't done,
+		// Note : despite ID unicity check isn't done,
 		// the ID we specify have to be set to a unique value,
 		// because it should matter in future updates (this is also why I
 		// made a getter and a setter instead of putting the ID public).

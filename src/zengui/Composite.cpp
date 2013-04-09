@@ -153,21 +153,35 @@ namespace ui
 		if(!isVisible())
 			return false;
 
+		bool consumed = false;
+
 		// Fetch children first
 		for(auto & w : m_children)
 		{
 			if(w->isVisible())
 			{
-				if(w->processInput(e))
+				if(e.type == InputEvent::MOUSE_MOVED)
 				{
-					if(w->blocksInput())
-						return true;
+					if(consumed)
+						w->setHovered(false);
+					else
+						w->setHovered(w->getBounds().contains(e.mousePos));
+				}
+
+				if(!consumed)
+				{
+					if(w->processInput(e))
+					{
+						if(w->blocksInput())
+							consumed = true;
+					}
 				}
 			}
 		}
 
-		// Then process the event for the composite itself
-		return IInputListener::processInput(e);
+		if(!consumed) // Then process the event for the composite itself
+			return IInputListener::processInput(e);
+		return consumed;
 	}
 
 	void AComposite::render(IRenderer & r)

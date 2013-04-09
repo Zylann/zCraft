@@ -177,17 +177,11 @@ namespace ui
 	{
 	}
 
-	/*
-		Input
-	*/
-
-	// TODO Widget: use m_blocksInput
-
-	bool AWidget::mouseMoved(int oldX, int oldY, int newX, int newY)
+	void AWidget::setHovered(bool h)
 	{
 		if(m_hovered)
 		{
-			if(!m_bounds.contains(newX, newY))
+			if(!h)
 			{
 				m_hovered = false;
 				onMouseQuit();
@@ -195,14 +189,22 @@ namespace ui
 		}
 		else
 		{
-			if(m_bounds.contains(newX, newY))
+			if(h)
 			{
 				m_hovered = true;
 				onMouseEnter();
 			}
 		}
+	}
 
-		return false;
+	/*
+		Input
+	*/
+
+	bool AWidget::mouseMoved(int oldX, int oldY, int newX, int newY)
+	{
+		// Note : AComposite takes care of setting hover flags
+		return m_bounds.contains(newX, newY);
 	}
 
 	bool AWidget::mousePressed(Mouse::Button button)
