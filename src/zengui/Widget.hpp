@@ -46,7 +46,7 @@ namespace ui
 	};
 
 	class Root;
-	class AContainer;
+	class AComposite;
 	class ISkin;
 	class IRenderer;
 
@@ -93,7 +93,7 @@ namespace ui
 
 		// Note : "r_" means that we use this pointer as a reference.
 		// we don't have the right to delete pointed data.
-		AContainer * r_parent = nullptr;
+		AComposite * r_parent = nullptr;
 
 		// This is a user-set identifier that can be used for debug,
 		// style or script selection. Empty value is ignored.
@@ -192,7 +192,7 @@ namespace ui
 
 		// Returns the parent of the widget.
 		// If null, the widget is then the top-level (Root).
-		inline AContainer * getParent() const { return r_parent; }
+		inline AComposite * getParent() const { return r_parent; }
 
 		// Get top-level widget by recursive search.
 		virtual Root * getRoot();
@@ -211,7 +211,7 @@ namespace ui
 		// This is specifically used when the widget is added to a container.
 		// Do NOT use this method outside that case.
 		// Will not work if the widget already have a parent.
-		void setParent(AContainer * w);
+		void setParent(AComposite * w);
 
 		inline bool blocksInput() const { return m_blocksInput; }
 

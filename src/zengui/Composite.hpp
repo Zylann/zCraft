@@ -4,8 +4,8 @@ Copyright (C) 2010-2012 Marc GILLERON
 This file is part of the zCraft project.
 */
 
-#ifndef ZENGUI_CONTAINER_HPP_INCLUDED
-#define ZENGUI_CONTAINER_HPP_INCLUDED
+#ifndef ZENGUI_COMPOSITE_HPP_INCLUDED
+#define ZENGUI_COMPOSITE_HPP_INCLUDED
 
 #include "Widget.hpp"
 
@@ -13,7 +13,7 @@ namespace zn
 {
 namespace ui
 {
-	class AContainer : public AWidget
+	class AComposite : public AWidget
 	{
 	protected :
 
@@ -25,9 +25,9 @@ namespace ui
 
 	public :
 
-		AContainer() : AWidget() {}
+		AComposite() : AWidget() {}
 
-		virtual ~AContainer()
+		virtual ~AComposite()
 		{
 			eraseAll();
 		}
@@ -111,4 +111,4 @@ namespace ui
 } // namespace ui
 } // namespace zn
 
-#endif // ZENGUI_CONTAINER_HPP_INCLUDED
+#endif // ZENGUI_COMPOSITE_HPP_INCLUDED

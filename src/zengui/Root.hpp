@@ -7,7 +7,7 @@ This file is part of the zCraft project.
 #ifndef ZENGUI_ROOT_HPP_INCLUDED
 #define ZENGUI_ROOT_HPP_INCLUDED
 
-#include "Container.hpp"
+#include "Composite.hpp"
 #include "Renderer.hpp"
 
 namespace zn
@@ -20,7 +20,7 @@ namespace ui
 		Note: it could be a singleton, but I don't want it to be accessible
 		from Everywhere...
 	*/
-	class Root : public AContainer
+	class Root : public AComposite
 	{
 	private :
 

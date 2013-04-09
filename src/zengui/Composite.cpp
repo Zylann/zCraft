@@ -4,14 +4,14 @@ Copyright (C) 2010-2012 Marc GILLERON
 This file is part of the zCraft project.
 */
 
-#include "Container.hpp"
+#include "Composite.hpp"
 #include "Skin.hpp"
 
 namespace zn
 {
 namespace ui
 {
-	void AContainer::setSkin(ISkin & theme, bool recursive)
+	void AComposite::setSkin(ISkin & theme, bool recursive)
 	{
 		r_skin = &theme;
 		if(recursive)
@@ -21,17 +21,17 @@ namespace ui
 		}
 	}
 
-	bool AContainer::checkChild(const AWidget * child, const std::string & from)
+	bool AComposite::checkChild(const AWidget * child, const std::string & from)
 	{
 		if(child == nullptr)
 		{
-			std::cout << "ERROR: AContainer::" << from << ": "
+			std::cout << "ERROR: AComposite::" << from << ": "
 				<< "given widget is null." << std::endl;
 			return false;
 		}
 		if(child == this)
 		{
-			std::cout << "ERROR: AContainer::" << from << ": "
+			std::cout << "ERROR: AComposite::" << from << ": "
 				<< "can't do that with self."
 				<< "ID=\"" << child->getID() << '"' << std::endl;
 			return false;
@@ -40,7 +40,7 @@ namespace ui
 	}
 
 	std::list<AWidget*>::iterator
-			AContainer::getCheckChild(
+			AComposite::getCheckChild(
 					const AWidget * child, const std::string & from)
 	{
 		if(!checkChild(child, from))
@@ -52,13 +52,13 @@ namespace ui
 				return it;
 		}
 
-		std::cout << "ERROR: AContainer::" << from << ": "
+		std::cout << "ERROR: AComposite::" << from << ": "
 			<< "child not found. "
 			<< "ID=\"" << child->getID() << '"' << std::endl;
 		return m_children.end();
 	}
 
-	bool AContainer::contains(const AWidget * child) const
+	bool AComposite::contains(const AWidget * child) const
 	{
 		for(auto it = m_children.begin(); it != m_children.end(); it++)
 		{
@@ -68,13 +68,13 @@ namespace ui
 		return false;
 	}
 
-	void AContainer::add(AWidget * child)
+	void AComposite::add(AWidget * child)
 	{
 		if(!checkChild(child, "add"))
 			return;
 		if(contains(child))
 		{
-			std::cout << "ERROR: AContainer::add: "
+			std::cout << "ERROR: AComposite::add: "
 				<< "can't add twice the same widget. "
 				<< "ID=\"" << child->getID() << '"' << std::endl;
 			return;
@@ -88,7 +88,7 @@ namespace ui
 			child->setSkin(*r_skin);
 	}
 
-	void AContainer::erase(AWidget * child)
+	void AComposite::erase(AWidget * child)
 	{
 		auto it = getCheckChild(child, "erase");
 		if(it != m_children.end())
@@ -98,13 +98,13 @@ namespace ui
 		}
 	}
 
-	void AContainer::eraseAll()
+	void AComposite::eraseAll()
 	{
 		for(auto it = m_children.begin(); it != m_children.end(); it++)
 			delete (*it);
 	}
 
-	AWidget * AContainer::getChildFromID(const std::string & ID)
+	AWidget * AComposite::getChildFromID(const std::string & ID)
 	{
 		AWidget * w;
 		for(auto it = m_children.begin(); it != m_children.end(); it++)
@@ -116,7 +116,7 @@ namespace ui
 		return nullptr;
 	}
 
-	void AContainer::bringChildToFront(AWidget * child)
+	void AComposite::bringChildToFront(AWidget * child)
 	{
 		auto it = getCheckChild(child, "bringChildToFront");
 		if(it != m_children.end())
@@ -126,11 +126,11 @@ namespace ui
 		}
 	}
 
-	void AContainer::focusChild(const AWidget * child)
+	void AComposite::focusChild(const AWidget * child)
 	{
 		if(child == this)
 		{
-			std::cout << "ERROR: AContainer::focusChild: "
+			std::cout << "ERROR: AComposite::focusChild: "
 				<< "can't do that with self."
 				<< "ID=\"" << child->getID() << '"' << std::endl;
 			return;
@@ -144,11 +144,11 @@ namespace ui
 		}
 	}
 
-	void AContainer::layout()
+	void AComposite::layout()
 	{
 	}
 
-	bool AContainer::processInput(const InputEvent & e)
+	bool AComposite::processInput(const InputEvent & e)
 	{
 		if(!isVisible())
 			return false;
@@ -166,11 +166,11 @@ namespace ui
 			}
 		}
 
-		// Then process the event for the container itself
+		// Then process the event for the composite itself
 		return IInputListener::processInput(e);
 	}
 
-	void AContainer::render(IRenderer & r)
+	void AComposite::render(IRenderer & r)
 	{
 		if(m_visible)
 		{
@@ -180,7 +180,7 @@ namespace ui
 		}
 	}
 
-	void AContainer::animate(float dt)
+	void AComposite::animate(float dt)
 	{
 		if(m_visible)
 		{
@@ -188,7 +188,7 @@ namespace ui
 		}
 	}
 
-	void AContainer::renderChildren(IRenderer & r)
+	void AComposite::renderChildren(IRenderer & r)
 	{
 		AWidget * w;
 		for(auto it = m_children.rbegin(); it != m_children.rend(); it++)
@@ -199,7 +199,7 @@ namespace ui
 		}
 	}
 
-	void AContainer::animateChildren(float dt)
+	void AComposite::animateChildren(float dt)
 	{
 		for(auto & w : m_children)
 		{

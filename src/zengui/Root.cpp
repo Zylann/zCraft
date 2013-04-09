@@ -12,7 +12,7 @@ namespace ui
 {
 	unsigned int g_instanceCount = 0;
 
-	Root::Root(unsigned int width, unsigned int height) : AContainer()
+	Root::Root(unsigned int width, unsigned int height) : AComposite()
 	{
 		m_bounds.set(0, 0, width, height);
 		g_instanceCount++;
@@ -58,7 +58,7 @@ namespace ui
 		if(m_renderer != nullptr)
 		{
 			m_renderer->begin();
-			AContainer::render(*m_renderer);
+			AComposite::render(*m_renderer);
 			m_renderer->end();
 		}
 	}

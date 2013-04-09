@@ -7,17 +7,17 @@ This file is part of the zCraft project.
 #ifndef ZENGUI_PANEL_HPP_INCLUDED
 #define ZENGUI_PANEL_HPP_INCLUDED
 
-#include "Container.hpp"
+#include "Composite.hpp"
 
 namespace zn
 {
 namespace ui
 {
-	class Panel : public AContainer
+	class Panel : public AComposite
 	{
 	public :
 
-		Panel() : AContainer() {}
+		Panel() : AComposite() {}
 		virtual ~Panel() {}
 
 		virtual void render(IRenderer & r) override

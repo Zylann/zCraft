@@ -5,7 +5,7 @@ This file is part of the zCraft project.
 */
 
 #include "Widget.hpp"
-#include "Container.hpp"
+#include "Composite.hpp"
 #include "Root.hpp"
 #include "Skin.hpp"
 
@@ -26,7 +26,7 @@ namespace ui
 			r_parent->bringChildToFront(this);
 	}
 
-	void AWidget::setParent(AContainer * w)
+	void AWidget::setParent(AComposite * w)
 	{
 		if(r_parent != nullptr)
 		{
