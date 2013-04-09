@@ -47,7 +47,7 @@ namespace ui
 
 	class Root;
 	class AContainer;
-	class ITheme;
+	class ISkin;
 	class IRenderer;
 
 	/*
@@ -77,7 +77,7 @@ namespace ui
 
 		Align m_align = Align::NONE; // How the widget should use the space where it is
 
-		ITheme * r_theme = nullptr;
+		ISkin * r_skin = nullptr;
 
 		/* State */
 
@@ -150,7 +150,7 @@ namespace ui
 		// Sets the theme used by this widget.
 		// If recursive is set to true, the theme will be applied to all of children too.
 		// Note : the theme has to be deleted manually after use.
-		virtual void setTheme(ITheme & theme, bool recursive = true);
+		virtual void setSkin(ISkin & theme, bool recursive = true);
 
 		// Sets the preferred alignment this widget should have.
 		// It will be ignored in certain cases depending on the layout of

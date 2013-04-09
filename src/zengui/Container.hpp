@@ -32,7 +32,7 @@ namespace ui
 			eraseAll();
 		}
 
-		void setTheme(ITheme & theme, bool recursive = true) override;
+		void setSkin(ISkin & theme, bool recursive = true) override;
 
 		/*
 			Widget management

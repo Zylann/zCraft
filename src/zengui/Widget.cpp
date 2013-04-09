@@ -7,7 +7,7 @@ This file is part of the zCraft project.
 #include "Widget.hpp"
 #include "Container.hpp"
 #include "Root.hpp"
-#include "Theme.hpp"
+#include "Skin.hpp"
 
 namespace zn
 {
@@ -90,9 +90,9 @@ namespace ui
 		m_sizeLimit.normalize();
 	}
 
-	void AWidget::setTheme(ITheme & theme, bool recursive)
+	void AWidget::setSkin(ISkin & theme, bool recursive)
 	{
-		r_theme = &theme;
+		r_skin = &theme;
 	}
 
 	void AWidget::show()
@@ -107,9 +107,9 @@ namespace ui
 
 	void AWidget::render(IRenderer & r)
 	{
-		if(r_theme != nullptr)
+		if(r_skin != nullptr)
 		{
-			r_theme->drawDummyWidget(r, *this);
+			r_skin->drawDummyWidget(r, *this);
 		}
 	}
 

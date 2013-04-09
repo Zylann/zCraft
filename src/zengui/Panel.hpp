@@ -22,8 +22,8 @@ namespace ui
 
 		virtual void render(IRenderer & r) override
 		{
-			if(r_theme != nullptr)
-				r_theme->drawPanel(r, *this);
+			if(r_skin != nullptr)
+				r_skin->drawPanel(r, *this);
 		}
 
 	};

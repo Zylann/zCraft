@@ -4,20 +4,20 @@ Copyright (C) 2010-2012 Marc GILLERON
 This file is part of the zCraft project.
 */
 
-#ifndef EXPERIMENTAL_BASICTHEME_HPP_INCLUDED
-#define EXPERIMENTAL_BASICTHEME_HPP_INCLUDED
+#ifndef EXPERIMENTAL_BASICSKIN_HPP_INCLUDED
+#define EXPERIMENTAL_BASICSKIN_HPP_INCLUDED
 
-#include "zengui/Theme.hpp"
+#include "zengui/Skin.hpp"
 
 namespace experimental
 {
-	class BasicTheme : public zn::ui::ITheme
+	class BasicSkin : public zn::ui::ISkin
 	{
 	public :
 
-		virtual ~BasicTheme() {}
+		virtual ~BasicSkin() {}
 
-		std::string getName();
+		virtual std::string getName() override;
 
 		virtual void drawDummyWidget(zn::ui::IRenderer & r, const zn::ui::AWidget & w) override;
 
@@ -28,6 +28,6 @@ namespace experimental
 } // namespace experimental
 
 
-#endif // EXPERIMENTAL_BASICTHEME_HPP_INCLUDED
+#endif // EXPERIMENTAL_BASICSKIN_HPP_INCLUDED
 
 

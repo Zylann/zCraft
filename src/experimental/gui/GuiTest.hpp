@@ -1,7 +1,7 @@
 #ifndef EXPERIMENTAL_TESTGUI_H_INCLUDED
 #define EXPERIMENTAL_TESTGUI_H_INCLUDED
 
-#include "BasicTheme.hpp"
+#include "BasicSkin.hpp"
 #include "engine/game/BasicGame.hpp"
 #include "zengui/Root.hpp"
 #include "zengui/plugin/SFMLInputAdapter.hpp"
@@ -16,7 +16,7 @@ namespace experimental
 		zn::ui::Root * m_gui;
 		zn::ui::Panel * r_panel;
 		zn::ui::SFMLInputAdapter m_guiInput;
-		BasicTheme * m_guiTheme;
+		BasicSkin * m_guiSkin;
 
 	public :
 

@@ -17,8 +17,8 @@ namespace experimental
 	{
 		m_gui = new ui::Root(m_window.getSize().x, m_window.getSize().y);
 		m_gui->setRenderer(new GuiRenderer());
-		m_guiTheme = new BasicTheme();
-		m_gui->setTheme(*m_guiTheme);
+		m_guiSkin = new BasicSkin();
+		m_gui->setSkin(*m_guiSkin);
 
 		r_panel = new ui::Panel();
 		r_panel->setBounds(IntRect(100, 100, 300, 250));
@@ -34,7 +34,7 @@ namespace experimental
 	void GuiTest::dispose()
 	{
 		delete m_gui;
-		delete m_guiTheme;
+		delete m_guiSkin;
 	}
 
 	void GuiTest::resized(const Vector2i & newSize)

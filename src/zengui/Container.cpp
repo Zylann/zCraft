@@ -5,19 +5,19 @@ This file is part of the zCraft project.
 */
 
 #include "Container.hpp"
-#include "Theme.hpp"
+#include "Skin.hpp"
 
 namespace zn
 {
 namespace ui
 {
-	void AContainer::setTheme(ITheme & theme, bool recursive)
+	void AContainer::setSkin(ISkin & theme, bool recursive)
 	{
-		r_theme = &theme;
+		r_skin = &theme;
 		if(recursive)
 		{
 			for(auto & child : m_children)
-				child->setTheme(theme, recursive);
+				child->setSkin(theme, recursive);
 		}
 	}
 
@@ -84,8 +84,8 @@ namespace ui
 
 		child->setParent(this);
 
-		if(r_theme != nullptr)
-			child->setTheme(*r_theme);
+		if(r_skin != nullptr)
+			child->setSkin(*r_skin);
 	}
 
 	void AContainer::erase(AWidget * child)
@@ -174,8 +174,8 @@ namespace ui
 	{
 		if(m_visible)
 		{
-			if(r_theme != nullptr)
-				r_theme->drawDummyWidget(r, *this);
+			if(r_skin != nullptr)
+				r_skin->drawDummyWidget(r, *this);
 			renderChildren(r);
 		}
 	}
