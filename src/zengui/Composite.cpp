@@ -184,13 +184,7 @@ namespace ui
 						w->setHovered(false);
 					else
 					{
-						// TODO clean this...
-						// I'm trying to get the absolute coordinates.
-						// My bounding system sucks, I have to rewrite a part of it.
-						IntRect bounds = w->getBounds();
-						if(w->getParent())
-							bounds.offset(w->getParent()->getAbsolutePosition());
-						w->setHovered(bounds.contains(e.mousePos));
+						w->setHovered(w->getBounds().contains(e.mousePos));
 					}
 				}
 

@@ -19,6 +19,13 @@ namespace ui
 	/*
 		This is the main GUI object, the root of widgets arborescence.
 		It should only be created once.
+
+		It is both a widget and a global manager (it holds the renderer and
+		gui-scoppe global variables/methods).
+
+		Root can be accessed from any widget by using getRoot(), assuming that
+		they are part of the same tree.
+
 		Note: it could be a singleton, but I don't want it to be accessible
 		from Everywhere, and it's a safer way of handling objects.
 	*/
@@ -39,6 +46,7 @@ namespace ui
 		// Destroys the GUI and its content.
 		virtual ~Root();
 
+		// This override is needed for the children to access Root.
 		Root * getRoot() override { return this; }
 
 		// Setup the renderer of the GUI, may be called once.

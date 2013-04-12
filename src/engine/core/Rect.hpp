@@ -174,11 +174,12 @@ namespace zn
 			return *this;
 		}
 
-		// Moves the rectangle by a vector
-		inline void offset(const Vector2<T> & off)
+		// Moves the rectangle by a vector, returns reference for chaining
+		inline Rect<T> & offset(const Vector2<T> & off)
 		{
 			min += off;
 			max += off;
+			return *this;
 		}
 
 		// Computes the center of the rectangle.

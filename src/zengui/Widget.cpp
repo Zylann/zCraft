@@ -39,15 +39,34 @@ namespace ui
 		r_parent = w;
 	}
 
-	void AWidget::setBounds(IntRect bounds)
+	IntRect AWidget::getBounds() const
 	{
-		bounds.normalize();
-		m_bounds = bounds;
+		if(r_parent != nullptr)
+			return getLocalBounds().offset(r_parent->getGlobalPosition());
+		return m_localBounds;
 	}
 
-	IntRect AWidget::getOuterBounds() const
+	IntRect AWidget::getLocalBounds() const
 	{
-		IntRect outerBounds = m_bounds;
+		return m_localBounds;
+	}
+
+	void AWidget::setLocalBounds(IntRect bounds)
+	{
+		bounds.normalize();
+		m_localBounds = bounds;
+	}
+
+	void AWidget::setBounds(IntRect globalBounds)
+	{
+		if(r_parent != nullptr)
+			globalBounds.offset(-r_parent->getGlobalPosition());
+		setLocalBounds(globalBounds);
+	}
+
+	IntRect AWidget::getLocalOuterBounds() const
+	{
+		IntRect outerBounds = m_localBounds;
 		outerBounds.min.x -= m_margin.left;
 		outerBounds.min.y -= m_margin.top;
 		outerBounds.max.x += m_margin.right;
@@ -55,21 +74,35 @@ namespace ui
 		return outerBounds;
 	}
 
-	IntRect AWidget::getInnerBounds() const
+	IntRect AWidget::getOuterBounds() const
+	{
+		if(r_parent != nullptr)
+			return getLocalOuterBounds().offset(r_parent->getGlobalPosition());
+		return getLocalOuterBounds();
+	}
+
+	IntRect AWidget::getLocalInnerBounds() const
 	{
 		IntRect innerBounds;
 		innerBounds.min.x = m_padding.left;
 		innerBounds.min.y = m_padding.top;
-		innerBounds.max.x = m_bounds.width() - m_padding.right;
-		innerBounds.max.y = m_bounds.height() - m_padding.bottom;
+		innerBounds.max.x = m_localBounds.width() - m_padding.right;
+		innerBounds.max.y = m_localBounds.height() - m_padding.bottom;
 		return innerBounds;
 	}
 
-	Vector2i AWidget::getAbsolutePosition() const
+	IntRect AWidget::getInnerBounds() const
 	{
 		if(r_parent != nullptr)
-			return m_bounds.min + r_parent->getAbsolutePosition();
-		return m_bounds.min;
+			return getLocalInnerBounds().offset(r_parent->getGlobalPosition());
+		return getLocalInnerBounds();
+	}
+
+	Vector2i AWidget::getGlobalPosition() const
+	{
+		if(r_parent != nullptr)
+			return m_localBounds.min + r_parent->getGlobalPosition();
+		return m_localBounds.min;
 	}
 
 	void AWidget::setSizeLimits(const Vector2i & minSize, const Vector2i & maxSize)
@@ -138,26 +171,26 @@ namespace ui
 
 		if(m_sizeLimit.max.x > 0 && m_sizeLimit.max.y > 0)
 		{
-			if(m_bounds.width() > m_sizeLimit.max.x)
+			if(m_localBounds.width() > m_sizeLimit.max.x)
 			{
-				m_bounds.max.x = m_bounds.min.x + m_sizeLimit.max.x;
+				m_localBounds.max.x = m_localBounds.min.x + m_sizeLimit.max.x;
 				changed = true;
 			}
-			if(m_bounds.height() > m_sizeLimit.max.y)
+			if(m_localBounds.height() > m_sizeLimit.max.y)
 			{
-				m_bounds.max.y = m_bounds.min.y + m_sizeLimit.max.y;
+				m_localBounds.max.y = m_localBounds.min.y + m_sizeLimit.max.y;
 				changed = true;
 			}
 		}
 
-		if(m_bounds.width() < m_sizeLimit.min.x)
+		if(m_localBounds.width() < m_sizeLimit.min.x)
 		{
-			m_bounds.max.x = m_bounds.min.x + m_sizeLimit.min.x;
+			m_localBounds.max.x = m_localBounds.min.x + m_sizeLimit.min.x;
 			changed = true;
 		}
-		if(m_bounds.height() < m_sizeLimit.min.y)
+		if(m_localBounds.height() < m_sizeLimit.min.y)
 		{
-			m_bounds.max.y = m_bounds.min.y + m_sizeLimit.min.y;
+			m_localBounds.max.y = m_localBounds.min.y + m_sizeLimit.min.y;
 			changed = true;
 		}
 
@@ -190,7 +223,7 @@ namespace ui
 			if(!h)
 			{
 				m_hovered = false;
-				onMouseQuit();
+//				onMouseQuit();
 			}
 		}
 		else
@@ -198,7 +231,7 @@ namespace ui
 			if(h)
 			{
 				m_hovered = true;
-				onMouseEnter();
+//				onMouseEnter();
 			}
 		}
 	}
@@ -210,7 +243,7 @@ namespace ui
 	bool AWidget::mouseMoved(int oldX, int oldY, int newX, int newY)
 	{
 		// Note : AComposite takes care of setting hover flags
-		return m_bounds.contains(newX, newY);
+		return m_localBounds.contains(newX, newY);
 	}
 
 	bool AWidget::mousePressed(Mouse::Button button)
@@ -219,7 +252,7 @@ namespace ui
 		{
 			m_pressed = true;
 			requestFocus();
-			onPress();
+//			onPress();
 			return true;
 		}
 		return false;
@@ -230,7 +263,7 @@ namespace ui
 		if(m_pressed)
 		{
 			m_pressed = false;
-			onRelease();
+//			onRelease();
 			return true;
 		}
 		return false;
@@ -246,7 +279,7 @@ namespace ui
 		if(key == Keyboard::Key::RETURN && m_focused)
 		{
 			m_pressed = true;
-			onPress();
+//			onPress();
 			return true;
 		}
 		return false;
@@ -257,7 +290,7 @@ namespace ui
 		if(m_pressed)
 		{
 			m_pressed = false;
-			onRelease();
+//			onRelease();
 			return true;
 		}
 		return false;

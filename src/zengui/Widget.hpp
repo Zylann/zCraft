@@ -76,7 +76,7 @@ namespace ui
 
 		/* Style */
 
-		IntRect m_bounds; // parent-relative bounds
+		IntRect m_localBounds; // parent-relative bounds
 		IntRect m_sizeLimit;
 
 		Margin m_margin;
@@ -119,28 +119,25 @@ namespace ui
 			Style
 		*/
 
-		// Sets fixed size of the widget.
-		// Note : this should be used for fixed-position layouts only.
-		void setBounds(IntRect bounds);
+		// Sets the fixed bounds of the widget.
+		// Should only be used for fixed-size layouts.
+		void setBounds(IntRect globalBounds); // Global
+		void setLocalBounds(IntRect bounds);
 
-		// Returns current bounds of the widget.
-		inline const IntRect & getBounds() const { return m_bounds; }
+		// Returns widget's bounds including its margin.
+		IntRect getBounds() const; // Global
+		IntRect getLocalBounds() const;
 
-		// Returns parent-relative widget's bounds including its margins
-		IntRect getOuterBounds() const;
+		// Returns widget's bounds including its margin (convenience).
+		IntRect getOuterBounds() const; // Global
+		IntRect getLocalOuterBounds() const;
 
-		// Returns widget's inner bounds including its padding.
-		// This is relative to the widget itself.
-		IntRect getInnerBounds() const;
+		// Returns widget's bounds including its padding (convenience).
+		IntRect getInnerBounds() const; // Global
+		IntRect getLocalInnerBounds() const;
 
-		// Get parent-relative X coordinate
-		inline int getX() const { return m_bounds.min.x; }
-
-		// Get parent-relative Y coordinate
-		inline int getY() const { return m_bounds.min.y; }
-
-		// Get absolute position
-		Vector2i getAbsolutePosition() const;
+		// Get absolute position of the upper-left corner of the widget.
+		Vector2i getGlobalPosition() const;
 
 		// Sets the size limit the widget should have.
 		void setSizeLimits(const Vector2i & minSize, const Vector2i & maxSize);
@@ -207,15 +204,16 @@ namespace ui
 		// Get top-level widget by recursive search.
 		virtual Root * getRoot();
 
+		// Brings the widget in front of the others within its container.
 		void bringToFront();
 
+		// Get the user-defined ID of the widget
 		inline const std::string & getID() const { return m_ID; }
 
-		// Note : despite ID unicity check isn't done,
-		// the ID we specify have to be set to a unique value,
-		// because it should matter in future updates (this is also why I
-		// made a getter and a setter instead of putting the ID public).
-		// Currently this is just a basic direct get/set attribute.
+		// Sets the user-defined ID of the widget (like CSS-HTML IDs).
+		// Note : using two same IDs will not cause a GUI error.
+		// it's up to the user to dispose of it as a unique ID.
+		// (however, future versions of the GUI may implement checking)
 		inline void setID(const std::string ID) { m_ID = ID; }
 
 		// This is specifically used when the widget is added to a container.
@@ -223,8 +221,10 @@ namespace ui
 		// Will not work if the widget already have a parent.
 		void setParent(AComposite * w);
 
+		// Tells if the widget blocks consume events it receives.
 		inline bool blocksInput() const { return m_blocksInput; }
 
+		// Gets how many widgets are contained into the widget.
 		virtual unsigned int getChildCount() const { return 0; }
 
 		/*
@@ -241,7 +241,7 @@ namespace ui
 	protected :
 
 		/*
-			Input
+			Input callbacks
 		*/
 
 		virtual bool mouseMoved(int oldX, int oldY, int newX, int newY) override;
@@ -255,19 +255,20 @@ namespace ui
 		/*
 			Basic state changes
 			These methods are called from input methods.
+			CURRENTLY UNUSUED
 		*/
 
-		virtual void onPress() {}
-		virtual void onRelease() {}
+//		virtual void onPress() {}
+//		virtual void onRelease() {}
 
-		virtual void onMouseEnter() {}
-		virtual void onMouseQuit() {}
+//		virtual void onMouseEnter() {}
+//		virtual void onMouseQuit() {}
 
-		virtual void onFocusOn() {}
-		virtual void onFocusOff() {}
+//		virtual void onFocusOn() {}
+//		virtual void onFocusOff() {}
 
-		virtual void onShow() {}
-		virtual void onHide() {}
+//		virtual void onShow() {}
+//		virtual void onHide() {}
 
 	private :
 

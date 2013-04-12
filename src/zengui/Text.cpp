@@ -7,6 +7,7 @@ This file is part of the zCraft project.
 #include "Text.hpp"
 #include "Renderer.hpp"
 #include "Skin.hpp"
+#include "Composite.hpp"
 
 namespace zn
 {
@@ -58,11 +59,15 @@ namespace ui
 		if(r_font != nullptr)
 		{
 			r.setFont(*r_font);
+			Vector2i off = getGlobalPosition();
 			for(unsigned int i = 0; i < m_dispText.size(); ++i)
 			{
 				const Line & line = m_dispText[i];
 				r.setColor(Color(255,255,255));
-				r.drawText(line.str, line.bounds.min.x, line.bounds.min.y, 0, line.str.size()-1);
+				r.drawText(line.str,
+						   line.bounds.min.x + off.x,
+						   line.bounds.min.y + off.y, 0,
+						   line.str.size()-1);
 			}
 		}
 //		else
@@ -109,7 +114,7 @@ namespace ui
 		{
 			// No wrap
 			Line line;
-			line.bounds = getInnerBounds();
+			line.bounds = getLocalInnerBounds();
 			line.str = m_text;
 			m_dispText.push_back(line);
 			std::cout << "DEBUG: nowrap" << std::endl;
@@ -118,7 +123,7 @@ namespace ui
 		{
 			std::cout << "DEBUG: wrap" << std::endl;
 			int lineHeight = r.getFontLineHeight(*r_font);
-			IntRect innerBounds = getInnerBounds();
+			IntRect innerBounds = getLocalInnerBounds();
 			IntRect lineBounds(0,0,0,lineHeight);
 			std::string lstr;
 			char c;

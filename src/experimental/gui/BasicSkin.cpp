@@ -36,7 +36,7 @@ namespace experimental
 
 	void BasicSkin::drawDummyWidget(IRenderer & r, const AWidget & w)
 	{
-		Vector2i pos = w.getAbsolutePosition();
+		Vector2i pos = w.getGlobalPosition();
 		const int width = w.getBounds().width();
 		const int height = w.getBounds().height();
 
@@ -48,7 +48,7 @@ namespace experimental
 
 	void BasicSkin::drawPanel(IRenderer & r, const AWidget & panel)
 	{
-		Vector2i pos = panel.getAbsolutePosition();
+		Vector2i pos = panel.getGlobalPosition();
 		const int width = panel.getBounds().width();
 		const int height = panel.getBounds().height();
 
