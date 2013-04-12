@@ -266,6 +266,17 @@ namespace bmfont
 		draw(text, 0, 0, invertYAxis);
 	}
 
+	int Font::getLineHeight()
+	{
+		return m_settings.lineHeight;
+	}
+
+	Vector2i Font::getTextSize(const std::string &text, int begin, int end)
+	{
+		// TODO Font: getTextSize()
+		return Vector2i();
+	}
+
 	// TODO Font: add kerning support
 	// It is parsed but not used
 

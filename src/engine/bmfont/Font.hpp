@@ -12,6 +12,8 @@ This file is part of the zCraft project.
 #include <list>
 #include <unordered_map>
 
+#include "engine/core/Vector2.hpp"
+
 /*
 	This is a simple C++ OpenGL BMFont implementation.
 	Requires SFML, glew and C++11 compiler.
@@ -180,6 +182,12 @@ namespace bmfont
 		// Draws a text using the current OpenGL state. The invertYAxis parameter is
 		// useful when you have a coordinate system where Y axis goes upside.
 		void draw(const std::string text, bool invertYAxis = false);
+
+		// Gets the maximum height of a line written with this font
+		int getLineHeight();
+
+		// Get size in pixels of the given text using this font
+		Vector2i getTextSize(const std::string & text, int begin=0, int end=-1);
 
 	private :
 

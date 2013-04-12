@@ -14,35 +14,13 @@ This file is part of the zCraft project.
 // but once copied it is fully independent.
 #include "Color.hpp"
 #include "Rect.hpp" // also includes Vector2
+#include "Texture.hpp"
+#include "Font.hpp"
 
 namespace zn
 {
 namespace ui
 {
-	/*
-		This is all what the GUI knows about textures.
-		how to draw them is up to you.
-	*/
-	struct Texture
-	{
-		void * data = nullptr;
-		int ID = 0;
-		int width = 0;
-		int height = 0;
-		std::string src;
-	};
-
-	/*
-		This is all what the GUI knows about fonts.
-		how to draw them is up to you.
-	*/
-	struct Font
-	{
-		void * data = nullptr;
-		int ID = 0;
-		std::string src;
-	};
-
 	/*
 		An implementation of this interface must be used for the
 		GUI to render things.
@@ -127,13 +105,17 @@ namespace ui
 			Misc
 		*/
 
-		// Get the maximum height of a line written with the given font.
-		virtual int getFontLineHeight(Font & font) const = 0;
-
 		// Get the size of a text written using the given font.
-		// Whitespace must be included in the size.
+		// Whitespace must be included in the size.		
 		virtual Vector2i getTextSize(
 			Font & font, const std::string & text, int begin, int end) = 0;
+
+		// Get the height of a line written with the given font
+		virtual int getFontLineHeight(Font & font) = 0;
+
+		// Returns the character index at which a text crosses the given max width.
+//		virtual unsigned int getTextCrossIndex(
+//			Font & font, const std::string & text, int maxWidth, int begin, int end) = 0;
 
 	};
 

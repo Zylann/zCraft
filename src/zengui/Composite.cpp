@@ -13,6 +13,7 @@ namespace ui
 {
 	void AComposite::setSkin(ISkin & theme, bool recursive)
 	{
+		//std::cout << "DEBUG: AComposite: setSkin (ID=" << getID() << ")" << std::endl;
 		r_skin = &theme;
 		if(recursive)
 		{
@@ -85,7 +86,10 @@ namespace ui
 		child->setParent(this);
 
 		if(r_skin != nullptr)
+		{
+			//std::cout << "DEBUG: set skin on child" << std::endl;
 			child->setSkin(*r_skin);
+		}
 	}
 
 	void AComposite::erase(AWidget * child)
@@ -140,7 +144,20 @@ namespace ui
 		for(auto it = m_children.begin(); it != m_children.end(); it++)
 		{
 			w = (*it);
-			w->setFocused(w == child);
+			if(w == child)
+				w->setFocused(true);
+			else
+				w->setFocused(false, true);
+		}
+	}
+
+	void AComposite::setFocused(bool f, bool recursive)
+	{
+		m_focused = f;
+		if(recursive)
+		{
+			for(auto & child : m_children)
+				child->setFocused(f, recursive);
 		}
 	}
 
@@ -160,12 +177,21 @@ namespace ui
 		{
 			if(w->isVisible())
 			{
+				// Mouse over
 				if(e.type == InputEvent::MOUSE_MOVED)
 				{
 					if(consumed)
 						w->setHovered(false);
 					else
-						w->setHovered(w->getBounds().contains(e.mousePos));
+					{
+						// TODO clean this...
+						// I'm trying to get the absolute coordinates.
+						// My bounding system sucks, I have to rewrite a part of it.
+						IntRect bounds = w->getBounds();
+						if(w->getParent())
+							bounds.offset(w->getParent()->getAbsolutePosition());
+						w->setHovered(bounds.contains(e.mousePos));
+					}
 				}
 
 				if(!consumed)
@@ -186,6 +212,7 @@ namespace ui
 
 	void AComposite::render(IRenderer & r)
 	{
+		// TODO separate render, renderWidget and renderChildren
 		if(m_visible)
 		{
 			if(r_skin != nullptr)

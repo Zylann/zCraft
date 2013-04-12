@@ -45,6 +45,13 @@ namespace ui
 		FILL		= FILL_V | FILL_H
 	};
 
+//	struct Identifier // Just a draft. May be in future code.
+//	{
+//		std::string ID; // Widget identifier (but user-defined, should be unique)
+//		std::string group; // Widget group (user-defined)
+//		std::string type; // Widget type
+//	};
+
 	class Root;
 	class AComposite;
 	class ISkin;
@@ -147,10 +154,10 @@ namespace ui
 		inline const Margin & getMargin() const { return m_margin; }
 		inline const Padding & getPadding() const { return m_padding; }
 
-		// Sets the theme used by this widget.
+		// Sets the theme used by this widget directly from a skin object.
 		// If recursive is set to true, the theme will be applied to all of children too.
 		// Note : the theme has to be deleted manually after use.
-		virtual void setSkin(ISkin & theme, bool recursive = true);
+		virtual void setSkin(ISkin & skin, bool recursive = true);
 
 		// Sets the preferred alignment this widget should have.
 		// It will be ignored in certain cases depending on the layout of
@@ -178,7 +185,7 @@ namespace ui
 
 		// Sets the widget as focused.
 		// Warning: this is just a setter, other widgets will not loose focus !
-		inline void setFocused(bool f) { m_focused = f; }
+		virtual void setFocused(bool f, bool recursive = false);
 
 		// Sets the widget as hovered, and triggers onMouseOver/onMouseQuit
 		void setHovered(bool h);
@@ -227,7 +234,8 @@ namespace ui
 		// Draws the widget
 		virtual void render(IRenderer & r);
 
-		// Animates the widget for a given time delta (in seconds)
+		// Animates the widget for a given time delta (in seconds).
+		// Implementation is optionnal.
 		virtual void animate(float dt) {}
 
 	protected :

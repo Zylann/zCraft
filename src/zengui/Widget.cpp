@@ -90,9 +90,10 @@ namespace ui
 		m_sizeLimit.normalize();
 	}
 
-	void AWidget::setSkin(ISkin & theme, bool recursive)
+	void AWidget::setSkin(ISkin & skin, bool recursive)
 	{
-		r_skin = &theme;
+		std::cout << "DEBUG: AWidget: set skin (ID=" << getID() << ')' << std::endl;
+		r_skin = &skin;
 	}
 
 	void AWidget::show()
@@ -175,6 +176,11 @@ namespace ui
 
 	void AWidget::layout()
 	{
+	}
+
+	void AWidget::setFocused(bool f, bool recursive)
+	{
+		m_focused = f;
 	}
 
 	void AWidget::setHovered(bool h)

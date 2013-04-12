@@ -2,6 +2,7 @@
 #include "GuiRenderer.hpp"
 #include "engine/opengl/opengl.hpp"
 #include "engine/system/Time.hpp"
+#include "zengui/Text.hpp"
 
 using namespace zn;
 
@@ -17,16 +18,29 @@ namespace experimental
 	{
 		m_gui = new ui::Root(m_window.getSize().x, m_window.getSize().y);
 		m_gui->setRenderer(new GuiRenderer());
-		m_guiSkin = new BasicSkin();
-		m_gui->setSkin(*m_guiSkin);
+		if(!m_gui->installSkin(new BasicSkin()))
+			return false;
+		m_gui->setSkin("Basic");
 
 		r_panel = new ui::Panel();
+		r_panel->setID("myFirstPanel");
 		r_panel->setBounds(IntRect(100, 100, 300, 250));
 		m_gui->add(r_panel);
 
 		ui::Panel * panel2 = new ui::Panel();
+		panel2->setID("myPanel2");
 		panel2->setBounds(IntRect(400, 200, 600, 300));
 		m_gui->add(panel2);
+
+		ui::Panel * panel3 = new ui::Panel();
+		panel3->setID("myPanel3");
+		panel3->setBounds(IntRect(10, 150, 20, 30));
+		r_panel->add(panel3);
+
+		ui::Text * text = new ui::Text();
+		text->setID("myText");
+		text->setText("This is not a sample text");
+		r_panel->add(text);
 
 		return true;
 	}
@@ -34,7 +48,6 @@ namespace experimental
 	void GuiTest::dispose()
 	{
 		delete m_gui;
-		delete m_guiSkin;
 	}
 
 	void GuiTest::resized(const Vector2i & newSize)

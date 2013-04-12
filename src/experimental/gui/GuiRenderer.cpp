@@ -11,6 +11,22 @@ using namespace zn;
 
 namespace experimental
 {
+	GuiRenderer::GuiRenderer() : ui::IRenderer()
+	{
+		r_font = nullptr;
+	}
+
+	GuiRenderer::~GuiRenderer()
+	{
+		// Free fonts
+		for(auto & p : m_fonts)
+		{
+			if(p.second != nullptr)
+				delete p.second;
+		}
+		m_fonts.clear();
+	}
+
 	void GuiRenderer::begin()
 	{
 	#if defined ZN_OPENGL2
@@ -33,21 +49,42 @@ namespace experimental
 
 	bool GuiRenderer::loadTexture(ui::Texture & texture)
 	{
-		return false;
+		return false; // Not supported
 	}
 
 	bool GuiRenderer::freeTexture(ui::Texture & texture)
 	{
-		return false;
+		return false; // Not supported
 	}
 
 	bool GuiRenderer::loadFont(ui::Font & font)
 	{
-		return false;
+		zn::bmfont::Font * asset = new zn::bmfont::Font();
+		if(!asset->loadFromFile(font.src))
+		{
+			delete asset;
+			return false;
+		}
+		//font.lineHeight = asset->getLineHeight();
+		auto it = m_fonts.find(font.ID);
+		if(it != m_fonts.end())
+		{
+			delete it->second;
+			it->second = asset;
+		}
+		else
+			m_fonts[font.ID] = asset;
 	}
 
 	bool GuiRenderer::freeFont(ui::Font & font)
 	{
+		auto it = m_fonts.find(font.ID);
+		if(it != m_fonts.end())
+		{
+			delete it->second;
+			m_fonts.erase(it);
+			return true;
+		}
 		return false;
 	}
 
@@ -63,17 +100,19 @@ namespace experimental
 
 	void GuiRenderer::setTexture(ui::Texture & texture)
 	{
-
+		// Not supported
 	}
 
 	void GuiRenderer::setTextureClip(const IntRect clip)
 	{
-
+		// Not supported
 	}
 
 	void GuiRenderer::setFont(ui::Font & font)
 	{
-
+		auto it = m_fonts.find(font.ID);
+		if(it != m_fonts.end())
+			r_font = it->second;
 	}
 
 	void GuiRenderer::drawLine(float xa, float ya, float xb, float yb)
@@ -112,19 +151,26 @@ namespace experimental
 
 	void GuiRenderer::drawText(const std::string & text, int x, int y, int begin, int end)
 	{
-
-	}
-
-	int GuiRenderer::getFontLineHeight(ui::Font & font) const
-	{
-		return 0;
+		if(r_font == nullptr)
+			return;
+		r_font->draw(text, x, y);
 	}
 
 	Vector2i GuiRenderer::getTextSize(ui::Font & font, const std::string & text, int begin, int end)
 	{
+		auto it = m_fonts.find(font.ID);
+		if(it != m_fonts.end())
+			return it->second->getTextSize(text, begin, end);
 		return Vector2i();
 	}
 
+	int GuiRenderer::getFontLineHeight(ui::Font &font)
+	{
+		auto it = m_fonts.find(font.ID);
+		if(it != m_fonts.end())
+			return it->second->getLineHeight();
+		return 0;
+	}
 
 } // namespace experimental
 

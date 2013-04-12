@@ -22,8 +22,11 @@ namespace ui
 
 		virtual void render(IRenderer & r) override
 		{
+			if(!m_visible)
+				return;
 			if(r_skin != nullptr)
 				r_skin->drawPanel(r, *this);
+			this->renderChildren(r);
 		}
 
 	};

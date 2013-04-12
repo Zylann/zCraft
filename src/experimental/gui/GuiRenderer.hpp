@@ -7,7 +7,9 @@ This file is part of the zCraft project.
 #ifndef EXPERIMENTAL_GUIRENDERER_HPP_INCLUDED
 #define EXPERIMENTAL_GUIRENDERER_HPP_INCLUDED
 
+#include <unordered_map>
 #include "zengui/Renderer.hpp"
+#include "engine/bmfont/Font.hpp"
 
 namespace experimental
 {
@@ -15,12 +17,15 @@ namespace experimental
 	{
 	private :
 
-		zn::Color m_color;
+		zn::Color m_color; // Current color
+		zn::bmfont::Font * r_font; // Current font
+
+		std::unordered_map<std::string,zn::bmfont::Font*> m_fonts;
 
 	public :
 
-		GuiRenderer() : zn::ui::IRenderer() {}
-		virtual ~GuiRenderer() {}
+		GuiRenderer();
+		virtual ~GuiRenderer();
 
 		void begin() override;
 
@@ -50,9 +55,9 @@ namespace experimental
 
 		void drawText(const std::string & text, int x, int y, int begin, int end) override;
 
-		int getFontLineHeight(zn::ui::Font & font) const override;
-
 		zn::Vector2i getTextSize(zn::ui::Font & font, const std::string & text, int begin, int end) override;
+
+		int getFontLineHeight(zn::ui::Font & font) override;
 
 	};
 

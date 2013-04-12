@@ -7,6 +7,8 @@ This file is part of the zCraft project.
 #ifndef ZENGUI_ROOT_HPP_INCLUDED
 #define ZENGUI_ROOT_HPP_INCLUDED
 
+#include <unordered_map>
+
 #include "Composite.hpp"
 #include "Renderer.hpp"
 
@@ -18,13 +20,15 @@ namespace ui
 		This is the main GUI object, the root of widgets arborescence.
 		It should only be created once.
 		Note: it could be a singleton, but I don't want it to be accessible
-		from Everywhere...
+		from Everywhere, and it's a safer way of handling objects.
 	*/
 	class Root : public AComposite
 	{
 	private :
 
 		IRenderer * m_renderer = nullptr;
+		std::unordered_map<std::string,ISkin*> m_skins; // Installed skins {name, skin}
+
 		//IAudioDriver * m_audio; // Not supported yet
 
 	public :
@@ -32,15 +36,22 @@ namespace ui
 		// Creates the GUI with the given screen size.
 		Root(unsigned int width, unsigned int height);
 
+		// Destroys the GUI and its content.
 		virtual ~Root();
 
 		Root * getRoot() override { return this; }
 
-		// Sets the renderer of the GUI.
-		// If it is already set, the old one is deleted.
-		// Once set, the renderer will be automatically deleted when Root
-		// is deleted.
+		// Setup the renderer of the GUI, may be called once.
+		// You don't need to manage or delete the renderer after.
 		void setRenderer(IRenderer * r);
+
+		// Stores and loads a C++classCoded skin.
+		// You don't need to manage, load, unload or delete the skin yourself after.
+		// A call to setSkin(name|ref) is required for a skin to take effect.
+		bool installSkin(ISkin * newSkin);
+
+		// Activates an installed skin.
+		void setSkin(const std::string & name, bool recursive = true);
 
 		// Renders the whole GUI using the current renderer.
 		// It does nothing if no renderer has been set.

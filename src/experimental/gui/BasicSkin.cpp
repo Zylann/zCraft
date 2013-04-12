@@ -13,9 +13,25 @@ using namespace ui;
 
 namespace experimental
 {
-	std::string BasicSkin::getName()
+	bool BasicSkin::load(IRenderer &r)
 	{
-		return "Basic";
+		m_defaultFont.src = "assets/fonts/arial32.fnt";
+		m_defaultFont.ID = "arial32";
+		if(!r.loadFont(m_defaultFont))
+			return false;
+		return true;
+	}
+
+	bool BasicSkin::unload(IRenderer &r)
+	{
+		if(!r.freeFont(m_defaultFont))
+			return false;
+		return true;
+	}
+
+	Font &BasicSkin::getDefaultFont()
+	{
+		return m_defaultFont;
 	}
 
 	void BasicSkin::drawDummyWidget(IRenderer & r, const AWidget & w)
@@ -67,8 +83,9 @@ namespace experimental
 		r.drawRect(pos.x, pos.y, width, height, true);
 	}
 
-
 } // namespace experimental
+
+
 
 
 

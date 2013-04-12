@@ -13,23 +13,20 @@ lib/compiler dependencies :
 - glu
 - glew
 
-project-scope package dependencies :
-Note : this is just an overview.
+Overview of project-scope package dependencies :
 
-engine/core 		: config.hpp
-engine/opengl 		: engine/core
-engine/noise		: engine/core
-engine/bmfont		: engine/opengl
-engine/game			: engine/opengl
-engine/system		: engine/core
-
-zcraft/				: engine/
-experimental/		: engine/
+engine/core/ 		: engine/config.hpp
+engine/ 			: engine/core
+zcraft/ 			: engine/
+zcraft/demos/ 		: zcraft/
+zengui/ 			: engine/core
+zengui/plugin/ 		: engine/
+experimental/ 		: *
 
 ////////////////////////////////////////////////////////////////////////////////
 
 Estimated total dev time
-- Marc Gilleron : 78h
+- Marc Gilleron : 82h
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -44,27 +41,28 @@ function and variable names :
 
 member variables :
 	prefixed by m_ if the class owns their memory allocation,
-	prefixed by r_ if they are treated as references. For example, a child
-	keeping a pointer on its parent may use r_parent as member variable,
-	and shouldn't do a delete on it.
+	prefixed by r_ if they are treated as references. For example, a wheel
+	keeping a pointer on the car may use r_parent as member variable,
+	but shouldn't do a delete on it.
 	prefix variables by _ should be allowed, then the r_ semantic
 	would be changed to a "Ref" suffix.
 
 file policy :
+	Extensions are hpp and cpp.
 	1 class per file, except for internal uses or convenience.
 	each file has the name of the class, without the A or I prefix.
 	if there is no classes in the file, its name must be lower case.
 	folders are allowed as separated packages or sub-packages.
+	Don't forget to include the namespace in header guards.
 	TEMPORARY:
-		do not use the same file name twice,
-		because qmake doesn't likes this.
-
-namespaces :
-	must be small (2-4 letters) and lower case for big packages.
+		do not use the same CPP file name twice,
+		because qmake doesn't likes this. Two HPPs is Ok.
 
 Margin :
 	set to 80 characters.
 	Strip the code on several lines if it overlaps to much.
+
+Indentation : tabs
 
 Brace policy :
 	Aligned, indent after.
@@ -89,7 +87,7 @@ int main(int argc, char * argv[])
 	int code = 0;
 
 	// TODO remove the "experimental" namespace.
-	// experimental things are actually like end-user code that would be
+	// experimental things are actually treated as end-user code that would be
 	// incorporated in the engine later.
 
 	try
