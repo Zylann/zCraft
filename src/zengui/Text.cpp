@@ -45,14 +45,14 @@ namespace ui
 
 	void Text::render(IRenderer & r)
 	{
-		if(m_textNeedUpdate)
-		{
-			updateText(r);
-		}
-
 		if(r_font == nullptr && r_skin != nullptr)
 		{
 			r_font = &r_skin->getDefaultFont();
+		}
+
+		if(m_textNeedUpdate)
+		{
+			updateText(r);
 		}
 
 		if(r_font != nullptr)
@@ -61,6 +61,7 @@ namespace ui
 			for(unsigned int i = 0; i < m_dispText.size(); ++i)
 			{
 				const Line & line = m_dispText[i];
+				r.setColor(Color(255,255,255));
 				r.drawText(line.str, line.bounds.min.x, line.bounds.min.y, 0, line.str.size()-1);
 			}
 		}
@@ -115,6 +116,7 @@ namespace ui
 		}
 		else // wrap
 		{
+			std::cout << "DEBUG: wrap" << std::endl;
 			int lineHeight = r.getFontLineHeight(*r_font);
 			IntRect innerBounds = getInnerBounds();
 			IntRect lineBounds(0,0,0,lineHeight);
@@ -160,6 +162,7 @@ namespace ui
 			}
 		}
 
+		std::cout << "DEBUG: update finished" << std::endl;
 		m_textNeedUpdate = false;
 	}
 
