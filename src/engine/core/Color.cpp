@@ -10,7 +10,7 @@ This file is part of the zCraft project.
 
 namespace zn
 {
-	Color::Color() : r(0), g(0), b(0), a(1)
+	Color::Color() : r(0), g(0), b(0), a(255)
 	{}
 
 	Color::Color(unsigned int hex)
