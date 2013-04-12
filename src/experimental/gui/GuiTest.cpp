@@ -16,6 +16,9 @@ namespace experimental
 
 	bool GuiTest::init()
 	{
+		if(!m_shader.load("assets\\shaders\\basic.vert", "assets\\shaders\\tvstatic.frag"))
+			return false;
+
 		m_gui = new ui::Root(m_window.getSize().x, m_window.getSize().y);
 		m_gui->setRenderer(new GuiRenderer());
 		if(!m_gui->installSkin(new BasicSkin()))
@@ -75,12 +78,15 @@ namespace experimental
 
 	void GuiTest::renderScene(const Time & delta)
 	{
-
+		glClearColor(0.2f, 0.1f, 0, 1.f);
 	}
 
 	void GuiTest::renderGUI(const zn::Time & delta)
 	{
+//		m_shader.bind();
+//		m_shader.setUniform("time", m_time.getElapsedTime().asSeconds());
 		m_gui->render();
+//		m_shader.unbind();
 	}
 
 } // namespace experimental

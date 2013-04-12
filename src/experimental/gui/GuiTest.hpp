@@ -6,6 +6,7 @@
 #include "zengui/Root.hpp"
 #include "zengui/plugin/SFMLInputAdapter.hpp"
 #include "zengui/Panel.hpp"
+#include "engine/opengl/ShaderProgram.hpp"
 
 namespace experimental
 {
@@ -17,6 +18,7 @@ namespace experimental
 		zn::ui::Panel * r_panel;
 		zn::ui::SFMLInputAdapter m_guiInput;
 		BasicSkin * m_guiSkin;
+		zn::gl::ShaderProgram m_shader;
 
 	public :
 

@@ -384,6 +384,11 @@ namespace bmfont
 			glEnable(GL_TEXTURE_2D);
 			*/
 		}
+
+	#if defined ZN_OPENGL2
+		glDisable(GL_TEXTURE_2D);
+	#endif
+
 	}
 
 } // namespace bmfont

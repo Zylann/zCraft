@@ -153,7 +153,12 @@ namespace experimental
 	{
 		if(r_font == nullptr)
 			return;
+	#if defined ZN_OPENGL2
+		glColor4ub(m_color.r, m_color.g, m_color.b, m_color.a);
 		r_font->draw(text, x, y);
+	#else
+		#error "OpenGL3 not supported"
+	#endif
 	}
 
 	Vector2i GuiRenderer::getTextSize(ui::Font & font, const std::string & text, int begin, int end)

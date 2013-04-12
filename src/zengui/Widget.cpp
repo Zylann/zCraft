@@ -92,7 +92,7 @@ namespace ui
 
 	void AWidget::setSkin(ISkin & skin, bool recursive)
 	{
-		std::cout << "DEBUG: AWidget: set skin (ID=" << getID() << ')' << std::endl;
+		//std::cout << "DEBUG: AWidget: set skin (ID=" << getID() << ')' << std::endl;
 		r_skin = &skin;
 	}
 
