@@ -53,14 +53,14 @@ namespace zn
 		virtual void renderScene(const Time & delta) = 0;
 
 		// Draws the GUI on a pixel-match rendering configuration (by default)
-		virtual void renderGUI(const Time & delta) {}
+		virtual void renderGUI(const Time & /*delta*/) {}
 
 		// Called when the game window is resized
-		virtual void resized(const Vector2i & newSize) {}
+		virtual void resized(const Vector2i & /*newSize*/) {}
 
 		// Called each time the game window receives an event
 		// (event-based inputs)
-		virtual void processEvent(const sf::Event & event) {}
+		virtual void processEvent(const sf::Event & /*event*/) {}
 
 	};
 

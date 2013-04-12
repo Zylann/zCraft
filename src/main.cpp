@@ -26,7 +26,7 @@ experimental/ 		: *
 ////////////////////////////////////////////////////////////////////////////////
 
 Estimated total dev time
-- Marc Gilleron : 83h
+- Marc Gilleron : 84h
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -81,7 +81,7 @@ Brace policy :
 
 using namespace zn;
 
-int main(int argc, char * argv[])
+int main(/*int argc, char * argv[]*/)
 {
 	std::cout << "ZCRAFT main begin" << std::endl;
 	int code = 0;
@@ -89,8 +89,6 @@ int main(int argc, char * argv[])
 	// TODO remove the "experimental" namespace.
 	// experimental things are actually treated as end-user code that would be
 	// incorporated in the engine later.
-
-	// TODO put unusued method parameters into block comments to avoid warnings
 
 	try
 	{

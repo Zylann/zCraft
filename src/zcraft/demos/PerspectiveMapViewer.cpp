@@ -77,7 +77,7 @@ namespace zcraft
 			m_depthSliceZ = 0;
 	}
 
-	void PerspectiveMapViewer::renderScene(const zn::Time & delta)
+	void PerspectiveMapViewer::renderScene(const zn::Time & /*delta*/)
 	{
 		//glClearColor(0.1f, 0.5f, 0.9f, 1);
 		glClearColor(0,0,0,1);

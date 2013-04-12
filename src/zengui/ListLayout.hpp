@@ -29,7 +29,7 @@ namespace ui
 	public :
 
 		ListLayout(Orientation orient = VERTICAL, int spacing = 0)
-			: AComposite(), m_orientation(orient), m_spacing(0)
+			: AComposite(), m_orientation(orient), m_spacing(spacing)
 		{}
 
 		virtual ~ListLayout() {}

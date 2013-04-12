@@ -123,7 +123,7 @@ namespace ui
 		m_sizeLimit.normalize();
 	}
 
-	void AWidget::setSkin(ISkin & skin, bool recursive)
+	void AWidget::setSkin(ISkin & skin, bool /*recursive*/)
 	{
 		//std::cout << "DEBUG: AWidget: set skin (ID=" << getID() << ')' << std::endl;
 		r_skin = &skin;
@@ -211,7 +211,7 @@ namespace ui
 	{
 	}
 
-	void AWidget::setFocused(bool f, bool recursive)
+	void AWidget::setFocused(bool f, bool /*recursive*/)
 	{
 		m_focused = f;
 	}
@@ -240,7 +240,7 @@ namespace ui
 		Input
 	*/
 
-	bool AWidget::mouseMoved(int oldX, int oldY, int newX, int newY)
+	bool AWidget::mouseMoved(int /*oldX*/, int /*oldY*/, int newX, int newY)
 	{
 		// Note : AComposite takes care of setting hover flags
 		return m_localBounds.contains(newX, newY);
@@ -250,7 +250,8 @@ namespace ui
 	{
 		if(m_hovered)
 		{
-			m_pressed = true;
+			if(button == Mouse::LEFT)
+				m_pressed = true;
 			requestFocus();
 //			onPress();
 			return true;
@@ -262,19 +263,20 @@ namespace ui
 	{
 		if(m_pressed)
 		{
-			m_pressed = false;
+			if(button == Mouse::LEFT)
+				m_pressed = false;
 //			onRelease();
 			return true;
 		}
 		return false;
 	}
 
-	bool AWidget::mouseWheelMoved(int delta)
+	bool AWidget::mouseWheelMoved(int /*delta*/)
 	{
 		return m_hovered;
 	}
 
-	bool AWidget::keyPressed(Keyboard::Key key, int unicode)
+	bool AWidget::keyPressed(Keyboard::Key key, int /*unicode*/)
 	{
 		if(key == Keyboard::Key::RETURN && m_focused)
 		{
@@ -285,7 +287,7 @@ namespace ui
 		return false;
 	}
 
-	bool AWidget::keyReleased(Keyboard::Key key)
+	bool AWidget::keyReleased(Keyboard::Key /*key*/)
 	{
 		if(m_pressed)
 		{

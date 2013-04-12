@@ -54,7 +54,7 @@ namespace zcraft
 		m_mapStreamer->update(bpos);
 	}
 
-	void FlatMapViewer::renderScene(const Time & delta)
+	void FlatMapViewer::renderScene(const Time & /*delta*/)
 	{
 		glClearColor(0.1f, 0.1f, 0.1f, 1);
 
@@ -85,7 +85,7 @@ namespace zcraft
 	#endif // ZN_OPENGL2
 	}
 
-	void FlatMapViewer::renderGUI(const Time & delta)
+	void FlatMapViewer::renderGUI(const Time & /*delta*/)
 	{
 	#if defined ZN_OPENGL2
 		MapStreamThread::RunningInfo threadInfo = m_mapStreamer->getThreadInfo();
@@ -123,19 +123,19 @@ namespace zcraft
 		}
 	}
 
-	void FlatMapViewer::blockAdded(const Vector3i pos, BlockMap & map)
+	void FlatMapViewer::blockAdded(const Vector3i pos, BlockMap & /*map*/)
 	{
 		sf::Image img = Cartographer::renderChunkTopDown(m_map, pos.x, pos.y, -64, 64);
 		m_cartography.setPictureFromImage(Vector2i(pos.x, pos.y), img);
 	}
 
-	void FlatMapViewer::blockChanged(const Vector3i pos, BlockMap & map)
+	void FlatMapViewer::blockChanged(const Vector3i pos, BlockMap & /*map*/)
 	{
 		sf::Image img = Cartographer::renderChunkTopDown(m_map, pos.x, pos.y, -64, 64);
 		m_cartography.setPictureFromImage(Vector2i(pos.x, pos.y), img);
 	}
 
-	void FlatMapViewer::blockRemoved(const Vector3i pos, BlockMap & map)
+	void FlatMapViewer::blockRemoved(const Vector3i pos, BlockMap & /*map*/)
 	{
 		m_cartography.erasePicture(Vector2i(pos.x, pos.y));
 	}

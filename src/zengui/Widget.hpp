@@ -236,7 +236,7 @@ namespace ui
 
 		// Animates the widget for a given time delta (in seconds).
 		// Implementation is optionnal.
-		virtual void animate(float dt) {}
+		virtual void animate(float /* dt */) {}
 
 	protected :
 
