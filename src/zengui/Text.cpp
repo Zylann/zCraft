@@ -18,6 +18,7 @@ namespace ui
 		m_wrap = false;
 		r_font = nullptr;
 		m_textNeedUpdate = false;
+		m_blocksInput = false;
 	}
 
 	Text::~Text()
@@ -117,11 +118,9 @@ namespace ui
 			line.bounds = getLocalInnerBounds();
 			line.str = m_text;
 			m_dispText.push_back(line);
-			std::cout << "DEBUG: nowrap" << std::endl;
 		}
 		else // wrap
 		{
-			std::cout << "DEBUG: wrap" << std::endl;
 			int lineHeight = r.getFontLineHeight(*r_font);
 			IntRect innerBounds = getLocalInnerBounds();
 			IntRect lineBounds(0,0,0,lineHeight);
@@ -129,9 +128,12 @@ namespace ui
 			char c;
 			bool ret = false;
 
+			// FIXME infinite loop somewhere (probably caused by unimplemented getTextSize())
+
 			for(unsigned int i = 0; i < m_text.size(); ++i)
 			{
 				c = m_text[i];
+				std::cout << "i=" << i << ", c=" << c << ' ';
 
 				// Carriage return
 				ret = isReturn(c);
@@ -143,31 +145,48 @@ namespace ui
 				if(!ret && r.getTextSize(*r_font, lstr, 0, lstr.size()-1).x >= innerBounds.width())
 				{
 					// TODO Text: handle tabs size
+					// FIXME Text: sometimes letters get misplaced
 
-					int j = findLastWhitespace(lstr);
-					if(j < 0)
-						j = 0;
-					lstr = lstr.substr(0, j+1);
-					if(i != 0)
-						i -= lstr.size() - j;
+					if(lstr.size() > 1) // If we can split the chain
+					{
+						int j = findLastWhitespace(lstr);
+						if(j < 0)
+						{
+							// No space found, split on letters
+							lstr = lstr.substr(0, 1);
+							--i; // Go back 1 character
+						}
+						else
+						{
+							// Space found, split on words
+							if(i != 0)
+							{
+								// Go back to the beginning of the limit-crossing word
+								i -= lstr.size()-j-1;
+							}
+							lstr = lstr.substr(0, j); // cut last space-delimited part
+						}
+					}
 					ret = true;
 				}
 
-				if(ret)
+				if(ret || i == m_text.size()-1) // If new line strip or end of text
 				{
+					// Push the new/last line
 					lineBounds.max.x = r.getTextSize(*r_font, lstr, 0, lstr.size()-1).x;
 					Line line;
 					line.str = lstr;
 					line.bounds = lineBounds;
+					std::cout << " nl" << lineBounds;
 					m_dispText.push_back(line);
 
 					lstr.clear();
 					lineBounds.offset(0, lineHeight);
 				}
+				std::cout << std::endl;
 			}
 		}
 
-		std::cout << "DEBUG: update finished" << std::endl;
 		m_textNeedUpdate = false;
 	}
 

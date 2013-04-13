@@ -27,22 +27,24 @@ namespace experimental
 
 		r_panel = new ui::Panel();
 		r_panel->setID("myFirstPanel");
-		r_panel->setBounds(IntRect(100, 100, 300, 250));
+		r_panel->setLocalBounds(IntRect(100, 100, 300, 250));
 		m_gui->add(r_panel);
 
 		ui::Panel * panel2 = new ui::Panel();
 		panel2->setID("myPanel2");
-		panel2->setBounds(IntRect(400, 200, 600, 300));
+		panel2->setLocalBounds(IntRect(400, 200, 600, 300));
 		m_gui->add(panel2);
 
 		ui::Panel * panel3 = new ui::Panel();
 		panel3->setID("myPanel3");
-		panel3->setBounds(IntRect(10, 150, 20, 30));
+		panel3->setLocalBounds(IntRect(10, 150, 20, 30));
 		r_panel->add(panel3);
 
 		ui::Text * text = new ui::Text();
 		text->setID("myText");
-		text->setText("This is not a sample text");
+		text->setWrap(true);
+		text->setLocalBounds(IntRect(10, 10, 100, 200));
+		text->setText("This  is not a sample text");
 		r_panel->add(text);
 
 		return true;
@@ -53,7 +55,7 @@ namespace experimental
 		delete m_gui;
 	}
 
-	void GuiTest::resized(const Vector2i & newSize)
+	void GuiTest::resized(const Vector2i & /*newSize*/)
 	{
 	}
 
@@ -76,12 +78,12 @@ namespace experimental
 		m_gui->animate(delta.hz());
 	}
 
-	void GuiTest::renderScene(const Time & delta)
+	void GuiTest::renderScene(const Time & /*delta*/)
 	{
 		glClearColor(0.2f, 0.1f, 0, 1.f);
 	}
 
-	void GuiTest::renderGUI(const zn::Time & delta)
+	void GuiTest::renderGUI(const zn::Time & /*delta*/)
 	{
 //		m_shader.bind();
 //		m_shader.setUniform("time", m_time.getElapsedTime().asSeconds());
