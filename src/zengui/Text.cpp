@@ -128,8 +128,6 @@ namespace ui
 			char c;
 			bool ret = false;
 
-			// FIXME infinite loop somewhere (probably caused by unimplemented getTextSize())
-
 			for(unsigned int i = 0; i < m_text.size(); ++i)
 			{
 				c = m_text[i];
