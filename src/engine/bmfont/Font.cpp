@@ -273,8 +273,23 @@ namespace bmfont
 
 	Vector2i Font::getTextSize(const std::string &text, int begin, int end)
 	{
-		// TODO Font: getTextSize()
-		return Vector2i();
+		if(begin < 0)
+			return Vector2i();
+		if(end < 0 || end >= text.size())
+			end = text.size()-1;
+
+		// TODO Font::getTextSize() : exact height
+
+		Vector2i size(0, getLineHeight());
+		for(int i = begin; i <= end; ++i)
+		{
+			const CharDescriptor * cd = m_settings.getChar(text[i]);
+			if(cd != nullptr)
+			{
+				size.x += cd->xadvance;
+			}
+		}
+		return size;
 	}
 
 	// TODO Font: add kerning support
