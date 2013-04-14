@@ -4,8 +4,8 @@ Copyright (C) 2010-2012 Marc GILLERON
 This file is part of the zCraft project.
 */
 
-#ifndef ENGINE_GAME_HPP_INCLUDED
-#define ENGINE_GAME_HPP_INCLUDED
+#ifndef ZN_GAME_HPP_INCLUDED
+#define ZN_GAME_HPP_INCLUDED
 
 #include "engine/system/Time.hpp"
 
@@ -17,25 +17,25 @@ namespace zn
 
 		virtual ~IGame() {}
 
-		/// Starts game's execution.
-		/// It may be blocking depending on the implementation.
+		// Starts game's execution.
+		// It may be blocking depending on the implementation.
 		virtual void start() = 0;
 
-		/// Tells the game to stop and close cleanly
+		// Tells the game to stop and close cleanly
 		virtual void stop() = 0;
 
 	protected :
 
-		/// Initializes the game (loads resources...)
+		// Initializes the game (loads resources...)
 		virtual bool init() = 0;
 
-		/// Updates game logic
+		// Updates game logic
 		virtual void update(const Time & delta) = 0;
 
-		/// Draws the whole game on the screen
+		// Draws the whole game on the screen
 		virtual void render(const Time & delta) = 0;
 
-		/// Frees game resources before closing
+		// Frees game resources before closing
 		virtual void dispose() = 0;
 
 	};
@@ -46,6 +46,6 @@ namespace zn
 
 } // namespace zn
 
-#endif // ENGINE_GAME_HPP_INCLUDED
+#endif // ZN_GAME_HPP_INCLUDED
 
 
