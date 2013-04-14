@@ -71,10 +71,18 @@ namespace ui
 						   line.str.size()-1);
 			}
 		}
+
+		IntRect gb = getBounds();
+		r.drawRect(gb.min.x, gb.min.y, gb.width(), gb.height(), false);
 //		else
 //		{
 //			// TODO Text: blocky rendering if no font is defined
 //		}
+	}
+
+	void Text::onSizeChanged()
+	{
+		m_textNeedUpdate = true;
 	}
 
 	inline bool isWhiteSpace(char c)
@@ -106,7 +114,7 @@ namespace ui
 		if(m_text.empty() || r_font == nullptr)
 		{
 			m_textNeedUpdate = false;
-			std::cout << "DEBUG: empty text" << std::endl;
+//			std::cout << "DEBUG: empty text" << std::endl;
 			return;
 		}
 
@@ -128,15 +136,16 @@ namespace ui
 			char c;
 			bool ret = false;
 
+//			std::cout << "---" << std::endl;
 			for(unsigned int i = 0; i < m_text.size(); ++i)
 			{
 				c = m_text[i];
-				std::cout << "i=" << i << ", c=" << c << ' ';
 
 				// Carriage return
 				ret = isReturn(c);
 
 				lstr += c;
+//				std::cout << "i=" << i << ", [" << lstr << ']';
 
 				// Inner bounds overlapping
 				// TODO Text: use a more efficient text size test
@@ -151,7 +160,8 @@ namespace ui
 						if(j < 0)
 						{
 							// No space found, split on letters
-							lstr = lstr.substr(0, 1);
+							//lstr = lstr.substr(lstr.size()-2, 1);
+							lstr.pop_back();
 							--i; // Go back 1 character
 						}
 						else
@@ -175,13 +185,13 @@ namespace ui
 					Line line;
 					line.str = lstr;
 					line.bounds = lineBounds;
-					std::cout << " nl" << lineBounds;
+//					std::cout << " nl" << lineBounds << '[' << lstr << ']';
 					m_dispText.push_back(line);
 
 					lstr.clear();
 					lineBounds.offset(0, lineHeight);
 				}
-				std::cout << std::endl;
+//				std::cout << std::endl;
 			}
 		}
 

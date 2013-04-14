@@ -37,15 +37,18 @@ namespace experimental
 
 		ui::Panel * panel3 = new ui::Panel();
 		panel3->setID("myPanel3");
-		panel3->setLocalBounds(IntRect(10, 150, 20, 30));
+		panel3->setLocalBounds(IntRect(10, 120, 100, 140));
 		r_panel->add(panel3);
 
-		ui::Text * text = new ui::Text();
-		text->setID("myText");
-		text->setWrap(true);
-		text->setLocalBounds(IntRect(10, 10, 100, 200));
-		text->setText("This  is not a sample text");
-		r_panel->add(text);
+		r_text = new ui::Text();
+		r_text->setID("myText");
+		r_text->setWrap(true);
+		r_text->setLocalBounds(IntRect(10, 10, 190, 110));
+		r_text->setText("This is not a sample text. This is a brand new "
+						"testing system involving character strings linked "
+						"together in a byte-based dynamic array, also called "
+						"std::string.");
+		r_panel->add(r_text);
 
 		return true;
 	}
@@ -68,11 +71,13 @@ namespace experimental
 	{
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
 		{
-			r_panel->setBounds(IntRect(r_panel->getBounds()).offset(-1, 0));
+			//r_panel->setBounds(IntRect(r_panel->getBounds()).offset(-1, 0));
+			r_text->setLocalBounds(r_text->getLocalBounds().contract(-1, 0));
 		}
 		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
 		{
-			r_panel->setBounds(IntRect(r_panel->getBounds()).offset(1, 0));
+			//r_panel->setBounds(IntRect(r_panel->getBounds()).offset(1, 0));
+			r_text->setLocalBounds(r_text->getLocalBounds().expand(1, 0));
 		}
 
 		m_gui->animate(delta.hz());

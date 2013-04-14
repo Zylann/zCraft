@@ -120,7 +120,7 @@ namespace zn
 
 		// Swaps min and max coordinates in order to keep them ordered
 		// (min.x <= max.x and min.y <= max.y)
-		inline void normalize()
+		inline void repair()
 		{
 			if(max.x < min.x)
 				std::swap(min.x, max.x);
@@ -179,6 +179,40 @@ namespace zn
 		{
 			min += off;
 			max += off;
+			return *this;
+		}
+
+		// Expands the rect from 1 side only per dimension.
+		// Example : if x < 0, the rectangle will be expanded from the left
+		// without modify the opposite side.
+		// Returns self for chaining.
+		inline Rect<T> & expand(const T x, const T y)
+		{
+			if(x < 0)
+				min.x += x;
+			else if(x > 0)
+				max.x += x;
+			if(y < 0)
+				min.y += y;
+			else if(y > 0)
+				max.y += y;
+			return *this;
+		}
+
+		// Contracts the rect from 1 side only per dimension.
+		// Example : if x < 0, the rectangle will be reduced from the right
+		// without modify the opposite side.
+		// Returns self for chaining.
+		inline Rect<T> & contract(const T x, const T y)
+		{
+			if(x < 0)
+				max.x += x;
+			else if(x > 0)
+				min.x += x;
+			if(y < 0)
+				max.y += y;
+			else if(y > 0)
+				min.y += y;
 			return *this;
 		}
 

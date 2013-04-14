@@ -21,3 +21,4 @@ This file is part of the zCraft project.
 //#define ZN_OPENGL3
 
 #endif // ZN_CONFIG_HPP_INCLUDED
+

@@ -15,8 +15,8 @@ namespace experimental
 {
 	bool BasicSkin::load(IRenderer &r)
 	{
-		m_defaultFont.src = "assets/fonts/arial32.fnt";
-		m_defaultFont.ID = "arial32";
+		m_defaultFont.src = "assets/fonts/tahoma16.fnt";
+		m_defaultFont.ID = "global";
 		if(!r.loadFont(m_defaultFont))
 			return false;
 		return true;

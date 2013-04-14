@@ -53,8 +53,13 @@ namespace ui
 
 	void AWidget::setLocalBounds(IntRect bounds)
 	{
-		bounds.normalize();
+		bounds.repair();
+		bool sizeChanged =
+			m_localBounds.width() != bounds.width() ||
+			m_localBounds.height() != bounds.height();
 		m_localBounds = bounds;
+		if(sizeChanged)
+			onSizeChanged();
 	}
 
 	void AWidget::setBounds(IntRect globalBounds)
@@ -120,7 +125,7 @@ namespace ui
 		if(m_sizeLimit.max.y < 0)
 			m_sizeLimit.max.y = 0;
 
-		m_sizeLimit.normalize();
+		m_sizeLimit.repair();
 	}
 
 	void AWidget::setSkin(ISkin & skin, bool /*recursive*/)
@@ -193,6 +198,9 @@ namespace ui
 			m_localBounds.max.y = m_localBounds.min.y + m_sizeLimit.min.y;
 			changed = true;
 		}
+
+		if(changed)
+			onSizeChanged();
 
 		return changed;
 	}

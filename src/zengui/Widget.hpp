@@ -74,7 +74,7 @@ namespace ui
 	{
 	protected :
 
-		/* Style */
+		/* Geometry */
 
 		IntRect m_localBounds; // parent-relative bounds
 		IntRect m_sizeLimit;
@@ -116,7 +116,7 @@ namespace ui
 		virtual ~AWidget() {}
 
 		/*
-			Style
+			Geometry
 		*/
 
 		// Sets the fixed bounds of the widget.
@@ -253,10 +253,10 @@ namespace ui
 		virtual bool keyReleased(Keyboard::Key key) override;
 
 		/*
-			Basic state changes
-			These methods are called from input methods.
-			CURRENTLY UNUSUED
+			State change notifications
 		*/
+
+		virtual void onSizeChanged() {}
 
 //		virtual void onPress() {}
 //		virtual void onRelease() {}

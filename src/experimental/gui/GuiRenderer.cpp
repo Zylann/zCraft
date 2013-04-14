@@ -47,12 +47,12 @@ namespace experimental
 	#endif
 	}
 
-	bool GuiRenderer::loadTexture(ui::Texture & texture)
+	bool GuiRenderer::loadTexture(ui::Texture & /*texture*/)
 	{
 		return false; // Not supported
 	}
 
-	bool GuiRenderer::freeTexture(ui::Texture & texture)
+	bool GuiRenderer::freeTexture(ui::Texture & /*texture*/)
 	{
 		return false; // Not supported
 	}
@@ -74,6 +74,7 @@ namespace experimental
 		}
 		else
 			m_fonts[font.ID] = asset;
+		return true;
 	}
 
 	bool GuiRenderer::freeFont(ui::Font & font)
@@ -98,12 +99,12 @@ namespace experimental
 		glLineWidth(w);
 	}
 
-	void GuiRenderer::setTexture(ui::Texture & texture)
+	void GuiRenderer::setTexture(ui::Texture & /*texture*/)
 	{
 		// Not supported
 	}
 
-	void GuiRenderer::setTextureClip(const IntRect clip)
+	void GuiRenderer::setTextureClip(const IntRect /*clip*/)
 	{
 		// Not supported
 	}

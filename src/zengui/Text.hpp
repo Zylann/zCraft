@@ -49,6 +49,10 @@ namespace ui
 
 		void render(IRenderer & r) override;
 
+	protected :
+
+		virtual void onSizeChanged() override;
+
 	private :
 
 		void updateText(IRenderer & r);
