@@ -182,7 +182,7 @@ namespace ui
 
 		// Sets the widget as focused.
 		// Warning: this is just a setter, other widgets will not loose focus !
-		virtual void setFocused(bool f, bool recursive = false);
+		virtual void setFocused(bool f);
 
 		// Sets the widget as hovered, and triggers onMouseOver/onMouseQuit
 		void setHovered(bool h);
@@ -191,7 +191,7 @@ namespace ui
 		virtual void hide();
 
 		// Sets the widget as focused (when available) and removes focus from others
-		void requestFocus();
+//		void requestFocus();
 
 		/*
 			Hierarchy

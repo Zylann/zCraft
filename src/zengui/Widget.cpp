@@ -152,17 +152,6 @@ namespace ui
 		}
 	}
 
-	void AWidget::requestFocus()
-	{
-		if(r_parent != nullptr)
-		{
-			r_parent->focusChild(this);
-			bringToFront();
-		}
-		else
-			setFocused(true);
-	}
-
 	void AWidget::setAlign(Align align)
 	{
 		m_align = align;
@@ -219,9 +208,34 @@ namespace ui
 	{
 	}
 
-	void AWidget::setFocused(bool f, bool /*recursive*/)
+	void AWidget::setFocused(bool f)
 	{
+		Root * r = getRoot();
+		if(r == nullptr)
+		{
+			std::cout << "ERROR: AWidget::setFocused: "
+					  << "Root is unreachable." << std::endl;
+			return;
+		}
+
 		m_focused = f;
+		if(m_focused)
+		{
+			// If another different widget is focused
+			AWidget * oldFocused = r->getFocusedWidget();
+			if(oldFocused && oldFocused != this)
+			{
+				// Unfocus it
+				oldFocused->setFocused(false);
+			}
+
+			r->setFocusedWidget(this);
+			bringToFront();
+		}
+		else
+		{
+			r->setFocusedWidget(nullptr);
+		}
 	}
 
 	void AWidget::setHovered(bool h)
@@ -260,7 +274,7 @@ namespace ui
 		{
 			if(button == Mouse::LEFT)
 				m_pressed = true;
-			requestFocus();
+			setFocused(true);
 //			onPress();
 			return true;
 		}

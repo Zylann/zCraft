@@ -16,6 +16,7 @@ namespace ui
 		m_localBounds.set(0, 0, width, height);
 		m_blocksInput = false;
 		setID("root");
+		r_focusedWidget = nullptr;
 
 		static int s_instanceCount = 0;
 		++s_instanceCount;
@@ -129,6 +130,19 @@ namespace ui
 			std::cout << "ERROR: Root::setSkin: "
 					  << "skin not found \"" << name << "\"" << std::endl;
 		}
+	}
+
+	void Root::setFocusedWidget(AWidget *w)
+	{
+		if(w && w->isFocused())
+		{
+			r_focusedWidget = w;
+		}
+	}
+
+	AWidget *Root::getFocusedWidget() const
+	{
+		return r_focusedWidget;
 	}
 
 } // namespace ui

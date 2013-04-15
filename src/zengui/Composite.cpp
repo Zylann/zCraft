@@ -130,37 +130,6 @@ namespace ui
 		}
 	}
 
-	void AComposite::focusChild(const AWidget * child)
-	{
-		if(child == this)
-		{
-			std::cout << "ERROR: AComposite::focusChild: "
-				<< "can't do that with self."
-				<< "ID=\"" << child->getID() << '"' << std::endl;
-			return;
-		}
-
-		AWidget * w;
-		for(auto it = m_children.begin(); it != m_children.end(); it++)
-		{
-			w = (*it);
-			if(w == child)
-				w->setFocused(true);
-			else
-				w->setFocused(false, true);
-		}
-	}
-
-	void AComposite::setFocused(bool f, bool recursive)
-	{
-		m_focused = f;
-		if(recursive)
-		{
-			for(auto & child : m_children)
-				child->setFocused(f, recursive);
-		}
-	}
-
 	void AComposite::layout()
 	{
 	}
