@@ -36,21 +36,14 @@ namespace experimental
 
 	void BasicSkin::drawDummyWidget(IRenderer & r, const AWidget & w)
 	{
-		Vector2i pos = w.getGlobalPosition();
-		const int width = w.getBounds().width();
-		const int height = w.getBounds().height();
-
 		static const Color borderColor(224, 224, 224);
-
 		r.setColor(borderColor);
-		r.drawRect(pos.x, pos.y, width, height, false);
+		r.drawRect(w.getBounds(), false);
 	}
 
 	void BasicSkin::drawPanel(IRenderer & r, const AWidget & panel)
 	{
-		Vector2i pos = panel.getGlobalPosition();
-		const int width = panel.getBounds().width();
-		const int height = panel.getBounds().height();
+		IntRect bounds = panel.getBounds();
 
 		static const Color borderColor(160, 160, 160);
 		static const Color borderColorHover(224, 224, 224);
@@ -58,6 +51,13 @@ namespace experimental
 		static const Color borderColorFocusHover(0xffc481ff);
 		static const Color fillColor(64, 64, 64);
 		static const Color fillColorPress(48, 48, 48);
+
+		if(panel.isPressed())
+			r.setColor(fillColorPress);
+		else
+			r.setColor(fillColor);
+
+		r.drawRect(bounds, true); // Fill
 
 		if(panel.isHovered())
 		{
@@ -74,13 +74,7 @@ namespace experimental
 				r.setColor(borderColor);
 		}
 
-		r.drawRect(pos.x, pos.y-1, width+1, height+1, false);
-
-		if(panel.isPressed())
-			r.setColor(fillColorPress);
-		else
-			r.setColor(fillColor);
-		r.drawRect(pos.x, pos.y, width, height, true);
+		r.drawRect(bounds.pad(1), false); // Border
 	}
 
 } // namespace experimental

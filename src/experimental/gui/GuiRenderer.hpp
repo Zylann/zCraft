@@ -51,7 +51,7 @@ namespace experimental
 
 		void drawLine(float xa, float ya, float xb, float yb) override;
 
-		void drawRect(float x, float y, float w, float h, bool fill) override;
+		void drawRect(zn::IntRect rect, bool fill) override;
 
 		void drawText(const std::string & text, int x, int y, int begin, int end) override;
 

@@ -21,10 +21,10 @@ namespace zn
 {
 namespace ui
 {
-	/*
-		An implementation of this interface must be used for the
-		GUI to render things.
-	*/
+	/**
+	 * @brief An implementation of this interface must be used for the
+	 * GUI to render things.
+	 */
 	class IRenderer
 	{
 	public :
@@ -36,10 +36,14 @@ namespace ui
 			Lifecycle
 		*/
 
-		// Called when the gui rendering starts
+		/**
+		 * @brief Called when the gui rendering starts
+		 */
 		virtual void begin() = 0;
 
-		// Called at the end of gui rendering
+		/**
+		 * @brief Called at the end of gui rendering
+		 */
 		virtual void end() = 0;
 
 		/*
@@ -95,7 +99,7 @@ namespace ui
 
 		// Draws a coloured rectangle defined by a top-left corner at (x,y) and a size.
 		// If fill is false, only the border must be rendered.
-		virtual void drawRect(float x, float y, float w, float h, bool fill) = 0;
+		virtual void drawRect(IntRect r, bool fill) = 0;
 
 		// Draws the given text from the (x,y) position.
 		// begin and end refer to the starting and ending index of the string to draw.

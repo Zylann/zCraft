@@ -129,7 +129,7 @@ namespace experimental
 	#endif
 	}
 
-	void GuiRenderer::drawRect(float x, float y, float w, float h, bool fill)
+	void GuiRenderer::drawRect(zn::IntRect rect, bool fill)
 	{
 	#if defined ZN_OPENGL2
 		glColor4ub(m_color.r, m_color.g, m_color.b, m_color.a);
@@ -139,10 +139,10 @@ namespace experimental
 		else
 			glBegin(GL_LINE_LOOP);
 
-		glVertex2f(x, y);
-		glVertex2f(x+w-1 , y);
-		glVertex2f(x+w-1, y+h-1);
-		glVertex2f(x, y+h-1);
+		glVertex2f(rect.min.x, rect.min.y);
+		glVertex2f(rect.max.x, rect.min.y);
+		glVertex2f(rect.max.x, rect.max.y);
+		glVertex2f(rect.min.x, rect.max.y);
 
 		glEnd();
 	#else

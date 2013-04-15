@@ -71,13 +71,12 @@ namespace ui
 						   line.str.size()-1);
 			}
 		}
-
-		IntRect gb = getBounds();
-		r.drawRect(gb.min.x, gb.min.y, gb.width(), gb.height(), false);
 //		else
 //		{
 //			// TODO Text: blocky rendering if no font is defined
 //		}
+
+		r.drawRect(getBounds(), false); // For debug
 	}
 
 	void Text::onSizeChanged()
