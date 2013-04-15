@@ -6,6 +6,7 @@ src_old/
 src_draft/
 worlds/
 releases/
+doc/doxygen/
 
 callstack.txt
 

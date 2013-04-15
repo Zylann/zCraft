@@ -98,7 +98,8 @@ namespace ui
 		/**
 		 * @brief Renders the whole GUI using the current renderer.
 		 * It does nothing if no renderer has been set.
-		 * @note it does the same as the inherited render(renderer), but you shouldn't use it.
+		 * @note it does the same as the inherited render(renderer),
+		 * but you may only use the one without parameters.
 		 */
 		void render();
 
