@@ -3,7 +3,7 @@
 
 #include "engine/game/BasicGame.hpp"
 #include "zengui/Root.hpp"
-#include "zengui/plugin/SFMLInputAdapter.hpp"
+#include "zengui/inputs/SFMLInputAdapter.hpp"
 #include "zengui/Panel.hpp"
 #include "zengui/Text.hpp"
 #include "engine/opengl/ShaderProgram.hpp"
