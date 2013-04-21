@@ -234,6 +234,8 @@ namespace ui
 		// Draws the widget
 		virtual void render(IRenderer & r);
 
+		// TODO AWidget: renderSelf(), renderChildren(), render()
+
 		// Animates the widget for a given time delta (in seconds).
 		// Implementation is optionnal.
 		virtual void animate(float /* dt */) {}

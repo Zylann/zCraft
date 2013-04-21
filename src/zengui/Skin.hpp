@@ -54,13 +54,15 @@ namespace ui
 		 */
 		virtual Font & getDefaultFont() = 0;
 
-		/*
+		/**
 			Methods below are used to draw widgets.
-			Each time the GUI generic renderer is provided, as a read-only
+			Each time the GUI generic renderer is provided, and a read-only
 			reference to the widget to draw.
-		*/
+			Some methods are optionnal.
+		**/
 
 		virtual void drawPanel(IRenderer & r, const AWidget & panel) = 0;
+		virtual void drawDragZone(IRenderer & /*r*/, const AWidget & /*dragZone*/) {}
 
 		/*
 			Optional methods

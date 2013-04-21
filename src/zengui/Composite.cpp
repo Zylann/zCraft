@@ -122,6 +122,7 @@ namespace ui
 
 	void AComposite::bringChildToFront(AWidget * child)
 	{
+		// TODO AWidget: widgets should bring-to-front upwards-recursively if a child widget is focused
 		auto it = getCheckChild(child, "bringChildToFront");
 		if(it != m_children.end())
 		{

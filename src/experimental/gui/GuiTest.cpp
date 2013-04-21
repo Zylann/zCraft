@@ -4,6 +4,7 @@
 #include "engine/system/Time.hpp"
 #include "zengui/Text.hpp"
 #include "zengui/skins/BasicSkin.hpp"
+#include "zengui/DragZone.hpp"
 
 using namespace zn;
 
@@ -20,26 +21,28 @@ namespace experimental
 		if(!m_shader.load("assets\\shaders\\basic.vert", "assets\\shaders\\tvstatic.frag"))
 			return false;
 
+		//
+		// GUI setup
+		//
+
 		m_gui = new ui::Root(m_window.getSize().x, m_window.getSize().y);
 		m_gui->setRenderer(new GuiRenderer());
 		if(!m_gui->installSkin(new ui::BasicSkin("Basic", "assets/fonts/tahoma16.fnt")))
 			return false;
 		m_gui->setSkin("Basic");
 
+		//
+		// Panel 1
+		//
+
 		r_panel = new ui::Panel();
 		r_panel->setID("myFirstPanel");
 		r_panel->setLocalBounds(IntRect(100, 100, 300, 250));
-		m_gui->add(r_panel);
 
-		ui::Panel * panel2 = new ui::Panel();
-		panel2->setID("myPanel2");
-		panel2->setLocalBounds(IntRect(400, 200, 600, 300));
-		m_gui->add(panel2);
-
-		ui::Panel * panel3 = new ui::Panel();
-		panel3->setID("myPanel3");
-		panel3->setLocalBounds(IntRect(10, 120, 100, 140));
-		r_panel->add(panel3);
+		ui::Panel * button = new ui::Panel();
+		button->setID("myPanel3");
+		button->setLocalBounds(IntRect(10, 120, 100, 140));
+		r_panel->add(button);
 
 		r_text = new ui::Text();
 		r_text->setID("myText");
@@ -50,6 +53,22 @@ namespace experimental
 						"together in a byte-based dynamic array, also called "
 						"std::string.");
 		r_panel->add(r_text);
+
+		m_gui->add(r_panel);
+
+		//
+		// Panel 2
+		//
+
+		ui::Panel * panel2 = new ui::Panel();
+		panel2->setID("myPanel2");
+		panel2->setLocalBounds(IntRect(400, 200, 600, 300));
+
+		ui::DragZone * dragZone = new ui::DragZone();
+		dragZone->setLocalBounds(IntRect(0, 0, 400, 100));
+		panel2->add(dragZone);
+
+		m_gui->add(panel2);
 
 		return true;
 	}
