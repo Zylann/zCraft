@@ -1,22 +1,18 @@
-/*
-BasicTheme.cpp
-Copyright (C) 2010-2012 Marc GILLERON
-This file is part of the zCraft project.
-*/
-
 #include "BasicSkin.hpp"
-#include "zengui/Color.hpp"
-#include "zengui/Renderer.hpp"
 
-using namespace zn;
-using namespace ui;
-
-namespace experimental
+namespace zn
 {
+namespace ui
+{
+	BasicSkin::BasicSkin(std::string name, std::string globalFontFilepath)
+	{
+		m_defaultFont.src = globalFontFilepath;
+		m_defaultFont.ID = "global";
+		m_name = name;
+	}
+
 	bool BasicSkin::load(IRenderer &r)
 	{
-		m_defaultFont.src = "assets/fonts/tahoma16.fnt";
-		m_defaultFont.ID = "global";
 		if(!r.loadFont(m_defaultFont))
 			return false;
 		return true;
@@ -77,7 +73,9 @@ namespace experimental
 		r.drawRect(bounds.pad(1), false); // Border
 	}
 
-} // namespace experimental
+} // namespace ui
+} // namespace zn
+
 
 
 

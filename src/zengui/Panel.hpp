@@ -8,6 +8,7 @@ This file is part of the zCraft project.
 #define ZENGUI_PANEL_HPP_INCLUDED
 
 #include "Composite.hpp"
+#include "Skin.hpp"
 
 namespace zn
 {

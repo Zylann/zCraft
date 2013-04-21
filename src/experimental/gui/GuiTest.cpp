@@ -3,6 +3,7 @@
 #include "engine/opengl/opengl.hpp"
 #include "engine/system/Time.hpp"
 #include "zengui/Text.hpp"
+#include "zengui/skins/BasicSkin.hpp"
 
 using namespace zn;
 
@@ -21,7 +22,7 @@ namespace experimental
 
 		m_gui = new ui::Root(m_window.getSize().x, m_window.getSize().y);
 		m_gui->setRenderer(new GuiRenderer());
-		if(!m_gui->installSkin(new BasicSkin()))
+		if(!m_gui->installSkin(new ui::BasicSkin("Basic", "assets/fonts/tahoma16.fnt")))
 			return false;
 		m_gui->setSkin("Basic");
 
