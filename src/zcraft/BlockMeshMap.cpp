@@ -193,7 +193,7 @@ namespace zcraft
 		updateMesh(pos, map);
 	}
 
-	void BlockMeshMap::blockRemoved(const Vector3i pos, BlockMap & map)
+	void BlockMeshMap::blockRemoved(const Vector3i pos, BlockMap & /*map*/)
 	{
 		eraseMesh(pos);
 	}

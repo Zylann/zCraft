@@ -69,7 +69,7 @@ namespace zn
 
 	private :
 
-		inline const float operator[](const int i) const { return m_v[i]; }
+		inline float operator[](int i) const { return m_v[i]; }
 
 		//  0   1   2   3
 		//  4   5   6   7

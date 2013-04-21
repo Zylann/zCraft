@@ -257,7 +257,7 @@ namespace zcraft
 			Vector3i startPos, // absolute start position
 			Vector3i transDir, // iteration translation
 			Vector3i vFaceDir, // face direction vector, ex : (0,0,1) for back face (z+)
-			const u8 dir, // direction constant
+			const u8 dir, // direction constant (for texturing)
 			const u16 length, // usually Block::SIZE
 			VoxelBuffer & vb, // voxels to analyse (may contain neighboring)
 			std::list<FastFace> & faces)

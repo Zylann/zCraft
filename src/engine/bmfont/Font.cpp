@@ -275,7 +275,7 @@ namespace bmfont
 	{
 		if(begin < 0)
 			return Vector2i();
-		if(end < 0 || end >= text.size())
+		if(end < 0 || end >= static_cast<int>(text.size()))
 			end = text.size()-1;
 
 		// TODO Font::getTextSize() : exact height
