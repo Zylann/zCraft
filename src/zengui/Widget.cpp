@@ -146,10 +146,15 @@ namespace ui
 
 	void AWidget::render(IRenderer & r)
 	{
-		if(r_skin != nullptr)
+		if(m_visible && r_skin != nullptr)
 		{
-			r_skin->drawDummyWidget(r, *this);
+			renderSelf(r);
 		}
+	}
+
+	void AWidget::renderSelf(IRenderer &r)
+	{
+		r_skin->drawDummyWidget(r, *this);
 	}
 
 	void AWidget::setAlign(Align align)

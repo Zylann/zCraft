@@ -231,16 +231,20 @@ namespace ui
 			Main loop
 		*/
 
-		// Draws the widget
+		// Draws the widget and all of its contents
 		virtual void render(IRenderer & r);
-
-		// TODO AWidget: renderSelf(), renderChildren(), render()
 
 		// Animates the widget for a given time delta (in seconds).
 		// Implementation is optionnal.
 		virtual void animate(float /* dt */) {}
 
 	protected :
+
+		// Draws only the widget (not his children).
+		// This method is called only if it is really needed
+		// (ie. it's not required to check if the widget is visible or
+		// if the skin is defined).
+		virtual void renderSelf(IRenderer & r);
 
 		/*
 			Input callbacks

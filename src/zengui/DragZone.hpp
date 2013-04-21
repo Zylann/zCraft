@@ -40,12 +40,11 @@ namespace ui
 			return AWidget::mouseMoved(oldX, oldY, newX, newY);
 		}
 
-		virtual void render(IRenderer &r) override
+	protected:
+
+		virtual void renderSelf(IRenderer &r) override
 		{
-			if(!m_visible)
-				return;
-			if(r_skin != nullptr)
-				r_skin->drawDragZone(r, *this);
+			r_skin->drawDragZone(r, *this);
 		}
 	};
 

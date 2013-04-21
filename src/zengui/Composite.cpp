@@ -180,7 +180,7 @@ namespace ui
 		if(m_visible)
 		{
 			if(r_skin != nullptr)
-				r_skin->drawDummyWidget(r, *this);
+				renderSelf(r);
 			renderChildren(r);
 		}
 	}
@@ -195,12 +195,9 @@ namespace ui
 
 	void AComposite::renderChildren(IRenderer & r)
 	{
-		AWidget * w;
 		for(auto it = m_children.rbegin(); it != m_children.rend(); it++)
 		{
-			w = (*it);
-			if(w->isVisible())
-				w->render(r);
+			(*it)->render(r);
 		}
 	}
 

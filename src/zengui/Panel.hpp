@@ -21,13 +21,11 @@ namespace ui
 		Panel() : AComposite() {}
 		virtual ~Panel() {}
 
-		virtual void render(IRenderer & r) override
+	protected :
+
+		virtual void renderSelf(IRenderer & r) override
 		{
-			if(!m_visible)
-				return;
-			if(r_skin != nullptr)
-				r_skin->drawPanel(r, *this);
-			this->renderChildren(r);
+			r_skin->drawPanel(r, *this);
 		}
 
 	};

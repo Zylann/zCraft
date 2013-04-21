@@ -45,9 +45,9 @@ namespace ui
 		m_textNeedUpdate = true;
 	}
 
-	void Text::render(IRenderer & r)
+	void Text::renderSelf(IRenderer & r)
 	{
-		if(r_font == nullptr && r_skin != nullptr)
+		if(r_font == nullptr)
 		{
 			r_font = &r_skin->getDefaultFont();
 		}
