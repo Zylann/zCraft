@@ -42,29 +42,47 @@ namespace ui
 		IntRect bounds = panel.getBounds();
 
 		static const Color borderColor(160, 160, 160);
+		static const Color borderColorFocus(0xff8800ff);
+		static const Color fillColor(64, 64, 64);
+
+		r.setColor(fillColor);
+		r.drawRect(bounds, true); // Fill
+
+		if(panel.isFocused())
+			r.setColor(borderColorFocus);
+		else
+			r.setColor(borderColor);
+		r.drawRect(bounds.pad(1), false); // Border
+	}
+
+	void BasicSkin::drawPushButton(IRenderer &r, const AWidget &btn)
+	{
+		IntRect bounds = btn.getBounds();
+
+		static const Color borderColor(160, 160, 160);
 		static const Color borderColorHover(224, 224, 224);
 		static const Color borderColorFocus(0xff8800ff);
 		static const Color borderColorFocusHover(0xffc481ff);
 		static const Color fillColor(64, 64, 64);
 		static const Color fillColorPress(48, 48, 48);
 
-		if(panel.isPressed())
+		if(btn.isPressed())
 			r.setColor(fillColorPress);
 		else
 			r.setColor(fillColor);
 
 		r.drawRect(bounds, true); // Fill
 
-		if(panel.isHovered())
+		if(btn.isHovered())
 		{
-			if(panel.isFocused())
+			if(btn.isFocused())
 				r.setColor(borderColorFocusHover);
 			else
 				r.setColor(borderColorHover);
 		}
 		else
 		{
-			if(panel.isFocused())
+			if(btn.isFocused())
 				r.setColor(borderColorFocus);
 			else
 				r.setColor(borderColor);

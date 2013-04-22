@@ -264,8 +264,8 @@ namespace ui
 
 		virtual void onSizeChanged() {}
 
-//		virtual void onPress() {}
-//		virtual void onRelease() {}
+		virtual void onPress() {}
+		virtual void onRelease() {}
 
 //		virtual void onMouseEnter() {}
 //		virtual void onMouseQuit() {}

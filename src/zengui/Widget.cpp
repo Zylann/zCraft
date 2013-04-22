@@ -280,7 +280,7 @@ namespace ui
 			if(button == Mouse::LEFT)
 				m_pressed = true;
 			setFocused(true);
-//			onPress();
+			onPress();
 			return true;
 		}
 		return false;
@@ -292,7 +292,7 @@ namespace ui
 		{
 			if(button == Mouse::LEFT)
 				m_pressed = false;
-//			onRelease();
+			onRelease();
 			return true;
 		}
 		return false;
@@ -308,7 +308,7 @@ namespace ui
 		if(key == Keyboard::Key::RETURN && m_focused)
 		{
 			m_pressed = true;
-//			onPress();
+			onPress();
 			return true;
 		}
 		return false;
@@ -319,7 +319,7 @@ namespace ui
 		if(m_pressed)
 		{
 			m_pressed = false;
-//			onRelease();
+			onRelease();
 			return true;
 		}
 		return false;

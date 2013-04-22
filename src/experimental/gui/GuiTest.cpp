@@ -1,10 +1,13 @@
 #include "GuiTest.hpp"
 #include "GuiRenderer.hpp"
+
 #include "engine/opengl/opengl.hpp"
 #include "engine/system/Time.hpp"
+
 #include "zengui/Text.hpp"
 #include "zengui/skins/BasicSkin.hpp"
 #include "zengui/DragZone.hpp"
+#include "zengui/PushButton.hpp"
 
 using namespace zn;
 
@@ -18,7 +21,7 @@ namespace experimental
 
 	bool GuiTest::init()
 	{
-		if(!m_shader.load("assets\\shaders\\basic.vert", "assets\\shaders\\tvstatic.frag"))
+		if(!m_shader.load("assets/shaders/basic.vert", "assets/shaders/tvstatic.frag"))
 			return false;
 
 		//
@@ -39,9 +42,13 @@ namespace experimental
 		r_panel->setID("myFirstPanel");
 		r_panel->setLocalBounds(IntRect(100, 100, 300, 250));
 
-		ui::Panel * button = new ui::Panel();
-		button->setID("myPanel3");
+		ui::PushButton * button = new ui::PushButton();
+		button->setID("myButton");
+		button->setText("My big button");
 		button->setLocalBounds(IntRect(10, 120, 100, 140));
+		button->onClickSignal.connect([](){
+			std::cout << "Hello world !" << std::endl;
+		});
 		r_panel->add(button);
 
 		r_text = new ui::Text();
