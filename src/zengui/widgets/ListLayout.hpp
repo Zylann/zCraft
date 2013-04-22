@@ -7,7 +7,7 @@ This file is part of the zCraft project.
 #ifndef ZENGUI_LISTLAYOUT_HPP_INCLUDED
 #define ZENGUI_LISTLAYOUT_HPP_INCLUDED
 
-#include "Composite.hpp"
+#include "../Composite.hpp"
 
 namespace zn
 {
@@ -19,6 +19,7 @@ namespace ui
 		VERTICAL
 	};
 
+	// UNTESTED / UNFINISHED
 	class ListLayout : public AComposite
 	{
 	private :

@@ -5,9 +5,9 @@ This file is part of the zCraft project.
 */
 
 #include "Text.hpp"
-#include "Renderer.hpp"
-#include "Skin.hpp"
-#include "Composite.hpp"
+#include "../Renderer.hpp"
+#include "../Skin.hpp"
+#include "../Composite.hpp"
 
 namespace zn
 {

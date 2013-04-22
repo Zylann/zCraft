@@ -7,8 +7,8 @@ This file is part of the zCraft project.
 #ifndef ZENGUI_BUTTON_HPP_INCLUDED
 #define ZENGUI_BUTTON_HPP_INCLUDED
 
-#include "Composite.hpp"
-#include "Signal.hpp"
+#include "../Composite.hpp"
+#include "../Signal.hpp"
 #include "Text.hpp"
 
 namespace zn

@@ -4,10 +4,10 @@
 #include "engine/opengl/opengl.hpp"
 #include "engine/system/Time.hpp"
 
-#include "zengui/Text.hpp"
 #include "zengui/skins/BasicSkin.hpp"
-#include "zengui/DragZone.hpp"
-#include "zengui/PushButton.hpp"
+#include "zengui/widgets/Text.hpp"
+#include "zengui/widgets/DragZone.hpp"
+#include "zengui/widgets/PushButton.hpp"
 
 using namespace zn;
 

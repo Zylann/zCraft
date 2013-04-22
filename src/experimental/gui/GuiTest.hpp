@@ -4,8 +4,8 @@
 #include "engine/game/BasicGame.hpp"
 #include "zengui/Root.hpp"
 #include "zengui/inputs/SFMLInputAdapter.hpp"
-#include "zengui/Panel.hpp"
-#include "zengui/Text.hpp"
+#include "zengui/widgets/Panel.hpp"
+#include "zengui/widgets/Text.hpp"
 #include "engine/opengl/ShaderProgram.hpp"
 
 namespace experimental

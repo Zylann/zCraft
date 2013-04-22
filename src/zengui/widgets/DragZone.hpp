@@ -1,8 +1,14 @@
-#ifndef DRAGZONE_HPP
-#define DRAGZONE_HPP
+/*
+DragZone.hpp
+Copyright (C) 2010-2012 Marc GILLERON
+This file is part of the zCraft project.
+*/
 
-#include "Widget.hpp"
-#include "Skin.hpp"
+#ifndef ZENGUI_DRAGZONE_HPP
+#define ZENGUI_DRAGZONE_HPP
+
+#include "../Widget.hpp"
+#include "../Skin.hpp"
 
 namespace zn
 {
@@ -57,4 +63,4 @@ namespace ui
 } // namespace ui
 } // namespace zn
 
-#endif // DRAGZONE_HPP
+#endif // ZENGUI_DRAGZONE_HPP

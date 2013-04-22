@@ -8,8 +8,8 @@ This file is part of the zCraft project.
 #define ZENGUI_TEXT_HPP_INCLUDED
 
 #include <vector>
-#include "Widget.hpp"
-#include "Font.hpp"
+#include "../Widget.hpp"
+#include "../Font.hpp"
 
 namespace zn
 {
