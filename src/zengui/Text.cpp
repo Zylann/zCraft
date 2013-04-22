@@ -61,10 +61,10 @@ namespace ui
 		{
 			r.setFont(*r_font);
 			Vector2i off = getGlobalPosition();
+			r.setColor(Color(255,255,255));
 			for(unsigned int i = 0; i < m_dispText.size(); ++i)
 			{
 				const Line & line = m_dispText[i];
-				r.setColor(Color(255,255,255));
 				r.drawText(line.str,
 						   line.bounds.min.x + off.x,
 						   line.bounds.min.y + off.y, 0,
@@ -76,7 +76,7 @@ namespace ui
 //			// TODO Text: blocky rendering if no font is defined
 //		}
 
-		r.drawRect(getBounds(), false); // For debug
+//		r.drawRect(getBounds(), false); // For debug
 	}
 
 	void Text::onSizeChanged()

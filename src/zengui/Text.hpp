@@ -15,36 +15,21 @@ namespace zn
 {
 namespace ui
 {
+	/**
+	 * @brief A basic widget for displaying text
+	 */
 	class Text : public AWidget
 	{
-		struct Line
-		{
-			std::string str;
-			IntRect bounds;
-		};
-
-	private :
-
-		// TODO Text: Unicode support
-		std::string m_text;
-		std::vector<Line> m_dispText;
-		Font * r_font;
-		bool m_textNeedUpdate;
-		bool m_wrap;
-
 	public :
 
 		Text();
 		virtual ~Text();
 
 		void setText(const std::string & text);
-
 		void setWrap(bool enable);
-
 		void setFont(Font & font);
 
 		inline Font * getFont() { return r_font; }
-
 		inline const std::string & getText() const { return m_text; }
 
 		void renderSelf(IRenderer & r) override;
@@ -56,6 +41,19 @@ namespace ui
 	private :
 
 		void updateText(IRenderer & r);
+
+		struct Line
+		{
+			std::string str;
+			IntRect bounds;
+		};
+
+		// TODO Text: UTF8 support
+		std::string m_text;
+		std::vector<Line> m_dispText;
+		Font * r_font;
+		bool m_textNeedUpdate;
+		bool m_wrap;
 
 	};
 
