@@ -46,13 +46,13 @@ namespace ui
 		static const Color fillColor(64, 64, 64);
 
 		r.setColor(fillColor);
-		r.drawRect(bounds, true); // Fill
+		r.drawRect(bounds.pad(1), true); // Fill
 
 		if(panel.isFocused())
 			r.setColor(borderColorFocus);
 		else
 			r.setColor(borderColor);
-		r.drawRect(bounds.pad(1), false); // Border
+		r.drawRect(bounds, false); // Border
 	}
 
 	void BasicSkin::drawPushButton(IRenderer &r, const AWidget &btn)
@@ -71,7 +71,7 @@ namespace ui
 		else
 			r.setColor(fillColor);
 
-		r.drawRect(bounds, true); // Fill
+		r.drawRect(bounds.pad(1), true); // Fill
 
 		if(btn.isHovered())
 		{
@@ -88,7 +88,7 @@ namespace ui
 				r.setColor(borderColor);
 		}
 
-		r.drawRect(bounds.pad(1), false); // Border
+		r.drawRect(bounds, false); // Border
 	}
 
 	void BasicSkin::drawDragZone(IRenderer & r, const AWidget & dz)
