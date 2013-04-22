@@ -63,6 +63,7 @@ namespace ui
 
 		virtual void drawPanel(IRenderer & r, const AWidget & panel) = 0;
 		virtual void drawPushButton(IRenderer & r, const AWidget & btn) = 0;
+		virtual void drawCheckBox(IRenderer & r, const AWidget & cb, bool checked) = 0;
 
 		virtual void drawDragZone(IRenderer & /*r*/, const AWidget & /*dragZone*/) {}
 

@@ -91,6 +91,38 @@ namespace ui
 		r.drawRect(bounds, false); // Border
 	}
 
+	void BasicSkin::drawCheckBox(IRenderer &r, const AWidget &cb, bool checked)
+	{
+		IntRect boxBounds = cb.getBounds();
+		boxBounds.max.x = boxBounds.min.x + boxBounds.height();
+		boxBounds.pad(-2);
+
+		static const Color borderColor(0, 0, 0);
+		static const Color borderColorFocus(0xff8800ff);
+		static const Color fillColor(96, 96, 96);
+		static const Color fillColorPress(128, 128, 128);
+		static const Color checkColor(0xff8800ff);
+		static const Color uncheckColor(48, 48, 48);
+
+		if(cb.isPressed())
+			r.setColor(fillColorPress);
+		else
+			r.setColor(fillColor);
+		r.drawRect(boxBounds.pad(1), true); // Fill
+
+		if(cb.isFocused())
+			r.setColor(borderColorFocus);
+		else
+			r.setColor(borderColor);
+		r.drawRect(boxBounds, false); // Border
+
+		if(checked)
+			r.setColor(checkColor);
+		else
+			r.setColor(uncheckColor);
+		r.drawRect(boxBounds.pad(-3, -4, -4, -3), true);
+	}
+
 	void BasicSkin::drawDragZone(IRenderer & r, const AWidget & dz)
 	{
 		IntRect bounds = dz.getBounds();

@@ -8,6 +8,7 @@
 #include "zengui/widgets/Text.hpp"
 #include "zengui/widgets/DragZone.hpp"
 #include "zengui/widgets/PushButton.hpp"
+#include "zengui/widgets/CheckBox.hpp"
 
 using namespace zn;
 
@@ -51,6 +52,11 @@ namespace experimental
 			std::cout << "Hello world !" << std::endl;
 		});
 		r_panel->add(button);
+
+		ui::CheckBox * checkBox = new ui::CheckBox();
+		checkBox->setText("My lovely checkbox");
+		checkBox->setLocalBounds(IntRect(120, 120, 250, 140));
+		r_panel->add(checkBox);
 
 		r_text = new ui::Text();
 		r_text->setID("myText");

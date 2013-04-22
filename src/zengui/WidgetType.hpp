@@ -23,6 +23,7 @@ namespace ui
 		PANEL,
 		TEXT,
 		PUSH_BUTTON,
+		CHECK_BOX,
 		DRAG_ZONE,
 
 		COUNT // Keep last

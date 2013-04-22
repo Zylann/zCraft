@@ -19,6 +19,7 @@ namespace ui
 		case PANEL: return "Panel";
 		case TEXT: return "Text";
 		case PUSH_BUTTON: return "PushButton";
+		case CHECK_BOX: return "CheckBox";
 		case DRAG_ZONE: return "DragZone";
 		default: return "Generic";
 		}
