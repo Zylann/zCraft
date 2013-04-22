@@ -23,7 +23,10 @@ namespace ui
 			if(AWidget::mousePressed(button))
 			{
 				if(r_parent != nullptr)
-					r_parent->bringToFront();
+				{
+					// Will bring the parent to front
+					r_parent->setFocused(true);
+				}
 				return true;
 			}
 			return false;
@@ -31,7 +34,7 @@ namespace ui
 
 		virtual bool mouseMoved(int oldX, int oldY, int newX, int newY) override
 		{
-			if(isFocused() && isPressed() && r_parent != nullptr)
+			if(isPressed() && r_parent != nullptr)
 			{
 				r_parent->setLocalBounds(
 					r_parent->getLocalBounds().offset(newX-oldX, newY-oldY));

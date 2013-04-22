@@ -72,7 +72,7 @@ namespace experimental
 		panel2->setLocalBounds(IntRect(400, 200, 600, 300));
 
 		ui::DragZone * dragZone = new ui::DragZone();
-		dragZone->setLocalBounds(IntRect(0, 0, 400, 100));
+		dragZone->setLocalBounds(IntRect(0, 0, 200, 50));
 		panel2->add(dragZone);
 
 		m_gui->add(panel2);

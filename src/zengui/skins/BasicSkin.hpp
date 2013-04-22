@@ -39,6 +39,7 @@ namespace ui
 		virtual void drawDummyWidget(zn::ui::IRenderer & r, const zn::ui::AWidget & w) override;
 		virtual void drawPanel(zn::ui::IRenderer & r, const zn::ui::AWidget & panel) override;
 		virtual void drawPushButton(IRenderer &r, const AWidget &btn) override;
+		virtual void drawDragZone(IRenderer &r, const AWidget &dz) override;
 
 	};
 

@@ -180,8 +180,7 @@ namespace ui
 
 		inline void setEnabled(bool e) { m_enabled = e; }
 
-		// Sets the widget as focused.
-		// Warning: this is just a setter, other widgets will not loose focus !
+		// Sets the widget as focused, and unfocuses the other if there is one.
 		virtual void setFocused(bool f);
 
 		// Sets the widget as hovered, and triggers onMouseOver/onMouseQuit

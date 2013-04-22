@@ -41,7 +41,7 @@ namespace ui
 	{
 		IntRect bounds = panel.getBounds();
 
-		static const Color borderColor(160, 160, 160);
+		static const Color borderColor(0, 0, 0);
 		static const Color borderColorFocus(0xff8800ff);
 		static const Color fillColor(64, 64, 64);
 
@@ -59,12 +59,12 @@ namespace ui
 	{
 		IntRect bounds = btn.getBounds();
 
-		static const Color borderColor(160, 160, 160);
-		static const Color borderColorHover(224, 224, 224);
+		static const Color borderColor(0, 0, 0);
+		static const Color borderColorHover(0, 0, 0);
 		static const Color borderColorFocus(0xff8800ff);
-		static const Color borderColorFocusHover(0xffc481ff);
-		static const Color fillColor(64, 64, 64);
-		static const Color fillColorPress(48, 48, 48);
+		static const Color borderColorFocusHover(0xff8800ff);
+		static const Color fillColor(96, 96, 96);
+		static const Color fillColorPress(112, 112, 112);
 
 		if(btn.isPressed())
 			r.setColor(fillColorPress);
@@ -89,6 +89,19 @@ namespace ui
 		}
 
 		r.drawRect(bounds.pad(1), false); // Border
+	}
+
+	void BasicSkin::drawDragZone(IRenderer & r, const AWidget & dz)
+	{
+		IntRect bounds = dz.getBounds();
+
+		static const Color fillColor(64, 64, 64);
+		static const Color fillColorHover(72, 72, 72);
+
+		r.setColor(dz.isHovered() ? fillColorHover : fillColor);
+		if(dz.isFocused())
+			r.setColor(Color(96,96,96));
+		r.drawRect(bounds, true); // Fill
 	}
 
 } // namespace ui
