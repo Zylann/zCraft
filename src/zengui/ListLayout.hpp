@@ -34,7 +34,7 @@ namespace ui
 
 		virtual ~ListLayout() {}
 
-		void layout() override;
+		void layout(IntRect space) override;
 
 	private :
 

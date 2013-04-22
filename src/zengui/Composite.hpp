@@ -67,7 +67,8 @@ namespace ui
 		// If the given pointer is null, this will unfocus all children.
 		void focusChild(const AWidget * widget);
 
-		virtual void layout() override;
+		virtual void layout(IntRect space) override;
+		void layout();
 
 		unsigned int getChildCount() const override { return m_children.size(); }
 

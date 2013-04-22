@@ -41,6 +41,7 @@ namespace experimental
 		r_panel = new ui::Panel();
 		r_panel->setID("myFirstPanel");
 		r_panel->setLocalBounds(IntRect(100, 100, 300, 250));
+		r_panel->setAlign(ui::CENTER_H | ui::FILL_H | ui::TOP);
 
 		ui::PushButton * button = new ui::PushButton();
 		button->setID("myButton");
@@ -76,6 +77,8 @@ namespace experimental
 		panel2->add(dragZone);
 
 		m_gui->add(panel2);
+
+		m_gui->layout();
 
 		return true;
 	}

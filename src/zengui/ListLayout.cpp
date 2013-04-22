@@ -10,7 +10,7 @@ namespace zn
 {
 namespace ui
 {
-	void ListLayout::layout()
+	void ListLayout::layout(IntRect /*space*/)
 	{
 		if(m_orientation == Orientation::VERTICAL)
 			layoutVertical();

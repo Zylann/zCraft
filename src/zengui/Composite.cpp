@@ -131,8 +131,24 @@ namespace ui
 		}
 	}
 
+	void AComposite::layout(IntRect space)
+	{
+		AWidget::layout(space);
+		layout();
+	}
+
 	void AComposite::layout()
 	{
+		IntRect ownSpace;
+		ownSpace.min.x = m_padding.left;
+		ownSpace.min.y = m_padding.top;
+		ownSpace.max.x = m_localBounds.width() - m_padding.right - 1;
+		ownSpace.max.y = m_localBounds.height() - m_padding.bottom - 1;
+
+		for(AWidget* & child : m_children)
+		{
+			child->layout(ownSpace);
+		}
 	}
 
 	bool AComposite::processInput(const InputEvent & e)

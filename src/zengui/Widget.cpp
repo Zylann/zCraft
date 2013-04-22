@@ -161,7 +161,7 @@ namespace ui
 		r_skin->drawDummyWidget(r, *this);
 	}
 
-	void AWidget::setAlign(Align align)
+	void AWidget::setAlign(unsigned char align)
 	{
 		m_align = align;
 	}
@@ -213,8 +213,66 @@ namespace ui
 		m_padding = p;
 	}
 
-	void AWidget::layout()
+	void AWidget::layout(IntRect space)
 	{
+		if(m_align == NONE)
+			return;
+
+		space.min.x += m_margin.left;
+		space.min.y += m_margin.top;
+		space.max.x -= m_margin.right;
+		space.max.y -= m_margin.bottom;
+
+		IntRect newBounds = m_localBounds;
+
+		if(m_align & CENTER_H)
+		{
+			newBounds.min.x = (space.width() - m_localBounds.width()) / 2;
+			newBounds.max.x = (space.width() + m_localBounds.width()) / 2;
+		}
+		if(m_align & CENTER_V)
+		{
+			newBounds.min.y = (space.height() - m_localBounds.height()) / 2;
+			newBounds.max.y = (space.height() + m_localBounds.height()) / 2;
+		}
+
+		if(m_align & FILL_H)
+		{
+			newBounds.min.x = space.min.x;
+			newBounds.max.x = space.max.x;
+		}
+		else
+		{
+			if(m_align & LEFT)
+			{
+				newBounds.offset(space.min.x - newBounds.min.x, 0);
+			}
+			else if(m_align & RIGHT)
+			{
+				newBounds.offset(space.max.x - newBounds.max.x, 0);
+			}
+		}
+
+		if(m_align & FILL_V)
+		{
+			newBounds.min.y = space.min.y;
+			newBounds.max.y = space.max.y;
+		}
+		else
+		{
+			if(m_align & TOP)
+			{
+				newBounds.offset(0, space.min.y - newBounds.min.y);
+			}
+			else if(m_align & BOTTOM)
+			{
+				newBounds.offset(0, space.max.y - newBounds.max.y);
+			}
+		}
+
+		newBounds.repair();
+
+		setLocalBounds(newBounds);
 	}
 
 	void AWidget::setFocused(bool f)

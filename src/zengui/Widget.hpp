@@ -83,7 +83,8 @@ namespace ui
 		Margin m_margin;
 		Padding m_padding;
 
-		Align m_align = Align::NONE; // How the widget should use the space where it is
+		// How the widget should use the space where it is
+		unsigned char m_align = Align::NONE;
 
 		ISkin * r_skin = nullptr;
 
@@ -160,14 +161,17 @@ namespace ui
 		// Sets the preferred alignment this widget should have.
 		// It will be ignored in certain cases depending on the layout of
 		// the container.
-		void setAlign(Align align);
+		void setAlign(unsigned char align);
 
-		inline Align getAlign() const { return m_align; }
+		inline unsigned char getAlign() const { return m_align; }
 
-		// Updates widget's position and size according to align,
-		// size and parent constraints.
-		// Returns true if the widget changed its geometry, false if not.
-		virtual void layout();
+		// Updates widget's position and size depending on the given space to occuppy.
+		// If called on a composite, the composite will call layout()
+		// recursively on its children.
+		virtual void layout(IntRect space);
+
+		// Updates widget's position and size depending on parent's space.
+//		virtual void layout();
 
 		/*
 			State
