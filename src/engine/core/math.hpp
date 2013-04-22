@@ -8,6 +8,7 @@ This file is part of the zCraft project.
 #define ENGINE_MATH_HPP_INCLUDED
 
 #include <cmath>
+#include <cstdlib>
 #include "engine/core/types.hpp"
 
 namespace zn
@@ -86,6 +87,14 @@ namespace math
 		return a < b ? b : a;
 	}
 
+	/**
+	 * @brief Clamps x to the given interval. If x is greater or lesser than
+	 * min or max, it will be backed to min or max.
+	 * @param x : value to clamp.
+	 * @param min
+	 * @param max
+	 * @return clamped value
+	 */
 	template<class T>
 	inline const T & clamp(const T & x, const T & min, const T & max)
 	{
@@ -96,8 +105,46 @@ namespace math
 		return x;
 	}
 
-	// TODO math: random functions
+	/**
+	 * @brief Generates random numbers in [min, max]
+	 * @note This function uses C rand().
+	 * @param min : minimum value. Assumed to be < max.
+	 * @param max : maximum value. Assumed to be > min.
+	 * @return
+	 */
+	inline int rand(s32 min, s32 max)
+	{
+		return min + std::rand() % (max - min + 1);
+	}
+
+	/**
+	 * @brief Generates random numbers in [0.f, 1.f]
+	 * @return
+	 */
+	inline float randf()
+	{
+		return static_cast<float>(std::rand()) / static_cast<float>(RAND_MAX);
+	}
+
+	/**
+	 * @brief Generates random numbers in [min, max]
+	 * @param min : minimum value. Assumed to be < max.
+	 * @param max : maximum value. Assumed to be > min.
+	 * @return
+	 */
+	inline f32 randf(f32 min, f32 max)
+	{
+		return min + randf() * (max - min);
+	}
+
 	// TODO math: put interpolations here (lerp)
+
+	// Draft
+//	inline f32 lerp(f32 src, f32 dst, f32 t)
+//	{
+//		return src + (dst - src) * t;
+//	}
+
 	// TODO math: fast rsqrt for vector normalization
 
 } // namespace math
