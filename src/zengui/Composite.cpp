@@ -148,6 +148,9 @@ namespace ui
 			if(w->isVisible())
 			{
 				// Mouse over
+				// Note : this is not done in the widget itself because it would
+				// cause too much overhead due to the lack of direct-access
+				// to other widgets
 				if(e.type == InputEvent::MOUSE_MOVED)
 				{
 					if(consumed)
@@ -176,7 +179,6 @@ namespace ui
 
 	void AComposite::render(IRenderer & r)
 	{
-		// TODO separate render, renderWidget and renderChildren
 		if(m_visible)
 		{
 			if(r_skin != nullptr)

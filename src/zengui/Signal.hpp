@@ -132,8 +132,8 @@ namespace ui
 		}
 	};
 
-	// TODO find a way to not have a class copy-paste for every parameter count
-	// TODO study the signal copy case
+	// TODO Signal: find a way to not have a class copy-paste for every parameter count
+	// TODO Signal: study the signal copy case
 
 } // namespace ui
 } // namespace zn

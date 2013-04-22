@@ -1,5 +1,5 @@
 // SimplexNoise
-// Copyright © 2003-2011, Stefan Gustavson
+// Copyright (c) 2003-2011, Stefan Gustavson
 //
 // Contact: stegu@itn.liu.se
 //
@@ -131,7 +131,7 @@ float  SimplexNoise::grad( int hash, float x, float y, float z, float t ) {
 
   // A lookup table to traverse the simplex around a given point in 4D.
   // Details can be found where this table is used, in the 4D noise method.
-  /* TODO: This should not be required, backport it from Bill's GLSL code! */
+  /* TODO: SimplexNoise: This should not be required, backport it from Bill's GLSL code! */
   static unsigned char simplex[64][4] = {
     {0,1,2,3},{0,1,3,2},{0,0,0,0},{0,2,3,1},{0,0,0,0},{0,0,0,0},{0,0,0,0},{1,2,3,0},
     {0,2,1,3},{0,0,0,0},{0,3,1,2},{0,3,2,1},{0,0,0,0},{0,0,0,0},{0,0,0,0},{1,3,2,0},
@@ -143,7 +143,7 @@ float  SimplexNoise::grad( int hash, float x, float y, float z, float t ) {
     {2,1,0,3},{0,0,0,0},{0,0,0,0},{0,0,0,0},{3,1,0,2},{0,0,0,0},{3,2,0,1},{3,2,1,0}};
 
 // 1D simplex noise
-// TODO: I think this one don't work
+// TODO: SimplexNoise: I think this one don't work
 float SimplexNoise::noise(float x) {
 
   int i0 = FASTFLOOR(x);
@@ -233,7 +233,7 @@ float SimplexNoise::noise(float x, float y) {
 
     // Add contributions from each corner to get the final noise value.
     // The result is scaled to return values in the interval [-1,1].
-    return 40.0f * (n0 + n1 + n2); // TODO: The scale factor is preliminary!
+	return 40.0f * (n0 + n1 + n2); // TODO: SimplexNoise: The scale factor is preliminary!
   }
 
 // 3D simplex noise
@@ -331,7 +331,7 @@ float SimplexNoise::noise(float x, float y, float z) {
 
     // Add contributions from each corner to get the final noise value.
     // The result is scaled to stay just inside [-1,1]
-    return 32.0f * (n0 + n1 + n2 + n3); // TODO: The scale factor is preliminary!
+	return 32.0f * (n0 + n1 + n2 + n3); // TODO: SimplexNoise: The scale factor is preliminary!
   }
 
 
@@ -370,7 +370,7 @@ float SimplexNoise::noise(float x, float y, float z, float w) {
     // To find out which of the 24 possible simplices we're in, we need to
     // determine the magnitude ordering of x0, y0, z0 and w0.
     // The method below is a good way of finding the ordering of x,y,z,w and
-    // then find the correct traversal order for the simplex we’re in.
+    // then find the correct traversal order for the simplex we are in.
     // First, six pair-wise comparisons are performed between each possible pair
     // of the four coordinates, and the results are used to add up binary bits
     // for an integer index.
@@ -467,6 +467,6 @@ float SimplexNoise::noise(float x, float y, float z, float w) {
     }
 
     // Sum up and scale the result to cover the range [-1,1]
-    return 27.0f * (n0 + n1 + n2 + n3 + n4); // TODO: The scale factor is preliminary!
+	return 27.0f * (n0 + n1 + n2 + n3 + n4); // TODO: SimplexNoise: The scale factor is preliminary!
   }
 //---------------------------------------------------------------------

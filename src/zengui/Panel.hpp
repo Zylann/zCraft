@@ -14,6 +14,9 @@ namespace zn
 {
 namespace ui
 {
+	/**
+	 * @brief A basic rectangular container.
+	 */
 	class Panel : public AComposite
 	{
 	public :
