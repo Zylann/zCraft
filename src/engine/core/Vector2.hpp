@@ -12,6 +12,10 @@ This file is part of the zCraft project.
 #include "math.hpp"
 #include "stringutils.hpp"
 
+#ifdef ZN_SFML
+	#include <SFML/System.hpp>
+#endif
+
 namespace zn
 {
 	template <typename T>
@@ -34,6 +38,10 @@ namespace zn
 
 		/// Copy constructor
 		Vector2(const Vector2<T> & other) : x(other.x), y(other.y) {}
+
+#ifdef ZN_SFML
+		Vector2(const sf::Vector2<T> other) : x(other.x), y(other.y) {}
+#endif
 
 		// operators
 
