@@ -10,6 +10,7 @@ This file is part of the zCraft project.
 #include "Signal.hpp"
 #include "InputListener.hpp"
 #include "Rect.hpp"
+#include "WidgetType.hpp"
 
 namespace zn
 {
@@ -205,6 +206,10 @@ namespace ui
 
 		// Brings the widget in front of the others within its container.
 		void bringToFront();
+
+		// Gets the internal type of this widget.
+		// Note : custom types are not supported yet, so you may use IDs in this case.
+		virtual WidgetType getType() const { return GENERIC; }
 
 		// Get the user-defined ID of the widget
 		inline const std::string & getID() const { return m_ID; }

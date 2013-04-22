@@ -24,6 +24,8 @@ namespace ui
 		Panel() : AComposite() {}
 		virtual ~Panel() {}
 
+		WidgetType getType() const override { return PANEL; }
+
 	protected :
 
 		virtual void renderSelf(IRenderer & r) override

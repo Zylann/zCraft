@@ -25,6 +25,8 @@ namespace ui
 		Text();
 		virtual ~Text();
 
+		WidgetType getType() const override { return TEXT; }
+
 		void setText(const std::string & text);
 		void setWrap(bool enable);
 		void setFont(Font & font);

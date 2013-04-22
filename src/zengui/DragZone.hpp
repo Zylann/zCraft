@@ -14,9 +14,12 @@ namespace ui
 	class DragZone : public AWidget
 	{
 	public:
+		// TODO DragZone: specify the dragged widget instead of using the parent
 
 		DragZone() : AWidget() {}
 		virtual ~DragZone() {}
+
+		WidgetType getType() const override { return DRAG_ZONE; }
 
 		virtual bool mousePressed(Mouse::Button button) override
 		{

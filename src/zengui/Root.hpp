@@ -50,6 +50,8 @@ namespace ui
 		 */
 		virtual ~Root();
 
+		WidgetType getType() const override { return ROOT; }
+
 		/**
 		 * @brief Returns the root element itself.
 		 * This override is needed for the children to access Root,

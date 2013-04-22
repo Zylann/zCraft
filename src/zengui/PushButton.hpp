@@ -15,12 +15,18 @@ namespace zn
 {
 namespace ui
 {
+	/**
+	 * @brief A simple push-button that emits a signal once clicked.
+	 * (press and release are also supported).
+	 */
 	class PushButton : public AComposite
 	{
 	public :
 
 		PushButton();
 		virtual ~PushButton() {}
+
+		WidgetType getType() const override { return PUSH_BUTTON; }
 
 		void setText(const std::string & str);
 
