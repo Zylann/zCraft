@@ -225,14 +225,6 @@ namespace zn
 			os << "===============================" << std::endl;
 		}
 
-		// defines the way an item must be printed
-		// TODO ShiftArray3D: remove this. Pointless.
-		virtual void printDataItem(std::ostream & os, T & item) const
-		{
-			//os << item;
-			os << "O";
-		}
-
 	}; // class ShiftArray3D
 
 } // namespace util

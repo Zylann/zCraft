@@ -16,9 +16,6 @@ namespace zcraft
 
 		VoxelBuffer();
 		~VoxelBuffer();
-
-		virtual void printDataItem(std::ostream & os, Voxel & item) const;
-
 	};
 
 } // namespace zcraft

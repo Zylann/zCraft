@@ -9,10 +9,5 @@ namespace zcraft
     VoxelBuffer::~VoxelBuffer()
     {}
 
-    void VoxelBuffer::printDataItem(std::ostream & os, Voxel & item) const
-    {
-        os << 0;
-    }
-
 } // namespace zcraft
 
