@@ -204,8 +204,12 @@ namespace ui
 		// Get top-level widget by recursive search.
 		virtual Root * getRoot();
 
-		// Brings the widget in front of the others within its container.
-		void bringToFront();
+		/**
+		 * @brief Brings the widget in front of the others within its container.
+		 * @param upwardRecursive : if set to true, the parent will also
+		 * be brang to front and so on.
+		 */
+		void bringToFront(bool upwardRecursive = false);
 
 		// Gets the internal type of this widget.
 		// Note : custom types are not supported yet, so you may use IDs in this case.

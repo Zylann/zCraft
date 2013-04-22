@@ -20,10 +20,14 @@ namespace ui
 		return nullptr; // Should be overrided in Root
 	}
 
-	void AWidget::bringToFront()
+	void AWidget::bringToFront(bool upwardRecursive)
 	{
 		if(r_parent != nullptr)
+		{
 			r_parent->bringChildToFront(this);
+			if(upwardRecursive)
+				r_parent->bringToFront(true);
+		}
 	}
 
 	void AWidget::setParent(AComposite * w)
@@ -215,6 +219,9 @@ namespace ui
 
 	void AWidget::setFocused(bool f)
 	{
+		if(f == m_focused)
+			return; // Nothing to change
+
 		Root * r = getRoot();
 		if(r == nullptr)
 		{
@@ -235,7 +242,7 @@ namespace ui
 			}
 
 			r->setFocusedWidget(this);
-			bringToFront();
+			bringToFront(true); // Recursive
 		}
 		else
 		{
