@@ -1,14 +1,14 @@
 #include "GuiTest.hpp"
-#include "GuiRenderer.hpp"
 
 #include "engine/opengl/opengl.hpp"
 #include "engine/system/Time.hpp"
 
-#include "zengui/skins/BasicSkin.hpp"
-#include "zengui/widgets/Text.hpp"
-#include "zengui/widgets/DragZone.hpp"
-#include "zengui/widgets/PushButton.hpp"
-#include "zengui/widgets/CheckBox.hpp"
+#include "engine/gui/renderers/OGLGuiRenderer.hpp"
+#include "engine/gui/skins/BasicSkin.hpp"
+#include "engine/gui/widgets/Text.hpp"
+#include "engine/gui/widgets/DragZone.hpp"
+#include "engine/gui/widgets/PushButton.hpp"
+#include "engine/gui/widgets/CheckBox.hpp"
 
 using namespace zn;
 
@@ -30,7 +30,7 @@ namespace experimental
 		//
 
 		m_gui = new ui::Root(m_window.getSize().x, m_window.getSize().y);
-		m_gui->setRenderer(new GuiRenderer());
+		m_gui->setRenderer(new ui::OGLGuiRenderer());
 		if(!m_gui->installSkin(new ui::BasicSkin("Basic", "assets/fonts/tahoma16.fnt")))
 			return false;
 		m_gui->setSkin("Basic");

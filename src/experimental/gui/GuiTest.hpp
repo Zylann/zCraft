@@ -2,11 +2,11 @@
 #define EXPERIMENTAL_TESTGUI_H_INCLUDED
 
 #include "engine/game/BasicGame.hpp"
-#include "zengui/Root.hpp"
-#include "zengui/inputs/SFMLInputAdapter.hpp"
-#include "zengui/widgets/Panel.hpp"
-#include "zengui/widgets/Text.hpp"
 #include "engine/opengl/ShaderProgram.hpp"
+#include "engine/gui/Root.hpp"
+#include "engine/gui/inputs/SFMLInputAdapter.hpp"
+#include "engine/gui/widgets/Panel.hpp"
+#include "engine/gui/widgets/Text.hpp"
 
 namespace experimental
 {
