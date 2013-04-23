@@ -315,13 +315,13 @@ namespace bmfont
 			c = text[i];
 
 			// Line endings
-			if(c == '\n')
+			if(c == '\n') // Newline
 			{
 				originY += m_settings.lineHeight;
 				originX = x0;
 				continue;
 			}
-			else if(c == '\r')
+			else if(c == '\r') // Carriage return
 			{
 				continue;
 			}
@@ -330,8 +330,10 @@ namespace bmfont
 			const CharDescriptor * cd = m_settings.getChar(c);
 			if(cd == nullptr)
 			{
-				//std::cout << "E" << (int)c;
-				break;
+				// If the character is unknown, display a placeholder.
+				cd = m_settings.getChar('?');
+				if(cd == nullptr) // If placeholder not found...
+					break; // Stop drawing.
 			}
 
 			// Use the glyph atlas texture
