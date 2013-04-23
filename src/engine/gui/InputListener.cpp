@@ -29,10 +29,13 @@ namespace ui
 			return mouseWheelMoved(e.mouseWheelDelta);
 
 		case InputEvent::KEY_PRESSED :
-			return keyPressed(e.keyCode, e.charUnicode);
+			return keyPressed(e.keyCode);
 
 		case InputEvent::KEY_RELEASED :
 			return keyReleased(e.keyCode);
+
+		case InputEvent::TEXT_ENTERED :
+			return textEntered(e.charUnicode);
 
 		default :
 			return false;

@@ -32,6 +32,14 @@ namespace zn
 
     std::string cropStr(std::string str, char c);
 
+	// TODO stringutils: toWstring
+//	/**
+//	 * @brief Converts UTF8 string into Unicode string using std::wstring
+//	 * @param str : UTF8 string
+//	 * @return Unicode-encoded wide string
+//	 */
+//	std::wstring toWstring(const std::string & str);
+
 
 } // namespace zn
 

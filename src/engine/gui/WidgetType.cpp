@@ -18,6 +18,7 @@ namespace ui
 		case ROOT: return "Root";
 		case PANEL: return "Panel";
 		case TEXT: return "Text";
+		case TEXT_FIELD: return "TextField";
 		case PUSH_BUTTON: return "PushButton";
 		case CHECK_BOX: return "CheckBox";
 		case DRAG_ZONE: return "DragZone";

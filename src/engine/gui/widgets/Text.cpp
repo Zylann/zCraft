@@ -47,6 +47,8 @@ namespace ui
 
 	void Text::renderSelf(IRenderer & r)
 	{
+		// TODO Text: add caret index and caret rendering
+
 		if(r_font == nullptr)
 		{
 			r_font = &r_skin->getDefaultFont();

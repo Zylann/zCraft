@@ -22,6 +22,7 @@ namespace ui
 		ROOT,
 		PANEL,
 		TEXT,
+		TEXT_FIELD,
 		PUSH_BUTTON,
 		CHECK_BOX,
 		DRAG_ZONE,

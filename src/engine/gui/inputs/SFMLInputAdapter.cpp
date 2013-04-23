@@ -19,6 +19,11 @@ namespace ui
 			m_event.keyCode = convertKeyCode(e.key.code);
 			break;
 
+		case sf::Event::TextEntered :
+			m_event.type = InputEvent::TEXT_ENTERED;
+			m_event.charUnicode = e.text.unicode;
+			break;
+
 		case sf::Event::KeyReleased :
 			m_event.type = InputEvent::KEY_RELEASED;
 			m_event.keyCode = convertKeyCode(e.key.code);

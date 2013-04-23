@@ -24,7 +24,7 @@ zengui/plugin/ 		: engine/
 experimental/ 		: *
 
 Estimated total dev time
-- Marc Gilleron : 75h
+- Marc Gilleron : 78h
 
 //////////////////////////////////////////////////////////////////////////////*/
 

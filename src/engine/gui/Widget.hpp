@@ -16,7 +16,9 @@ namespace zn
 {
 namespace ui
 {
-	// Note : coordinates use 2D axes where Y goes down
+	/**
+	 * @brief Defines borders of a rectangle.
+	 */
 	struct RectBorder
 	{
 		short left;
@@ -31,6 +33,10 @@ namespace ui
 	typedef RectBorder Margin;
 	typedef RectBorder Padding;
 
+	/**
+	 * @brief Alignment bits.
+	 * Can be combinated with '|' to define a specific alignemnt.
+	 */
 	enum Align // Should fit in a byte
 	{
 		NONE 		= 0,
@@ -75,7 +81,7 @@ namespace ui
 	{
 	protected :
 
-		/* Geometry */
+		/** Geometry & appearance **/
 
 		IntRect m_localBounds; // parent-relative bounds
 		IntRect m_sizeLimit;
@@ -88,7 +94,7 @@ namespace ui
 
 		ISkin * r_skin = nullptr;
 
-		/* State */
+		/** State **/
 
 		bool m_visible = true; // Is the widget visible?
 		bool m_enabled = true; // Can we interact with the widget?
@@ -98,7 +104,7 @@ namespace ui
 
 		bool m_blocksInput = true;
 
-		/* Hierarchy */
+		/** Hierarchy & identification **/
 
 		// Note : "r_" means that we use this pointer as a reference.
 		// we don't have the right to delete pointed data.
@@ -110,16 +116,12 @@ namespace ui
 
 	public :
 
-		/*
-			Ctor/dtor
-		*/
-
 		AWidget() {}
 		virtual ~AWidget() {}
 
-		/*
-			Geometry
-		*/
+		/**
+			Geometry & appearance
+		**/
 
 		// Sets the fixed bounds of the widget.
 		// Should only be used for fixed-size layouts.
@@ -173,9 +175,9 @@ namespace ui
 		// Updates widget's position and size depending on parent's space.
 //		virtual void layout();
 
-		/*
+		/**
 			State
-		*/
+		**/
 
 		inline bool isVisible() const { return m_visible; }
 		inline bool isEnabled() const { return m_enabled; }
@@ -194,16 +196,19 @@ namespace ui
 		virtual void show();
 		virtual void hide();
 
-		// Sets the widget as focused (when available) and removes focus from others
-//		void requestFocus();
-
-		/*
-			Hierarchy
-		*/
+		/**
+			Hierarchy & appearance
+		**/
 
 		// Returns the parent of the widget.
 		// If null, the widget is then the top-level (Root).
 		inline AComposite * getParent() const { return r_parent; }
+
+		/**
+		 * @brief Returns the parent of the widget as read-only.
+		 * @return the parent, or nullptr if the widget is on top-level.
+		 */
+		inline const AComposite * getParentConst() const { return r_parent; }
 
 		// Get top-level widget by recursive search.
 		virtual Root * getRoot();
@@ -239,9 +244,9 @@ namespace ui
 		// Gets how many widgets are contained into the widget.
 		virtual unsigned int getChildCount() const { return 0; }
 
-		/*
+		/**
 			Main loop
-		*/
+		**/
 
 		// Draws the widget and all of its contents
 		virtual void render(IRenderer & r);
@@ -258,21 +263,22 @@ namespace ui
 		// if the skin is defined).
 		virtual void renderSelf(IRenderer & r);
 
-		/*
+		/**
 			Input callbacks
-		*/
+		**/
 
 		virtual bool mouseMoved(int oldX, int oldY, int newX, int newY) override;
 		virtual bool mousePressed(Mouse::Button button) override;
 		virtual bool mouseReleased(Mouse::Button button) override;
 		virtual bool mouseWheelMoved(int delta) override;
 
-		virtual bool keyPressed(Keyboard::Key key, int unicode) override;
+		virtual bool keyPressed(Keyboard::Key key) override;
 		virtual bool keyReleased(Keyboard::Key key) override;
+		virtual bool textEntered(unsigned int unicode) override;
 
-		/*
+		/**
 			State change notifications
-		*/
+		**/
 
 		virtual void onSizeChanged() {}
 

@@ -48,8 +48,9 @@ namespace ui
 
 		/* Keyboard */
 
-		virtual bool keyPressed(Keyboard::Key key, int unicode) = 0;
+		virtual bool keyPressed(Keyboard::Key key) = 0;
 		virtual bool keyReleased(Keyboard::Key key) = 0;
+		virtual bool textEntered(unsigned int unicode) = 0;
 
 	};
 

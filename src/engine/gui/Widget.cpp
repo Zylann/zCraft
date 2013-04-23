@@ -368,7 +368,7 @@ namespace ui
 		return m_hovered;
 	}
 
-	bool AWidget::keyPressed(Keyboard::Key key, int /*unicode*/)
+	bool AWidget::keyPressed(Keyboard::Key key)
 	{
 		if(key == Keyboard::Key::RETURN && m_focused)
 		{
@@ -388,6 +388,11 @@ namespace ui
 			return true;
 		}
 		return false;
+	}
+
+	bool AWidget::textEntered(unsigned int /*unicode*/)
+	{
+		return m_focused;
 	}
 
 } // namespace ui

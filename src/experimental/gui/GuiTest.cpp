@@ -9,6 +9,7 @@
 #include "engine/gui/widgets/DragZone.hpp"
 #include "engine/gui/widgets/PushButton.hpp"
 #include "engine/gui/widgets/CheckBox.hpp"
+#include "engine/gui/widgets/TextField.hpp"
 
 using namespace zn;
 
@@ -57,6 +58,18 @@ namespace experimental
 		checkBox->setText("My lovely checkbox");
 		checkBox->setLocalBounds(IntRect(120, 120, 250, 140));
 		r_panel->add(checkBox);
+
+		ui::TextField * textField = new ui::TextField();
+		textField->setLocalBounds(IntRect(270, 120, 400, 140));
+		r_panel->add(textField);
+
+		ui::PushButton * clearTextField = new ui::PushButton();
+		clearTextField->setText("Clear");
+		clearTextField->setLocalBounds(IntRect(410, 120, 450, 140));
+		clearTextField->onClickSignal.connect([=](){
+			textField->setText("");
+		});
+		r_panel->add(clearTextField);
 
 		r_text = new ui::Text();
 		r_text->setID("myText");

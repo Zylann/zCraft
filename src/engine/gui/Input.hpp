@@ -83,7 +83,8 @@ namespace ui
 			MOUSE_RELEASED,
 			MOUSE_WHEEL_MOVED,
 			KEY_PRESSED,
-			KEY_RELEASED
+			KEY_RELEASED,
+			TEXT_ENTERED
 		};
 
 		Type type;
@@ -98,7 +99,7 @@ namespace ui
 		/* Keyboard */
 
 		Keyboard::Key keyCode;
-		int charUnicode;
+		unsigned int charUnicode;
 	};
 
 } // namespace ui

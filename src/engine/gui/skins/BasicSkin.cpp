@@ -123,6 +123,24 @@ namespace ui
 		r.drawRect(boxBounds.pad(-3, -4, -4, -3), true);
 	}
 
+	void BasicSkin::drawTextField(IRenderer &r, const AWidget &tf)
+	{
+		IntRect bounds = tf.getBounds();
+
+		static const Color borderColor(0, 0, 0);
+		static const Color borderColorFocus(0xff8800ff);
+		static const Color fillColor(48, 48, 48);
+
+		r.setColor(fillColor);
+		r.drawRect(bounds.pad(1), true); // Fill
+
+		if(tf.isFocused())
+			r.setColor(borderColorFocus);
+		else
+			r.setColor(borderColor);
+		r.drawRect(bounds, false); // Border
+	}
+
 	void BasicSkin::drawDragZone(IRenderer & r, const AWidget & dz)
 	{
 		IntRect bounds = dz.getBounds();
