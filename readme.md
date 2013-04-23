@@ -66,11 +66,12 @@ This is a set of generic tools I wrote for making games,
 and may be used for other projects than zCraft.
 It is heavily based on SFML, but some parts are independent.
 
-- zENGui, namespace zn::ui::, folder zengui/
+- zENGui, namespace zn::ui::, folder engine/ui/
 
 This is a generic gui that doesn't depend on anything, except for "very" basic
 files such as Vector2, Rect and Color. It is currently developped as part of the
 project. All you have to do to use it is to provide your renderer and input.
+Note : some renderers and inputs are already programmed.
 
 - zCraft, namespace zcraft::, folder zcraft/
 
@@ -79,6 +80,6 @@ This is the voxel engine, based on zENG.
 - Experimental, namespace experimental::
 
 experimental undocumented stuff based on the other packages.
-its contents may be future features. I added this to the repo to have a
+its contents may be future features or tests. I added this to the repo to have a
 cloud copy of it (I don't trust my HD) and to ease sharing.
 
