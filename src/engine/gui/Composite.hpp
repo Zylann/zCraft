@@ -1,5 +1,5 @@
 /*
-Container.hpp
+Composite.hpp
 Copyright (C) 2010-2012 Marc GILLERON
 This file is part of the zCraft project.
 */
@@ -15,14 +15,6 @@ namespace ui
 {
 	class AComposite : public AWidget
 	{
-	protected :
-
-		// List of widgets ordered by reverse adding time.
-		// events will be received in this order, but rendered the reverse way,
-		// so that last widgets will be drawn first.
-		// Widgets are destroyed when the container is deleted.
-		std::list<AWidget*> m_children;
-
 	public :
 
 		AComposite() : AWidget() {}
@@ -34,15 +26,35 @@ namespace ui
 
 		void setSkin(ISkin & theme, bool recursive = true) override;
 
-		/*
+		/**
 			Widget management
-		*/
+		**/
 
-		// Adds a widget to the container.
-		// If a layout has been set on it, the indexes will be used to
-		// position the widget into the layout.
-		// Fails silently if the widget is already in the container.
-		virtual void add(AWidget * child);
+		/**
+		 * @brief Adds a child widget to the composite.
+		 * @param child : widget to add.
+		 * @return generic pointer to the newly added widget, nullptr if
+		 * something got wrong.
+		 * @note if you want to get the right widget return type, use the
+		 * template add() version.
+		 */
+		AWidget * add(AWidget * child);
+
+		/**
+		 * @brief Adds a child widget to the composite (template version).
+		 * @param child : widget to add (must inherit from AWidget).
+		 * @return pointer to the newly added widget, nullptr if something got
+		 * wrong.
+		 * @note Widgets added using this method must define a default constructor.
+		 */
+		template <class T>
+		T * add()
+		{
+			T * child = new T();
+			if(add(child))
+				return child;
+			return nullptr;
+		}
 
 		// Erases the given widget from the container.
 		// If it is not found, it will not be deleted.
@@ -63,25 +75,21 @@ namespace ui
 		// so it will be displayed before the others.
 		void bringChildToFront(AWidget * widget);
 
-		// Focuses a contained widget and unfocuses others.
-		// If the given pointer is null, this will unfocus all children.
-		void focusChild(const AWidget * widget);
-
 		virtual void layout(IntRect space) override;
 		void layout();
 
 		unsigned int getChildCount() const override { return m_children.size(); }
 
-		/*
+		/**
 			Main loop
 		*/
 
 		virtual void render(IRenderer & r) override;
 		virtual void animate(float dt) override;
 
-		/*
+		/**
 			Input
-		*/
+		**/
 
 		virtual bool processInput(const InputEvent & e) override;
 
@@ -95,9 +103,7 @@ namespace ui
 
 	private :
 
-		/*
-			Internal
-		*/
+		/** Internal **/
 
 		// Checks if the widget is neither null nor the container itself.
 		// Outputs and error and returns false if it fails.
@@ -106,6 +112,16 @@ namespace ui
 		// Finds a child in the container and returns its iterator within the list.
 		// If the given widget is invalid, it outputs an error and returns end iterator.
 		std::list<AWidget*>::iterator getCheckChild(const AWidget * child, const std::string & from);
+
+	protected :
+
+		/** Attributes **/
+
+		// List of widgets ordered by reverse adding time.
+		// events will be received in this order, but rendered the reverse way,
+		// so that last widgets will be drawn first.
+		// Widgets are destroyed when the container is deleted.
+		std::list<AWidget*> m_children;
 
 	};
 

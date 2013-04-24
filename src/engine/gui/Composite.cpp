@@ -69,16 +69,16 @@ namespace ui
 		return false;
 	}
 
-	void AComposite::add(AWidget * child)
+	AWidget * AComposite::add(AWidget * child)
 	{
 		if(!checkChild(child, "add"))
-			return;
+			return nullptr;
 		if(contains(child))
 		{
 			std::cout << "ERROR: AComposite::add: "
 				<< "can't add twice the same widget. "
 				<< "ID=\"" << child->getID() << '"' << std::endl;
-			return;
+			return nullptr;
 		}
 
 		m_children.push_back(child);
@@ -90,6 +90,7 @@ namespace ui
 			//std::cout << "DEBUG: set skin on child" << std::endl;
 			child->setSkin(*r_skin);
 		}
+		return child;
 	}
 
 	void AComposite::erase(AWidget * child)

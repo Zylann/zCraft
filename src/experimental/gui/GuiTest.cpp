@@ -45,14 +45,15 @@ namespace experimental
 		r_panel->setLocalBounds(IntRect(100, 100, 300, 250));
 		r_panel->setAlign(ui::CENTER_H | ui::FILL_H | ui::TOP);
 
-		ui::PushButton * button = new ui::PushButton();
+//		ui::PushButton * button = new ui::PushButton();
+		ui::PushButton * button = r_panel->add<ui::PushButton>();
 		button->setID("myButton");
 		button->setText("My big button");
 		button->setLocalBounds(IntRect(10, 120, 100, 140));
 		button->onClickSignal.connect([](){
 			std::cout << "Hello world !" << std::endl;
 		});
-		r_panel->add(button);
+//		r_panel->add(button);
 
 		ui::CheckBox * checkBox = new ui::CheckBox();
 		checkBox->setText("My lovely checkbox");
