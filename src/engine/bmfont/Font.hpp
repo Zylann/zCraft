@@ -14,21 +14,20 @@ This file is part of the zCraft project.
 
 #include "engine/core/Vector2.hpp"
 
-/*
+/**
 	This is a simple C++ OpenGL BMFont implementation.
 	Requires SFML, glew and C++11 compiler.
 	Documentation about BMFont : http://www.angelcode.com/products/bmfont/
 	(included in the installer provided on the website)
-*/
+**/
 
 namespace zn
 {
 namespace bmfont
 {
-	/*
-		FontInfo gather informations about how the font was created
-	*/
-
+	/**
+	 * @brief gather informations about how the font was created
+	 */
 	struct FontInfo
 	{
 		struct Padding
@@ -59,6 +58,9 @@ namespace bmfont
 		unsigned int outline; // The outline thickness for the characters.
 	};
 
+	/**
+	 * @brief Indicates a specific X offset between two given characters.
+	 */
 	struct Kerning
 	{
 		short first = 0; // The first character id.
@@ -69,9 +71,12 @@ namespace bmfont
 		short amount = 0;
 	};
 
+	/**
+	 * @brief Informations about a character and how to draw it
+	 */
 	struct CharDescriptor
 	{
-		short id = 0; //	The character id.
+		unsigned int id = 0; //	The character id (usually unicode).
 
 		short x = 0; 	//	The left position of the character image in the texture.
 		short y = 0;	//	The top position of the character image in the texture.
@@ -95,16 +100,15 @@ namespace bmfont
 
 	};
 
-	/*
-		FontSettings is what is used from the specification to draw the font.
-	*/
-
-	class FontSettings
+	/**
+	 * @brief A set of character descriptors, kerning information and some metadata
+	 */
+	class CharSet
 	{
 	private :
 
 		std::list<Kerning> m_kernings;
-		std::unordered_map<int, CharDescriptor> m_chars; // (id, char)
+		std::unordered_map<unsigned int, CharDescriptor> m_chars; // (unicode, char)
 
 	public :
 
@@ -142,20 +146,20 @@ namespace bmfont
 		short getKerning(int first, int second) const;
 
 		void addChar(CharDescriptor cd);
-		const CharDescriptor * getChar(int id) const;
+		const CharDescriptor * getChar(unsigned int id) const;
 
 	};
 
-	/*
-		The main font class
-	*/
-
+	/**
+	 * @brief This class allows to load AngelCode fonts encoded with the BMFont utility,
+	 * and to draw them using SFML textures and OpenGL (no SFML/Graphics pipeline).
+	 * @warning the only supported format is white text on alpha, with a textual FNT file.
+	 */
 	class Font
 	{
 	private :
 
-		// Spec
-		FontSettings m_settings;
+		CharSet m_chars;
 		FontInfo m_info;
 
 		sf::Texture * m_textures; // array of textures
@@ -186,12 +190,20 @@ namespace bmfont
 		// Gets the maximum height of a line written with this font
 		int getLineHeight();
 
-		// Get size in pixels of the given text using this font
+		/**
+		 * @brief Get size in pixels of a portion of the given text using this font.
+		 * The entire text will be measured if no range is given.
+		 * @param text : source text
+		 * @param begin : begin index of the text to measure.
+		 * @param end : end index of the text to measure. If -1 or greater than text size,
+		 * it will be clamped to the last index.
+		 * @return width and height of the measured text.
+		 */
 		Vector2i getTextSize(const std::string & text, int begin=0, int end=-1);
 
 	private :
 
-		// Loads settings and font info from a .fnt text file.
+		// Loads charset and font info from a .fnt text file.
 		bool parse(const std::string fpath);
 
 	};

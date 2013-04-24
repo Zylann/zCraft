@@ -15,6 +15,9 @@ This file is part of the zCraft project.
 #include "engine/bmfont/Font.hpp"
 #include "engine/core/stringutils.hpp" // for cropStr()
 
+// Character to use when a character has not been found
+#define PLACEHOLDER_CHAR '?'
+
 namespace zn
 {
 namespace bmfont
@@ -23,12 +26,12 @@ namespace bmfont
 		FontSettings
 	*/
 
-	void FontSettings::addKerning(Kerning k)
+	void CharSet::addKerning(Kerning k)
 	{
 		m_kernings.push_back(k);
 	}
 
-	short FontSettings::getKerning(int first, int second) const
+	short CharSet::getKerning(int first, int second) const
 	{
 		for(auto & k : m_kernings)
 		{
@@ -38,17 +41,22 @@ namespace bmfont
 		return 0;
 	}
 
-	void FontSettings::addChar(CharDescriptor cd)
+	void CharSet::addChar(CharDescriptor cd)
 	{
 		m_chars[cd.id] = cd;
 	}
 
-	const CharDescriptor * FontSettings::getChar(int id) const
+	const CharDescriptor * CharSet::getChar(unsigned int id) const
 	{
+		// Find the character
 		auto it = m_chars.find(id);
 		if(it != m_chars.end())
 			return &(it->second);
-		return nullptr;
+		// If not found, find a placeholder
+		it = m_chars.find(PLACEHOLDER_CHAR);
+		if(it != m_chars.end())
+			return &(it->second);
+		return nullptr; // Uh uh...
 	}
 
 	/*
@@ -90,11 +98,11 @@ namespace bmfont
 		int dirCharPos = fpath.find_last_of("/\\");
 		std::string dir = fpath.substr(0, dirCharPos + 1);
 
-		m_textures = new sf::Texture[m_settings.pages.size()];
+		m_textures = new sf::Texture[m_chars.pages.size()];
 
-		for(unsigned int i = 0; i < m_settings.pages.size(); i++)
+		for(unsigned int i = 0; i < m_chars.pages.size(); i++)
 		{
-			const std::string texPath = dir + m_settings.pages[i];
+			const std::string texPath = dir + m_chars.pages[i];
 			if(!m_textures[i].loadFromFile(texPath))
 			{
 				std::cout << "ERROR: Font::loadFromFile(): "
@@ -149,23 +157,23 @@ namespace bmfont
 					converter << value;
 
 					if(key == "lineHeight")
-						converter >> m_settings.lineHeight;
+						converter >> m_chars.lineHeight;
 					else if(key == "base")
-						converter >> m_settings.base;
+						converter >> m_chars.base;
 					else if(key == "scaleW")
-						converter >> m_settings.scaleW;
+						converter >> m_chars.scaleW;
 					else if(key == "scaleH")
-						converter >> m_settings.scaleH;
+						converter >> m_chars.scaleH;
 					else if(key == "packed")
-						converter >> m_settings.packed;
+						converter >> m_chars.packed;
 					else if(key == "alphaChnl")
-						converter >> m_settings.alphaChnl;
+						converter >> m_chars.alphaChnl;
 					else if(key == "redChnl")
-						converter >> m_settings.redChnl;
+						converter >> m_chars.redChnl;
 					else if(key == "greenChnl")
-						converter >> m_settings.greenChnl;
+						converter >> m_chars.greenChnl;
 					else if(key == "blueChnl")
-						converter >> m_settings.blueChnl;
+						converter >> m_chars.blueChnl;
 					/*else if(key == "pages") // pages are automatically counted
 						converter >> ?*/
 				}
@@ -185,14 +193,14 @@ namespace bmfont
 					if(key == "id")
 					{
 						converter >> id;
-						if(id >= m_settings.pages.size())
-							m_settings.pages.resize(id + 1);
+						if(id >= m_chars.pages.size())
+							m_chars.pages.resize(id + 1);
 					}
 					else if(key == "file")
 					{
 						// Remove quotes
 						const std::string filename = cropStr(value, '"');
-						m_settings.pages[id] = filename;
+						m_chars.pages[id] = filename;
 					}
 				}
 			}
@@ -231,7 +239,7 @@ namespace bmfont
 						converter >> cd.chnl;
 				}
 
-				m_settings.addChar(cd);
+				m_chars.addChar(cd);
 			}
 			else if(tag == "kerning")
 			{
@@ -254,7 +262,7 @@ namespace bmfont
 						converter >> k.amount;
 				}
 
-				m_settings.addKerning(k);
+				m_chars.addKerning(k);
 			}
 		}
 
@@ -268,7 +276,7 @@ namespace bmfont
 
 	int Font::getLineHeight()
 	{
-		return m_settings.lineHeight;
+		return m_chars.lineHeight;
 	}
 
 	Vector2i Font::getTextSize(const std::string &text, int begin, int end)
@@ -283,12 +291,11 @@ namespace bmfont
 		Vector2i size(0, getLineHeight());
 		for(int i = begin; i <= end; ++i)
 		{
-			const CharDescriptor * cd = m_settings.getChar(text[i]);
+			const CharDescriptor * cd = m_chars.getChar(text[i]);
 			if(cd == nullptr)
 			{
-				cd = m_settings.getChar('?');
-				if(cd == nullptr)
-					break;
+				// No character found, even no placeholder.
+				break; // Stop
 			}
 			size.x += cd->xadvance;
 		}
@@ -320,7 +327,7 @@ namespace bmfont
 			// Line endings
 			if(c == '\n') // Newline
 			{
-				originY += m_settings.lineHeight;
+				originY += m_chars.lineHeight;
 				originX = x0;
 				continue;
 			}
@@ -330,13 +337,11 @@ namespace bmfont
 			}
 
 			// Get character descriptor
-			const CharDescriptor * cd = m_settings.getChar(c);
+			const CharDescriptor * cd = m_chars.getChar(c);
 			if(cd == nullptr)
 			{
-				// If the character is unknown, display a placeholder.
-				cd = m_settings.getChar('?');
-				if(cd == nullptr) // If placeholder not found...
-					break; // Stop drawing.
+				// No character found, even no placeholder.
+				break; // Stop drawing.
 			}
 
 			// Use the glyph atlas texture
