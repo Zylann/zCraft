@@ -7,6 +7,7 @@
 #include "engine/gui/inputs/SFMLInputAdapter.hpp"
 #include "engine/gui/widgets/Panel.hpp"
 #include "engine/gui/widgets/Text.hpp"
+#include "engine/gui/widgets/ProgressBar.hpp"
 
 namespace experimental
 {
@@ -17,6 +18,7 @@ namespace experimental
 		zn::ui::Root * m_gui;
 		zn::ui::Panel * r_panel;
 		zn::ui::Text * r_text;
+		zn::ui::ProgressBar * r_progressBar;
 		zn::ui::SFMLInputAdapter m_guiInput;
 		zn::gl::ShaderProgram m_shader;
 

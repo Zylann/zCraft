@@ -5,7 +5,6 @@
 
 #include "engine/gui/renderers/OGLGuiRenderer.hpp"
 #include "engine/gui/skins/BasicSkin.hpp"
-#include "engine/gui/widgets/Text.hpp"
 #include "engine/gui/widgets/DragZone.hpp"
 #include "engine/gui/widgets/PushButton.hpp"
 #include "engine/gui/widgets/CheckBox.hpp"
@@ -71,6 +70,10 @@ namespace experimental
 			textField->setText("");
 		});
 		r_panel->add(clearTextField);
+
+		r_progressBar = r_panel->add<ui::ProgressBar>();
+		r_progressBar->setLocalBounds(IntRect(460, 125, 600, 135));
+		r_progressBar->setValue(0.33f);
 
 		r_text = new ui::Text();
 		r_text->setID("myText");

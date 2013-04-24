@@ -65,12 +65,13 @@ namespace ui
 		virtual void drawPushButton(IRenderer & r, const AWidget & btn) = 0;
 		virtual void drawCheckBox(IRenderer & r, const AWidget & cb, bool checked) = 0;
 		virtual void drawTextField(IRenderer & r, const AWidget & tf) = 0;
-
-		virtual void drawDragZone(IRenderer & /*r*/, const AWidget & /*dragZone*/) {}
+		virtual void drawProgressBar(IRenderer & r, const AWidget & pb, float ratio) = 0;
 
 		/*
 			Optional methods
 		*/
+
+		virtual void drawDragZone(IRenderer & /*r*/, const AWidget & /*dragZone*/) {}
 
 		/**
 		 * @brief Default rendering of unknown widgets. Usually for debug.

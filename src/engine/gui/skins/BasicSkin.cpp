@@ -129,7 +129,7 @@ namespace ui
 
 		static const Color borderColor(0, 0, 0);
 		static const Color borderColorFocus(0xff8800ff);
-		static const Color fillColor(48, 48, 48);
+		static const Color fillColor(32, 32, 32);
 
 		r.setColor(fillColor);
 		r.drawRect(bounds.pad(1), true); // Fill
@@ -139,6 +139,30 @@ namespace ui
 		else
 			r.setColor(borderColor);
 		r.drawRect(bounds, false); // Border
+	}
+
+	void BasicSkin::drawProgressBar(IRenderer &r, const AWidget &pb, float ratio)
+	{
+		IntRect bounds = pb.getBounds();
+
+//		static const Color borderColor(0, 0, 0);
+		static const Color fillColor(32, 32, 32);
+		static const Color progressColor(255, 127, 0);
+
+		r.setColor(fillColor);
+		r.drawRect(bounds.pad(1), true); // Fill
+
+//		r.setColor(borderColor);
+//		r.drawRect(bounds, false); // Border
+
+		// Progress
+		if(ratio > 0.001f)
+		{
+			bounds.pad(-3, -3, -3, -3);
+			bounds.max.x = bounds.min.x + static_cast<float>(bounds.width()) * ratio;
+			r.setColor(progressColor);
+			r.drawRect(bounds, true);
+		}
 	}
 
 	void BasicSkin::drawDragZone(IRenderer & r, const AWidget & dz)
