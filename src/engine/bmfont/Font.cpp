@@ -46,7 +46,7 @@ namespace bmfont
 		m_chars[cd.id] = cd;
 	}
 
-	const CharDescriptor * CharSet::getChar(unsigned int id) const
+	const CharDescriptor * CharSet::getChar(int id) const
 	{
 		// Find the character
 		auto it = m_chars.find(id);
@@ -269,7 +269,7 @@ namespace bmfont
 		return true;
 	}
 
-	void Font::draw(const std::string text, bool invertYAxis)
+	void Font::draw(const std::wstring &text, bool invertYAxis)
 	{
 		draw(text, 0, 0, invertYAxis);
 	}
@@ -279,7 +279,7 @@ namespace bmfont
 		return m_chars.lineHeight;
 	}
 
-	Vector2i Font::getTextSize(const std::string &text, int begin, int end)
+	Vector2i Font::getTextSize(const std::wstring &text, int begin, int end)
 	{
 		if(begin < 0)
 			return Vector2i();
@@ -307,12 +307,12 @@ namespace bmfont
 
 	// TODO Font: optimize rendering
 
-	void Font::draw(const std::string text, float x0, float y0, bool invertYAxis)
+	void Font::draw(const std::wstring &text, float x0, float y0, bool invertYAxis)
 	{
 		unsigned int originX = x0, originY = y0; // Cursor position
 		unsigned int x, y; // Shifted position
 		float tx, ty, tw, th; // Texture sub-rect coordinates
-		char c; // Current read character
+		wchar_t c; // Current read character
 
 	#if defined ZN_OPENGL2
 		glEnable(GL_TEXTURE_2D);

@@ -26,8 +26,8 @@ namespace ui
 
 		WidgetType getType() const override { return TEXT_FIELD; }
 
-		void setText(const std::string str);
-		std::string getText() const;
+		void setText(const std::wstring str);
+		std::wstring getText() const;
 
 		inline unsigned int getCaretIndex() const { return m_caretIndex; }
 

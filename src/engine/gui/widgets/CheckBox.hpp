@@ -28,7 +28,7 @@ namespace ui
 
 		WidgetType getType() const override { return CHECK_BOX; }
 
-		void setText(const std::string text);
+		void setText(const std::wstring text);
 
 		inline bool isChecked() const { return m_checked; }
 		void setChecked(bool check);

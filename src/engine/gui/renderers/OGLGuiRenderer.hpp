@@ -50,9 +50,9 @@ namespace ui
 
 		void drawLine(float xa, float ya, float xb, float yb) override;
 		void drawRect(zn::IntRect rect, bool fill) override;
-		void drawText(const std::string & text, int x, int y, int begin, int end) override;
+		void drawText(const std::wstring &text, int x, int y, int begin, int end) override;
 
-		zn::Vector2i getTextSize(zn::ui::Font & font, const std::string & text, int begin, int end) const override;
+		zn::Vector2i getTextSize(zn::ui::Font & font, const std::wstring & text, int begin, int end) const override;
 		int getFontLineHeight(zn::ui::Font & font) const override;
 
 	};

@@ -103,7 +103,7 @@ namespace ui
 
 		// Draws the given text from the (x,y) position.
 		// begin and end refer to the starting and ending index of the string to draw.
-		virtual void drawText(const std::string & text, int x, int y, int begin, int end) = 0;
+		virtual void drawText(const std::wstring & text, int x, int y, int begin, int end) = 0;
 
 		/*
 			Misc
@@ -120,7 +120,7 @@ namespace ui
 		 * @return width and height or the measured text.
 		 */
 		virtual Vector2i getTextSize(
-			Font & font, const std::string & text, int begin, int end) const = 0;
+			Font & font, const std::wstring & text, int begin, int end) const = 0;
 
 		// Get the height of a line written with the given font
 		virtual int getFontLineHeight(Font & font) const = 0;

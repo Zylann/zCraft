@@ -47,7 +47,7 @@ namespace experimental
 //		ui::PushButton * button = new ui::PushButton();
 		ui::PushButton * button = r_panel->add<ui::PushButton>();
 		button->setID("myButton");
-		button->setText("My big button");
+		button->setText(L"My big button");
 		button->setLocalBounds(IntRect(10, 120, 100, 140));
 		button->onClickSignal.connect([](){
 			std::cout << "Hello world !" << std::endl;
@@ -55,7 +55,7 @@ namespace experimental
 //		r_panel->add(button);
 
 		ui::CheckBox * checkBox = new ui::CheckBox();
-		checkBox->setText("My lovely checkbox");
+		checkBox->setText(L"My lovely checkbox");
 		checkBox->setLocalBounds(IntRect(120, 120, 250, 140));
 		r_panel->add(checkBox);
 
@@ -64,10 +64,10 @@ namespace experimental
 		r_panel->add(textField);
 
 		ui::PushButton * clearTextField = new ui::PushButton();
-		clearTextField->setText("Clear");
+		clearTextField->setText(L"Clear");
 		clearTextField->setLocalBounds(IntRect(410, 120, 450, 140));
 		clearTextField->onClickSignal.connect([=](){
-			textField->setText("");
+			textField->setText(L"");
 		});
 		r_panel->add(clearTextField);
 
@@ -79,7 +79,7 @@ namespace experimental
 		r_text->setID("myText");
 		r_text->setWrap(true);
 		r_text->setLocalBounds(IntRect(10, 10, 190, 110));
-		r_text->setText("This is not a sample text. This is a brand new "
+		r_text->setText(L"This is not a sample text. This is a brand new "
 						"testing system involving character strings linked "
 						"together in a byte-based dynamic array, also called "
 						"std::string.");

@@ -76,7 +76,7 @@ namespace bmfont
 	 */
 	struct CharDescriptor
 	{
-		unsigned int id = 0; //	The character id (usually unicode).
+		int id = 0; //	The character id (usually unicode/UTF).
 
 		short x = 0; 	//	The left position of the character image in the texture.
 		short y = 0;	//	The top position of the character image in the texture.
@@ -108,7 +108,7 @@ namespace bmfont
 	private :
 
 		std::list<Kerning> m_kernings;
-		std::unordered_map<unsigned int, CharDescriptor> m_chars; // (unicode, char)
+		std::unordered_map<int, CharDescriptor> m_chars; // (unicode/UTF, char)
 
 	public :
 
@@ -146,7 +146,7 @@ namespace bmfont
 		short getKerning(int first, int second) const;
 
 		void addChar(CharDescriptor cd);
-		const CharDescriptor * getChar(unsigned int id) const;
+		const CharDescriptor * getChar(int id) const;
 
 	};
 
@@ -181,11 +181,11 @@ namespace bmfont
 
 		// Draws a text at (x,y) using the font. The invertYAxis parameter is
 		// useful when you have a coordinate system where Y axis goes upside.
-		void draw(const std::string text, float x0, float y0, bool invertYAxis = false);
+		void draw(const std::wstring &text, float x0, float y0, bool invertYAxis = false);
 
 		// Draws a text using the current OpenGL state. The invertYAxis parameter is
 		// useful when you have a coordinate system where Y axis goes upside.
-		void draw(const std::string text, bool invertYAxis = false);
+		void draw(const std::wstring &text, bool invertYAxis = false);
 
 		// Gets the maximum height of a line written with this font
 		int getLineHeight();
@@ -199,7 +199,7 @@ namespace bmfont
 		 * it will be clamped to the last index.
 		 * @return width and height of the measured text.
 		 */
-		Vector2i getTextSize(const std::string & text, int begin=0, int end=-1);
+		Vector2i getTextSize(const std::wstring & text, int begin=0, int end=-1);
 
 	private :
 

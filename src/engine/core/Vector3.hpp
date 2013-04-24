@@ -395,6 +395,15 @@ namespace zn
 		return os << vec.toString();
 	}
 
+	template <typename T>
+	std::wostream & operator<<(std::wostream & wos, const Vector3<T> & vec)
+	{
+		std::string str = vec.toString();
+		for(unsigned int i = 0; i < str.size(); ++i)
+			wos.put(str[i]);
+		return wos;
+	}
+
     template <typename T>
 	std::string operator+(std::string const & a, Vector3<T> const & b)
 	{

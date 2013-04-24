@@ -150,7 +150,7 @@ namespace ui
 	#endif
 	}
 
-	void OGLGuiRenderer::drawText(const std::string & text, int x, int y, int begin, int end)
+	void OGLGuiRenderer::drawText(const std::wstring & text, int x, int y, int begin, int end)
 	{
 		if(r_font == nullptr)
 			return;
@@ -162,7 +162,7 @@ namespace ui
 	#endif
 	}
 
-	Vector2i OGLGuiRenderer::getTextSize(ui::Font & font, const std::string & text, int begin, int end) const
+	Vector2i OGLGuiRenderer::getTextSize(ui::Font & font, const std::wstring &text, int begin, int end) const
 	{
 		auto it = m_fonts.find(font.ID);
 		if(it != m_fonts.end())

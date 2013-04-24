@@ -163,32 +163,32 @@ namespace zcraft
 		#warning "zcraft::PerspectiveMapViewer doesn't supports OpenGL3"
 	#endif // defined
 
-		std::stringstream ss;
+		std::wstringstream wss;
 
 		// Tips
-		ss << "WASD/ZQSD to move, arrows to rotate, +/- to go up and down, "
-			<< "ESC to disable camera\n";
+		wss << L"WASD/ZQSD to move, arrows to rotate, +/- to go up and down, "
+			<< L"ESC to disable camera\n";
 
 		// FPS
-		ss << "FPS=" << (int)delta.hz();
+		wss << L"FPS=" << (int)delta.hz();
 
 		// MapStreamThread
 		MapStreamThread::RunningInfo threadInfo = m_mapStreamer->getThreadInfo();
-		ss << "\nRem:" << threadInfo.remainingRequests
-			<< ", L:" << threadInfo.loadedCount
-			<< ", G:" << threadInfo.generatedCount
-			<< ", S:" << threadInfo.savedCount
-			<< ", D:" << threadInfo.droppedCount;
+		wss << L"\nRem:" << threadInfo.remainingRequests
+			<< L", L:" << threadInfo.loadedCount
+			<< L", G:" << threadInfo.generatedCount
+			<< L", S:" << threadInfo.savedCount
+			<< L", D:" << threadInfo.droppedCount;
 
 		// MeshMap
-		ss << "\nBlocks: " << m_map.getBlockCount()
-			<< " Meshs: " << m_meshMap.getCount();
+		wss << L"\nBlocks: " << m_map.getBlockCount()
+			<< L" Meshs: " << m_meshMap.getCount();
 
 		// Position
 		Vector3f fpos = m_camera.getPosition();
-		ss << "\nPos: " << Vector3i(floor(fpos.x), floor(fpos.y), floor(fpos.z));
+		wss << L"\nPos: " << Vector3i(floor(fpos.x), floor(fpos.y), floor(fpos.z));
 
-		m_font.draw(ss.str(), 0, 0);
+		m_font.draw(wss.str(), 0, 0);
 	}
 
 	void PerspectiveMapViewer::dispose()

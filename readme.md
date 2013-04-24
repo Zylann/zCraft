@@ -46,8 +46,9 @@ https://dl.dropbox.com/u/60408088/INFO/zCraft/2012-12-29-zcraft-map-test.zip
 Compiling
 =========
 
-Compiler settings :
-- C++11, compiles fine with GCC 4.7.2 (I use MinGW on Windows)
+Compiler requirements :
+- C++11, compiles fine with GCC 4.7.2 or MinGW on Windows.
+(MSVC compatibility is not my priority)
 
 Dependencies :
 - SFML 2 RC (I recompiled it for the last MinGW)
@@ -60,17 +61,17 @@ Folder structure
 
 The project is divided in several main parts :
 
-- zENG, namespace zn::, folder engine/
+- zENG, namespace zn::, folder engine/ (also called zCraft Engine)
 
 This is a set of generic tools I wrote for making games,
 and may be used for other projects than zCraft.
 It is heavily based on SFML, but some parts are independent.
 
-- zENGui, namespace zn::ui::, folder engine/ui/
+- zENGui, namespace zn::ui::, folder engine/gui/
 
-This is a generic gui that doesn't depend on anything, except for "very" basic
-files such as Vector2, Rect and Color. It is currently developped as part of the
-project. All you have to do to use it is to provide your renderer and input.
+This is a generic gui that only depends on the core/ and utf8/ parts of the engine.
+It is currently developped as part of the project.
+All you have to do to use it is to provide your renderer and input.
 Note : some renderers and inputs are already programmed.
 
 - zCraft, namespace zcraft::, folder zcraft/

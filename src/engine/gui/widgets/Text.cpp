@@ -25,7 +25,7 @@ namespace ui
 	Text::~Text()
 	{}
 
-	void Text::setText(const std::string & text)
+	void Text::setText(const std::wstring &text)
 	{
 		m_sourceText = text;
 		m_textNeedUpdate = true;
@@ -87,17 +87,17 @@ namespace ui
 		m_textNeedUpdate = true;
 	}
 
-	inline bool isWhiteSpace(char c)
+	inline bool isWhiteSpace(wchar_t c)
 	{
 		return c==' ' || c=='\t' || c=='\n' || c=='\r';
 	}
 
-	inline bool isReturn(char c)
+	inline bool isReturn(wchar_t c)
 	{
 		return c=='\n' || c=='\r';
 	}
 
-	int findLastWhitespace(const std::string & str)
+	int findLastWhitespace(const std::wstring & str)
 	{
 		if(str.empty())
 			return -1;
@@ -143,7 +143,7 @@ namespace ui
 			int lineHeight = renderer->getFontLineHeight(*r_font);
 			IntRect innerBounds = getLocalInnerBounds();
 			IntRect lineBounds(0,0,0,lineHeight);
-			std::string lstr;
+			std::wstring lstr;
 			char c;
 			bool ret = false;
 
@@ -210,9 +210,9 @@ namespace ui
 		m_textNeedUpdate = false;
 	}
 
-	const std::string & Text::getLine(unsigned int index) const
+	const std::wstring &Text::getLine(unsigned int index) const
 	{
-		static std::string dummyString;
+		static const std::wstring dummyString;
 		if(m_lines.empty())
 			return dummyString;
 		return m_lines[index].str;
@@ -299,7 +299,7 @@ namespace ui
 			}
 		}
 
-		const std::string & str = m_lines[line].str;
+		const std::wstring & str = m_lines[line].str;
 		for(col = 0; col < str.size(); ++col)
 		{
 			if(getCharacterPos(col, line).x >= x)

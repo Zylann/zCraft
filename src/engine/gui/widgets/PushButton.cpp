@@ -12,7 +12,7 @@ namespace ui
 		add(r_text);
 	}
 
-	void PushButton::setText(const std::string &str)
+	void PushButton::setText(const std::wstring &str)
 	{
 		r_text->setText(str);
 	}

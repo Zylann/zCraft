@@ -28,7 +28,7 @@ namespace ui
 
 		WidgetType getType() const override { return PUSH_BUTTON; }
 
-		void setText(const std::string & str);
+		void setText(const std::wstring & str);
 
 		Signal0 onPressSignal;
 		Signal0 onReleaseSignal;

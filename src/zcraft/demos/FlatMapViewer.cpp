@@ -89,14 +89,14 @@ namespace zcraft
 	{
 	#if defined ZN_OPENGL2
 		MapStreamThread::RunningInfo threadInfo = m_mapStreamer->getThreadInfo();
-		std::stringstream ss;
-		ss << "Rem:" << threadInfo.remainingRequests
-			<< ", L:" << threadInfo.loadedCount
-			<< ", G:" << threadInfo.generatedCount
-			<< ", S:" << threadInfo.savedCount
-			<< ", D:" << threadInfo.droppedCount;
+		std::wstringstream wss;
+		wss << L"Rem:" << threadInfo.remainingRequests
+			<< L", L:" << threadInfo.loadedCount
+			<< L", G:" << threadInfo.generatedCount
+			<< L", S:" << threadInfo.savedCount
+			<< L", D:" << threadInfo.droppedCount;
 		glColor3ub(255,255,255);
-		m_font.draw(ss.str(), 0, 0);
+		m_font.draw(wss.str(), 0, 0);
 	#elif defined ZN_OPENGL3
 		#warning "zcraft::FlatMapViewer doesn't supports OpenGL 3"
 	#endif // defined

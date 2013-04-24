@@ -19,7 +19,7 @@ namespace ui
 		add(r_text);
 	}
 
-	void CheckBox::setText(const std::string str)
+	void CheckBox::setText(const std::wstring str)
 	{
 		// TODO CheckBox: update text rect after setText()
 		r_text->setText(str);

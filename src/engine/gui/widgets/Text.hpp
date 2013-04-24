@@ -43,10 +43,10 @@ namespace ui
 		void setFont(Font & font);
 		inline Font * getFont() { return r_font; }
 
-		void setText(const std::string & text);
-		inline const std::string & getText() const { return m_sourceText; }
+		void setText(const std::wstring & text);
+		inline const std::wstring & getText() const { return m_sourceText; }
 
-		const std::string & getLine(unsigned int index) const;
+		const std::wstring & getLine(unsigned int index) const;
 		inline unsigned int getLineCount() const { return m_lines.size(); }
 
 		Vector2i getCharacterPos(unsigned int col, unsigned int line=0);
@@ -62,14 +62,14 @@ namespace ui
 
 		struct Line
 		{
-			std::string str;
+			std::wstring str;
 			IntRect bounds;
 		};
 
 		void updateText(const IRenderer * renderer = nullptr);
 
 		// TODO Text: Unicode support
-		std::string m_sourceText;
+		std::wstring m_sourceText;
 		std::vector<Line> m_lines;
 		Font * r_font;
 		bool m_textNeedUpdate;

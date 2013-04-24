@@ -20,7 +20,7 @@ namespace ui
 	{
 	}
 
-	void TextField::setText(const std::string str)
+	void TextField::setText(const std::wstring str)
 	{
 		r_text->setText(str);
 
@@ -34,7 +34,7 @@ namespace ui
 		}
 	}
 
-	std::string TextField::getText() const
+	std::wstring TextField::getText() const
 	{
 		return r_text->getText();
 	}
@@ -90,14 +90,14 @@ namespace ui
 				else if(key == Keyboard::BACK && m_caretIndex != 0)
 				{
 					--m_caretIndex;
-					std::string str = r_text->getText();
+					std::wstring str = r_text->getText();
 					str.erase(m_caretIndex, 1);
 					r_text->setText(str);
 					m_caretNeedUpdate = true;
 				}
 				else if(key == Keyboard::DELETE && m_caretIndex != r_text->getText().size())
 				{
-					std::string str = r_text->getText();
+					std::wstring str = r_text->getText();
 					str.erase(m_caretIndex, 1);
 					r_text->setText(str);
 				}
@@ -121,7 +121,7 @@ namespace ui
 			{
 				//std::cout << "W[" << m_caretIndex << "]";
 				//std::cout << '[' << (char)unicode << ']' << std::endl;
-				std::string str = r_text->getText();
+				std::wstring str = r_text->getText();
 				str.insert(m_caretIndex, 1, unicode);
 				++m_caretIndex;
 				r_text->setText(str);

@@ -5,7 +5,7 @@
 #include "engine/opengl/opengl.hpp"
 
 #ifdef ZN_OPENGL3
-	#error "This file doesn't supports OpenGL 3, and is outdated. Use opengl.hpp instead (experimental)"
+	#error "This file doesn't supports OpenGL 3 yet"
 #endif // ZN_OPENGL3
 
 namespace zn
