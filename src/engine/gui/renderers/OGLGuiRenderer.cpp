@@ -162,7 +162,7 @@ namespace ui
 	#endif
 	}
 
-	Vector2i OGLGuiRenderer::getTextSize(ui::Font & font, const std::string & text, int begin, int end)
+	Vector2i OGLGuiRenderer::getTextSize(ui::Font & font, const std::string & text, int begin, int end) const
 	{
 		auto it = m_fonts.find(font.ID);
 		if(it != m_fonts.end())
@@ -170,7 +170,7 @@ namespace ui
 		return Vector2i();
 	}
 
-	int OGLGuiRenderer::getFontLineHeight(ui::Font &font)
+	int OGLGuiRenderer::getFontLineHeight(ui::Font &font) const
 	{
 		auto it = m_fonts.find(font.ID);
 		if(it != m_fonts.end())

@@ -278,16 +278,19 @@ namespace bmfont
 		if(end < 0 || end >= static_cast<int>(text.size()))
 			end = text.size()-1;
 
-		// TODO Font::getTextSize() : exact height
+		// TODO Font::getTextSize() : exact height instead of max height
 
 		Vector2i size(0, getLineHeight());
 		for(int i = begin; i <= end; ++i)
 		{
 			const CharDescriptor * cd = m_settings.getChar(text[i]);
-			if(cd != nullptr)
+			if(cd == nullptr)
 			{
-				size.x += cd->xadvance;
+				cd = m_settings.getChar('?');
+				if(cd == nullptr)
+					break;
 			}
+			size.x += cd->xadvance;
 		}
 		return size;
 	}

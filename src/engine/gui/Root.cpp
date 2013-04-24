@@ -68,6 +68,11 @@ namespace ui
 		m_renderer = r;
 	}
 
+	const IRenderer *Root::getRenderer() const
+	{
+		return m_renderer;
+	}
+
 	bool Root::installSkin(ISkin *newSkin)
 	{
 		if(newSkin == nullptr)

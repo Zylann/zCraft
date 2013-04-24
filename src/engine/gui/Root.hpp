@@ -28,14 +28,6 @@ namespace ui
 	 */
 	class Root : public AComposite
 	{
-	private :
-
-		IRenderer * m_renderer = nullptr;
-		std::unordered_map<std::string,ISkin*> m_skins; // Installed skins {name, skin}
-		AWidget * r_focusedWidget;
-
-		//IAudioDriver * m_audio; // Not supported yet
-
 	public :
 
 		/**
@@ -66,6 +58,12 @@ namespace ui
 		 * @param r : renderer, usually new MyRenderer(args...)
 		 */
 		void setRenderer(IRenderer * r);
+
+		/**
+		 * @brief Read-only access to the current renderer.
+		 * @return renderer pointer, nullptr if not set yet
+		 */
+		const IRenderer * getRenderer() const;
 
 		/**
 		 * @brief Stores and loads a C++classCoded skin.
@@ -104,6 +102,14 @@ namespace ui
 		 * but you may only use the one without parameters.
 		 */
 		void render();
+
+	private :
+
+		IRenderer * m_renderer = nullptr;
+		std::unordered_map<std::string,ISkin*> m_skins; // Installed skins {name, skin}
+		AWidget * r_focusedWidget;
+
+		//IAudioDriver * m_audio; // Not supported yet
 
 	};
 

@@ -16,33 +16,49 @@ namespace zn
 namespace ui
 {
 	/**
-	 * @brief A basic widget for displaying text
+	 * @brief A basic widget for displaying text.
 	 */
 	class Text : public AWidget
 	{
 	public :
+
+		struct Pos
+		{
+			unsigned int line = 0;
+			unsigned int col = 0;
+
+			Pos() {}
+			Pos(unsigned int line0, unsigned int col0)
+				: line(line0), col(col0)
+			{}
+		};
 
 		Text();
 		virtual ~Text();
 
 		WidgetType getType() const override { return TEXT; }
 
-		void setText(const std::string & text);
 		void setWrap(bool enable);
+
 		void setFont(Font & font);
-
 		inline Font * getFont() { return r_font; }
-		inline const std::string & getText() const { return m_text; }
 
-		void renderSelf(IRenderer & r) override;
+		void setText(const std::string & text);
+		inline const std::string & getText() const { return m_sourceText; }
+
+		const std::string & getLine(unsigned int index) const;
+		inline unsigned int getLineCount() const { return m_lines.size(); }
+
+		Vector2i getCharacterPos(unsigned int col, unsigned int line=0);
+		Pos getColumnAndLine(int x, int y);
 
 	protected :
+
+		void renderSelf(IRenderer & r) override;
 
 		virtual void onSizeChanged() override;
 
 	private :
-
-		void updateText(IRenderer & r);
 
 		struct Line
 		{
@@ -50,9 +66,11 @@ namespace ui
 			IntRect bounds;
 		};
 
-		// TODO Text: UTF8 support
-		std::string m_text;
-		std::vector<Line> m_dispText;
+		void updateText(const IRenderer * renderer = nullptr);
+
+		// TODO Text: Unicode support
+		std::string m_sourceText;
+		std::vector<Line> m_lines;
 		Font * r_font;
 		bool m_textNeedUpdate;
 		bool m_wrap;

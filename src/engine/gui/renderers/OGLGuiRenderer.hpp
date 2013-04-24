@@ -52,8 +52,8 @@ namespace ui
 		void drawRect(zn::IntRect rect, bool fill) override;
 		void drawText(const std::string & text, int x, int y, int begin, int end) override;
 
-		zn::Vector2i getTextSize(zn::ui::Font & font, const std::string & text, int begin, int end) override;
-		int getFontLineHeight(zn::ui::Font & font) override;
+		zn::Vector2i getTextSize(zn::ui::Font & font, const std::string & text, int begin, int end) const override;
+		int getFontLineHeight(zn::ui::Font & font) const override;
 
 	};
 

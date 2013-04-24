@@ -41,8 +41,12 @@ namespace ui
 
 	private:
 
+		void updateCaret();
+
 		Text * r_text;
 		unsigned int m_caretIndex;
+		int m_caretPosX;
+		bool m_caretNeedUpdate;
 
 	};
 

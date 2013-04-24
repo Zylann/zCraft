@@ -17,11 +17,9 @@ Overview of project-scope package dependencies :
 
 engine/core/ 		: engine/config.hpp
 engine/ 			: engine/core
+engine/gui/         : engine/core (except for renderers/ and inputs/)
 zcraft/ 			: engine/
 zcraft/demos/ 		: zcraft/
-zengui/ 			: engine/core
-zengui/plugin/ 		: engine/
-experimental/ 		: *
 
 Estimated total dev time
 - Marc Gilleron : 78h

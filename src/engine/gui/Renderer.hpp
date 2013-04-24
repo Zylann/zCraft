@@ -109,16 +109,24 @@ namespace ui
 			Misc
 		*/
 
-		// Get the size of a text written using the given font.
-		// Whitespace must be included in the size.		
+		/**
+		 * @brief Get the size of a text written using the given font.
+		 *  Whitespace must be included in the size.
+		 * @param font : font used
+		 * @param text : text to measure with the font
+		 * @param begin : first character
+		 * @param end : last character. A negative or greater than text.size() value
+		 * means the entire text must be measured.
+		 * @return width and height or the measured text.
+		 */
 		virtual Vector2i getTextSize(
-			Font & font, const std::string & text, int begin, int end) = 0;
+			Font & font, const std::string & text, int begin, int end) const = 0;
 
 		// Get the height of a line written with the given font
-		virtual int getFontLineHeight(Font & font) = 0;
+		virtual int getFontLineHeight(Font & font) const = 0;
 
 		// Returns the character index at which a text crosses the given max width.
-//		virtual unsigned int getTextCrossIndex(
+//		virtual unsigned int getCrossCharIndex(
 //			Font & font, const std::string & text, int maxWidth, int begin, int end) = 0;
 
 	};

@@ -12,6 +12,8 @@ namespace ui
 		r_text->setPadding(Padding(4,4,4,4));
 		add(r_text);
 		m_caretIndex = 0;
+		m_caretPosX = 0;
+		m_caretNeedUpdate = false;
 	}
 
 	TextField::~TextField()
@@ -28,6 +30,7 @@ namespace ui
 				m_caretIndex = 0;
 			else
 				m_caretIndex = str.size()-1;
+			m_caretNeedUpdate = true;
 		}
 	}
 
@@ -39,6 +42,23 @@ namespace ui
 	void TextField::renderSelf(IRenderer &r)
 	{
 		r_skin->drawTextField(r, *this);
+
+		if(m_focused && r_text->getFont() != nullptr)
+		{
+			if(m_caretNeedUpdate)
+				updateCaret();
+
+			int caretHeight = r.getFontLineHeight(*r_text->getFont());
+			IntRect bounds = r_text->getInnerBounds();
+
+			static Color caretColor(255,255,255);
+
+			int x = bounds.min.x + m_caretPosX;
+
+			r.setColor(caretColor);
+			r.drawLine(x, bounds.min.y,
+					   x, bounds.min.y + caretHeight);
+		}
 	}
 
 	bool TextField::mousePressed(Mouse::Button button)
@@ -55,14 +75,17 @@ namespace ui
 				if(key == Keyboard::LEFT && m_caretIndex != 0)
 				{
 					--m_caretIndex;
+					m_caretNeedUpdate = true;
 				}
 				else if(key == Keyboard::RIGHT && m_caretIndex != r_text->getText().size())
 				{
 					++m_caretIndex;
+					m_caretNeedUpdate = true;
 				}
 				else if(key == Keyboard::END)
 				{
 					m_caretIndex = r_text->getText().size();
+					m_caretNeedUpdate = true;
 				}
 				else if(key == Keyboard::BACK && m_caretIndex != 0)
 				{
@@ -70,6 +93,7 @@ namespace ui
 					std::string str = r_text->getText();
 					str.erase(m_caretIndex, 1);
 					r_text->setText(str);
+					m_caretNeedUpdate = true;
 				}
 				else if(key == Keyboard::DELETE && m_caretIndex != r_text->getText().size())
 				{
@@ -78,6 +102,9 @@ namespace ui
 					r_text->setText(str);
 				}
 			}
+
+			if(m_caretNeedUpdate)
+				updateCaret();
 
 			return true;
 		}
@@ -94,16 +121,24 @@ namespace ui
 			{
 				if(r_text->getText().empty() || m_caretIndex != r_text->getText().size()-1)
 				{
-					std::cout << '[' << (char)unicode << ']' << std::endl;
+					//std::cout << '[' << (char)unicode << ']' << std::endl;
 					std::string str = r_text->getText();
 					str.insert(m_caretIndex, 1, unicode);
 					++m_caretIndex;
 					r_text->setText(str);
+					m_caretNeedUpdate = true;
 				}
 			}
 			return true;
 		}
 		return false;
+	}
+
+	void TextField::updateCaret()
+	{
+		m_caretPosX = r_text->getCharacterPos(m_caretIndex).x;
+		std::cout << "updateCaret " << m_caretIndex << ", " << r_text->getText() << " => " << m_caretPosX << std::endl;
+		m_caretNeedUpdate = false;
 	}
 
 } // namespace ui
