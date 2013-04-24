@@ -118,16 +118,16 @@ namespace experimental
 
 	void GuiTest::update(const zn::Time & delta)
 	{
-		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
-		{
-			//r_panel->setBounds(IntRect(r_panel->getBounds()).offset(-1, 0));
-			r_text->setLocalBounds(r_text->getLocalBounds().contract(-1, 0));
-		}
-		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
-		{
-			//r_panel->setBounds(IntRect(r_panel->getBounds()).offset(1, 0));
-			r_text->setLocalBounds(r_text->getLocalBounds().expand(1, 0));
-		}
+//		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
+//		{
+//			//r_panel->setBounds(IntRect(r_panel->getBounds()).offset(-1, 0));
+//			r_text->setLocalBounds(r_text->getLocalBounds().contract(-1, 0));
+//		}
+//		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
+//		{
+//			//r_panel->setBounds(IntRect(r_panel->getBounds()).offset(1, 0));
+//			r_text->setLocalBounds(r_text->getLocalBounds().expand(1, 0));
+//		}
 
 		m_gui->animate(delta.hz());
 	}

@@ -22,7 +22,7 @@ zcraft/ 			: engine/
 zcraft/demos/ 		: zcraft/
 
 Estimated total dev time
-- Marc Gilleron : 78h
+- Marc Gilleron : 83h
 
 //////////////////////////////////////////////////////////////////////////////*/
 

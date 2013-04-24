@@ -192,6 +192,7 @@ namespace ui
 				if(ret || i == m_sourceText.size()-1) // If new line strip or end of text
 				{
 					// Push the new/last line
+					// FIXME Text: line bounds height seems incorrect
 					lineBounds.max.x = renderer->getTextSize(*r_font, lstr, 0, lstr.size()-1).x;
 					Line line;
 					line.str = lstr;
@@ -225,11 +226,14 @@ namespace ui
 		if(m_textNeedUpdate)
 			updateText();
 
+		// If no lines in the text or if no text update were possible,
+		// return origin position.
 		if(m_lines.empty())
 		{
 			return pos;
 		}
 
+		// Get the root to access the current renderer
 		Root * root = getRoot();
 		if(root == nullptr)
 		{
@@ -238,6 +242,7 @@ namespace ui
 						 "You must add the widget to the hierarchy first." << std::endl;
 			return pos;
 		}
+		// Get renderer for measuring fonts
 		const IRenderer * renderer = root->getRenderer();
 		if(renderer == nullptr)
 		{
@@ -246,6 +251,7 @@ namespace ui
 						 "you must set a renderer on the GUI root first." << std::endl;
 			return pos;
 		}
+		// A skin must be defined to know which font to work with
 		if(r_skin == nullptr)
 		{
 			std::cout << "ERROR: Text::getCharacterPos: "
@@ -255,6 +261,7 @@ namespace ui
 			return pos;
 		}
 
+		// If no font set, the skin must provide a default one
 		if(r_font == nullptr)
 		{
 			r_font = &r_skin->getDefaultFont();
@@ -263,14 +270,17 @@ namespace ui
 		// Get Y first from the line index
 		pos.y = line * renderer->getFontLineHeight(*r_font);
 
+		// Now get X :
 		// If in lines range and not on first column
 		if(line < m_lines.size() && col != 0)
 		{
-			pos.x = renderer->getTextSize(*r_font, m_lines[line].str, 0, col).x;
+			// The X coordinate is the size of the text before the caret
+			pos.x = renderer->getTextSize(*r_font, m_lines[line].str, 0, col-1).x;
 			return pos;
 		}
 		else
 		{
+			// Beginning of the line : X = 0
 			return pos;
 		}
 	}

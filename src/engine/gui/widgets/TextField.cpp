@@ -119,15 +119,13 @@ namespace ui
 			// (0x20 == ' ', 0x7f == ESC)
 			if(unicode >= 0x20 && unicode != 0x7f)
 			{
-				if(r_text->getText().empty() || m_caretIndex != r_text->getText().size()-1)
-				{
-					//std::cout << '[' << (char)unicode << ']' << std::endl;
-					std::string str = r_text->getText();
-					str.insert(m_caretIndex, 1, unicode);
-					++m_caretIndex;
-					r_text->setText(str);
-					m_caretNeedUpdate = true;
-				}
+				//std::cout << "W[" << m_caretIndex << "]";
+				//std::cout << '[' << (char)unicode << ']' << std::endl;
+				std::string str = r_text->getText();
+				str.insert(m_caretIndex, 1, unicode);
+				++m_caretIndex;
+				r_text->setText(str);
+				m_caretNeedUpdate = true;
 			}
 			return true;
 		}
@@ -137,8 +135,8 @@ namespace ui
 	void TextField::updateCaret()
 	{
 		m_caretPosX = r_text->getCharacterPos(m_caretIndex).x;
-		std::cout << "updateCaret " << m_caretIndex << ", " << r_text->getText() << " => " << m_caretPosX << std::endl;
 		m_caretNeedUpdate = false;
+		//std::cout << "updateCaret " << m_caretIndex << ", " << r_text->getText() << " => " << m_caretPosX << std::endl;
 	}
 
 } // namespace ui
