@@ -22,7 +22,7 @@ zcraft/ 			: engine/
 zcraft/demos/ 		: zcraft/
 
 Estimated total dev time
-- Marc Gilleron : 85h
+- Marc Gilleron : 86h
 
 //////////////////////////////////////////////////////////////////////////////*/
 
@@ -40,7 +40,6 @@ using namespace zn;
 
 void testUTF8()
 {
-	std::cout << "Size of wchar_t : " << sizeof(wchar_t) << std::endl;
 	std::ifstream ifs("utf8.txt");
 	if(!ifs.is_open())
 		return;
@@ -73,10 +72,12 @@ void testUTF8()
 	ifs.close();
 }
 
-int main(/*int argc, char * argv[]*/)
+int main(int argc, char * argv[])
 {
 	std::cout << "ZCRAFT main begin" << std::endl;
 	int code = 0;
+
+	std::cout << "Size of wchar_t : " << sizeof(wchar_t) << std::endl;
 
 	// TODO remove the "experimental" namespace.
 	// experimental things are actually treated as end-user code that would be

@@ -21,6 +21,8 @@ namespace ui
 		ProgressBar() { m_blocksInput = false; }
 		virtual ~ProgressBar() {}
 
+		WidgetType getType() const override { return PROGRESS_BAR; }
+
 		void setRatio(float ratio)
 		{
 			m_ratio = ratio < 0 ? 0 : ratio > 1 ? 1 : ratio;

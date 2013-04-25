@@ -30,6 +30,8 @@ namespace ui
 		Slider();
 		virtual ~Slider() {}
 
+		WidgetType getType() const override { return SLIDER; }
+
 		void setRatio(float ratio);
 		inline float getRatio() const { return m_ratio; }
 

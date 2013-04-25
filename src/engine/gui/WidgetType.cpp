@@ -22,6 +22,8 @@ namespace ui
 		case PUSH_BUTTON: return "PushButton";
 		case CHECK_BOX: return "CheckBox";
 		case DRAG_ZONE: return "DragZone";
+		case PROGRESS_BAR: return "ProgressBar";
+		case SLIDER: return "Slider";
 		default: return "Generic";
 		}
 	}

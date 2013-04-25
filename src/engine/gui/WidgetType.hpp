@@ -26,6 +26,8 @@ namespace ui
 		PUSH_BUTTON,
 		CHECK_BOX,
 		DRAG_ZONE,
+		PROGRESS_BAR,
+		SLIDER,
 
 		COUNT // Keep last
 	};
