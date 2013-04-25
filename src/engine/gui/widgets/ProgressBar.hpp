@@ -21,12 +21,12 @@ namespace ui
 		ProgressBar() { m_blocksInput = false; }
 		virtual ~ProgressBar() {}
 
-		void setValue(float ratio)
+		void setRatio(float ratio)
 		{
 			m_ratio = ratio < 0 ? 0 : ratio > 1 ? 1 : ratio;
 		}
 
-		inline float getValue() const { return m_ratio; }
+		inline float getRatio() const { return m_ratio; }
 
 	protected:
 

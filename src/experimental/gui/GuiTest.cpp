@@ -73,7 +73,7 @@ namespace experimental
 
 		r_progressBar = r_panel->add<ui::ProgressBar>();
 		r_progressBar->setLocalBounds(IntRect(460, 125, 600, 135));
-		r_progressBar->setValue(0.33f);
+		r_progressBar->setRatio(0.33f);
 
 		r_text = new ui::Text();
 		r_text->setID("myText");
