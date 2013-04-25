@@ -9,6 +9,7 @@
 #include "engine/gui/widgets/PushButton.hpp"
 #include "engine/gui/widgets/CheckBox.hpp"
 #include "engine/gui/widgets/TextField.hpp"
+#include "engine/gui/widgets/Slider.hpp"
 
 using namespace zn;
 
@@ -74,6 +75,13 @@ namespace experimental
 		r_progressBar = r_panel->add<ui::ProgressBar>();
 		r_progressBar->setLocalBounds(IntRect(460, 125, 600, 135));
 		r_progressBar->setRatio(0.33f);
+
+		ui::Slider * slider1 = r_panel->add<ui::Slider>();
+		slider1->setLocalBounds(IntRect(460, 80, 600, 100));
+
+		ui::Slider * slider2 = r_panel->add<ui::Slider>();
+		slider2->setOrientation(ui::Slider::VERTICAL);
+		slider2->setLocalBounds(IntRect(610, 50, 630, 140));
 
 		r_text = new ui::Text();
 		r_text->setID("myText");

@@ -9,6 +9,7 @@ This file is part of the zCraft project.
 
 #include "Widget.hpp"
 #include "Renderer.hpp"
+#include "widgets/Slider.hpp"
 
 namespace zn
 {
@@ -66,6 +67,7 @@ namespace ui
 		virtual void drawCheckBox(IRenderer & r, const AWidget & cb, bool checked) = 0;
 		virtual void drawTextField(IRenderer & r, const AWidget & tf) = 0;
 		virtual void drawProgressBar(IRenderer & r, const AWidget & pb, float ratio) = 0;
+		virtual void drawSlider(IRenderer & r, const Slider & s) = 0;
 
 		/*
 			Optional methods

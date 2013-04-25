@@ -165,6 +165,49 @@ namespace ui
 		}
 	}
 
+	void BasicSkin::drawSlider(IRenderer &r, const Slider &s)
+	{
+		IntRect bounds = s.getBounds();
+		IntRect cursorBounds = bounds;
+
+		static const Color backColor(32,32,32);
+		static const Color borderColor(0, 0, 0);
+		static const Color borderColorFocus(0xff8800ff);
+		static const Color fillColor(96, 96, 96);
+		//static const Color fillColorPress(112, 112, 112);
+
+		// Back
+
+		r.setColor(backColor);
+		if(s.getOrientation() == Slider::HORIZONTAL)
+			r.drawRect(bounds.pad(0, -5, 0, -5), true);
+		else
+			r.drawRect(bounds.pad(-5, 0, -5, 0), true);
+
+		// Cursor
+
+		if(s.getOrientation() == Slider::HORIZONTAL)
+		{
+			cursorBounds.max.x = cursorBounds.min.x + 8;
+			cursorBounds.offset(s.getRatio() * static_cast<float>(bounds.width() - 8), 0);
+		}
+		else
+		{
+			// Note : Y is inverted because UP is the max value for users
+			cursorBounds.min.y = cursorBounds.max.y - 8;
+			cursorBounds.offset(0, -s.getRatio() * static_cast<float>(bounds.height() - 8));
+		}
+
+		r.setColor(fillColor);
+		r.drawRect(cursorBounds.pad(1), true); // Fill
+
+		if(s.isFocused())
+			r.setColor(borderColorFocus);
+		else
+			r.setColor(borderColor);
+		r.drawRect(cursorBounds, false); // Border
+	}
+
 	void BasicSkin::drawDragZone(IRenderer & r, const AWidget & dz)
 	{
 		IntRect bounds = dz.getBounds();

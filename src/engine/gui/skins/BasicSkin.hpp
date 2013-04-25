@@ -42,6 +42,7 @@ namespace ui
 		virtual void drawCheckBox(IRenderer & r, const AWidget & cb, bool checked) override;
 		virtual void drawTextField(IRenderer &r, const AWidget &tf) override;
 		virtual void drawProgressBar(IRenderer &r, const AWidget &pb, float ratio) override;
+		virtual void drawSlider(IRenderer &r, const Slider &s) override;
 
 		virtual void drawDragZone(IRenderer &r, const AWidget &dz) override;
 
