@@ -63,8 +63,6 @@ namespace bmfont
 		Font
 	*/
 
-	// TODO Font: handle accentued characters
-
 	Font::Font()
 	{
 		m_textures = nullptr;
