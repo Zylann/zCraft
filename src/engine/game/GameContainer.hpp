@@ -1,5 +1,5 @@
 /*
-AGameContainer.hpp
+GameContainer.hpp
 Copyright (C) 2010-2012 Marc GILLERON
 This file is part of the zCraft project.
 */
@@ -8,6 +8,7 @@ This file is part of the zCraft project.
 #define ZN_AGAMECONTAINER_HPP
 
 #include <string>
+#include <exception>
 #include "engine/core/types.hpp"
 #include "Game.hpp"
 
@@ -29,7 +30,7 @@ namespace zn
 		AGameContainer(IGame * game);
 		virtual ~AGameContainer();
 
-		virtual void setVideoMode(VideoSettings videoSettings) = 0;
+		virtual void setVideoMode(VideoSettings videoSettings, std::string title="") = 0;
 
 		virtual void setTitle(const std::string & title) = 0;
 		virtual const std::string & getTitle() = 0;
@@ -40,7 +41,7 @@ namespace zn
 		virtual void setFullscreen(bool fullscreen) = 0;
 		virtual bool isFullscreen() const = 0;
 
-		virtual void start() throw std::exception = 0;
+		virtual void start() = 0; // Throws an exception if a fatal error occur
 
 	protected:
 
@@ -51,6 +52,6 @@ namespace zn
 
 } // namespace zn
 
-#endif // AGAMECONTAINER_HPP
+#endif // ZN_GAMECONTAINER_HPP
 
 
