@@ -23,6 +23,16 @@ namespace zn
 		u32 openGLMinorVersion = 0;
 	};
 
+	/**
+	 * @brief A generic container (window) for games.
+	 * It can use several kinds of backends (SFML, SDL...) and forwards
+	 * abstracted input to the game.
+	 * The purpose of this is to minimize (or eliminate) backend-specific code
+	 * from the game.
+	 * @note it only deals with windowing, so if you use SDL as a game container,
+	 * you can still use SFML image loading for example. However, rendering using
+	 * pre-defined pipelines like SFML/Graphics will not work unless you use the same backend.
+	 */
 	class AGameContainer
 	{
 	public:

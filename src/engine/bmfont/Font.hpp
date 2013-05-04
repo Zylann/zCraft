@@ -16,7 +16,7 @@ This file is part of the zCraft project.
 
 /**
 	This is a simple C++ OpenGL BMFont implementation.
-	Requires SFML, glew and C++11 compiler.
+	Requires SFML (sf::Texture), glew and C++11 compiler.
 	Documentation about BMFont : http://www.angelcode.com/products/bmfont/
 	(included in the installer provided on the website)
 **/

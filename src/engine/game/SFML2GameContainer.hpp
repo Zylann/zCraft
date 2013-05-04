@@ -12,6 +12,9 @@ This file is part of the zCraft project.
 
 namespace zn
 {
+	/**
+	 * @brief A GameContainer that uses SFML2 as backend.
+	 */
 	class SFML2GameContainer : public AGameContainer
 	{
 	public:
@@ -42,6 +45,8 @@ namespace zn
 } // namespace zn
 
 #endif // ZN_SFML2GAMECONTAINER_HPP
+
+
 
 
 
