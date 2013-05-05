@@ -1,10 +1,12 @@
 #ifndef ZN_TIME_HPP_INCLUDED
 #define ZN_TIME_HPP_INCLUDED
 
+#include <chrono>
 #include "engine/core/types.hpp"
 
 namespace zn
 {
+	// TODO Time: should be moved to core?
 	class Time
 	{
 	private :
@@ -38,9 +40,19 @@ namespace zn
 			return -1;
 		}
 
-		// TODO Time: static millis()
+		// NOT USED, because using time spans is better than getting the clock().
+//		static inline u32 millis()
+//		{
+//			std::chrono::time_point_cast<
+//					std::chrono::milliseconds>(
+//						std::chrono::high_resolution_clock::now().time_point);
+//		}
+
+		// TODO Time: create Timer class using <chrono>, and drop sf::Clock
 	};
 
 } // namespace zn
 
 #endif // ZN_TIME_HPP_INCLUDED
+
+
