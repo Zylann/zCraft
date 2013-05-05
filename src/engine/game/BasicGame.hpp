@@ -10,9 +10,9 @@ This file is part of the zCraft project.
 #include <SFML/Window.hpp>
 #include <string>
 
-#include "engine/opengl/opengl.hpp"
-#include "engine/core/Vector2.hpp"
-#include "engine/game/Game.hpp"
+#include "../opengl/opengl.hpp"
+#include "../core/Vector2.hpp"
+#include "Game.hpp"
 
 namespace zn
 {
@@ -27,7 +27,6 @@ namespace zn
 	protected :
 
 		sf::Window m_window;
-
 		sf::Clock m_time; // Used for app time
 
 	public :
