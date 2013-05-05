@@ -4,8 +4,10 @@ Copyright (C) 2010-2012 Marc GILLERON
 This file is part of the zCraft project.
 */
 
-#include "Scene.hpp"
+#include "GScene.hpp"
 #include "engine/core/types.hpp"
+
+// TODO GScene: rename when QBS will allow two files with same name
 
 using namespace zn;
 

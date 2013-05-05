@@ -1,7 +1,7 @@
 #ifndef AXESSCENENODE_HPP_INCLUDED
 #define AXESSCENENODE_HPP_INCLUDED
 
-#include "SceneNode.hpp"
+#include "GSceneNode.hpp"
 
 namespace experimental
 {

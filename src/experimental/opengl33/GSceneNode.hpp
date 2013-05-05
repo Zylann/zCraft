@@ -3,6 +3,8 @@
 
 #include "engine/core/types.hpp"
 
+// TODO GSceneNode: rename when QBS will allow two files with same name
+
 namespace experimental
 {
 namespace gl

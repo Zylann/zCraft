@@ -10,7 +10,7 @@ This file is part of the zCraft project.
 #include "engine/system/Time.hpp"
 
 #include "experimental/opengl33/ogl33game.hpp"
-#include "experimental/opengl33/Scene.hpp"
+#include "experimental/opengl33/GScene.hpp"
 #include "experimental/opengl33/AxesSceneNode.hpp"
 #include "engine/opengl/ShaderProgram.hpp"
 #include "experimental/opengl33/opengl3.hpp"

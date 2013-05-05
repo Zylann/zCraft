@@ -2,7 +2,9 @@
 #define SCENE_HPP_INCLUDED
 
 #include <unordered_map>
-#include "SceneNode.hpp"
+#include "GSceneNode.hpp"
+
+// TODO GSceneNode: rename when QBS will allow two files with same name
 
 namespace experimental
 {
