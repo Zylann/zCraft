@@ -20,7 +20,7 @@ namespace ui
 	 * @brief This is the main GUI object, the root of widgets arborescence.
 	 * It should only be created once.
 	 * It is both a widget and a global manager (it holds the renderer and
-	 * gui-scoppe global variables/methods).
+	 * gui-scope global variables/methods).
 	 * Root can be accessed from any widget by using getRoot(), assuming that
 	 * they are part of the same tree.
 	 * @note it could be a singleton, but I don't want it to be accessible
