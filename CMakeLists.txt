@@ -27,7 +27,7 @@ link_directories(
 # Note : this command seems automatic, but when we just add files to the
 # filesystem without modifying CMakeLists, the generated build system will not
 # be aware of this, so rerun cmake will be needed to re-genererate it
-# (see CMake documentation), so it is unusued, but still here just in case.
+# (see CMake documentation). It is unusued, but still here just in case.
 #file(GLOB_RECURSE src_all src/*.cpp)
 
 # GAME ENGINE ==================================================================
@@ -208,8 +208,6 @@ set(src_experimental
 	src/experimental/opengl33/TransformStack.cpp
 	src/experimental/opengl33/VertexColorArray2.hpp
 	src/experimental/opengl33/VertexColorArray2.cpp
-	src/experimental/tween/TweenTest.hpp
-	src/experimental/tween/TweenTest.cpp
 )
 
 # VOXEL ENGINE =================================================================
