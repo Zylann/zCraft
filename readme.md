@@ -17,16 +17,31 @@ It is built on top of an engine (engine/ package) that can be used for any game.
 Current main features
 =====================
 
+Voxel engine :
+
 - Simple map generators using 2D or 3D perlin noise
 - World save format based on N*N*N block files, where N=16 (not efficient, but working)
 - Built-in 2D top-down world cartographer
 - 3D free-flight viewer supporting viewing ranges up to 13*16 cubes without
 	dropping under 60fps (on a 2009 laptop, didn't tested over that limit).
 
-Early planned features
+Game engine :
+
+- Some essentials (Vector2, Vector3, Rect, AABB, Matrix4...)
+- Dependence-free generic GUI (windows, buttons, wrapped text, sliders, dragging, skins...)
+- OpenGL utility (Vertex/Pixel/Geometry shaders, basic direct-draws, VBO...)
+- BMFont implementation
+- Template entity-based game structure 
+- And other things (Platform-specific things, math utilities, logging...)
+
+Third-party :
+
+- UTF8 conversion for text internationalization
+- Simplex noise
+
+Some planned features
 ================
 
-- GUI (WIP)
 - Frustum culling
 - OpenGL 3.x (easier switching, at least)
 - AABB physics
@@ -46,15 +61,25 @@ https://dl.dropbox.com/u/60408088/INFO/zCraft/2012-12-29-zcraft-map-test.zip
 Compiling
 =========
 
+A few days ago, I switched to CMake. However, I'm new to this build system,
+so the CMakeLists.txt may be a bit awkward.
+It is recommended to use a separate build/ directory for the building process
+(notice it in .gitignore) in which you specify your environnment (paths to libs).
+
 Compiler requirements :
 - C++11, compiles fine with GCC 4.7.2 or MinGW on Windows.
-(MSVC compatibility is not my priority)
+(MSVC compatibility is not my priority until I really need it)
 
 Dependencies :
-- SFML 2 RC (I recompiled it for the last MinGW)
+- SFML 2.0 (GCC 4.7 DW2)
 - OpenGL 2.1 (I should switch to 3 one day)
 - Glu
 - Glew (I recompiled it for MinGW)
+
+Execute
+========
+
+The execution directory must be the same as the assets/ folder (i.e repo's root).
 
 Folder structure
 ================
