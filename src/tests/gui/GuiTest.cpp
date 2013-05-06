@@ -119,8 +119,10 @@ namespace experimental
 		delete m_gui;
 	}
 
-	void GuiTest::resized(const Vector2i & /*newSize*/)
+	void GuiTest::resized(const Vector2i & newSize)
 	{
+		m_gui->setBounds(IntRect(0, 0, newSize.x, newSize.y));
+		m_gui->layout();
 	}
 
 	void GuiTest::processEvent(const sf::Event & event)

@@ -76,6 +76,10 @@ namespace ui
 		void bringChildToFront(AWidget * widget);
 
 		virtual void layout(IntRect space) override;
+
+		/**
+		 * @brief Reorganizes contained widgets from the size of their container.
+		 */
 		void layout();
 
 		unsigned int getChildCount() const override { return m_children.size(); }
