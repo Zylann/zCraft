@@ -127,7 +127,7 @@ namespace zcraft
 
 		for(auto & p : m_pics)
 		{
-			p.second.bind();
+			sf::Texture::bind(&p.second);
 
 			glPushMatrix();
 			glTranslatef(p.first.x, p.first.y, 0);

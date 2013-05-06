@@ -10,10 +10,10 @@ This file is part of the zCraft project.
 #include <sstream>
 #include <string>
 
-#include "engine/opengl/opengl.hpp"
-#include "engine/config.hpp"
-#include "engine/bmfont/Font.hpp"
-#include "engine/core/stringutils.hpp" // for cropStr()
+#include "../opengl/opengl.hpp"
+#include "../config.hpp"
+#include "../bmfont/Font.hpp"
+#include "../core/stringutils.hpp" // for cropStr()
 
 // Character to use when a character has not been found
 #define PLACEHOLDER_CHAR '?'
@@ -358,7 +358,7 @@ namespace bmfont
 
 			// Draw glyph
 
-			tex.bind();
+			sf::Texture::bind(&tex);
 			gl::drawTexturedRect(
 				x, y, cd->width, cd->height,
 				tx, ty, tw, th);
