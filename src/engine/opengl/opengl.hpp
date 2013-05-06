@@ -9,7 +9,7 @@
 #include <GL/glew.h>
 #include <SFML/Graphics.hpp>
 
-#include "engine/core/types.hpp"
+#include "../core/types.hpp"
 
 namespace zn
 {
