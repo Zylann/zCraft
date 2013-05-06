@@ -41,10 +41,10 @@ set(src_all
 # This command requires a list of source files.
 add_executable(${PROJECT_NAME} ${src_all})
 
-# The executable will be placed in the bin folder (Debug or Release).
+# The executable will be placed in the bin folder (Debug or Release),
 # Note : by default, CMAKE_BUILD_TYPE is empty,
 # in this case a debug project will be generated.
-set(EXECUTABLE_OUTPUT_PATH bin/${CMAKE_BUILD_TYPE})
+#set(EXECUTABLE_OUTPUT_PATH bin/${CMAKE_BUILD_TYPE})
 
 # Note : the order is important
 target_link_libraries(
