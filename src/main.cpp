@@ -29,48 +29,12 @@ Estimated total dev time
 #include <iostream>
 #include <cstdio>
 
-//#include "experimental/tween/TweenTest.hpp"
 //#include "experimental/opengl33/game.hpp"
-#include "experimental/gui/GuiTest.hpp"
+#include "tests/gui/GuiTest.hpp"
 //#include "zcraft/zcraft.hpp"
-#include "engine/utf8.hpp"
 #include <fstream>
 
 using namespace zn;
-
-void testUTF8()
-{
-	std::ifstream ifs("utf8.txt");
-	if(!ifs.is_open())
-		return;
-	std::string line;
-	while(std::getline(ifs, line))
-	{
-		if(!utf8::is_valid(line.begin(), line.end()))
-			std::cout << "Invalid line : " << line << std::endl;
-		else
-		{
-			// Print raw
-			std::cout << line << std::endl;
-
-			// Convert to UTF16
-			std::wstring wline;
-			utf8::utf8to16(line.begin(), line.end(), std::back_inserter(wline));
-			std::wcout << wline << std::endl;
-
-			for(unsigned int i = 0; i < wline.size(); ++i)
-			{
-				std::wcout << L"[" << wline[i] << L"] " << (int)wline[i] << std::endl;
-			}
-
-			// And back to UTF8
-			line.clear();
-			utf8::utf16to8(wline.begin(), wline.end(), std::back_inserter(line));
-			std::cout << line << std::endl;
-		}
-	}
-	ifs.close();
-}
 
 int main(int argc, char * argv[])
 {
@@ -85,7 +49,6 @@ int main(int argc, char * argv[])
 
 	try
 	{
-//		code = runGame(new experimental::TweenTest());
 //		code = experimental::gl::testgl33();
 		code = runGame(new experimental::GuiTest());
 //		code = zcraft::shell(argc, argv);

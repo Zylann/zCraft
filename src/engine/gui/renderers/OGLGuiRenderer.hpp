@@ -9,7 +9,7 @@ This file is part of the zCraft project.
 
 #include <unordered_map>
 #include "../Renderer.hpp"
-#include "engine/bmfont/Font.hpp"
+#include "../../bmfont/Font.hpp"
 
 namespace zn
 {

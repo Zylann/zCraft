@@ -1,8 +1,8 @@
-#ifndef SCENE_HPP_INCLUDED
-#define SCENE_HPP_INCLUDED
+#ifndef TEST_SCENE_HPP_INCLUDED
+#define TEST_SCENE_HPP_INCLUDED
 
 #include <unordered_map>
-#include "GSceneNode.hpp"
+#include "SceneNode.hpp"
 
 // TODO GSceneNode: rename when QBS will allow two files with same name
 
@@ -54,6 +54,6 @@ namespace gl
 } // namespace gl
 } // namespace experimental
 
-#endif // SCENE_HPP_INCLUDED
+#endif // TEST_SCENE_HPP_INCLUDED
 
 

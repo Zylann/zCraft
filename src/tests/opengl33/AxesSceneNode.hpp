@@ -1,7 +1,7 @@
-#ifndef AXESSCENENODE_HPP_INCLUDED
-#define AXESSCENENODE_HPP_INCLUDED
+#ifndef TEST_AXESSCENENODE_HPP_INCLUDED
+#define TEST_AXESSCENENODE_HPP_INCLUDED
 
-#include "GSceneNode.hpp"
+#include "SceneNode.hpp"
 
 namespace experimental
 {
@@ -22,4 +22,4 @@ namespace gl
 } // namespace gl
 } // namespace experimental
 
-#endif // AXESSCENENODE_HPP_INCLUDED
+#endif // TEST_AXESSCENENODE_HPP_INCLUDED

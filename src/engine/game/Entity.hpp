@@ -12,7 +12,7 @@ This file is part of the zCraft project.
 #include "Component.hpp"
 #include "InternalEntityType.hpp"
 #include "Drawable.hpp"
-#include "EntityRenderer.hpp"
+#include "Renderer.hpp"
 
 namespace zn
 {
