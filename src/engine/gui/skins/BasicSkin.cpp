@@ -4,10 +4,16 @@ namespace zn
 {
 namespace ui
 {
-	BasicSkin::BasicSkin(std::string name, std::string globalFontFilepath)
+	BasicSkin::BasicSkin(std::string name,
+			std::string globalFontFilepath,
+			std::string globalMonoFontFilepath)
 	{
 		m_defaultFont.src = globalFontFilepath;
 		m_defaultFont.ID = "global";
+
+		m_defaultMonoFont.src = globalMonoFontFilepath;
+		m_defaultMonoFont.ID = "global_mono";
+
 		m_name = name;
 	}
 
@@ -28,6 +34,11 @@ namespace ui
 	Font &BasicSkin::getDefaultFont()
 	{
 		return m_defaultFont;
+	}
+
+	Font &BasicSkin::getDefaultMonoFont()
+	{
+		return m_defaultMonoFont;
 	}
 
 	void BasicSkin::drawDummyWidget(IRenderer & r, const AWidget & w)

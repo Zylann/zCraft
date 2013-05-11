@@ -19,6 +19,9 @@ namespace ui
 	 * @brief A skin is a kind of widget renderer.
 	 * It can either use the generic GUI renderer (more portable)
 	 * or use your custom one (not recommended).
+	 * @note If you want to customize one widget having a common type,
+	 * you may create a new specific skin based on BasicSkin (or another),
+	 * and only define the methods you want.
 	 */
 	class ISkin
 	{
@@ -54,6 +57,13 @@ namespace ui
 		 * @return the font descriptor (see Renderer.hpp to know what it means)
 		 */
 		virtual Font & getDefaultFont() = 0;
+
+		/**
+		 * @brief Get the default monospace font of this skin.
+		 * @note if not overloaded, this method will fallback to globalDefaultFont().
+		 * @return the font descriptor (see Renderer.hpp to know what it means)
+		 */
+		virtual Font & getDefaultMonoFont() { return getDefaultFont(); }
 
 		/**
 			Methods below are used to draw widgets.

@@ -17,6 +17,7 @@ namespace ui
 	private :
 
 		zn::ui::Font m_defaultFont;
+		zn::ui::Font m_defaultMonoFont;
 		std::string m_name;
 
 	public :
@@ -26,14 +27,21 @@ namespace ui
 		 * @name name of the skin to be used for identification (usually "Basic").
 		 * @param globalFontFilepath : path to the global font.
 		 * It will be named "global" for the renderer.
+		 * @param globalMonoFontFilepath : path to the global mono font.
+		 * It will be named "global_mono" for the renderer.
+		 * If not specified, it will be set same as the global font.
 		 */
-		BasicSkin(std::string name, std::string globalFontFilepath);
+		BasicSkin(std::string name,
+			std::string globalFontFilepath,
+			std::string globalMonoFontFilepath="");
+
 		virtual ~BasicSkin() {}
 
 		virtual bool load(zn::ui::IRenderer & r) override;
 		virtual bool unload(zn::ui::IRenderer & r) override;
 
 		virtual zn::ui::Font & getDefaultFont() override;
+		virtual zn::ui::Font & getDefaultMonoFont() override;
 		virtual std::string getName() override { return m_name; }
 
 		virtual void drawDummyWidget(zn::ui::IRenderer & r, const zn::ui::AWidget & w) override;
