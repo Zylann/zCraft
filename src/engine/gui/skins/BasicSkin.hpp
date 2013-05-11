@@ -37,15 +37,15 @@ namespace ui
 
 		virtual ~BasicSkin() {}
 
-		virtual bool load(zn::ui::IRenderer & r) override;
-		virtual bool unload(zn::ui::IRenderer & r) override;
+		virtual bool load(IRenderer & r) override;
+		virtual bool unload(IRenderer & r) override;
 
-		virtual zn::ui::Font & getDefaultFont() override;
-		virtual zn::ui::Font & getDefaultMonoFont() override;
+		virtual Font & getDefaultFont() override;
+		virtual Font & getDefaultMonoFont() override;
 		virtual std::string getName() override { return m_name; }
 
-		virtual void drawDummyWidget(zn::ui::IRenderer & r, const zn::ui::AWidget & w) override;
-		virtual void drawPanel(zn::ui::IRenderer & r, const zn::ui::AWidget & panel) override;
+		virtual void drawDummyWidget(IRenderer & r, const AWidget & w) override;
+		virtual void drawPanel(IRenderer & r, const AWidget & panel) override;
 		virtual void drawPushButton(IRenderer &r, const AWidget &btn) override;
 		virtual void drawCheckBox(IRenderer & r, const AWidget & cb, bool checked) override;
 		virtual void drawTextField(IRenderer &r, const AWidget &tf) override;
