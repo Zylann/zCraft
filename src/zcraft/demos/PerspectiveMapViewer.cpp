@@ -72,7 +72,7 @@ namespace zcraft
 		Vector3i bpos = Block::toBlockCoords(pos);
 		m_mapStreamer->update(bpos);
 
-		m_depthSliceZ += 48.f * delta.s();
+		m_depthSliceZ += 48.f * delta.seconds();
 		if(m_depthSliceZ > 128.f)
 			m_depthSliceZ = 0;
 	}

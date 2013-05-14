@@ -23,5 +23,3 @@ namespace zn
 } // namespace zn
 
 #endif // ZN_GAME_RENDERER_HPP
-
-

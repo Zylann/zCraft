@@ -16,6 +16,9 @@ This file is part of the zCraft project.
 
 namespace zn
 {
+	/**
+	 * @brief This is a base class for solo or client-side games.
+	 */
 	class ABasicGame : public IGame
 	{
 	private :

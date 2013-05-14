@@ -15,6 +15,8 @@ namespace ui
 		m_defaultMonoFont.ID = "global_mono";
 
 		m_name = name;
+
+		lightColor = Color(0xff8800ff); // Orange
 	}
 
 	bool BasicSkin::load(IRenderer &r)
@@ -53,14 +55,13 @@ namespace ui
 		IntRect bounds = panel.getBounds();
 
 		static const Color borderColor(0, 0, 0);
-		static const Color borderColorFocus(0xff8800ff);
 		static const Color fillColor(64, 64, 64, 224);
 
 		r.setColor(fillColor);
 		r.drawRect(bounds.pad(1), true); // Fill
 
 		if(panel.isFocused())
-			r.setColor(borderColorFocus);
+			r.setColor(lightColor);
 		else
 			r.setColor(borderColor);
 		r.drawRect(bounds, false); // Border
@@ -72,8 +73,6 @@ namespace ui
 
 		static const Color borderColor(0, 0, 0);
 		static const Color borderColorHover(0, 0, 0);
-		static const Color borderColorFocus(0xff8800ff);
-		static const Color borderColorFocusHover(0xff8800ff);
 		static const Color fillColor(96, 96, 96);
 		static const Color fillColorPress(112, 112, 112);
 
@@ -87,14 +86,14 @@ namespace ui
 		if(btn.isHovered())
 		{
 			if(btn.isFocused())
-				r.setColor(borderColorFocusHover);
+				r.setColor(lightColor);
 			else
 				r.setColor(borderColorHover);
 		}
 		else
 		{
 			if(btn.isFocused())
-				r.setColor(borderColorFocus);
+				r.setColor(lightColor);
 			else
 				r.setColor(borderColor);
 		}
@@ -109,10 +108,8 @@ namespace ui
 		boxBounds.pad(-2);
 
 		static const Color borderColor(0, 0, 0);
-		static const Color borderColorFocus(0xff8800ff);
 		static const Color fillColor(96, 96, 96);
 		static const Color fillColorPress(128, 128, 128);
-		static const Color checkColor(0xff8800ff);
 		static const Color uncheckColor(48, 48, 48);
 
 		if(cb.isPressed())
@@ -122,13 +119,13 @@ namespace ui
 		r.drawRect(boxBounds.pad(1), true); // Fill
 
 		if(cb.isFocused())
-			r.setColor(borderColorFocus);
+			r.setColor(lightColor);
 		else
 			r.setColor(borderColor);
 		r.drawRect(boxBounds, false); // Border
 
 		if(checked)
-			r.setColor(checkColor);
+			r.setColor(lightColor);
 		else
 			r.setColor(uncheckColor);
 		r.drawRect(boxBounds.pad(-3, -4, -4, -3), true);
@@ -139,14 +136,13 @@ namespace ui
 		IntRect bounds = tf.getBounds();
 
 		static const Color borderColor(0, 0, 0);
-		static const Color borderColorFocus(0xff8800ff);
 		static const Color fillColor(32, 32, 32);
 
 		r.setColor(fillColor);
 		r.drawRect(bounds.pad(1), true); // Fill
 
 		if(tf.isFocused())
-			r.setColor(borderColorFocus);
+			r.setColor(lightColor);
 		else
 			r.setColor(borderColor);
 		r.drawRect(bounds, false); // Border
@@ -158,7 +154,6 @@ namespace ui
 
 //		static const Color borderColor(0, 0, 0);
 		static const Color fillColor(32, 32, 32);
-		static const Color progressColor(255, 127, 0);
 
 		r.setColor(fillColor);
 		r.drawRect(bounds.pad(1), true); // Fill
@@ -171,7 +166,7 @@ namespace ui
 		{
 			bounds.pad(-3, -3, -3, -3);
 			bounds.max.x = bounds.min.x + static_cast<float>(bounds.width()) * ratio;
-			r.setColor(progressColor);
+			r.setColor(lightColor);
 			r.drawRect(bounds, true);
 		}
 	}
@@ -183,7 +178,6 @@ namespace ui
 
 		static const Color backColor(32,32,32);
 		static const Color borderColor(0, 0, 0);
-		static const Color borderColorFocus(0xff8800ff);
 		static const Color fillColor(96, 96, 96);
 		//static const Color fillColorPress(112, 112, 112);
 
@@ -213,7 +207,7 @@ namespace ui
 		r.drawRect(cursorBounds.pad(1), true); // Fill
 
 		if(s.isFocused())
-			r.setColor(borderColorFocus);
+			r.setColor(lightColor);
 		else
 			r.setColor(borderColor);
 		r.drawRect(cursorBounds, false); // Border

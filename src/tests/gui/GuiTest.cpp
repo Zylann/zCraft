@@ -32,8 +32,13 @@ namespace experimental
 
 		m_gui = new ui::Root(m_window.getSize().x, m_window.getSize().y);
 		m_gui->setRenderer(new ui::OGLGuiRenderer());
-		if(!m_gui->installSkin(new ui::BasicSkin("Basic", "assets/fonts/tahoma16.fnt")))
+		ui::BasicSkin * skin = new ui::BasicSkin("Basic", "assets/fonts/tahoma16.fnt");
+		skin->lightColor = Color(0x00bbffff);
+		if(!m_gui->installSkin(skin))
+		{
+			delete skin;
 			return false;
+		}
 		m_gui->setSkin("Basic");
 
 		//
@@ -101,11 +106,21 @@ namespace experimental
 
 		ui::Panel * panel2 = new ui::Panel();
 		panel2->setID("myPanel2");
-		panel2->setLocalBounds(IntRect(400, 200, 600, 300));
+		panel2->setLocalBounds(IntRect(300, 200).offset(200, 200));
 
-		ui::DragZone * dragZone = new ui::DragZone();
-		dragZone->setLocalBounds(IntRect(0, 0, 200, 50));
-		panel2->add(dragZone);
+		ui::DragZone * dragZone1 = new ui::DragZone();
+		dragZone1->setLocalBounds(IntRect(300, 30));
+		panel2->add(dragZone1);
+
+		ui::DragZone * dragZone2 = new ui::DragZone();
+		dragZone2->setLocalBounds(IntRect(300, 30).offset(0, 170));
+		panel2->add(dragZone2);
+
+		ui::TextField * tf1 = panel2->add<ui::TextField>();
+		tf1->setLocalBounds(IntRect(200, 24).offset(30, 50));
+
+		ui::TextField * tf2 = panel2->add<ui::TextField>();
+		tf2->setLocalBounds(IntRect(200, 24).offset(30, 80));
 
 		m_gui->add(panel2);
 
@@ -148,7 +163,7 @@ namespace experimental
 
 	void GuiTest::renderScene(const Time & /*delta*/)
 	{
-		glClearColor(0.2f, 0.1f, 0, 1.f);
+		glClearColor(0.1f, 0.1f, 0.2f, 1.f);
 	}
 
 	void GuiTest::renderGUI(const zn::Time & /*delta*/)

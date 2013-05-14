@@ -25,6 +25,10 @@ namespace zn
 
 		Rect() {}
 
+		Rect(const T width, const T height)
+			: min(0, 0), max(width-1, height-1)
+		{}
+
 		Rect(const T minX, const T minY, const T maxX, const T maxY)
 		: min(minX, minY), max(maxX, maxY)
 		{}

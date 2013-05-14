@@ -24,7 +24,7 @@ namespace ui
 
 		/**
 		 * @brief Constructs the skin.
-		 * @name name of the skin to be used for identification (usually "Basic").
+		 * @param name : name of the skin to be used for identification (usually "Basic").
 		 * @param globalFontFilepath : path to the global font.
 		 * It will be named "global" for the renderer.
 		 * @param globalMonoFontFilepath : path to the global mono font.
@@ -53,6 +53,8 @@ namespace ui
 		virtual void drawSlider(IRenderer &r, const Slider &s) override;
 
 		virtual void drawDragZone(IRenderer &r, const AWidget &dz) override;
+
+		Color lightColor;
 
 	};
 

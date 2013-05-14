@@ -80,7 +80,7 @@ namespace zn
 				else if(event.type == sf::Event::KeyPressed)
 				{
 					if(event.key.code == sf::Keyboard::F3)
-						std::cout << "FPS: " << 1.f / delta.s() << std::endl;
+						std::cout << "FPS: " << 1.f / delta.seconds() << std::endl;
 				}
 
 				processEvent(event);

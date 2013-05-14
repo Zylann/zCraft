@@ -59,8 +59,8 @@ namespace zcraft
 		f32 yaw = m_yaw;
 		f32 pitch = m_pitch;
 
-		f32 a = 8.f * delta.s(); // Linear speed
-		f32 aa = 90.f * delta.s(); // Angular speed
+		f32 a = 8.f * delta.seconds(); // Linear speed
+		f32 aa = 90.f * delta.seconds(); // Angular speed
 
 		/* Keyboard control */
 

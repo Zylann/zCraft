@@ -34,7 +34,7 @@ namespace zcraft
 
 	void FlatMapViewer::update(const Time & delta)
 	{
-		f32 a = 32.f * delta.s();
+		f32 a = 32.f * delta.seconds();
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
 			m_camera.move(-a, 0);
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
