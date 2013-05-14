@@ -7,10 +7,9 @@ namespace ui
 {
 	TextField::TextField() : AComposite()
 	{
-		r_text = new Text();
+		r_text = add<Text>();
 		r_text->setWrap(false);
 		r_text->setPadding(Padding(4,4,4,4));
-		add(r_text);
 		m_caretIndex = 0;
 		m_caretPosX = 0;
 		m_caretNeedUpdate = false;
@@ -37,6 +36,11 @@ namespace ui
 	std::wstring TextField::getText() const
 	{
 		return r_text->getText();
+	}
+
+	void TextField::setSecret(bool s)
+	{
+		r_text->setSecret(s);
 	}
 
 	void TextField::renderSelf(IRenderer &r)

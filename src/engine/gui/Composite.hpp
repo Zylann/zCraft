@@ -36,7 +36,8 @@ namespace ui
 		 * @return generic pointer to the newly added widget, nullptr if
 		 * something got wrong.
 		 * @note if you want to get the right widget return type, use the
-		 * template add() version.
+		 * template add() version. Also, this method is not virtual, and it
+		 * may stay as this, because it may be used in constructors.
 		 */
 		AWidget * add(AWidget * child);
 

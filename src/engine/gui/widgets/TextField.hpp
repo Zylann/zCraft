@@ -29,6 +29,9 @@ namespace ui
 		void setText(const std::wstring str);
 		std::wstring getText() const;
 
+		void setSecret(bool s);
+		inline bool isSecret() const { return r_text->isSecret(); }
+
 		inline unsigned int getCaretIndex() const { return m_caretIndex; }
 
 	protected:

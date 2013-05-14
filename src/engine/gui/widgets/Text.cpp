@@ -20,6 +20,7 @@ namespace ui
 		r_font = nullptr;
 		m_textNeedUpdate = false;
 		m_blocksInput = false;
+		m_secret = false;
 	}
 
 	Text::~Text()
@@ -43,6 +44,12 @@ namespace ui
 	void Text::setFont(Font &font)
 	{
 		r_font = &font;
+		m_textNeedUpdate = true;
+	}
+
+	void Text::setSecret(bool s)
+	{
+		m_secret = s;
 		m_textNeedUpdate = true;
 	}
 
@@ -135,7 +142,14 @@ namespace ui
 			// No wrap
 			Line line;
 			line.bounds = getLocalInnerBounds();
-			line.str = m_sourceText;
+			if(m_secret)
+			{
+				line.str.clear();
+				for(u32 i = 0; i < m_sourceText.size(); ++i)
+					line.str += '*';
+			}
+			else
+				line.str = m_sourceText;
 			m_lines.push_back(line);
 		}
 		else // wrap
@@ -144,13 +158,14 @@ namespace ui
 			IntRect innerBounds = getLocalInnerBounds();
 			IntRect lineBounds(0,0,0,lineHeight);
 			std::wstring lstr;
-			char c;
+			wchar_t c;
 			bool ret = false;
 
 //			std::cout << "---" << std::endl;
 			for(unsigned int i = 0; i < m_sourceText.size(); ++i)
 			{
-				c = m_sourceText[i];
+				// Extract source text
+				c = m_secret ? '*' : m_sourceText[i];
 
 				// Carriage return
 				ret = isReturn(c);

@@ -55,7 +55,7 @@ namespace ui
 		IntRect bounds = panel.getBounds();
 
 		static const Color borderColor(0, 0, 0);
-		static const Color fillColor(64, 64, 64, 224);
+		static const Color fillColor(64, 64, 64, 192);
 
 		r.setColor(fillColor);
 		r.drawRect(bounds.pad(1), true); // Fill

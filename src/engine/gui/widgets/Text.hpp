@@ -52,6 +52,9 @@ namespace ui
 		Vector2i getCharacterPos(unsigned int col, unsigned int line=0);
 		Pos getColumnAndLine(int x, int y);
 
+		void setSecret(bool s);
+		inline bool isSecret() const { return m_secret; }
+
 	protected :
 
 		void renderSelf(IRenderer & r) override;
@@ -68,12 +71,12 @@ namespace ui
 
 		void updateText(const IRenderer * renderer = nullptr);
 
-		// TODO Text: Unicode support
 		std::wstring m_sourceText;
 		std::vector<Line> m_lines;
 		Font * r_font;
 		bool m_textNeedUpdate;
 		bool m_wrap;
+		bool m_secret;
 
 	};
 

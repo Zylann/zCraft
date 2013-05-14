@@ -121,6 +121,7 @@ namespace experimental
 
 		ui::TextField * tf2 = panel2->add<ui::TextField>();
 		tf2->setLocalBounds(IntRect(200, 24).offset(30, 80));
+		tf2->setSecret(true);
 
 		m_gui->add(panel2);
 
