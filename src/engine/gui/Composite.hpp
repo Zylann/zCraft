@@ -7,7 +7,7 @@ This file is part of the zCraft project.
 #ifndef ZENGUI_COMPOSITE_HPP_INCLUDED
 #define ZENGUI_COMPOSITE_HPP_INCLUDED
 
-#include "Widget.hpp"
+#include "WidgetList.hpp"
 
 namespace zn
 {
@@ -19,10 +19,7 @@ namespace ui
 
 		AComposite() : AWidget() {}
 
-		virtual ~AComposite()
-		{
-			eraseAll();
-		}
+		virtual ~AComposite();
 
 		void setSkin(ISkin & theme, bool recursive = true) override;
 
@@ -39,13 +36,14 @@ namespace ui
 		 * template add() version. Also, this method is not virtual, and it
 		 * may stay as this, because it may be used in constructors.
 		 */
-		AWidget * add(AWidget * child);
+		AWidget * add(AWidget * newChild);
 
 		/**
 		 * @brief Adds a child widget to the composite (template version).
-		 * @param child : widget to add (must inherit from AWidget).
-		 * @return pointer to the newly added widget, nullptr if something got
-		 * wrong.
+		 * This version is recommended because the widget you create has directly
+		 * an access to the GUI hierarchy (certain tasks require this).
+		 * Also note that this method never returns nullptr.
+		 * @return pointer to the newly added widget (never nullptr).
 		 * @note Widgets added using this method must define a default constructor.
 		 */
 		template <class T>
@@ -106,19 +104,11 @@ namespace ui
 		// Calls animate() on each child of the container
 		void animateChildren(float dt);
 
-	private :
-
 		/** Internal **/
 
 		// Checks if the widget is neither null nor the container itself.
 		// Outputs and error and returns false if it fails.
 		bool checkChild(const AWidget * child, const std::string & from);
-
-		// Finds a child in the container and returns its iterator within the list.
-		// If the given widget is invalid, it outputs an error and returns end iterator.
-		std::list<AWidget*>::iterator getCheckChild(const AWidget * child, const std::string & from);
-
-	protected :
 
 		/** Attributes **/
 
@@ -126,7 +116,7 @@ namespace ui
 		// events will be received in this order, but rendered the reverse way,
 		// so that last widgets will be drawn first.
 		// Widgets are destroyed when the container is deleted.
-		std::list<AWidget*> m_children;
+		WidgetList m_children;
 
 	};
 

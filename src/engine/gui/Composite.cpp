@@ -11,6 +11,11 @@ namespace zn
 {
 namespace ui
 {
+	AComposite::~AComposite()
+	{
+		eraseAll();
+	}
+
 	void AComposite::setSkin(ISkin & theme, bool recursive)
 	{
 		//std::cout << "DEBUG: AComposite: setSkin (ID=" << getID() << ")" << std::endl;
@@ -22,99 +27,61 @@ namespace ui
 		}
 	}
 
-	bool AComposite::checkChild(const AWidget * child, const std::string & from)
-	{
-		if(child == nullptr)
-		{
-			std::cout << "ERROR: AComposite::" << from << ": "
-				<< "given widget is null." << std::endl;
-			return false;
-		}
-		if(child == this)
-		{
-			std::cout << "ERROR: AComposite::" << from << ": "
-				<< "can't do that with self."
-				<< "ID=\"" << child->getID() << '"' << std::endl;
-			return false;
-		}
-		return true;
-	}
-
-	std::list<AWidget*>::iterator
-			AComposite::getCheckChild(
-					const AWidget * child, const std::string & from)
-	{
-		if(!checkChild(child, from))
-			return m_children.end();
-
-		for(auto it = m_children.begin(); it != m_children.end(); it++)
-		{
-			if((*it) == child)
-				return it;
-		}
-
-		std::cout << "ERROR: AComposite::" << from << ": "
-			<< "child not found. "
-			<< "ID=\"" << child->getID() << '"' << std::endl;
-		return m_children.end();
-	}
-
 	bool AComposite::contains(const AWidget * child) const
 	{
-		for(auto it = m_children.begin(); it != m_children.end(); it++)
-		{
-			if((*it) == child)
-				return true;
-		}
-		return false;
+		return m_children.contains(child);
 	}
 
-	AWidget * AComposite::add(AWidget * child)
+	AWidget * AComposite::add(AWidget * newChild)
 	{
-		if(!checkChild(child, "add"))
-			return nullptr;
-		if(contains(child))
+		if(newChild == nullptr)
 		{
 			std::cout << "ERROR: AComposite::add: "
-				<< "can't add twice the same widget. "
-				<< "ID=\"" << child->getID() << '"' << std::endl;
+				"given widget is null." << std::endl;
+			return nullptr;
+		}
+		if(newChild == this)
+		{
+			std::cout << "ERROR: AComposite::add: "
+				"can't do that with self."
+				"ID=\"" << newChild->getID() << '"' << std::endl;
+			return nullptr;
+		}
+		if(contains(newChild))
+		{
+			std::cout << "ERROR: AComposite::add: "
+				"can't add twice the same widget. "
+				"ID=\"" << newChild->getID() << '"' << std::endl;
 			return nullptr;
 		}
 
-		m_children.push_back(child);
+		m_children.add(newChild);
 
-		child->setParent(this);
+		newChild->setParent(this);
 
 		if(r_skin != nullptr)
 		{
-			//std::cout << "DEBUG: set skin on child" << std::endl;
-			child->setSkin(*r_skin);
+			//std::cout << "DEBUG: set skin on newChild" << std::endl;
+			newChild->setSkin(*r_skin);
 		}
-		return child;
+		return newChild;
 	}
 
 	void AComposite::erase(AWidget * child)
 	{
-		auto it = getCheckChild(child, "erase");
-		if(it != m_children.end())
-		{
-			delete (*it);
-			m_children.erase(it);
-		}
+		m_children.erase(child);
 	}
 
 	void AComposite::eraseAll()
 	{
-		for(auto it = m_children.begin(); it != m_children.end(); it++)
-			delete (*it);
+		m_children.clear();
 	}
 
 	AWidget * AComposite::getChildFromID(const std::string & ID)
 	{
-		AWidget * w;
 		for(auto it = m_children.begin(); it != m_children.end(); it++)
 		{
-			w = (*it);
+			AWidget * w = (*it);
 			if(w->getID() == ID)
 				return w;
 		}
@@ -123,12 +90,7 @@ namespace ui
 
 	void AComposite::bringChildToFront(AWidget * child)
 	{
-		auto it = getCheckChild(child, "bringChildToFront");
-		if(it != m_children.end())
-		{
-			m_children.erase(it);
-			m_children.push_front(child);
-		}
+		m_children.toFront(child);
 	}
 
 	void AComposite::layout(IntRect space)
@@ -158,8 +120,10 @@ namespace ui
 
 		bool consumed = false;
 
+		// Start deferred mode because the list may be modified in the loop
+		m_children.beginDefer();
 		// Fetch children first
-		for(auto & w : m_children)
+		for(AWidget *& w : m_children)
 		{
 			if(w->isVisible())
 			{
@@ -187,6 +151,8 @@ namespace ui
 				}
 			}
 		}
+		// End of deferring mode
+		m_children.endDefer();
 
 		if(!consumed) // Then process the event for the composite itself
 			return IInputListener::processInput(e);
@@ -213,7 +179,7 @@ namespace ui
 
 	void AComposite::renderChildren(IRenderer & r)
 	{
-		for(auto it = m_children.rbegin(); it != m_children.rend(); it++)
+		for(auto it = m_children.rbegin(); it != m_children.rend(); ++it)
 		{
 			(*it)->render(r);
 		}
