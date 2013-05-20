@@ -163,11 +163,14 @@ namespace gl
 	#endif
 	}
 
-	void drawGrid(const float cx, const float cy, const float r)
+	void drawGrid(const float cx, const float cy, float r, float spacing)
 	{
+		if(spacing < 0.001f || r < 0.001f)
+			return;
+		r *= spacing;
 	#if defined ZN_OPENGL2
 		glBegin(GL_LINES);
-		for(float x = cx - r; x < cx + r; x++)
+		for(float x = cx - r; x < cx + r; x += spacing)
 		{
 			glVertex2f(x, cy - r);
 			glVertex2f(x, cy + r);
@@ -175,7 +178,7 @@ namespace gl
 		glEnd();
 
 		glBegin(GL_LINES);
-		for(float y = cy - r; y < cy + r; y++)
+		for(float y = cy - r; y < cy + r; y += spacing)
 		{
 			glVertex2f(cx - r, y);
 			glVertex2f(cx + r, y);

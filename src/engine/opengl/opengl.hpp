@@ -36,7 +36,7 @@ namespace gl
 
 	void drawCross(const float x, const float y, const float s = 1);
 
-	void drawGrid(const float cx, const float cy, const float r);
+	void drawGrid(const float cx, const float cy, float r, float spacing=1);
 
 	void drawTestCube(const float c = 1);
 
