@@ -18,6 +18,8 @@ This file is part of the zCraft project.
 
 namespace zn
 {
+	// TODO implement operators outside the class
+
 	template <typename T>
 	class Vector2
 	{

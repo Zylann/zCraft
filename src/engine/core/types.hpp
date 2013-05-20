@@ -31,10 +31,12 @@ namespace zn
 	typedef signed long long s64;
 	typedef unsigned long long u64;
 #endif
-	
+
 	// Float types
 	typedef float f32;
 	typedef double f64;
 }
 
 #endif // ZN_TYPES_HPP_INCLUDED
+
+

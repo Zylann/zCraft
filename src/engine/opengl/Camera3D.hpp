@@ -35,6 +35,8 @@ namespace zn
 		bool m_projectionChanged;
 		bool m_positionChanged;
 
+		// TODO orthographic options
+
 	public :
 
 		Camera3D(const Vector2f viewportSize = Vector2f(512));

@@ -16,6 +16,7 @@ namespace zn
 		virtual ~IDrawable() {}
 
 		virtual void render() = 0;
+		//virtual s16 getDrawOrder() const { return 0; }
 	};
 
 } // namespace zn
