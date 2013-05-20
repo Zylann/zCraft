@@ -335,7 +335,7 @@ namespace ui
 	bool AWidget::mouseMoved(int /*oldX*/, int /*oldY*/, int newX, int newY)
 	{
 		// Note : AComposite takes care of setting hover flags
-		return m_localBounds.contains(newX, newY);
+		return false;//m_localBounds.contains(newX, newY);
 	}
 
 	bool AWidget::mousePressed(Mouse::Button button)
