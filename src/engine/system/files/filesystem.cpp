@@ -93,7 +93,7 @@ namespace fs
         int result = mkdir(path.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
         if(result == 0)
             return true;
-        if(errno = EEXIST)
+        if(errno == EEXIST)
             return true;
         else
             std::cout << "ERROR: makeDir: can't create folder '"
@@ -101,10 +101,11 @@ namespace fs
         return false;
     }
 
-    void getDirContent(DirContent & content, std::string dirPath)
+    bool getDirContent(DirContent & content, std::string dirPath)
     {
     	std::cout << "ERROR: UNIX getDirContent: not implemented yet" << std::endl;
         // TODO filesystem: getDirContent for Linux POSIX
+        return false;
     }
 
 #endif
