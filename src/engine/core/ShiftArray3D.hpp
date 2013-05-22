@@ -167,6 +167,11 @@ namespace zn
 			return m_data[m_area.index(pos)];
 		}
 
+		inline T getNoEx(s32 x, s32 y, s32 z) const
+		{
+			return m_data[m_area.index(x, y, z)];
+		}
+
 		// get an element
 		T get(const Vector3i & pos) const
 				throw(Exception)
@@ -191,38 +196,6 @@ namespace zn
 				setNoEx(pos, value);
 			else
 				throw Exception("ShiftArray3D::set " + pos);
-		}
-
-		// TODO ShiftArray3D: methods below may be useless.
-
-		// Prints buffer description in an output stream (for debug purposes).
-		// Note : very large buffers should not be printed, it would create
-		// lines and lines of data (not very useful).
-		void print(std::ostream & os) const
-		{
-			os << "=========== ShiftArray3D ==========" << std::endl;
-			os << "m_area = " << m_area.toString() << std::endl;
-			os << "m_data =" << std::endl;
-
-			Vector3i pos;
-			int i;
-
-			for(pos.z = 0; pos.z < m_area.getSize().z; pos.z++)
-			{
-				os << "Layer Z=" << pos.z << " :" << std::endl;
-
-				for(pos.y = 0; pos.y < m_area.getSize().y; pos.y++)
-				{
-					os << " ";
-					for(pos.x = 0; pos.x < m_area.getSize().x; pos.x++)
-					{
-						i = m_area.index(pos);
-						printDataItem(os, m_data[i]);
-					}
-					os << std::endl;
-				}
-			}
-			os << "===============================" << std::endl;
 		}
 
 	}; // class ShiftArray3D
