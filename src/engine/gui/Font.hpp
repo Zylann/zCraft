@@ -11,9 +11,11 @@ namespace ui
 	*/
 	struct Font
 	{
-		void * userdata = nullptr;
+		void * userdata;
 		std::string ID;
 		std::string src; // filename
+
+		Font() : userdata(nullptr) {}
 	};
 
 } // namespace ui

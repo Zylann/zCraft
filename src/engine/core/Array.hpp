@@ -23,15 +23,9 @@ namespace zn
 	template <typename T>
 	class Array
 	{
-	private :
-
-		T * m_data = nullptr;
-		u32 m_size = 0;
-
 	public :
 
-		Array()
-		{}
+		Array() : m_data(nullptr), m_size(0) {}
 
 		Array(const u32 size)
 		{
@@ -157,6 +151,11 @@ namespace zn
 		{
 			return m_data;
 		}
+
+	private :
+
+		T * m_data;
+		u32 m_size;
 
 	};
 

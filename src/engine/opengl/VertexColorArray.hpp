@@ -28,18 +28,26 @@ namespace gl
 		Array<u8> m_colors;
 
 		// Metadata
-		GLuint m_bufferID = 0;
-		GLenum m_primitiveType = 0;
-		u32 m_vertexCount = 0;
-		u32 m_valuesPerVertex = 0;
-		u32 m_valuesPerColor = 0;
-		u32 m_verticesOffset = 0;
-		u32 m_colorsOffset = 0;
+		GLuint m_bufferID;
+		GLenum m_primitiveType;
+		u32 m_vertexCount;
+		u32 m_valuesPerVertex;
+		u32 m_valuesPerColor;
+		u32 m_verticesOffset;
+		u32 m_colorsOffset;
 
 	public :
 
 		// Creates an empty array
-		VertexColorArray();
+		VertexColorArray()
+		:   m_bufferID(0),
+            m_primitiveType(0),
+            m_vertexCount(0),
+            m_valuesPerVertex(0),
+            m_valuesPerColor(0),
+            m_verticesOffset(0),
+            m_colorsOffset(0)
+        {}
 
 		// Destroys the array and hosted data
 		~VertexColorArray();

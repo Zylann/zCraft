@@ -79,44 +79,20 @@ namespace ui
 	*/
 	class AWidget : public IInputListener
 	{
-	protected :
-
-		/** Geometry & appearance **/
-
-		IntRect m_localBounds; // parent-relative bounds
-		IntRect m_sizeLimit;
-
-		Margin m_margin;
-		Padding m_padding;
-
-		// How the widget should use the space where it is
-		unsigned char m_align = Align::NONE;
-
-		ISkin * r_skin = nullptr;
-
-		/** State **/
-
-		bool m_visible = true; // Is the widget visible?
-		bool m_enabled = true; // Can we interact with the widget?
-		bool m_hovered = false; // Is the mouse over the widget?
-		bool m_pressed = false; // Are we pressing the widget (i.e. mouseDown) ?
-		bool m_focused = false; // Does this widget has the focus?
-
-		bool m_blocksInput = true;
-
-		/** Hierarchy & identification **/
-
-		// Note : "r_" means that we use this pointer as a reference.
-		// we don't have the right to delete pointed data.
-		AComposite * r_parent = nullptr;
-
-		// This is a user-set identifier that can be used for debug,
-		// style or script selection. Empty value is ignored.
-		std::string m_ID;
-
 	public :
 
-		AWidget() {}
+		AWidget()
+		:   m_align(Align::NONE),
+            r_skin(nullptr),
+            m_visible(true),
+            m_enabled(true),
+            m_hovered(false),
+            m_pressed(false),
+            m_focused(false),
+            m_blocksInput(true),
+            r_parent(nullptr)
+		{}
+
 		virtual ~AWidget() {}
 
 		/**
@@ -299,6 +275,41 @@ namespace ui
 		// Updates widget's size according to its limits.
 		// It does this ONLY for this widget (parent and children are ignored)
 		bool applySizeLimit();
+
+	protected :
+
+		/** Geometry & appearance **/
+
+		IntRect m_localBounds; // parent-relative bounds
+		IntRect m_sizeLimit;
+
+		Margin m_margin;
+		Padding m_padding;
+
+		// How the widget should use the space where it is
+		unsigned char m_align;
+
+		ISkin * r_skin;
+
+		/** State **/
+
+		bool m_visible; // Is the widget visible?
+		bool m_enabled; // Can we interact with the widget?
+		bool m_hovered; // Is the mouse over the widget?
+		bool m_pressed; // Are we pressing the widget (i.e. mouseDown) ?
+		bool m_focused; // Does this widget has the focus?
+
+		bool m_blocksInput;
+
+		/** Hierarchy & identification **/
+
+		// Note : "r_" means that we use this pointer as a reference.
+		// we don't have the right to delete pointed data.
+		AComposite * r_parent;
+
+		// This is a user-set identifier that can be used for debug,
+		// style or script selection. Empty value is ignored.
+		std::string m_ID;
 
 	};
 

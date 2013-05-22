@@ -11,11 +11,16 @@ namespace ui
 	*/
 	struct Texture
 	{
-		void * userdata = nullptr;
-		int width = 0;
-		int height = 0;
+		void * userdata;
+		int width;
+		int height;
 		std::string ID;
 		std::string src; // filename
+
+		Texture()
+		:   userdata(nullptr),
+            width(0), height(0)
+        {}
 	};
 
 } // namespace ui

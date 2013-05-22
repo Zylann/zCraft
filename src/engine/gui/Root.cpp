@@ -13,6 +13,7 @@ namespace ui
 {
 	Root::Root(unsigned int width, unsigned int height) : AComposite()
 	{
+	    m_renderer = nullptr;
 		m_localBounds.set(0, 0, width, height);
 		m_blocksInput = false;
 		setID("root");

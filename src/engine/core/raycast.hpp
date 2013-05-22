@@ -40,14 +40,15 @@ namespace zn
 		f32 maxDistance;
 
 		// Result
-		bool isHit = false; // True if hit corresponds to a ray collision
+		bool isHit; // True if hit corresponds to a ray collision
 		RayHit hit; // Result of ray casting. Contains last ray state if not.
 
 		// Constructs the raycaster by specifying a hit predicate and a maximal cast distance
-		RayCaster(
-			HitPredicate hitFunc0,
-			f32 maxDistance0)
-		: hitFunc(hitFunc0), maxDistance(maxDistance0) {}
+		RayCaster(HitPredicate hitFunc0, f32 maxDistance0)
+		:   hitFunc(hitFunc0),
+            maxDistance(maxDistance0),
+            isHit(false)
+        {}
 
 		// Casts a ray, returns true if a collision occurred.
 		// Options of the raycaster are used.

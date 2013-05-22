@@ -14,9 +14,6 @@ namespace zn
 {
 namespace gl
 {
-	VertexColorArray::VertexColorArray()
-	{}
-
 	VertexColorArray::~VertexColorArray()
 	{
 		clear();

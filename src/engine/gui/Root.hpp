@@ -105,7 +105,7 @@ namespace ui
 
 	private :
 
-		IRenderer * m_renderer = nullptr;
+		IRenderer * m_renderer;
 		std::unordered_map<std::string,ISkin*> m_skins; // Installed skins {name, skin}
 		AWidget * r_focusedWidget;
 

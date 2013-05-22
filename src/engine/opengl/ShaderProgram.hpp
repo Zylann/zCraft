@@ -25,31 +25,15 @@ namespace gl
 
 	class ShaderProgram
 	{
-	private :
-
-		struct Shader
-		{
-			std::string sourcePath;
-			GLuint ID = 0;
-
-			Shader(GLuint sID, const std::string path)
-				: sourcePath(path), ID(sID)
-			{}
-		};
-
-		GLuint m_programID = 0;
-
-		// Note: Uniforms affect a geometry (while attribs affect vertices)
-		std::unordered_map<std::string,GLint> m_uniforms;
-
-		Shader * m_vertex = nullptr;
-		Shader * m_geometry = nullptr;
-		Shader * m_fragment = nullptr;
-
 	public :
 
 		// Constructs an empty program.
-		ShaderProgram() {}
+		ShaderProgram()
+		:   m_programID(0),
+            m_vertex(nullptr),
+            m_geometry(nullptr),
+            m_fragment(nullptr)
+		{}
 
 		// Destroys the program and its shaders.
 		~ShaderProgram();
@@ -114,6 +98,25 @@ namespace gl
 		static bool loadShader(
 			GLuint & outShaderID, GLenum type,
 			const std::string & sourcePath);
+
+		struct Shader
+		{
+			std::string sourcePath;
+			GLuint ID;
+
+			Shader(GLuint sID, const std::string path)
+				: sourcePath(path), ID(sID)
+			{}
+		};
+
+		GLuint m_programID;
+
+		// Note: Uniforms affect a geometry (while attribs affect vertices)
+		std::unordered_map<std::string,GLint> m_uniforms;
+
+		Shader * m_vertex;
+		Shader * m_geometry;
+		Shader * m_fragment;
 
 	};
 

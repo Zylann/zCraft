@@ -187,7 +187,11 @@ namespace ui
 						{
 							// No space found, split on letters
 							//lstr = lstr.substr(lstr.size()-2, 1);
+                        #ifdef ZN_CPP0X
+                            lstr = lstr.substr(0, lstr.size()-1);
+                        #else
 							lstr.pop_back();
+                        #endif
 							--i; // Go back 1 character
 						}
 						else

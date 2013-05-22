@@ -87,7 +87,7 @@ namespace ui
 				ADD, ERASE, TO_FRONT, CLEAR
 			};
 
-			AWidget * widget = nullptr;
+			AWidget * widget;
 			Type type;
 
 			Operation(AWidget * w, Type t)

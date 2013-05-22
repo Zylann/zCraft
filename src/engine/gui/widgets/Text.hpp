@@ -24,10 +24,11 @@ namespace ui
 
 		struct Pos
 		{
-			unsigned int line = 0;
-			unsigned int col = 0;
+			unsigned int line;
+			unsigned int col;
 
-			Pos() {}
+			Pos() : line(0), col(0) {}
+
 			Pos(unsigned int line0, unsigned int col0)
 				: line(line0), col(col0)
 			{}
