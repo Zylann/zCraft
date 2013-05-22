@@ -60,15 +60,48 @@ namespace zn
 		m_positionChanged = true;
 	}
 
+	Ray Camera3D::screenToRay(f32 screenX, f32 screenY) const
+	{
+		// TODO faster screenToRay (the current one is UBER SLOW, 50% CPU PEAK)
+
+		GLdouble modelview[16];
+		GLdouble projection[16];
+		GLint viewport[4];
+
+		glGetDoublev(GL_MODELVIEW_MATRIX, modelview);
+		glGetDoublev(GL_PROJECTION_MATRIX, projection);
+		glGetIntegerv(GL_VIEWPORT, viewport);
+
+		screenY = (float)viewport[3] - (float)screenY;
+
+		GLdouble x0, y0, z0;
+		gluUnProject(
+			screenX, screenY, 0,
+			modelview, projection, viewport,
+			&x0, &y0, &z0);
+
+		GLdouble x1, y1, z1;
+		gluUnProject(
+			screenX, screenY, 1,
+			modelview, projection, viewport,
+			&x1, &y1, &z1);
+
+		Vector3f dir(x1-x0, y1-y0, z1-z0);
+		dir.normalize();
+
+		return Ray(m_pos, dir);
+	}
+
 	void Camera3D::look()
 	{
 	#if defined ZN_OPENGL2 //{
 
 		// Projection
+
+		float ratio = m_viewportSize.x / m_viewportSize.y;
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
-		gluPerspective(m_fov,
-			m_viewportSize.x / m_viewportSize.y, m_near, m_far);
+		gluPerspective(m_fov, ratio, m_near, m_far);
 
 		// Orientation
 		glMatrixMode(GL_MODELVIEW);

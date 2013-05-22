@@ -9,6 +9,7 @@ This file is part of the zCraft project.
 
 #include "engine/core/Vector2.hpp"
 #include "engine/core/Vector3.hpp"
+#include "engine/core/raycast.hpp"
 
 namespace zn
 {
@@ -18,6 +19,27 @@ namespace zn
 
 	class Camera3D
 	{
+	public :
+
+		Camera3D(const Vector2f viewportSize = Vector2f(512));
+
+		void updateViewport(const Vector2f vps);
+
+		void setNearAndFar(f32 near, f32 far);
+		void setFov(f32 fovDegrees);
+		void setPosition(const Vector3f pos);
+		void setVertical(const Vector3f vert);
+		void setForward(const Vector3f fw);
+
+		inline Vector3f getPosition() const { return m_pos; }
+		inline Vector3f getForward() const { return m_forward; }
+		inline Vector3f getVertical() const { return m_vertical; }
+		inline f32 getFov() const { return m_fov; }
+
+		Ray screenToRay(f32 screenX, f32 screenY) const;
+
+		void look();
+
 	private :
 
 		// Projection
@@ -36,32 +58,6 @@ namespace zn
 		bool m_positionChanged;
 
 		// TODO orthographic options
-
-	public :
-
-		Camera3D(const Vector2f viewportSize = Vector2f(512));
-
-		void updateViewport(const Vector2f vps);
-
-		void setNearAndFar(f32 near, f32 far);
-
-		void setFov(f32 fovDegrees);
-
-		void setPosition(const Vector3f pos);
-
-		void setVertical(const Vector3f vert);
-
-		void setForward(const Vector3f fw);
-
-		inline Vector3f getPosition() const { return m_pos; }
-
-		inline Vector3f getForward() const { return m_forward; }
-
-		inline Vector3f getVertical() const { return m_vertical; }
-
-		inline f32 getFov() const { return m_fov; }
-
-		void look();
 
 	};
 
