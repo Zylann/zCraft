@@ -19,6 +19,11 @@ namespace zn
         setSize(newSize);
     }
 
+	Area3D::Area3D(u32 sizeX, u32 sizeY, u32 sizeZ)
+	{
+        setSize(sizeX, sizeY, sizeZ);
+	}
+
     Area3D::Area3D(const Vector3i & newPos, const Vector3i & newSize)
     {
         setPosition(newPos);
@@ -31,6 +36,11 @@ namespace zn
         m_size.y = newSize.y >= 0 ? newSize.y : 0;
         m_size.z = newSize.z >= 0 ? newSize.z : 0;
     }
+
+	void Area3D::setSize(u32 x, u32 y, u32 z)
+	{
+		m_size.set(x,y,z);
+	}
 
     void Area3D::setBounds(const Vector3i & minEdge, const Vector3i & maxEdge)
     {
@@ -121,11 +131,22 @@ namespace zn
         return relativeIndex(p_pos - m_pos);
     }
 
+    int Area3D::index(s32 x, s32 y, s32 z) const
+    {
+    	return relativeIndex(x - m_pos.x, y - m_pos.y, z - m_pos.z);
+    }
+
     int Area3D::relativeIndex(const Vector3i & p_pos) const
     {
+    	// TODO optimize
         return p_pos.z * m_size.y * m_size.x +
                p_pos.y * m_size.x +
                p_pos.x;
+    }
+
+    int Area3D::relativeIndex(s32 x, s32 y, s32 z) const
+    {
+        return m_size.x * (z * m_size.y + y) + x;
     }
 
 } // namespace zn
