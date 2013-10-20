@@ -1,13 +1,10 @@
 ﻿zCraft
 ======
 
-A C++ framework for making games.
-Copyright 2010-2013 (c) Marc Gilleron
+A C++ polygon-based voxel engine and utility framework.
 
-This project is a set of files I use for developping games in C++.
-It also features a voxel engine for 3D OpenGL testing and maybe some games.
-I regularly copy some parts of this framework when I start a project, and then
-backups new stuff to it as reusable components, so I don't have to rewrite stuff.
+This project is a voxel engine featuring a common set of files I use for developping games in C++.
+I'm not working anymore on the voxel part.
 
 ![Screenshot](http://zylannprods.fr/games/zcraft/screenshots/2013-02-19-crafted-zcraft.png)
 
@@ -35,21 +32,6 @@ Third-party :
 
 - UTF8 conversion for text internationalization
 - Simplex noise
-
-Some planned features
-================
-
-Note: depends on which project I currently work on.
-
-- OpenGL 3.x (easier switching, at least)
-- More GUI widgets
-- Scripting interfaces for AngelScript, Lua and Python
-- AABB physics
-- Voxel engine: Faster voxel archive save format
-- Voxel engine: Frustum culling
-- Voxel engine: volumetric sprites
-- Voxel engine: mapgen optimization
-- And many little things in the code : see TODO comments
 
 Downloads
 =========
