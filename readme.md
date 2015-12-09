@@ -1,5 +1,6 @@
 ﻿zCraft
 ======
+OLD AND NOT MAINTAINED ANYMORE
 
 A C++ polygon-based voxel engine and utility framework.
 
